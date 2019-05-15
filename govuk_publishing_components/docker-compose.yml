@@ -1,0 +1,26 @@
+version: '3.7'
+
+x-govuk_publishing_components: &govuk_publishing_components
+  build:
+    context: .
+    dockerfile: govuk_publishing_components/Dockerfile
+  image: govuk_publishing_components
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+    - home:/home/build
+  working_dir: /govuk/govuk_publishing_components
+
+services:
+  govuk_publishing_components-default:
+    <<: *govuk_publishing_components
+
+  govuk_publishing_components-web:
+    <<: *govuk_publishing_components
+    depends_on:
+      - nginx-proxy
+    environment:
+      VIRTUAL_HOST: govuk_publishing_components.dev.gov.uk
+    ports:
+      - "9292"
+    command: bundle exec rackup spec/dummy/config.ru --host 0.0.0.0

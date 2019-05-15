@@ -1,0 +1,37 @@
+version: '3.7'
+
+x-content-tagger: &content-tagger
+  build:
+    context: .
+    dockerfile: content-tagger/Dockerfile
+  image: content-tagger
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+    - home:/home/build
+    - ./content-tagger/chromedriver-version:/home/build/.chromedriver-helper/.chromedriver-version
+  working_dir: /govuk/content-tagger
+
+services:
+  content-tagger-default:
+    <<: *content-tagger
+    privileged: true
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
+      DATABASE_URL: "postgresql://postgres@postgres/content-tagger"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres/content-tagger-test"
+
+  content-tagger-backend: &content-tagger-backend
+    <<: *content-tagger
+    depends_on:
+      - postgres
+      - publishing-api-backend
+      - nginx-proxy
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres/content-tagger"
+      VIRTUAL_HOST: content-tagger.dev.gov.uk
+    ports:
+      - "3000"
+    command: rails s -b 0.0.0.0 -P /tmp/rails.pid

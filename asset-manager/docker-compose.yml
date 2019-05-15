@@ -1,0 +1,58 @@
+version: '3.7'
+
+x-asset-manager: &asset-manager
+  build:
+    context: .
+    dockerfile: asset-manager/Dockerfile
+  image: asset-manager
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+    - home:/home/build
+  working_dir: /govuk/asset-manager
+
+services:
+  asset-manager-default:
+    <<: *asset-manager
+    depends_on:
+      - mongo
+      - redis
+    environment:
+      MONGODB_URI: "mongodb://mongo/asset-manager"
+      TEST_MONGODB_URI: "mongodb://mongo/asset-manager-test"
+      REDIS_URL: redis://redis
+
+  asset-manager-backend: &asset-manager-backend
+    <<: *asset-manager
+    depends_on:
+      - mongo
+      - redis
+      - nginx-proxy
+    environment:
+      MONGODB_URI: "mongodb://mongo/asset-manager"
+      REDIS_URL: redis://redis
+      VIRTUAL_HOST: asset-manager.dev.gov.uk
+    ports:
+      - "3000"
+    command: rails s -b 0.0.0.0 -P /tmp/rails.pid
+
+  asset-manager-e2e:
+    <<: *asset-manager-backend
+    depends_on:
+      - mongo
+      - redis
+      - nginx-proxy
+      - asset-manager-worker
+
+  asset-manager-worker:
+    <<: *asset-manager
+    depends_on:
+      - mongo
+      - redis
+    environment:
+      MONGODB_URI: "mongodb://mongo/asset-manager"
+      REDIS_URL: redis://redis
+      ASSET_MANAGER_CLAMSCAN_PATH: /bin/true
+      FAKE_S3_HOST: http://127.0.0.1
+      ALLOW_FAKE_S3_IN_PRODUCTION_FOR_PUBLISHING_E2E_TESTS: "true"
+    command: bundle exec sidekiq -C ./config/sidekiq.yml

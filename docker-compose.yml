@@ -1,0 +1,36 @@
+version: '3.7'
+
+volumes:
+  home:
+  bundle:
+  rabbitmq:
+  postgres:
+  mysql:
+  mongo:
+  go:
+
+services:
+  postgres:
+    image: postgres:9.6
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  mongo:
+    image: mongo:2.4
+    volumes:
+      - mongo:/data/db
+
+  mysql:
+    image: mysql:5.5.58
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+  redis:
+    image: redis
+
+  rabbitmq:
+    image: rabbitmq
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq

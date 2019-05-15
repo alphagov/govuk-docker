@@ -1,0 +1,23 @@
+version: '3.7'
+
+x-static: &static
+  image: govuk/static:master
+
+services:
+  static-backend: &static-backend
+    <<: *static
+    environment:
+      VIRTUAL_HOST: static.dev.gov.uk
+    ports:
+      - "3013"
+    command: rails s -b 0.0.0.0 -P /tmp/rails.pid
+
+  static-draft:
+    <<: *static-backend
+    environment:
+      VIRTUAL_HOST: draft-static.dev.gov.uk
+
+  static-live:
+    <<: *static-backend
+    environment:
+      VIRTUAL_HOST: static.dev.gov.uk

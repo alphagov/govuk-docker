@@ -1,0 +1,154 @@
+**WARNING - _This is not an official GOV.UK repository. It is also a WIP and could receive breaking changes at any time._**
+
+# govuk-docker
+
+An alternative way to to develop on GOV.UK.
+
+![diagram](https://github.com/benthorner/govuk-docker/raw/master/diagram.png)
+
+## Introduction
+
+The GOV.UK website is a microservice architecture, formed of many apps working together. Developing in this ecosystem is a challenge, due to the range of environments to maintain, both for the app being developed and its dependencies.
+
+The aim of govuk-docker is to make it easy to develop any GOV.UK app. It achieves this by providing a variety of environments or _stacks_ for each app, in which you can run tests, start a debugger,
+publish a document end-to-end e.g.
+
+```
+# Run whitehall rake plus any required dependencies (DBs)
+whitehall$ gdr default rake
+
+# Start content-tagger rails plus a minimal backend stack
+content-tagger$ gdr backend
+
+# Start content-publisher rails plus an end-to-end stack
+content-publisher$ gdr e2e
+```
+
+The above examples make use of an alias to reduce the amount of typing; the full form is `govuk-docker run-this`. In the last two commands, the app will be available in your browser at *app-name.dev.gov.uk*.
+
+## Setup
+
+First make sure the following are installed on your system:
+
+   - [dnsmasq](http://www.thekelleys.org.uk/dnsmasq/doc.html) to make *app-name.dev.gov.uk* work
+   - [docker](https://hub.docker.com/) and [docker-compose](https://docs.docker.com/compose/install/), fairly obviously
+   - [git](https://git-scm.com) if you're setting everything up from scratch
+   - A directory `~/govuk` in your home directory
+
+Now in the `govuk` directory, run the following commands.
+
+```
+git clone git@github.com:benthorner/govuk-docker.git
+cd govuk-docker
+
+# Expect this to take some time (around 20 minutes)
+make
+```
+
+Then create or append to the following and restart dnsmasq.
+
+```
+# /etc/resolver/dev.gov.uk
+nameserver 127.0.0.1
+
+# /usr/local/etc/dnsmasq.conf (bottom)
+address=/dev.gov.uk/127.0.0.1
+```
+
+Finally, put the following in your bash config (aliases optional).
+
+```
+alias gd="govuk-docker"
+alias gdr="govuk-docker run-this"
+alias gdrd="govuk-docker run-this default"
+alias gdb="govuk-docker build-this"
+alias gdd="govuk-docker down; govuk-docker prune"
+
+export PATH=$PATH:~/govuk/govuk-docker/bin
+```
+
+## User Needs
+
+The aim of govuk-docker is to meet the following primary need.
+
+> **As a** developer on GOV.UK apps <br/>
+> **I want** a GOV.UK environment optimised for development <br/>
+> **So that** I can develop GOV.UK apps efficiently
+
+However, this high-level statement hides a great number of specific needs, which also help to clarify the design decisions for govuk-docker. These lower-level [needs](NEEDS.md) and associated [decisions](DECISIONS.md) are set out in separate documents.
+
+## Compatibility
+
+The following apps are supported by govuk-docker to some extent.
+
+   - ⚠ asset-manager
+      * One [failing spec](https://github.com/alphagov/asset-manager/blob/master/spec/requests/virus_scanning_spec.rb#L54) for virus scanning
+   - ⚠ content-data-admin
+      * **TODO: Missing support for a webserver stack**
+   - ✅ content-publisher
+   - ⚠ content-store
+      * [MongoDB config](https://github.com/benthorner/govuk-docker/blob/master/content-store/mongoid.yml#L14) is overriden to use a different test DB
+   - ⚠ content-tagger
+      * [chromedriver-helper](https://github.com/benthorner/govuk-docker/blob/master/content-tagger/docker-compose.yml#L13) version lock is manually added
+   - ⚠ government-frontend
+      * [chromedriver-helper](https://github.com/benthorner/govuk-docker/blob/master/content-tagger/docker-compose.yml#L13) version lock is manually added
+   - ✅ govspeak
+   - ⚠ govuk-developer-docs
+      * Some manuals require [explicit UTF-8 support](https://github.com/docker-library/docs/blob/master/ruby/content.md#encoding)
+      * [One test](https://github.com/alphagov/govuk-developer-docs/blob/master/spec/app/document_types_spec.rb#L17) fails due to an irrelevant ordering issue
+      * [Another test](https://github.com/alphagov/govuk-developer-docs/blob/master/spec/app/document_types_csv_spec.rb) seems to be failing due fixture issues
+   - ✅ govuk_app_config
+   - ❌ govuk_publishing_components
+      * Unable to run `rake` due to an [old version of Jasmine](https://github.com/jasmine/jasmine-gem/issues/285)
+   - ✅ plek
+   - ✅ publishing-api
+   - ✅ router-api
+   - ⚠ router
+      * Unable to run `make test` due to a [hardcoded DB host](https://github.com/alphagov/router/blob/master/integration_tests/route_helpers.go#L77)
+   - ⚠ whitehall
+      * Who knows, really - several tests are failing, lots pass ;-)
+      * **TODO: Missing support for an E2E stack**
+
+## FAQs
+
+### How to: diagnose and troubleshoot
+
+Sometimes things go wrong or some investigation is needed. As govuk-docker is just a bunch of docker config and a CLI wrapper, it's still possible to use all the standard docker commands to help fix issues and get more info e.g.
+
+```
+# tail logs for running services
+gd logs -f
+
+# get all the running containers
+docker ps -a
+
+# cleanup all govuk-docker services
+gdd
+
+# get a terminal inside a service
+gdrd bash
+```
+
+### How to: add a new service
+
+TODO: PR example
+
+### How to: change a service e.g. upgrade Ruby
+
+TODO: PR example
+
+### How to: setup a specific service
+
+If a new service has been added to govuk-docker, first pull the latest version to get the changes. One way to setup the new service would be to run `make`, but this goes through every service and might take a while. A faster way is to do this:
+
+```
+# auto-clone any new services
+make clone
+
+# setup the specific service(s)
+make -f my_service/Makefile
+```
+
+### How to: update everything!
+
+Sometimes it's useful to get all changes for all repos e.g. to support finding things with a govuk-wide grep. This can be done by running `make pull`, followed by `make setup` to ensure all services continue to run as expected.

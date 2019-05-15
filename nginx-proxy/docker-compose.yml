@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy:latest
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+      - ./nginx-proxy/proxy.conf:/etc/nginx/proxy.conf
+    networks:
+      default:
+        aliases:
+          - asset-manager.dev.gov.uk
+          - content-publisher.dev.gov.uk
+          - content-store.dev.gov.uk
+          - content-tagger.dev.gov.uk
+          - draft-content-store.dev.gov.uk
+          - draft-government-frontend.dev.gov.uk
+          - draft-origin.dev.gov.uk
+          - draft-router-api.dev.gov.uk
+          - draft-router.dev.gov.uk
+          - draft-static.dev.gov.uk
+          - government-frontend.dev.gov.uk
+          - govuk-developer-docs.dev.gov.uk
+          - govuk_publishing_components.dev.gov.uk
+          - publishing-api.dev.gov.uk
+          - router-api.dev.gov.uk
+          - router.dev.gov.uk
+          - static.dev.gov.uk
+          - whitehall-admin.dev.gov.uk
+          - www-origin.dev.gov.uk
+          - www.dev.gov.uk
