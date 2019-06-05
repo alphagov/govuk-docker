@@ -28,6 +28,8 @@ services:
           - router-api.dev.gov.uk
           - router.dev.gov.uk
           - static.dev.gov.uk
+          - support.dev.gov.uk
+          - support-api.dev.gov.uk
           - whitehall-admin.dev.gov.uk
           - www-origin.dev.gov.uk
           - www.dev.gov.uk

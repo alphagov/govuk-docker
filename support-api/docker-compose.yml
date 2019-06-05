@@ -1,0 +1,38 @@
+version: '3.7'
+
+x-support-api: &support-api
+  build:
+    context: .
+    dockerfile: support-api/Dockerfile
+  image: support-api
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+    - home:/home/build
+    - ./support-api/database.yml:/govuk/support-api/config/database.yml
+  working_dir: /govuk/support-api
+
+services:
+  support-api-default:
+    <<: *support-api
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres/support-api"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres/support-api-test"
+      REDIS_URL: redis://redis
+
+  support-api-backend: &support-api-backend
+    <<: *support-api
+    depends_on:
+      - postgres
+      - redis
+      - nginx-proxy
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres/support-api"
+      REDIS_URL: redis://redis
+      VIRTUAL_HOST: support-api.dev.gov.uk
+    ports:
+      - "3000"
+    command: rails s -b 0.0.0.0 -P /tmp/rails.pid

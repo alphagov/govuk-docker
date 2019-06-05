@@ -1,0 +1,33 @@
+version: '3.7'
+
+x-support: &support
+  build:
+    context: .
+    dockerfile: support/Dockerfile
+  image: support
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+    - home:/home/build
+  working_dir: /govuk/support
+
+services:
+  support-default:
+    <<: *support
+    depends_on:
+      - redis
+    environment:
+      REDIS_URL: redis://redis
+
+  support-backend: &support-backend
+    <<: *support
+    depends_on:
+      - redis
+      - nginx-proxy
+      - support-api-backend
+    environment:
+      VIRTUAL_HOST: support.dev.gov.uk
+      REDIS_URL: redis://redis
+    ports:
+      - "3000"
+    command: rails s -b 0.0.0.0 -P /tmp/rails.pid

@@ -103,8 +103,11 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ plek
    - ✅ publishing-api
    - ✅ router-api
-   - ⚠ router
+   - ❌ router
       * Unable to run `make test` due to a [hardcoded DB host](https://github.com/alphagov/router/blob/master/integration_tests/route_helpers.go#L77)
+   - ✅ support
+   - ⚠ support-api
+      * [PostgreSQL config](https://github.com/benthorner/govuk-docker/blob/master/support-api/database.yml) is overriden to set a non-localhost URL
    - ⚠ whitehall
       * Who knows, really - several tests are failing, lots pass ;-)
       * **TODO: Missing support for an E2E stack**
@@ -131,7 +134,9 @@ gdrd bash
 
 ### How to: add a new service
 
-TODO: PR example
+Here's an example commit that does just that.
+
+https://github.com/benthorner/govuk-docker/commit/1cd31a5fa3469cce47637db81f17ca1b03d72f89
 
 ### How to: change a service e.g. upgrade Ruby
 
