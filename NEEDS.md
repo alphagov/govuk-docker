@@ -184,13 +184,13 @@ Decisions made to support this need: [make-setup](DECISIONS.md#make-setup), [cli
 ### Contributing
 
 >**As a** developer on a new GOV.UK service <br>
->**I want** to update govuk-docker to support it <br>
+>**I want** to update my environment to support it <br>
 >**So that** I can meet all of my other needs <br>
 
 Decisions made to support this need: [make-clone](DECISIONS.md#make-clone), [make-files](DECISIONS.md#make-files), [docker-compose](DECISIONS.md#docker-compose)
 
 >**As a** developer on a changing GOV.UK service <br>
->**I want** to update govuk-docker to support it<br>
+>**I want** to update my environment to support it<br>
 >**So that** I can meet all of my other needs <br>
 
 Decisions made to support this need: [make-files](DECISIONS.md#make-files), [docker-compose](DECISIONS.md#docker-compose), [docker-aliases](DECISIONS.md#docker-aliases)
