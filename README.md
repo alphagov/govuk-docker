@@ -140,7 +140,7 @@ https://github.com/benthorner/govuk-docker/commit/1cd31a5fa3469cce47637db81f17ca
 
 ### How to: change a service e.g. upgrade Ruby
 
-TODO: PR example
+This will usually involve editing a `Dockerfile`, for things like system packages or new language versions; or a `docker-compose.yml` file, for things like environment variables and dependencies on other services. When a `Dockerfile` changes, the associated image needs to be rebuilt, which can be done in the service directory by running `gdb`.
 
 ### How to: setup a specific service
 
