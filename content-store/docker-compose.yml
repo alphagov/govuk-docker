@@ -30,9 +30,10 @@ services:
     environment:
       MONGODB_URI: "mongodb://mongo/content-store"
       VIRTUAL_HOST: content-store.dev.gov.uk
+      HOST: 0.0.0.0
     ports:
       - "3000"
-    command: rails s -b 0.0.0.0 -P /tmp/rails.pid
+    command: rails s -P /tmp/rails.pid
 
   content-store-draft:
     <<: *content-store-live
@@ -44,3 +45,4 @@ services:
       PLEK_HOSTNAME_PREFIX: "draft-"
       MONGODB_URI: "mongodb://mongo/draft-content-store"
       VIRTUAL_HOST: draft-content-store.dev.gov.uk
+      HOST: 0.0.0.0

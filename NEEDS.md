@@ -31,7 +31,7 @@ Decisions made to support this need: [docker-compose](DECISIONS.md#docker-compos
 >**I want** to understand the dev tools I'm using <br>
 >**So that** I can use them correctly and debug issues <br>
 
-Decisions made to support this need: [make-files](DECISIONS.md#make-files), [docker-compose](DECISIONS.md#docker-compose), [cli-echo](DECISIONS.md#cli-echo)
+Decisions made to support this need: [make-files](DECISIONS.md#make-files), [docker-compose](DECISIONS.md#docker-compose), [cli-echo](DECISIONS.md#cli-echo), [docker-binding](DECISIONS.md#docker-binding)
 
 ### Getting Started
 
@@ -85,7 +85,7 @@ Decisions made to support this need: [make-idempotent](DECISIONS.md#make-idempot
 >**I want** to start a web server for the app <br>
 >**So that** I can manually test the app <br>
 
-Decisions made to support this need: [docker-stacks](DECISIONS.md#docker-stacks), [docker-bindmount](DECISIONS.md#docker-bindmount)
+Decisions made to support this need: [docker-stacks](DECISIONS.md#docker-stacks), [docker-bindmount](DECISIONS.md#docker-bindmount), [docker-binding](DECISIONS.md#docker-binding)
 
 >**As a** developer on a GOV.UK app <br>
 >**I want** to navigate to the app in my browser <br>

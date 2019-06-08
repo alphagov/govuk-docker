@@ -199,6 +199,14 @@ Instead of trying to make `bundle exec` implicit in all commands, bundler recomm
 
 Debugging a Ruby service is often done with the aid of a gem like [byebug](https://github.com/deivid-rodriguez/byebug), using `byebug` or `debugger` breakpoints to activate a prompt in the running command. By default, a docker command does not expose an interactive terminal, which would prevent the use of the prompt for debugger, since it could not receive any input. **Using [docker-compose](https://docs.docker.com/compose/reference/run/) automatically allocates an interactive terminal, so the prompt can be used**.
 
+### docker-binding
+
+Developing a webapp often involves making requests e.g. in the browser, or using CLI tools like `curl`. This can break if the app is running inside a Docker container, since commands like `rails server` and `middleman server` only listen to requests on the local machine (the container) by default. Commands like `rails server` support a `binding` option to change this behaviour e.g. `rails server -b 0.0.0.0` starts a webserver that listens on all interfaces.
+
+Using [docker-stacks](#docker-stacks), the command to start a webserver is specified automatically e.g. `govuk-docker run-this backend` is the same as `govuk-docker run-this backend rails s` but with the additional flag `-b 0.0.0.0`. This may cause confusion if a developer wishes to write a custom command, since the binding flag is docker-specific. In order to avoid confusion and reduce typing, **govuk-docker encourages the use of environment variables to set binding options**.
+
+Currently only [rails](https://github.com/rails/rails/issues/25677) supports this behaviour.
+
 ## CLI
 
 ### cli-exists

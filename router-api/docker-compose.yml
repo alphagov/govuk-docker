@@ -26,12 +26,13 @@ services:
       - mongo
       - router-live
     environment:
-      ROUTER_NODES: router.dev.gov.uk:3055
+      ROUTER_NODES: router-live:3055
       MONGODB_URI: "mongodb://mongo/router"
       VIRTUAL_HOST: router-api.dev.gov.uk
+      HOST: 0.0.0.0
     ports:
       - "3000"
-    command: rails s -b 0.0.0.0 -P /tmp/rails.pid
+    command: rails s -P /tmp/rails.pid
 
   router-api-draft:
     <<: *router-api-live
@@ -39,6 +40,7 @@ services:
       - mongo
       - router-draft
     environment:
-      ROUTER_NODES: draft-router.dev.gov.uk:3055
+      ROUTER_NODES: router-draft:3055
       MONGODB_URI: "mongodb://mongo/draft-router"
       VIRTUAL_HOST: draft-router-api.dev.gov.uk
+      HOST: 0.0.0.0

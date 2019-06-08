@@ -28,6 +28,7 @@ services:
     environment:
       VIRTUAL_HOST: support.dev.gov.uk
       REDIS_URL: redis://redis
+      HOST: 0.0.0.0
     ports:
       - "3000"
-    command: rails s -b 0.0.0.0 -P /tmp/rails.pid
+    command: rails s -P /tmp/rails.pid

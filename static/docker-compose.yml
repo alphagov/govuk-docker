@@ -8,16 +8,19 @@ services:
     <<: *static
     environment:
       VIRTUAL_HOST: static.dev.gov.uk
+      HOST: 0.0.0.0
     ports:
       - "3013"
-    command: rails s -b 0.0.0.0 -P /tmp/rails.pid
+    command: rails s -P /tmp/rails.pid
 
   static-draft:
     <<: *static-backend
     environment:
       VIRTUAL_HOST: draft-static.dev.gov.uk
+      HOST: 0.0.0.0
 
   static-live:
     <<: *static-backend
     environment:
       VIRTUAL_HOST: static.dev.gov.uk
+      HOST: 0.0.0.0
