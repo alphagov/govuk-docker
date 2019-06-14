@@ -1,0 +1,37 @@
+version: '3.7'
+
+x-signon: &signon
+  build:
+    context: .
+    dockerfile: signon/Dockerfile
+  image: signon
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+    - home:/home/build
+  working_dir: /govuk/signon
+
+services:
+  signon-default:
+    <<: *signon
+    privileged: true
+    depends_on:
+      - mysql
+      - redis
+    environment:
+      DATABASE_URL: "mysql2://root:root@mysql/signon_development"
+      TEST_DATABASE_URL: "mysql2://root:root@mysql/signon_test"
+      REDIS_HOST: redis
+
+  signon-web:
+    <<: *signon
+    depends_on:
+      - mysql
+      - nginx-proxy
+    environment:
+      DATABASE_URL: "mysql2://root:root@mysql/signon_development"
+      VIRTUAL_HOST: signon.dev.gov.uk
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    command: rails s

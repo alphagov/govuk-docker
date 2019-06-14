@@ -102,9 +102,10 @@ The following apps are supported by govuk-docker to some extent.
       * Unable to run `rake` due to an [old version of Jasmine](https://github.com/jasmine/jasmine-gem/issues/285)
    - ✅ plek
    - ✅ publishing-api
-   - ✅ router-api
    - ❌ router
       * Unable to run `make test` due to a [hardcoded DB host](https://github.com/alphagov/router/blob/master/integration_tests/route_helpers.go#L77)
+   - ✅ router-api
+   - ✅ signon
    - ✅ support
    - ⚠ support-api
       * [PostgreSQL config](https://github.com/benthorner/govuk-docker/blob/master/support-api/database.yml) is overriden to set a non-localhost URL
