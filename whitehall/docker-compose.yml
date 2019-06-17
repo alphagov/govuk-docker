@@ -23,6 +23,7 @@ services:
       DATABASE_URL: "mysql2://root:root@mysql/whitehall_development"
       TEST_DATABASE_URL: "mysql2://root:root@mysql/whitehall_test"
       REDIS_URL: redis://redis
+      PATH: "/govuk/whitehall/bin:${PATH}"
 
   whitehall-backend:
     <<: *whitehall
@@ -38,6 +39,7 @@ services:
       REDIS_URL: redis://redis
       VIRTUAL_HOST: whitehall-admin.dev.gov.uk
       HOST: 0.0.0.0
+      PATH: "/govuk/whitehall/bin:${PATH}"
     ports:
       - "3000"
     command: rails s -P /tmp/rails.pid

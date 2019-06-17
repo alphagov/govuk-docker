@@ -14,3 +14,5 @@ x-govuk_app_config: &govuk_app_config
 services:
   govuk_app_config-default:
     <<: *govuk_app_config
+    environment:
+      PATH: "/govuk/govuk_app_config/bin:${PATH}"

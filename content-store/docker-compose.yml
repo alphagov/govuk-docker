@@ -20,6 +20,7 @@ services:
     environment:
       MONGODB_URI: "mongodb://mongo/content-store"
       TEST_MONGODB_URI: "mongodb://mongo/content-store-test"
+      PATH: "/govuk/content-store/bin:${PATH}"
 
   content-store-live: &content-store-live
     <<: *content-store
@@ -31,6 +32,7 @@ services:
       MONGODB_URI: "mongodb://mongo/content-store"
       VIRTUAL_HOST: content-store.dev.gov.uk
       HOST: 0.0.0.0
+      PATH: "/govuk/content-store/bin:${PATH}"
     ports:
       - "3000"
     command: rails s -P /tmp/rails.pid
@@ -46,3 +48,4 @@ services:
       MONGODB_URI: "mongodb://mongo/draft-content-store"
       VIRTUAL_HOST: draft-content-store.dev.gov.uk
       HOST: 0.0.0.0
+      PATH: "/govuk/content-store/bin:${PATH}"

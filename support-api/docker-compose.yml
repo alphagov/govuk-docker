@@ -22,6 +22,7 @@ services:
       DATABASE_URL: "postgresql://postgres@postgres/support-api"
       TEST_DATABASE_URL: "postgresql://postgres@postgres/support-api-test"
       REDIS_URL: redis://redis
+      PATH: "/govuk/support-api/bin:${PATH}"
 
   support-api-backend: &support-api-backend
     <<: *support-api
@@ -34,6 +35,7 @@ services:
       REDIS_URL: redis://redis
       VIRTUAL_HOST: support-api.dev.gov.uk
       HOST: 0.0.0.0
+      PATH: "/govuk/support-api/bin:${PATH}"
     ports:
       - "3000"
     command: rails s -P /tmp/rails.pid

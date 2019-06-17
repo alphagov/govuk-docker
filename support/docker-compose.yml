@@ -18,6 +18,7 @@ services:
       - redis
     environment:
       REDIS_URL: redis://redis
+      PATH: "/govuk/support/bin:${PATH}"
 
   support-backend: &support-backend
     <<: *support
@@ -29,6 +30,7 @@ services:
       VIRTUAL_HOST: support.dev.gov.uk
       REDIS_URL: redis://redis
       HOST: 0.0.0.0
+      PATH: "/govuk/support/bin:${PATH}"
     ports:
       - "3000"
     command: rails s -P /tmp/rails.pid

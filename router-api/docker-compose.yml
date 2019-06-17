@@ -19,6 +19,7 @@ services:
     environment:
       MONGODB_URI: "mongodb://mongo/router"
       TEST_MONGODB_URI: "mongodb://mongo/router-test"
+      PATH: "/govuk/router-api/bin:${PATH}"
 
   router-api-live: &router-api-live
     <<: *router-api
@@ -30,6 +31,7 @@ services:
       MONGODB_URI: "mongodb://mongo/router"
       VIRTUAL_HOST: router-api.dev.gov.uk
       HOST: 0.0.0.0
+      PATH: "/govuk/router-api/bin:${PATH}"
     ports:
       - "3000"
     command: rails s -P /tmp/rails.pid
@@ -44,3 +46,4 @@ services:
       MONGODB_URI: "mongodb://mongo/draft-router"
       VIRTUAL_HOST: draft-router-api.dev.gov.uk
       HOST: 0.0.0.0
+      PATH: "/govuk/router-api/bin:${PATH}"

@@ -14,6 +14,8 @@ x-govuk_publishing_components: &govuk_publishing_components
 services:
   govuk_publishing_components-default:
     <<: *govuk_publishing_components
+    environment:
+      PATH: "/govuk/govuk_publishing_components/bin:${PATH}"
 
   govuk_publishing_components-web:
     <<: *govuk_publishing_components
@@ -21,6 +23,7 @@ services:
       - nginx-proxy
     environment:
       VIRTUAL_HOST: govuk_publishing_components.dev.gov.uk
+      PATH: "/govuk/govuk_publishing_components/bin:${PATH}"
     ports:
       - "9292"
     command: bundle exec rackup spec/dummy/config.ru --host 0.0.0.0
