@@ -16,7 +16,6 @@ services:
     <<: *govuk-developer-docs
     environment:
       LANG: "C.UTF-8"
-      PATH: "/govuk/govuk-developer-docs/bin:${PATH}"
 
   govuk-developer-docs-web:
     <<: *govuk-developer-docs
@@ -24,7 +23,6 @@ services:
       - nginx-proxy
     environment:
       VIRTUAL_HOST: govuk-developer-docs.dev.gov.uk
-      PATH: "/govuk/govuk-developer-docs/bin:${PATH}"
     ports:
       - "4567"
     command: bundle exec middleman server --bind-address 0.0.0.0

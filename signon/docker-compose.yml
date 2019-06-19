@@ -22,7 +22,6 @@ services:
       DATABASE_URL: "mysql2://root:root@mysql/signon_development"
       TEST_DATABASE_URL: "mysql2://root:root@mysql/signon_test"
       REDIS_HOST: redis
-      PATH: "/govuk/signon/bin:${PATH}"
 
   signon-web:
     <<: *signon
@@ -33,7 +32,6 @@ services:
       DATABASE_URL: "mysql2://root:root@mysql/signon_development"
       VIRTUAL_HOST: signon.dev.gov.uk
       HOST: 0.0.0.0
-      PATH: "/govuk/signon/bin:${PATH}"
     ports:
       - "3000"
     command: rails s

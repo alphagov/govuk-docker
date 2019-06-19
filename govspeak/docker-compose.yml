@@ -1,6 +1,6 @@
 version: '3.7'
 
-x-govspeak: &govspeak
+x-govuk_publisher_components: &govspeak
   build:
     context: .
     dockerfile: govspeak/Dockerfile
@@ -14,5 +14,3 @@ x-govspeak: &govspeak
 services:
   govspeak-default:
     <<: *govspeak
-    environment:
-      PATH: "/govuk/govspeak/bin:${PATH}"

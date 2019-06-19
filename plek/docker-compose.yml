@@ -14,5 +14,3 @@ x-plek: &plek
 services:
   plek-default:
     <<: *plek
-    environment:
-      PATH: "/govuk/plek/bin:${PATH}"

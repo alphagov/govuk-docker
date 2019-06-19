@@ -22,7 +22,6 @@ services:
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
       DATABASE_URL: "postgresql://postgres@postgres/content-tagger"
       TEST_DATABASE_URL: "postgresql://postgres@postgres/content-tagger-test"
-      PATH: "/govuk/content-tagger/bin:${PATH}"
 
   content-tagger-backend: &content-tagger-backend
     <<: *content-tagger
@@ -36,7 +35,6 @@ services:
       VIRTUAL_HOST: content-tagger.dev.gov.uk
       REDIS_URL: redis://redis
       HOST: 0.0.0.0
-      PATH: "/govuk/content-tagger/bin:${PATH}"
     ports:
       - "3000"
     command: rails s -P /tmp/rails.pid

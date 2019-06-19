@@ -22,7 +22,6 @@ services:
       DATABASE_URL: "postgresql://postgres@postgres/content-publisher"
       TEST_DATABASE_URL: "postgresql://postgres@postgres/content-publisher-test"
       REDIS_URL: redis://redis
-      PATH: "/govuk/content-publisher/bin:${PATH}"
 
   content-publisher-backend: &content-publisher-backend
     <<: *content-publisher
@@ -38,7 +37,6 @@ services:
       REDIS_URL: redis://redis
       VIRTUAL_HOST: content-publisher.dev.gov.uk
       HOST: 0.0.0.0
-      PATH: "/govuk/content-publisher/bin:${PATH}"
     ports:
       - "3000"
     command: rails s -P /tmp/rails.pid

@@ -18,8 +18,6 @@ services:
       - ..:/govuk:delegated
       - bundle:/usr/local/bundle
       - ./government-frontend/chromedriver-version:/home/build/.chromedriver-helper/.chromedriver-version
-    environment:
-      PATH: "/govuk/government-frontend/bin:${PATH}"
 
   government-frontend-live: &government-frontend-draft
     <<: *government-frontend
@@ -31,7 +29,6 @@ services:
       GOVUK_ASSET_ROOT: government-frontend.dev.gov.uk
       VIRTUAL_HOST: government-frontend.dev.gov.uk
       HOST: 0.0.0.0
-      PATH: "/govuk/government-frontend/bin:${PATH}"
     ports:
       - "3000"
     command: rails s -P /tmp/rails.pid
@@ -48,4 +45,3 @@ services:
       VIRTUAL_HOST: draft-government-frontend.dev.gov.uk
       PLEK_HOSTNAME_PREFIX: "draft-"
       HOST: 0.0.0.0
-      PATH: "/govuk/government-frontend/bin:${PATH}"

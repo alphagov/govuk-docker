@@ -193,7 +193,7 @@ Confusingly, it's not always necessary to write this prefix e.g. due to 'helper'
 
 Another approach to solving this problem is to set the [RUBYGEMS_GEMDEPS](https://reinteractive.com/posts/266-no-more-bundle-exec-using-the-new-rubygems_gemdeps-environment-variable) environment variable, which behaves similarly, but (apparently) not identically to `bundle exec` and is [not recommended](https://github.com/bundler/bundler/issues/3656).
 
-Instead of trying to make `bundle exec` implicit in all commands, bundler recommends using [its binstub command](https://bundler.io/man/bundle-binstubs.1.html) to generate wrappers to automate it for particular gems, much like the 'helper' scripts provided by rails. The existing wrappers like `bin/rake` do already many cover common commands in many GOV.UK services. In order to reduce typing, **govuk-docker adds the `bin` directory for the service to the PATH for the container**, and encourages the addition of bundler binstubs to individual services as the developers think necessary.
+Instead of trying to make `bundle exec` implicit in all commands, bundler recommends using [its binstub command](https://bundler.io/man/bundle-binstubs.1.html) to generate wrappers to automate it for particular gems, much like the 'helper' scripts provided by rails. The existing wrappers like `bin/rake` do already many cover common commands in many GOV.UK services. In order to reduce typing, **govuk-docker encourages the addition of bundler binstubs to individual projects as the developers think necessary**.
 
 ### docker-debugger
 
