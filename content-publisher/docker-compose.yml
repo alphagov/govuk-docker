@@ -46,6 +46,19 @@ services:
     depends_on:
       - postgres
       - redis
+      - content-publisher-worker
       - publishing-api-e2e
       - asset-manager-e2e
       - nginx-proxy
+
+  content-publisher-worker:
+    <<: *content-publisher
+    depends_on:
+      - postgres
+      - redis
+      - publishing-api-e2e
+      - asset-manager-e2e
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres/content-publisher"
+      REDIS_URL: redis://redis
+    command: bundle exec sidekiq -C ./config/sidekiq.yml
