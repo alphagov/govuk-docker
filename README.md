@@ -100,12 +100,15 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ govuk_app_config
    - ❌ govuk_publishing_components
       * Unable to run `rake` due to an [old version of Jasmine](https://github.com/jasmine/jasmine-gem/issues/285)
+   - ✅ miller-columns-element
    - ✅ plek
    - ✅ publishing-api
    - ❌ router
       * Unable to run `make test` due to a [hardcoded DB host](https://github.com/alphagov/router/blob/master/integration_tests/route_helpers.go#L77)
    - ✅ router-api
    - ✅ signon
+   - ⚠ static
+      * JavaScript 404 errors when previewing pages, possibly [related to analytics](https://github.com/alphagov/static/blob/master/app/assets/javascripts/analytics/init.js.erb#L28)
    - ✅ support
    - ⚠ support-api
       * [PostgreSQL config](https://github.com/benthorner/govuk-docker/blob/master/support-api/database.yml) is overriden to set a non-localhost URL
