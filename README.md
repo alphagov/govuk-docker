@@ -114,7 +114,8 @@ The following apps are supported by govuk-docker to some extent.
       * [PostgreSQL config](https://github.com/benthorner/govuk-docker/blob/master/support-api/database.yml) is overriden to set a non-localhost URL
    - ⚠ whitehall
       * Who knows, really - several tests are failing, lots pass ;-)
-      * **TODO: Missing support for an E2E stack**
+      * Rake task to [create a test taxon](https://github.com/alphagov/whitehall/blob/master/lib/tasks/taxonomy.rake#L11) for publishing is not idempotent
+      * Placeholder images don't work as missing proxy for [/government/assets](https://github.com/alphagov/whitehall/blob/master/app/presenters/publishing_api/news_article_presenter.rb#L133)
 
 ## FAQs
 
