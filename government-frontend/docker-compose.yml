@@ -19,7 +19,7 @@ services:
       - bundle:/usr/local/bundle
       - ./government-frontend/chromedriver-version:/home/build/.chromedriver-helper/.chromedriver-version
 
-  government-frontend-live: &government-frontend-draft
+  government-frontend-live: &government-frontend-live
     <<: *government-frontend
     depends_on:
       - router-live
@@ -34,7 +34,7 @@ services:
     command: rails s -P /tmp/rails.pid
 
   government-frontend-draft:
-    <<: *government-frontend-draft
+    <<: *government-frontend-live
     depends_on:
       - router-draft
       - content-store-draft
