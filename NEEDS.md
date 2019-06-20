@@ -103,13 +103,13 @@ Decisions made to support this need: [docker-stacks](DECISIONS.md#docker-stacks)
 >**I want** to run the app against an end-to-end stack <br>
 >**So that** I can manually test user journeys <br>
 
-Decisions made to support this need: [docker-stacks](DECISIONS.md#docker-stacks), [web-nginx](DECISIONS.md#web-nginx), [make-setup](DECISIONS.md#make-setup)
+Decisions made to support this need: [docker-stacks](DECISIONS.md#docker-stacks), [web-nginx](DECISIONS.md#web-nginx), [make-setup](DECISIONS.md#make-setup), [rails/rails#36486](https://github.com/rails/rails/pull/36486)
 
 >**As a** developer on a GOV.UK app <br>
 >**I want** to run the app against a draft-specific stack <br>
 >**So that** I can manually test user journeys <br>
 
-Decisions made to support this need: [docker-stacks](DECISIONS.md#docker-stacks), [web-nginx](DECISIONS.md#web-nginx), [make-setup](DECISIONS.md#make-setup)
+Decisions made to support this need: [docker-stacks](DECISIONS.md#docker-stacks), [web-nginx](DECISIONS.md#web-nginx), [make-setup](DECISIONS.md#make-setup), [rails/rails#36486](https://github.com/rails/rails/pull/36486)
 
 >**As a** developer on a GOV.UK app <br>
 >**I want** to change code without restarting the server <br>
