@@ -35,7 +35,7 @@ services:
       HOST: 0.0.0.0
     ports:
       - "3000"
-    command: rails s -P /tmp/rails.pid
+    command: bin/rails s -P /tmp/rails.pid
 
   asset-manager-e2e:
     <<: *asset-manager-backend

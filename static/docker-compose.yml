@@ -25,7 +25,7 @@ services:
       PATH: "/govuk/static/bin:${PATH}"
     ports:
       - "3000"
-    command: rails s -P /tmp/rails.pid
+    command: bin/rails s -P /tmp/rails.pid
 
   static-live:
     <<: *static-backend

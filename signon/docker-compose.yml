@@ -34,4 +34,4 @@ services:
       HOST: 0.0.0.0
     ports:
       - "3000"
-    command: rails s
+    command: bin/rails s -P /tmp/rails.pid
