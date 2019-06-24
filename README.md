@@ -60,9 +60,8 @@ Finally, put the following in your bash config (aliases optional).
 ```
 alias gd="govuk-docker"
 alias gdr="govuk-docker run-this"
-alias gdrd="govuk-docker run-this default"
+alias gdd="govuk-docker run-this default"
 alias gdb="govuk-docker build-this"
-alias gdd="govuk-docker down; govuk-docker prune"
 
 export PATH=$PATH:~/govuk/govuk-docker/bin
 ```
