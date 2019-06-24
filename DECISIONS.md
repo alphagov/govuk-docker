@@ -207,6 +207,10 @@ Using [docker-stacks](#docker-stacks), the command to start a webserver is speci
 
 Currently only [rails](https://github.com/rails/rails/issues/25677) supports this behaviour.
 
+### docker-bundeopen
+
+Sometimes a service can exhibit a bug in one of its dependencies. In order to investigate a bug in a Ruby dependency, it's common to 'edit' the local copy of the code for the dependency using `bundle open`. Due to [docker-bundle](#docker-bundle), the code for a Ruby dependency is only accessible in the context of a container. In order to support editing of Ruby dependencies in the context of a container, **govuk-docker installs vim for all Ruby services and sets it as the default editor**.
+
 ## CLI
 
 ### cli-exists

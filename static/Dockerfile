@@ -1,5 +1,5 @@
 FROM ruby:2.6.3
-RUN apt-get update -qq && apt-get upgrade -y && apt-get install -y build-essential
+RUN apt-get update -qq && apt-get upgrade -y && apt-get install -y build-essential vim
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && apt install -y ./google-chrome*.deb
 
 RUN wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
@@ -13,3 +13,5 @@ RUN apt-get clean
 
 RUN useradd -m build
 USER build
+
+ENV EDITOR=vim
