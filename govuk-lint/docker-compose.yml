@@ -1,0 +1,16 @@
+version: '3.7'
+
+x-govuk-lint: &govuk-lint
+  build:
+    context: .
+    dockerfile: govuk-lint/Dockerfile
+  image: govuk-lint
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+    - home:/home/build
+  working_dir: /govuk/govuk-lint
+
+services:
+  govuk-lint-default:
+    <<: *govuk-lint

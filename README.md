@@ -96,6 +96,7 @@ The following apps are supported by govuk-docker to some extent.
       * Some manuals require [explicit UTF-8 support](https://github.com/docker-library/docs/blob/master/ruby/content.md#encoding)
       * [One test](https://github.com/alphagov/govuk-developer-docs/blob/master/spec/app/document_types_spec.rb#L17) fails due to an irrelevant ordering issue
       * [Another test](https://github.com/alphagov/govuk-developer-docs/blob/master/spec/app/document_types_csv_spec.rb) seems to be failing due fixture issues
+   - ✅ govuk-lint
    - ✅ govuk_app_config
    - ❌ govuk_publishing_components
       * Unable to run `rake` due to an [old version of Jasmine](https://github.com/jasmine/jasmine-gem/issues/285)
