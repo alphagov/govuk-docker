@@ -35,6 +35,17 @@ First make sure the following are installed on your system:
    - [git](https://git-scm.com) if you're setting everything up from scratch
    - A directory `~/govuk` in your home directory
 
+Start with the following in your bash config (aliases optional).
+
+```
+alias gd="govuk-docker"
+alias gdr="govuk-docker run-this"
+alias gdd="govuk-docker run-this default"
+alias gdb="govuk-docker build-this"
+
+export PATH=$PATH:~/govuk/govuk-docker/bin
+```
+
 Now in the `govuk` directory, run the following commands.
 
 ```
@@ -55,16 +66,6 @@ nameserver 127.0.0.1
 address=/dev.gov.uk/127.0.0.1
 ```
 
-Finally, put the following in your bash config (aliases optional).
-
-```
-alias gd="govuk-docker"
-alias gdr="govuk-docker run-this"
-alias gdd="govuk-docker run-this default"
-alias gdb="govuk-docker build-this"
-
-export PATH=$PATH:~/govuk/govuk-docker/bin
-```
 
 ## User Needs
 
