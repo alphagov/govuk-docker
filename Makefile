@@ -23,6 +23,7 @@ setup:
 	for repo in $(shell ls */Makefile | xargs -L 1 dirname); do \
 		make -f $$repo/Makefile; \
 	done
+	govuk-docker run whitehall-e2e rake taxonomy:populate_end_to_end_test_data
 
 clean:
 	govuk-docker stop
