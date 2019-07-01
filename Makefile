@@ -22,7 +22,6 @@ build:
 	bin/govuk-docker build
 
 setup: $(addsuffix _setup,$(APPS))
-	bin/govuk-docker run whitehall-e2e rake taxonomy:populate_end_to_end_test_data
 
 clean:
 	bin/govuk-docker stop
