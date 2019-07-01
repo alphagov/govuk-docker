@@ -163,3 +163,8 @@ make -f my_service/Makefile
 ### How to: update everything!
 
 Sometimes it's useful to get all changes for all repos e.g. to support finding things with a govuk-wide grep. This can be done by running `make pull`, followed by `make setup` to ensure all services continue to run as expected.
+
+
+## Licence
+
+[MIT License](LICENCE)
