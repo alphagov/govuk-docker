@@ -61,7 +61,15 @@ cd govuk-docker
 make
 ```
 
-Then create or append to the following and restart dnsmasq.
+If you have been using the vagrant based dev vm, take a backup
+of  `/etc/resolver/dev.gov.uk`.
+
+```
+cp /etc/resolver/dev.gov.uk ~/dev.gov.uk
+```
+
+Then create or append to the following and restart dnsmasq. If you've been using
+the vagrant based dev vm, you'll need to replace `/etc/resolver/dev.gov.uk`..
 
 ```
 # /etc/resolver/dev.gov.uk
