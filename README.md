@@ -4,7 +4,7 @@
 
 An alternative way to to develop on GOV.UK.
 
-![diagram](https://github.com/benthorner/govuk-docker/raw/master/diagram.png)
+![diagram](/docs/diagram.png)
 
 ## Introduction
 
@@ -25,6 +25,16 @@ content-publisher$ gdr e2e
 ```
 
 The above examples make use of an alias to reduce the amount of typing; the full form is `govuk-docker run-this`. In the last two commands, the app will be available in your browser at *app-name.dev.gov.uk*.
+
+## User Needs
+
+The aim of govuk-docker is to meet the following primary need.
+
+> **As a** developer on GOV.UK apps <br/>
+> **I want** a GOV.UK environment optimised for development <br/>
+> **So that** I can develop GOV.UK apps efficiently
+
+However, this high-level statement hides a great number of specific needs, which also help to clarify the design decisions for govuk-docker. These lower-level [needs](docs/NEEDS.md) and associated [decisions](docs/DECISIONS.md) are set out in separate documents.
 
 ## Setup
 
@@ -66,16 +76,6 @@ nameserver 127.0.0.1
 address=/dev.gov.uk/127.0.0.1
 ```
 
-
-## User Needs
-
-The aim of govuk-docker is to meet the following primary need.
-
-> **As a** developer on GOV.UK apps <br/>
-> **I want** a GOV.UK environment optimised for development <br/>
-> **So that** I can develop GOV.UK apps efficiently
-
-However, this high-level statement hides a great number of specific needs, which also help to clarify the design decisions for govuk-docker. These lower-level [needs](NEEDS.md) and associated [decisions](DECISIONS.md) are set out in separate documents.
 
 ## Compatibility
 
