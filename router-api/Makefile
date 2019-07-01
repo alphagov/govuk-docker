@@ -1,4 +1,2 @@
-GOVUK_DOCKER_RUN=govuk-docker run router-api-default
-
-default:
-	${GOVUK_DOCKER_RUN} bundle
+router-api_setup:
+	govuk-docker run router-api-default bundle

@@ -1,5 +1,3 @@
-GOVUK_DOCKER_RUN=govuk-docker run support-api-default
-
-default:
-	${GOVUK_DOCKER_RUN} bundle
-	${GOVUK_DOCKER_RUN} sh -c 'rake db:migrate 2>/dev/null || rake db:setup'
+support-api_setup:
+	govuk-docker run support-api-default bundle
+	govuk-docker run support-api-default sh -c 'rake db:migrate 2>/dev/null || rake db:setup'

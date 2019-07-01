@@ -1,6 +1,4 @@
-GOVUK_DOCKER_RUN=govuk-docker run content-publisher-default
-
-default:
-	${GOVUK_DOCKER_RUN} bundle
-	${GOVUK_DOCKER_RUN} sh -c 'rake db:migrate 2>/dev/null || rake db:setup'
-	${GOVUK_DOCKER_RUN} yarn
+content-publisher_setup:
+	govuk-docker run content-publisher-default bundle
+	govuk-docker run content-publisher-default sh -c 'rake db:migrate 2>/dev/null || rake db:setup'
+	govuk-docker run content-publisher-default yarn

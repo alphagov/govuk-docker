@@ -21,10 +21,11 @@ pull:
 build:
 	bin/govuk-docker build
 
-setup:
-	for repo in $(REPOS); do \
-		make -f $$repo/Makefile; \
-	done
+setup: asset-manager_setup content-data-admin_setup content-publisher_setup content-store_setup \
+	content-tagger_setup government-frontend_setup govspeak_setup govuk-developer-docs_setup \
+	govuk-lint_setup govuk_app_config_setup govuk_publishing_components_setup \
+	miller-columns-element_setup plek_setup publishing-api_setup router_setup router-api_setup \
+	signon_setup static_setup support_setup support-api_setup whitehall_setup
 	bin/govuk-docker run whitehall-e2e rake taxonomy:populate_end_to_end_test_data
 
 clean:
@@ -35,3 +36,5 @@ test:
 	# Test that the docker-compose config is valid. This will error if there are errors
 	# in the YAML files, or incompatible features are used.
 	bin/govuk-docker config
+
+include $(shell ls */Makefile)

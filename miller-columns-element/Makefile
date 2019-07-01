@@ -1,4 +1,2 @@
-GOVUK_DOCKER_RUN=govuk-docker run miller-columns-element-default
-
-default:
-	${GOVUK_DOCKER_RUN} npm install
+miller-columns-element_setup:
+	govuk-docker run miller-columns-element-default npm install
