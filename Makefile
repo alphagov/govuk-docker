@@ -31,3 +31,7 @@ clean:
 	bin/govuk-docker stop
 	bin/govuk-docker prune
 
+test:
+	# Test that the docker-compose config is valid. This will error if there are errors
+	# in the YAML files, or incompatible features are used.
+	bin/govuk-docker config
