@@ -4,7 +4,7 @@
 
 GOV.UK development environment using Docker.
 
-![diagram](/docs/diagram.png)
+![diagram](docs/diagram.png)
 
 ## Introduction
 
