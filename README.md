@@ -68,7 +68,15 @@ Then create or append to the following and restart dnsmasq.
 nameserver 127.0.0.1
 
 # /usr/local/etc/dnsmasq.conf (bottom)
+conf-dir=/usr/local/etc/dnsmasq.d,*.conf
+
+# /usr/local/etc/dnsmasq.d/development.conf
 address=/dev.gov.uk/127.0.0.1
+```
+
+Once you've updated those files, restart dnsmasq:
+```
+sudo brew services restart dnsmasq
 ```
 
 
