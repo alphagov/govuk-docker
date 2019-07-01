@@ -1,8 +1,8 @@
-**WARNING - _This is not an official GOV.UK repository. It is also a WIP and could receive breaking changes at any time._**
+** WIP and could receive breaking changes at any time. **
 
 # govuk-docker
 
-An alternative way to to develop on GOV.UK.
+GOV.UK development environment using Docker.
 
 ![diagram](/docs/diagram.png)
 
@@ -59,7 +59,7 @@ export PATH=$PATH:~/govuk/govuk-docker/bin
 Now in the `govuk` directory, run the following commands.
 
 ```
-git clone git@github.com:benthorner/govuk-docker.git
+git clone git@github.com:alphagov/govuk-docker.git
 cd govuk-docker
 
 # Expect this to take some time (around 20 minutes)
@@ -87,11 +87,11 @@ The following apps are supported by govuk-docker to some extent.
       * **TODO: Missing support for a webserver stack**
    - ✅ content-publisher
    - ⚠ content-store
-      * [MongoDB config](https://github.com/benthorner/govuk-docker/blob/master/content-store/mongoid.yml#L14) is overriden to use a different test DB
+      * [MongoDB config](https://github.com/alphagov/govuk-docker/blob/master/content-store/mongoid.yml#L14) is overriden to use a different test DB
    - ⚠ content-tagger
-      * [chromedriver-helper](https://github.com/benthorner/govuk-docker/blob/master/content-tagger/docker-compose.yml#L13) version lock is manually added
+      * [chromedriver-helper](https://github.com/alphagov/govuk-docker/blob/master/content-tagger/docker-compose.yml#L13) version lock is manually added
    - ⚠ government-frontend
-      * [chromedriver-helper](https://github.com/benthorner/govuk-docker/blob/master/content-tagger/docker-compose.yml#L13) version lock is manually added
+      * [chromedriver-helper](https://github.com/alphagov/govuk-docker/blob/master/content-tagger/docker-compose.yml#L13) version lock is manually added
    - ✅ govspeak
    - ⚠ govuk-developer-docs
       * Some manuals require [explicit UTF-8 support](https://github.com/docker-library/docs/blob/master/ruby/content.md#encoding)
@@ -112,7 +112,7 @@ The following apps are supported by govuk-docker to some extent.
       * JavaScript 404 errors when previewing pages, possibly [related to analytics](https://github.com/alphagov/static/blob/master/app/assets/javascripts/analytics/init.js.erb#L28)
    - ✅ support
    - ⚠ support-api
-      * [PostgreSQL config](https://github.com/benthorner/govuk-docker/blob/master/support-api/database.yml) is overriden to set a non-localhost URL
+      * [PostgreSQL config](https://github.com/alphagov/govuk-docker/blob/master/support-api/database.yml) is overriden to set a non-localhost URL
    - ⚠ whitehall
       * Who knows, really - several tests are failing, lots pass ;-)
       * Rake task to [create a test taxon](https://github.com/alphagov/whitehall/blob/master/lib/tasks/taxonomy.rake#L11) for publishing is not idempotent
@@ -142,7 +142,7 @@ gdrd bash
 
 Here's an example commit that does just that.
 
-https://github.com/benthorner/govuk-docker/commit/1cd31a5fa3469cce47637db81f17ca1b03d72f89
+https://github.com/alphagov/govuk-docker/commit/1cd31a5fa3469cce47637db81f17ca1b03d72f89
 
 ### How to: change a service e.g. upgrade Ruby
 
