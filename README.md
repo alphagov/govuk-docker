@@ -38,28 +38,26 @@ However, this high-level statement hides a great number of specific needs, which
 
 ## Setup
 
+### 1. Dependencies
+
 First make sure the following are installed on your system:
 
-   - [dnsmasq](http://www.thekelleys.org.uk/dnsmasq/doc.html) to make *app-name.dev.gov.uk* work
-   - [docker](https://hub.docker.com/) and [docker-compose](https://docs.docker.com/compose/install/), fairly obviously
-   - [git](https://git-scm.com) if you're setting everything up from scratch
-   - A directory `~/govuk` in your home directory
+1. [dnsmasq](http://www.thekelleys.org.uk/dnsmasq/doc.html) to make *app-name.dev.gov.uk* work (`brew install dnsmasq`)
+2. [docker](https://hub.docker.com/) and [docker-compose](https://docs.docker.com/compose/install/)
+3. [git](https://git-scm.com) if you're setting everything up from scratch
+4. A directory `~/govuk` in your home directory
 
-Start with the following in your bash config (aliases optional).
+### 2. Configure shell
+
+Start with the following in your `~/.bash_profile`:
 
 ```
 export PATH=$PATH:~/govuk/govuk-docker/bin
 ```
 
-Now in the `govuk` directory, run the following commands.
+Reload your shell with `source ~/.bash_profile`.
 
-```
-git clone git@github.com:alphagov/govuk-docker.git
-cd govuk-docker
-
-# Expect this to take some time (around 20 minutes)
-make
-```
+### 3. Configure DNS
 
 Then create or append to the following and restart dnsmasq.
 
@@ -71,6 +69,17 @@ nameserver 127.0.0.1
 address=/dev.gov.uk/127.0.0.1
 ```
 
+### 4. Clone repo and build
+
+Now in the `govuk` directory, run the following commands.
+
+```
+git clone git@github.com:alphagov/govuk-docker.git
+cd govuk-docker
+
+# Expect this to take some time (around 20 minutes)
+make
+```
 
 ## Compatibility
 
