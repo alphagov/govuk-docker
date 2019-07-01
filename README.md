@@ -15,13 +15,13 @@ publish a document end-to-end e.g.
 
 ```
 # Run whitehall rake plus any required dependencies (DBs)
-whitehall$ gdr default rake
+whitehall$ govuk-docker run-this default rake
 
 # Start content-tagger rails plus a minimal backend stack
-content-tagger$ gdr backend
+content-tagger$ govuk-docker run-this backend
 
 # Start content-publisher rails plus an end-to-end stack
-content-publisher$ gdr e2e
+content-publisher$ govuk-docker run-this e2e
 ```
 
 The above examples make use of an alias to reduce the amount of typing; the full form is `govuk-docker run-this`. In the last two commands, the app will be available in your browser at *app-name.dev.gov.uk*.
@@ -48,11 +48,6 @@ First make sure the following are installed on your system:
 Start with the following in your bash config (aliases optional).
 
 ```
-alias gd="govuk-docker"
-alias gdr="govuk-docker run-this"
-alias gdd="govuk-docker run-this default"
-alias gdb="govuk-docker build-this"
-
 export PATH=$PATH:~/govuk/govuk-docker/bin
 ```
 
@@ -126,16 +121,13 @@ Sometimes things go wrong or some investigation is needed. As govuk-docker is ju
 
 ```
 # tail logs for running services
-gd logs -f
+govuk-docker logs -f
 
 # get all the running containers
 docker ps -a
 
-# cleanup all govuk-docker services
-gdd
-
 # get a terminal inside a service
-gdrd bash
+govuk-docker run-this default bash
 ```
 
 ### How to: add a new service
