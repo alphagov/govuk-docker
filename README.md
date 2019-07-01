@@ -36,7 +36,7 @@ The aim of govuk-docker is to meet the following primary need.
 
 However, this high-level statement hides a great number of specific needs, which also help to clarify the design decisions for govuk-docker. These lower-level [needs](docs/NEEDS.md) and associated [decisions](docs/DECISIONS.md) are set out in separate documents.
 
-## Setup
+## Prerequisites
 
 First make sure the following are installed on your system:
 
@@ -44,6 +44,8 @@ First make sure the following are installed on your system:
    - [docker](https://hub.docker.com/) and [docker-compose](https://docs.docker.com/compose/install/), fairly obviously
    - [git](https://git-scm.com) if you're setting everything up from scratch
    - A directory `~/govuk` in your home directory
+
+## Setup
 
 Start with the following in your bash config (aliases optional).
 
@@ -78,6 +80,8 @@ Once you've updated those files, restart dnsmasq:
 ```
 sudo brew services restart dnsmasq
 ```
+
+To check if the new config has been applied, you can run `scutil --dns` to check that `dev.gov.uk` appears in the list.
 
 
 ## Compatibility
