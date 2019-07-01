@@ -36,16 +36,18 @@ The aim of govuk-docker is to meet the following primary need.
 
 However, this high-level statement hides a great number of specific needs, which also help to clarify the design decisions for govuk-docker. These lower-level [needs](docs/NEEDS.md) and associated [decisions](docs/DECISIONS.md) are set out in separate documents.
 
-## Setup
+## Prerequisites
 
 First make sure the following are installed on your system:
 
-   - [dnsmasq](http://www.thekelleys.org.uk/dnsmasq/doc.html) to make *app-name.dev.gov.uk* work
+   - [dnsmasq](http://www.thekelleys.org.uk/dnsmasq/doc.html) to make *app-name.dev.gov.uk* work. You can install this using `brew install dnsmasq`
    - [docker](https://hub.docker.com/) and [docker-compose](https://docs.docker.com/compose/install/), fairly obviously
    - [git](https://git-scm.com) if you're setting everything up from scratch
    - A directory `~/govuk` in your home directory
 
-Start with the following in your bash config (aliases optional).
+## Setup
+
+Start with the following in your bash config.
 
 ```
 export PATH=$PATH:~/govuk/govuk-docker/bin
@@ -76,8 +78,18 @@ the vagrant based dev vm, you'll need to replace `/etc/resolver/dev.gov.uk`..
 nameserver 127.0.0.1
 
 # /usr/local/etc/dnsmasq.conf (bottom)
+conf-dir=/usr/local/etc/dnsmasq.d,*.conf
+
+# /usr/local/etc/dnsmasq.d/development.conf
 address=/dev.gov.uk/127.0.0.1
 ```
+
+Once you've updated those files, restart dnsmasq:
+```
+sudo brew services restart dnsmasq
+```
+
+To check if the new config has been applied, you can run `scutil --dns` to check that `dev.gov.uk` appears in the list.
 
 
 ## Compatibility
