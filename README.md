@@ -91,6 +91,12 @@ sudo brew services restart dnsmasq
 
 To check if the new config has been applied, you can run `scutil --dns` to check that `dev.gov.uk` appears in the list.
 
+To check name resolution run `dig app.dev.gov.uk`. The response has to include answer section
+
+```
+;; ANSWER SECTION:
+app.dev.gov.uk.		0	IN	A	127.0.0.1
+```
 
 ## Compatibility
 
