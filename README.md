@@ -1,10 +1,10 @@
-**WARNING - _This is not an official GOV.UK repository. It is also a WIP and could receive breaking changes at any time._**
+** WIP and could receive breaking changes at any time. **
 
 # govuk-docker
 
-An alternative way to to develop on GOV.UK.
+GOV.UK development environment using Docker.
 
-![diagram](https://github.com/benthorner/govuk-docker/raw/master/diagram.png)
+![diagram](docs/diagram.png)
 
 ## Introduction
 
@@ -15,16 +15,26 @@ publish a document end-to-end e.g.
 
 ```
 # Run whitehall rake plus any required dependencies (DBs)
-whitehall$ gdr default rake
+whitehall$ govuk-docker run-this default rake
 
 # Start content-tagger rails plus a minimal backend stack
-content-tagger$ gdr backend
+content-tagger$ govuk-docker run-this backend
 
 # Start content-publisher rails plus an end-to-end stack
-content-publisher$ gdr e2e
+content-publisher$ govuk-docker run-this e2e
 ```
 
 The above examples make use of an alias to reduce the amount of typing; the full form is `govuk-docker run-this`. In the last two commands, the app will be available in your browser at *app-name.dev.gov.uk*.
+
+## User Needs
+
+The aim of govuk-docker is to meet the following primary need.
+
+> **As a** developer on GOV.UK apps <br/>
+> **I want** a GOV.UK environment optimised for development <br/>
+> **So that** I can develop GOV.UK apps efficiently
+
+However, this high-level statement hides a great number of specific needs, which also help to clarify the design decisions for govuk-docker. These lower-level [needs](docs/NEEDS.md) and associated [decisions](docs/DECISIONS.md) are set out in separate documents.
 
 ## Setup
 
@@ -38,18 +48,13 @@ First make sure the following are installed on your system:
 Start with the following in your bash config (aliases optional).
 
 ```
-alias gd="govuk-docker"
-alias gdr="govuk-docker run-this"
-alias gdd="govuk-docker run-this default"
-alias gdb="govuk-docker build-this"
-
 export PATH=$PATH:~/govuk/govuk-docker/bin
 ```
 
 Now in the `govuk` directory, run the following commands.
 
 ```
-git clone git@github.com:benthorner/govuk-docker.git
+git clone git@github.com:alphagov/govuk-docker.git
 cd govuk-docker
 
 # Expect this to take some time (around 20 minutes)
@@ -67,16 +72,6 @@ address=/dev.gov.uk/127.0.0.1
 ```
 
 
-## User Needs
-
-The aim of govuk-docker is to meet the following primary need.
-
-> **As a** developer on GOV.UK apps <br/>
-> **I want** a GOV.UK environment optimised for development <br/>
-> **So that** I can develop GOV.UK apps efficiently
-
-However, this high-level statement hides a great number of specific needs, which also help to clarify the design decisions for govuk-docker. These lower-level [needs](NEEDS.md) and associated [decisions](DECISIONS.md) are set out in separate documents.
-
 ## Compatibility
 
 The following apps are supported by govuk-docker to some extent.
@@ -87,11 +82,11 @@ The following apps are supported by govuk-docker to some extent.
       * **TODO: Missing support for a webserver stack**
    - ✅ content-publisher
    - ⚠ content-store
-      * [MongoDB config](https://github.com/benthorner/govuk-docker/blob/master/content-store/mongoid.yml#L14) is overriden to use a different test DB
+      * [MongoDB config](https://github.com/alphagov/govuk-docker/blob/master/content-store/mongoid.yml#L14) is overriden to use a different test DB
    - ⚠ content-tagger
-      * [chromedriver-helper](https://github.com/benthorner/govuk-docker/blob/master/content-tagger/docker-compose.yml#L13) version lock is manually added
+      * [chromedriver-helper](https://github.com/alphagov/govuk-docker/blob/master/content-tagger/docker-compose.yml#L13) version lock is manually added
    - ⚠ government-frontend
-      * [chromedriver-helper](https://github.com/benthorner/govuk-docker/blob/master/content-tagger/docker-compose.yml#L13) version lock is manually added
+      * [chromedriver-helper](https://github.com/alphagov/govuk-docker/blob/master/content-tagger/docker-compose.yml#L13) version lock is manually added
    - ✅ govspeak
    - ⚠ govuk-developer-docs
       * Some manuals require [explicit UTF-8 support](https://github.com/docker-library/docs/blob/master/ruby/content.md#encoding)
@@ -112,7 +107,7 @@ The following apps are supported by govuk-docker to some extent.
       * JavaScript 404 errors when previewing pages, possibly [related to analytics](https://github.com/alphagov/static/blob/master/app/assets/javascripts/analytics/init.js.erb#L28)
    - ✅ support
    - ⚠ support-api
-      * [PostgreSQL config](https://github.com/benthorner/govuk-docker/blob/master/support-api/database.yml) is overriden to set a non-localhost URL
+      * [PostgreSQL config](https://github.com/alphagov/govuk-docker/blob/master/support-api/database.yml) is overriden to set a non-localhost URL
    - ⚠ whitehall
       * Who knows, really - several tests are failing, lots pass ;-)
       * Rake task to [create a test taxon](https://github.com/alphagov/whitehall/blob/master/lib/tasks/taxonomy.rake#L11) for publishing is not idempotent
@@ -126,23 +121,20 @@ Sometimes things go wrong or some investigation is needed. As govuk-docker is ju
 
 ```
 # tail logs for running services
-gd logs -f
+govuk-docker logs -f
 
 # get all the running containers
 docker ps -a
 
-# cleanup all govuk-docker services
-gdd
-
 # get a terminal inside a service
-gdrd bash
+govuk-docker run-this default bash
 ```
 
 ### How to: add a new service
 
 Here's an example commit that does just that.
 
-https://github.com/benthorner/govuk-docker/commit/1cd31a5fa3469cce47637db81f17ca1b03d72f89
+https://github.com/alphagov/govuk-docker/commit/1cd31a5fa3469cce47637db81f17ca1b03d72f89
 
 ### How to: change a service e.g. upgrade Ruby
 
@@ -163,3 +155,8 @@ make -f my_service/Makefile
 ### How to: update everything!
 
 Sometimes it's useful to get all changes for all repos e.g. to support finding things with a govuk-wide grep. This can be done by running `make pull`, followed by `make setup` to ensure all services continue to run as expected.
+
+
+## Licence
+
+[MIT License](LICENCE)
