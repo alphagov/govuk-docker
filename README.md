@@ -47,7 +47,7 @@ First make sure the following are installed on your system:
 
 ## Setup
 
-Start with the following in your bash config (aliases optional).
+Start with the following in your bash config.
 
 ```
 export PATH=$PATH:~/govuk/govuk-docker/bin
