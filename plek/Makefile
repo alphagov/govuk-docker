@@ -1,2 +1,2 @@
-plek_setup: ../plek
+plek: ../plek
 	govuk-docker run plek-default bundle

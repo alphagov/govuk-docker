@@ -1,2 +1,2 @@
-static_setup: ../static
+static: ../static
 	govuk-docker run static-default bundle

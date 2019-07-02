@@ -1,2 +1,2 @@
-support_setup: ../support support-api_setup
+support: ../support support-api
 	govuk-docker run support-default bundle

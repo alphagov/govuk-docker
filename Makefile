@@ -1,5 +1,7 @@
 GOVUK_ROOT_DIR="${HOME}/govuk"
 
+.PHONY: clone pull build setup clean $(shell ls */Makefile | xargs -L 1 dirname)
+
 APPS ?= $(shell ls */Makefile | xargs -L 1 dirname)
 
 default: build setup clean
@@ -16,7 +18,7 @@ pull:
 build:
 	bin/govuk-docker build
 
-setup: $(addsuffix _setup,$(APPS))
+setup: $(APPS)
 
 clean:
 	bin/govuk-docker stop
@@ -27,9 +29,9 @@ test:
 	# in the YAML files, or incompatible features are used.
 	bin/govuk-docker config
 
-../%: % %/Makefile
-	if [ ! -d "${GOVUK_ROOT_DIR}/$<" ]; then \
-		echo "$<" && git clone "git@github.com:alphagov/$<.git" "${GOVUK_ROOT_DIR}/$<"; \
+../%: %/Makefile
+	if [ ! -d "${GOVUK_ROOT_DIR}/$(subst /Makefile,,$<)" ]; then \
+		echo "$(subst /Makefile,,$<)" && git clone "git@github.com:alphagov/$(subst /Makefile,,$<).git" "${GOVUK_ROOT_DIR}/$(subst /Makefile,,$<)"; \
 	fi
 
 include $(shell ls */Makefile)

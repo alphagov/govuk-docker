@@ -1,2 +1,2 @@
-government-frontend_setup: ../government-frontend content-store_setup router_setup static_setup
+government-frontend: ../government-frontend content-store router static
 	govuk-docker run government-frontend-default bundle
