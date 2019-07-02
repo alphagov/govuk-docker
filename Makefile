@@ -1,4 +1,4 @@
-GOVUK_ROOT_DIR="${HOME}/govuk"
+GOVUK_ROOT_DIR ?= "${HOME}/govuk"
 
 .PHONY: clone pull build clean test $(shell ls */Makefile | xargs -L 1 dirname)
 
