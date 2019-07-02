@@ -7,7 +7,7 @@ services:
       - "80:80"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock
-      - ./nginx-proxy/proxy.conf:/etc/nginx/proxy.conf
+      - ./services/nginx-proxy/proxy.conf:/etc/nginx/proxy.conf
     networks:
       default:
         aliases:
