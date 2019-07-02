@@ -1,7 +1,9 @@
 FROM ruby:2.6.3
 
 RUN apt-get update -qq && apt-get upgrade -y && apt-get install -y vim
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 2>&1 && apt install -y ./google-chrome*.deb
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 2>&1 && \
+    apt install -y ./google-chrome*.deb && \
+    rm ./google-chrome*.deb
 # for capybara-webkit
 RUN apt-get update -qq && apt-get install -y libqtwebkit4 libqt4-dev xvfb
 RUN gem install foreman
