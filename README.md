@@ -108,10 +108,7 @@ The following apps are supported by govuk-docker to some extent.
    - ⚠ government-frontend
       * [chromedriver-helper](https://github.com/alphagov/govuk-docker/blob/master/content-tagger/docker-compose.yml#L13) version lock is manually added
    - ✅ govspeak
-   - ⚠ govuk-developer-docs
-      * Some manuals require [explicit UTF-8 support](https://github.com/docker-library/docs/blob/master/ruby/content.md#encoding)
-      * [One test](https://github.com/alphagov/govuk-developer-docs/blob/master/spec/app/document_types_spec.rb#L17) fails due to an irrelevant ordering issue
-      * [Another test](https://github.com/alphagov/govuk-developer-docs/blob/master/spec/app/document_types_csv_spec.rb) seems to be failing due fixture issues
+   - ✅ govuk-developer-docs
    - ✅ govuk-lint
    - ✅ govuk_app_config
    - ❌ govuk_publishing_components
