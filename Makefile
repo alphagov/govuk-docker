@@ -1,6 +1,6 @@
 GOVUK_ROOT_DIR ?= "${HOME}/govuk"
 
-.PHONY: clone pull build clean test $(shell ls services/*/Makefile | xargs -L 1 dirname)
+.PHONY: clone pull build clean test
 
 APPS ?= $(shell ls services/*/Makefile | xargs -L 1 dirname)
 
