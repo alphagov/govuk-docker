@@ -17,7 +17,6 @@ services:
     volumes:
       - ..:/govuk:delegated
       - bundle:/usr/local/bundle
-      - ./government-frontend/chromedriver-version:/home/build/.chromedriver-helper/.chromedriver-version
 
   government-frontend-live: &government-frontend-live
     <<: *government-frontend
