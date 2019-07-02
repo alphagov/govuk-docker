@@ -1,0 +1,53 @@
+version: '3.7'
+
+x-whitehall: &whitehall
+  build:
+    context: .
+    dockerfile: services/whitehall/Dockerfile
+  image: whitehall
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+    - home:/home/build
+  working_dir: /govuk/whitehall
+
+services:
+  whitehall-default:
+    <<: *whitehall
+    privileged: true
+    depends_on:
+      - mysql
+      - redis
+    environment:
+      DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
+      DATABASE_URL: "mysql2://root:root@mysql/whitehall_development"
+      TEST_DATABASE_URL: "mysql2://root:root@mysql/whitehall_test"
+      REDIS_URL: redis://redis
+
+  whitehall-backend: &whitehall-backend
+    <<: *whitehall
+    depends_on:
+      - mysql
+      - redis
+      - static-backend
+      - nginx-proxy
+      - asset-manager-backend
+      - publishing-api-backend
+    environment:
+      DATABASE_URL: "mysql2://root:root@mysql/whitehall_development"
+      REDIS_URL: redis://redis
+      VIRTUAL_HOST: whitehall-admin.dev.gov.uk
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    command: bin/rails s -P /tmp/rails.pid
+
+  whitehall-e2e:
+    <<: *whitehall-backend
+    depends_on:
+      - mysql
+      - redis
+      - static-backend
+      - nginx-proxy
+      - asset-manager-e2e
+      - publishing-api-e2e

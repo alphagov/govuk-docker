@@ -3,7 +3,7 @@
 COMMAND=$1
 shift
 
-COMPOSE_FILES="$(dirname $0)/../*/docker-compose.yml"
+COMPOSE_FILES="$(dirname $0)/../services/*/docker-compose.yml"
 COMPOSE_FLAGS="-f $(dirname $0)/../docker-compose.yml"
 
 for file in $COMPOSE_FILES; do

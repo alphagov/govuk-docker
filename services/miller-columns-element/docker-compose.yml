@@ -1,0 +1,15 @@
+version: '3.7'
+
+x-miller-columns-element: &miller-columns-element
+  build:
+    context: .
+    dockerfile: services/miller-columns-element/Dockerfile
+  image: miller-columns-element
+  volumes:
+    - ..:/govuk:delegated
+  working_dir: /govuk/miller-columns-element
+
+services:
+  miller-columns-element-default:
+    <<: *miller-columns-element
+    privileged: true

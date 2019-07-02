@@ -1,0 +1,46 @@
+version: '3.7'
+
+x-router-api: &router-api
+  build:
+    context: .
+    dockerfile: services/router-api/Dockerfile
+  image: router-api
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+    - home:/home/build
+  working_dir: /govuk/router-api
+
+services:
+  router-api-default:
+    <<: *router-api
+    depends_on:
+      - mongo
+    environment:
+      MONGODB_URI: "mongodb://mongo/router"
+      TEST_MONGODB_URI: "mongodb://mongo/router-test"
+
+  router-api-live: &router-api-live
+    <<: *router-api
+    depends_on:
+      - mongo
+      - router-live
+    environment:
+      ROUTER_NODES: router-live:3055
+      MONGODB_URI: "mongodb://mongo/router"
+      VIRTUAL_HOST: router-api.dev.gov.uk
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    command: bin/rails s -P /tmp/rails.pid
+
+  router-api-draft:
+    <<: *router-api-live
+    depends_on:
+      - mongo
+      - router-draft
+    environment:
+      ROUTER_NODES: router-draft:3055
+      MONGODB_URI: "mongodb://mongo/draft-router"
+      VIRTUAL_HOST: draft-router-api.dev.gov.uk
+      HOST: 0.0.0.0
