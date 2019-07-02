@@ -104,7 +104,7 @@ Having all the services defined in a single file would make it difficult to navi
 
 ### docker-aliases
 
-While the config to run each service with docker-compose is service-specific, there are common elements between each stack. In order to reduce this duplication, **govuk-docker uses x-my_service section to define the common elements and relies on YAML aliases to embed the common elements in each stack**.
+While the config to run each service with docker-compose is service-specific, there are common elements between each stack. In order to reduce this duplication, **govuk-docker uses x-my_service sections to define the common elements** and relies on YAML aliases to embed the common elements in each stack.
 
 ```
 x-my_service: &my_service
