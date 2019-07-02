@@ -21,11 +21,7 @@ default:
 clone: $(addprefix ../,$(APPS))
 
 pull:
-	for repo in $(APPS); do \
-		if [ -d "${GOVUK_ROOT_DIR}/$$repo" ]; then \
-			(cd ${GOVUK_ROOT_DIR}/$$repo && echo $$repo && git pull origin master:master); \
-		fi \
-	done
+	echo $(APPS) | cut -d/ -f3 | xargs -P8 -n1 ./bin/update-git-repo.sh
 
 clean:
 	bin/govuk-docker stop
