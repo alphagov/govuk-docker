@@ -11,8 +11,6 @@ RUN cp phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get update -qq && apt-get install -y nodejs
 
-RUN apt-get clean
-
 RUN useradd -m build
 USER build
 
