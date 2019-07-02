@@ -14,6 +14,4 @@ RUN apt-get update -qq && apt-get install -y nodejs
 RUN useradd -m build
 USER build
 
-RUN mkdir /home/build/.chromedriver-helper
-
 ENV EDITOR=vim

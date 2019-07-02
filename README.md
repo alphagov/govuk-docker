@@ -115,8 +115,7 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ content-store
    - ⚠ content-tagger
       * [chromedriver-helper](https://github.com/alphagov/govuk-docker/blob/master/content-tagger/docker-compose.yml#L13) version lock is manually added
-   - ⚠ government-frontend
-      * [chromedriver-helper](https://github.com/alphagov/govuk-docker/blob/master/content-tagger/docker-compose.yml#L13) version lock is manually added
+   - ✅ government-frontend
    - ✅ govspeak
    - ✅ govuk-developer-docs
    - ✅ govuk-lint
