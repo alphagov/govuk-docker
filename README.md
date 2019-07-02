@@ -58,19 +58,14 @@ Now in the `govuk` directory, run the following commands.
 ```
 git clone git@github.com:alphagov/govuk-docker.git
 cd govuk-docker
+make build
 ```
 
-You can now either clone and build all of the apps like this:
+You can now clone and setup the apps you need with `make APP-NAME`,
+for example:
 
 ```
-# expect this to take a while
-make
-```
-
-Or only an app and its transitive dependencies like this:
-
-```
-make APPS="content-publisher government-frontend"
+make content-publisher government-frontend
 ```
 
 If you have been using the vagrant based dev vm, take a backup
@@ -169,11 +164,11 @@ This will usually involve editing a `Dockerfile`, for things like system package
 
 ### How to: setup a specific service
 
-If a new service has been added to govuk-docker, first pull the latest version to get the changes. Then use `make APPS=app-name` to clone (if necessary) and set up just that app and its dependencies.
+If a new service has been added to govuk-docker, first pull the latest version to get the changes. Then use `make app-name` to clone (if necessary) and set up just that app and its dependencies.
 
 ### How to: update everything!
 
-Sometimes it's useful to get all changes for all repos e.g. to support finding things with a govuk-wide grep. This can be done by running `make pull`, followed by `make setup` to ensure all services continue to run as expected.
+Sometimes it's useful to get all changes for all repos e.g. to support finding things with a govuk-wide grep. This can be done by running `make pull`.
 
 
 ## Licence

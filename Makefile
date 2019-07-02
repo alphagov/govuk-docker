@@ -1,10 +1,12 @@
 GOVUK_ROOT_DIR="${HOME}/govuk"
 
-.PHONY: clone pull build setup clean $(shell ls */Makefile | xargs -L 1 dirname)
+.PHONY: clone pull build clean test $(shell ls */Makefile | xargs -L 1 dirname)
 
 APPS ?= $(shell ls */Makefile | xargs -L 1 dirname)
 
-default: build setup clean
+default:
+	@echo "Run 'make build' to bootstrap govuk-docker"
+	@echo "Or 'make APP-NAME' to set up an app"
 
 clone: $(addprefix ../,$(APPS))
 
@@ -17,8 +19,6 @@ pull:
 
 build:
 	bin/govuk-docker build
-
-setup: $(APPS)
 
 clean:
 	bin/govuk-docker stop
