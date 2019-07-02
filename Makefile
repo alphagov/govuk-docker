@@ -2,7 +2,7 @@ GOVUK_ROOT_DIR="${HOME}/govuk"
 
 APPS ?= $(shell ls */Makefile | xargs -L 1 dirname)
 
-default: clone build setup clean
+default: build setup clean
 
 clone: $(addprefix ../,$(APPS))
 
