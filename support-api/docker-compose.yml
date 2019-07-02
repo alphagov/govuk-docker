@@ -9,7 +9,6 @@ x-support-api: &support-api
     - ..:/govuk:delegated
     - bundle:/usr/local/bundle
     - home:/home/build
-    - ./support-api/database.yml:/govuk/support-api/config/database.yml
   working_dir: /govuk/support-api
 
 services:

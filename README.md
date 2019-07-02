@@ -134,8 +134,7 @@ The following apps are supported by govuk-docker to some extent.
    - ⚠ static
       * JavaScript 404 errors when previewing pages, possibly [related to analytics](https://github.com/alphagov/static/blob/master/app/assets/javascripts/analytics/init.js.erb#L28)
    - ✅ support
-   - ⚠ support-api
-      * [PostgreSQL config](https://github.com/alphagov/govuk-docker/blob/master/support-api/database.yml) is overriden to set a non-localhost URL
+   - ✅ support-api
    - ✅ travel-advice-publisher
    - ⚠ whitehall
       * Who knows, really - several tests are failing, lots pass ;-)
