@@ -125,8 +125,7 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ miller-columns-element
    - ✅ plek
    - ✅ publishing-api
-   - ❌ router
-      * Unable to run `make test` due to a [hardcoded DB host](https://github.com/alphagov/router/blob/master/integration_tests/route_helpers.go#L77)
+   - ✅ router
    - ✅ router-api
    - ✅ signon
    - ⚠ static
