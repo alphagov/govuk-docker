@@ -1,2 +1,2 @@
 static: ../static
-	bin/govuk-docker run static-default bundle
+	bin/govuk-docker compose run static-default bundle
