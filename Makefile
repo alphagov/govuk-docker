@@ -1,6 +1,6 @@
 GOVUK_ROOT_DIR ?= "${HOME}/govuk"
 
-.PHONY: clone pull build clean test
+.PHONY: clone pull clean test
 
 APPS ?= $(shell ls services/*/Makefile | xargs -L 1 dirname)
 
@@ -16,9 +16,6 @@ pull:
 			(cd ${GOVUK_ROOT_DIR}/$$repo && echo $$repo && git pull origin master:master); \
 		fi \
 	done
-
-build:
-	bin/govuk-docker build
 
 clean:
 	bin/govuk-docker stop

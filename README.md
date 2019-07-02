@@ -58,7 +58,6 @@ Now in the `govuk` directory, run the following commands.
 ```
 git clone git@github.com:alphagov/govuk-docker.git
 cd govuk-docker
-make build
 ```
 
 You can now clone and setup the apps you need with `make APP-NAME`,
