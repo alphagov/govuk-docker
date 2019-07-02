@@ -70,7 +70,7 @@ of  `/etc/resolver/dev.gov.uk`.
 cp /etc/resolver/dev.gov.uk ~/dev.gov.uk
 ```
 
-Then create or update `/etc/resolver/dev.gov.uk`
+Then create or update `/etc/resolver/dev.gov.uk`. If you've been using the vagrant based dev VM, you'll need to replace `/etc/resolver/dev.gov.uk`
 
 ```
 nameserver 127.0.0.1
