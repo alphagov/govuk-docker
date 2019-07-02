@@ -3,6 +3,8 @@
 COMMAND=$1
 shift
 
+GOVUK_DOCKER_DIR=${GOVUK_ROOT_DIR:-$HOME/govuk}/govuk-docker
+
 COMPOSE_FILES="$(dirname $0)/../services/*/docker-compose.yml"
 COMPOSE_FLAGS="-f $(dirname $0)/../docker-compose.yml"
 
@@ -32,6 +34,20 @@ function check_stack {
 }
 
 case $COMMAND in
+  "setup")
+    for GOVUK_DOCKER_SERVICE in "$@"; do
+      check_service
+    done
+    set -x
+    cd $GOVUK_DOCKER_DIR
+    for GOVUK_DOCKER_SERVICE in "$@"; do
+      make $GOVUK_DOCKER_SERVICE
+    done;;
+  "setup-this")
+    check_service
+    set -x
+    cd $GOVUK_DOCKER_DIR
+    make $SERVICE;;
   "build-this")
     check_service
     set -x
