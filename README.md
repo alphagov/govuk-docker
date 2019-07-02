@@ -24,7 +24,7 @@ content-tagger$ govuk-docker run-this backend
 content-publisher$ govuk-docker run-this e2e
 ```
 
-The above examples make use of an alias to reduce the amount of typing; the full form is `govuk-docker run-this`. In the last two commands, the app will be available in your browser at *app-name.dev.gov.uk*.
+In the last two commands, the app will be available in your browser at *app-name.dev.gov.uk*.
 
 ## User Needs
 
