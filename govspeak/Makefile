@@ -1,2 +1,2 @@
 govspeak: ../govspeak
-	govuk-docker run govspeak-default bundle
+	bin/govuk-docker run govspeak-default bundle
