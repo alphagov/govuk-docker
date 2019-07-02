@@ -30,8 +30,8 @@ test:
 	bin/govuk-docker config
 
 ../%: %/Makefile
-	if [ ! -d "${GOVUK_ROOT_DIR}/$(subst /Makefile,,$<)" ]; then \
-		echo "$(subst /Makefile,,$<)" && git clone "git@github.com:alphagov/$(subst /Makefile,,$<).git" "${GOVUK_ROOT_DIR}/$(subst /Makefile,,$<)"; \
+	if [ ! -d "${GOVUK_ROOT_DIR}/$*" ]; then \
+		echo "$*" && git clone "git@github.com:alphagov/$*.git" "${GOVUK_ROOT_DIR}/$*"; \
 	fi
 
 include $(shell ls services/*/Makefile)
