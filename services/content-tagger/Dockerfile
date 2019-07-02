@@ -6,13 +6,10 @@ RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
     apt install -y ./google-chrome*.deb && \
     rm ./google-chrome*.deb
 
-
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get update -qq && apt-get install -y nodejs
 
 RUN useradd -m build
 USER build
-
-RUN mkdir /home/build/.chromedriver-helper
 
 ENV EDITOR=vim

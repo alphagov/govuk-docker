@@ -107,14 +107,12 @@ app.dev.gov.uk.		0	IN	A	127.0.0.1
 
 The following apps are supported by govuk-docker to some extent.
 
-   - ⚠ asset-manager
-      * One [failing spec](https://github.com/alphagov/asset-manager/blob/master/spec/requests/virus_scanning_spec.rb#L54) for virus scanning
+   - ✅ asset-manager
    - ⚠ content-data-admin
       * **TODO: Missing support for a webserver stack**
    - ✅ content-publisher
    - ✅ content-store
-   - ⚠ content-tagger
-      * [chromedriver-helper](https://github.com/alphagov/govuk-docker/blob/master/content-tagger/docker-compose.yml#L13) version lock is manually added
+   - ✅ content-tagger
    - ✅ government-frontend
    - ✅ govspeak
    - ✅ govuk-developer-docs

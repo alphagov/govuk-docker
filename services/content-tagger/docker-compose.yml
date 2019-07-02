@@ -9,7 +9,6 @@ x-content-tagger: &content-tagger
     - ..:/govuk:delegated
     - bundle:/usr/local/bundle
     - home:/home/build
-    - ./content-tagger/chromedriver-version:/home/build/.chromedriver-helper/.chromedriver-version
   working_dir: /govuk/content-tagger
 
 services:
