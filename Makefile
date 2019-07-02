@@ -4,12 +4,7 @@ APPS ?= $(shell ls */Makefile | xargs -L 1 dirname)
 
 default: clone build setup clean
 
-clone:
-	for repo in $(APPS); do \
-		if [ ! -d "${GOVUK_ROOT_DIR}/$$repo" ]; then \
-			echo $$repo && git clone git@github.com:alphagov/$$repo.git ${GOVUK_ROOT_DIR}/$$repo; \
-		fi \
-	done
+clone: $(addprefix ../,$(APPS))
 
 pull:
 	for repo in $(APPS); do \
@@ -31,5 +26,10 @@ test:
 	# Test that the docker-compose config is valid. This will error if there are errors
 	# in the YAML files, or incompatible features are used.
 	bin/govuk-docker config
+
+../%: % %/Makefile
+	if [ ! -d "${GOVUK_ROOT_DIR}/$<" ]; then \
+		echo "$<" && git clone "git@github.com:alphagov/$<.git" "${GOVUK_ROOT_DIR}/$<"; \
+	fi
 
 include $(shell ls */Makefile)
