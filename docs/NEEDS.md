@@ -65,6 +65,12 @@ Decisions made to support this need: [docker-stacks](DECISIONS.md#docker-stacks)
 
 Decisions made to support this need: [cli-setup](DECISIONS.md#cli-setup)
 
+>**As a** developer on GOV.UK who has not previously used govuk-docker<br>
+>**I want** to be able to do the setup work for apps I already have downloaded<br>
+>**So that** I can use govuk-docker<br>
+
+Decisions made to support this need: [cli-setup-this](DECISIONS.md#cli-setup-this)
+
 ### Getting Updates
 
 >**As a** developer on a GOV.UK service <br>

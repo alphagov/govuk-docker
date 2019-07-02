@@ -250,6 +250,10 @@ Running a service command may require certain environment variables to be set te
 
 Apps and their and their dependencies can be downloaded and built by running `make app1 app2...` in the `govuk-docker` directory, but that requires the developer to be in the `govuk-docker` directory.  It also introduces an asymmetry between building and running things: the former uses `make`, the latter uses `govuk-docker`.  To make the experience more consistent, `govuk-docker setup` has been added to support this use.
 
+### cli-setup-this
+
+A developer can use `govuk-docker run-this` to run the application in the current directory, but that fails if it hasn't been set up in govuk-docker or if any of its dependencies are missing.  The developer can fix this by running `govuk-docker setup APP-NAME`, but `run-this` doesn't require the app name.  For consistency with `run-this`, there must be a `setup-this`.
+
 ## Web Requests
 
 ### web-nginx
