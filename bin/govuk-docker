@@ -48,11 +48,6 @@ case $COMMAND in
     set -x
     cd $GOVUK_DOCKER_DIR
     make $SERVICE;;
-  "build-this")
-    check_service
-    set -x
-    docker-compose $COMPOSE_FLAGS build $SERVICE-default
-    ;;
   "run-this")
     STACK=$1
     shift
