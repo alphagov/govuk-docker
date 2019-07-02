@@ -35,3 +35,10 @@ test:
 	# Test that the docker-compose config is valid. This will error if there are errors
 	# in the YAML files, or incompatible features are used.
 	bin/govuk-docker config
+
+	# Test that some builds work from scratch for services with different kinds of Dockerfile.
+	# This will error if a build fails for some reason.
+	bin/govuk-docker build --no-cache --parallel \
+		asset-manager-default \
+		content-publisher-default \
+		signon-default
