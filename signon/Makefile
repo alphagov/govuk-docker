@@ -1,5 +1,3 @@
-GOVUK_DOCKER_RUN=govuk-docker run signon-default
-
-default:
-	${GOVUK_DOCKER_RUN} bundle
-	${GOVUK_DOCKER_RUN} sh -c 'rake db:migrate 2>/dev/null || rake db:setup'
+signon: ../signon
+	bin/govuk-docker run signon-default bundle
+	bin/govuk-docker run signon-default sh -c 'rake db:migrate 2>/dev/null || rake db:setup'

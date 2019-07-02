@@ -1,4 +1,2 @@
-GOVUK_DOCKER_RUN=govuk-docker run support-default
-
-default:
-	${GOVUK_DOCKER_RUN} bundle
+support: ../support support-api
+	bin/govuk-docker run support-default bundle

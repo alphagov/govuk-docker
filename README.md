@@ -24,7 +24,7 @@ content-tagger$ govuk-docker run-this backend
 content-publisher$ govuk-docker run-this e2e
 ```
 
-The above examples make use of an alias to reduce the amount of typing; the full form is `govuk-docker run-this`. In the last two commands, the app will be available in your browser at *app-name.dev.gov.uk*.
+In the last two commands, the app will be available in your browser at *app-name.dev.gov.uk*.
 
 ## User Needs
 
@@ -58,9 +58,14 @@ Now in the `govuk` directory, run the following commands.
 ```
 git clone git@github.com:alphagov/govuk-docker.git
 cd govuk-docker
+make build
+```
 
-# Expect this to take some time (around 20 minutes)
-make
+You can now clone and setup the apps you need with `make APP-NAME`,
+for example:
+
+```
+make content-publisher government-frontend
 ```
 
 If you have been using the vagrant based dev vm, take a backup
@@ -158,19 +163,11 @@ This will usually involve editing a `Dockerfile`, for things like system package
 
 ### How to: setup a specific service
 
-If a new service has been added to govuk-docker, first pull the latest version to get the changes. One way to setup the new service would be to run `make`, but this goes through every service and might take a while. A faster way is to do this:
-
-```
-# auto-clone any new services
-make clone
-
-# setup the specific service(s)
-make -f my_service/Makefile
-```
+If a new service has been added to govuk-docker, first pull the latest version to get the changes. Then use `make app-name` to clone (if necessary) and set up just that app and its dependencies.
 
 ### How to: update everything!
 
-Sometimes it's useful to get all changes for all repos e.g. to support finding things with a govuk-wide grep. This can be done by running `make pull`, followed by `make setup` to ensure all services continue to run as expected.
+Sometimes it's useful to get all changes for all repos e.g. to support finding things with a govuk-wide grep. This can be done by running `make pull`.
 
 
 ## Licence

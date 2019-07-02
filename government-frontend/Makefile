@@ -1,4 +1,2 @@
-GOVUK_DOCKER_RUN=govuk-docker run government-frontend-default
-
-default:
-	${GOVUK_DOCKER_RUN} bundle
+government-frontend: ../government-frontend content-store router static
+	bin/govuk-docker run government-frontend-default bundle
