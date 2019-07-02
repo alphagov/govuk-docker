@@ -113,6 +113,7 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ content-publisher
    - ✅ content-store
    - ✅ content-tagger
+   - ✅ email-alert-api
    - ✅ government-frontend
    - ✅ govspeak
    - ✅ govuk-developer-docs
