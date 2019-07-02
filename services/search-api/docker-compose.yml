@@ -1,0 +1,141 @@
+version: '3.7'
+
+x-search-api: &search-api
+  build:
+    context: .
+    dockerfile: services/search-api/Dockerfile
+  image: search-api
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+    - home:/home/build
+  working_dir: /govuk/search-api
+  environment:
+    REDIS_URL: redis://redis
+    REDIS_TEST_HOST: redis
+    REDIS_TEST_PORT: 6379
+    ELASTICSEARCH_URI: http://elasticsearch5:9200
+    ELASTICSEARCH_B_URI: http://elasticsearch6:9200
+
+services:
+  search-api-lite:
+    <<: *search-api
+    depends_on:
+    - redis
+    - elasticsearch5
+    - elasticsearch6
+    - search-api-worker
+    - search-api-listener-publishing-queue
+    - search-api-listener-insert-data
+    - search-api-listener-bulk-insert-data
+
+  search-api-app:
+    <<: *search-api
+    depends_on:
+    - redis
+    - elasticsearch5
+    - elasticsearch6
+    - search-api-worker
+    - search-api-listener-publishing-queue
+    - search-api-listener-insert-data
+    - search-api-listener-bulk-insert-data
+    - publishing-api-app
+    environment:
+      VIRTUAL_HOST: search-api.dev.gov.uk
+    ports:
+      - "3233"
+    command: bundle exec unicorn -c ./config/unicorn.rb -p ${PORT:-3233}
+
+  search-api-app-e2e:
+    <<: *search-api
+    depends_on:
+    - redis
+    - elasticsearch5
+    - elasticsearch6
+    - search-api-worker
+    - search-api-listener-publishing-queue
+    - search-api-listener-insert-data
+    - search-api-listener-bulk-insert-data
+    - publishing-api-app-e2e
+    environment:
+      VIRTUAL_HOST: search-api.dev.gov.uk
+    links:
+      - nginx-proxy:error-handler.dev.gov.uk
+      - nginx-proxy:publishing-api.dev.gov.uk
+    ports:
+     - "3233"
+    command: bundle exec unicorn -c ./config/unicorn.rb -p ${PORT:-3233}
+    volumes:
+      - ./apps/rummager/log:/app/log
+
+  search-api-worker:
+    << : *search-api
+    depends_on:
+      - elasticsearch5
+      - elasticsearch6
+      - rabbitmq
+      - redis
+    command: foreman run worker
+    environment:
+      GOVUK_APP_NAME: search-api-worker
+      SENTRY_CURRENT_ENV: search-api-worker
+      REDIS_URL: redis://redis
+    links:
+      - nginx-proxy:publishing-api.dev.gov.uk
+      - nginx-proxy:error-handler.dev.gov.uk
+    command: bundle exec sidekiq -C ./config/sidekiq.yml
+
+  search-api-listener-publishing-queue:
+    << : *search-api
+    command: foreman run publishing-queue-listener
+    depends_on:
+      - rabbitmq
+      - redis
+    environment:
+      GOVUK_APP_NAME: search-api-listener-publishing-queue
+      SENTRY_CURRENT_ENV: search-api-listener-publishing-queue
+      REDIS_URL: redis://redis
+    command: bundle exec rake message_queue:listen_to_publishing_queue
+
+  search-api-listener-insert-data:
+    << : *search-api
+    command: foreman run govuk-index-queue-listener
+    depends_on:
+      - rabbitmq
+      - redis
+    environment:
+      GOVUK_APP_NAME: search-api-listener-insert-data
+      SENTRY_CURRENT_ENV: search-api-listener-insert-data
+      REDIS_URL: redis://redis
+    command: bundle exec rake message_queue:insert_data_into_govuk
+
+  search-api-listener-bulk-insert-data:
+    << : *search-api
+    command: foreman run bulk-reindex-queue-listener
+    depends_on:
+      - rabbitmq
+      - redis
+    environment:
+      GOVUK_APP_NAME: search-api-listener-bulk-insert-data
+      SENTRY_CURRENT_ENV: search-api-listener-bulk-insert-data
+      REDIS_URL: redis://redis
+    ports: []
+    command: bundle exec rake message_queue:bulk_insert_data_into_govuk
+
+  elasticsearch5:
+    image: elasticsearch:5.6.14
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=127.0.0.1
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+
+  elasticsearch6:
+    image: elasticsearch:6.7.0
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=127.0.0.1
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
