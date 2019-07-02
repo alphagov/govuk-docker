@@ -136,6 +136,7 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ support
    - ⚠ support-api
       * [PostgreSQL config](https://github.com/alphagov/govuk-docker/blob/master/support-api/database.yml) is overriden to set a non-localhost URL
+   - ✅ travel-advice-publisher
    - ⚠ whitehall
       * Who knows, really - several tests are failing, lots pass ;-)
       * Rake task to [create a test taxon](https://github.com/alphagov/whitehall/blob/master/lib/tasks/taxonomy.rake#L11) for publishing is not idempotent
