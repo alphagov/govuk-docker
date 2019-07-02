@@ -10,7 +10,7 @@ GOVUK_ROOT_DIR ?= "${HOME}/govuk"
 #     make: `clean' is up to date.
 .PHONY: clone pull clean test
 
-APPS ?= $(shell ls services/*/Makefile | xargs -L 1 dirname)
+APPS ?= $(shell ls services/*/Makefile | xargs -L 1 dirname | xargs -L 1 basename)
 
 default:
 	@echo "Run 'make build' to bootstrap govuk-docker"
