@@ -1,0 +1,58 @@
+version: '3.7'
+
+x-frontend: &frontend
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: frontend
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/frontend
+
+services:
+  frontend-lite:
+    <<: *frontend
+    privileged: true
+
+  frontend-app: &frontend-app
+    <<: *frontend
+    depends_on:
+      - content-store-app
+      - router-app
+      - static-app
+    environment:
+      GOVUK_ASSET_ROOT: frontend.dev.gov.uk
+      VIRTUAL_HOST: frontend.dev.gov.uk
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    command: bin/rails s -P /tmp/rails.pid
+
+  frontend-setup:
+    <<: *frontend
+    depends_on:
+      - publishing-api-app-e2e
+
+  frontend-app-draft:
+    <<: *frontend-app
+    depends_on:
+      - content-store-app-draft
+      - router-app-draft
+      - static-app-draft
+    environment:
+      GOVUK_ASSET_ROOT: draft-frontend.dev.gov.uk
+      VIRTUAL_HOST: draft-frontend.dev.gov.uk
+      PLEK_HOSTNAME_PREFIX: "draft-"
+      HOST: 0.0.0.0
+
+  frontend-app-live:
+    <<: *frontend-app
+    depends_on:
+      - nginx-proxy-app
+    environment:
+      GOVUK_WEBSITE_ROOT: https://www.gov.uk
+      PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
+      PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
+      VIRTUAL_HOST: frontend.dev.gov.uk
+      HOST: 0.0.0.0
