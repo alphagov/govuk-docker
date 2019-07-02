@@ -246,6 +246,10 @@ Sometimes it's necessary to (re)build the image for a specific service. This cou
 
 Running a service command may require certain environment variables to be set temporarily e.g. in order to pass options to a `rake` task. Natively this would be written `VAR1=val1 VAR2=val2 ... CMD`. This approach isn't compatible with the docker/compose CLI and normally it would be necessary to use the [-e option](https://docs.docker.com/compose/reference/run/) instead. In order to retain the native approach for environment variables, when using [cli-runthis](#cli-runthis) **govuk-docker CLI executes the specified command via the `env` command, which will read any temporary environment variables**. Using [cli-aliases](#cli-aliases), a command that requires temporary environment variables can now be written `gdrd VAR1=val1 VAR2=val2 ... CMD`.
 
+### cli-setup
+
+Apps and their and their dependencies can be downloaded and built by running `make app1 app2...` in the `govuk-docker` directory, but that requires the developer to be in the `govuk-docker` directory.  It also introduces an asymmetry between building and running things: the former uses `make`, the latter uses `govuk-docker`.  To make the experience more consistent, `govuk-docker setup` has been added to support this use.
+
 ## Web Requests
 
 ### web-nginx

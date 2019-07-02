@@ -59,6 +59,12 @@ Decisions made to support this need: [docker-stacks](DECISIONS.md#docker-stacks)
 
 Decisions made to support this need: [docker-stacks](DECISIONS.md#docker-stacks), [make-files](DECISIONS.md#make-files)
 
+>**As a** developer on GOV.UK who has moved teams<br>
+>**I want** to be able to get all of the new apps I will be working on, and their dependencies, with minimal typing<br>
+>**So that** I can get up to speed more quickly<br>
+
+Decisions made to support this need: [cli-setup](DECISIONS.md#cli-setup)
+
 ### Getting Updates
 
 >**As a** developer on a GOV.UK service <br>
