@@ -19,14 +19,19 @@ pull:
 	done
 
 build:
-	govuk-docker build
+	bin/govuk-docker build
 
 setup:
 	for repo in $(REPOS); do \
 		make -f $$repo/Makefile; \
 	done
-	govuk-docker run whitehall-e2e rake taxonomy:populate_end_to_end_test_data
+	bin/govuk-docker run whitehall-e2e rake taxonomy:populate_end_to_end_test_data
 
 clean:
-	govuk-docker stop
-	govuk-docker prune
+	bin/govuk-docker stop
+	bin/govuk-docker prune
+
+test:
+	# Test that the docker-compose config is valid. This will error if there are errors
+	# in the YAML files, or incompatible features are used.
+	bin/govuk-docker config
