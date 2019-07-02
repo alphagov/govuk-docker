@@ -1,0 +1,24 @@
+version: '3.7'
+
+x-publisher: &publisher
+  build:
+    context: .
+    dockerfile: services/publisher/Dockerfile
+  image: publisher
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+    - home:/home/build
+  working_dir: /govuk/publisher
+
+services:
+  publisher-lite:
+    <<: *publisher
+    privileged: true
+    depends_on:
+      - redis
+      - mongo
+    environment:
+      MONGODB_URI: "mongodb://mongo/publisher"
+      TEST_MONGODB_URI: "mongodb://mongo/publisher-test"
+      REDIS_URL: redis://redis
