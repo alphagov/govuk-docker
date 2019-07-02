@@ -1,0 +1,48 @@
+version: '3.7'
+
+x-router: &router
+  build:
+    context: .
+    dockerfile: services/router/Dockerfile
+  image: router
+  volumes:
+    - go:/go
+    - ../router:/go/src/github.com/alphagov/router:delegated
+    - home:/home/build
+  working_dir: /go/src/github.com/alphagov/router
+
+services:
+  router-default:
+    <<: *router
+    depends_on:
+      - mongo
+    environment:
+      DEBUG: "true"
+      ROUTER_MONGO_URL: mongo
+      ROUTER_MONGO_DB: router
+
+  router-live: &router-live
+    <<: *router
+    depends_on:
+      - mongo
+    ports:
+      - "8080"
+      - "3055"
+    environment:
+      VIRTUAL_HOST: router.dev.gov.uk,www.dev.gov.uk,www-origin.dev.gov.uk
+      VIRTUAL_PORT: 8080
+      ROUTER_MONGO_URL: mongo
+      ROUTER_MONGO_DB: router
+      ROUTER_APIADDR: :3055
+      ROUTER_BACKEND_HEADER_TIMEOUT: 60s
+    command: ./router
+
+  router-draft:
+    <<: *router-live
+    environment:
+      VIRTUAL_HOST: draft-router.dev.gov.uk,draft-origin.dev.gov.uk
+      VIRTUAL_PORT: 8080
+      ROUTER_MONGO_URL: mongo
+      ROUTER_MONGO_DB: draft-router
+      ROUTER_APIADDR: :3055
+      ROUTER_BACKEND_HEADER_TIMEOUT: 60s

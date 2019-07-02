@@ -1,0 +1,47 @@
+version: '3.7'
+
+x-government-frontend: &government-frontend
+  build:
+    context: .
+    dockerfile: services/government-frontend/Dockerfile
+  image: government-frontend
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+  working_dir: /govuk/government-frontend
+
+services:
+  government-frontend-default:
+    <<: *government-frontend
+    privileged: true
+    volumes:
+      - ..:/govuk:delegated
+      - bundle:/usr/local/bundle
+      - ./government-frontend/chromedriver-version:/home/build/.chromedriver-helper/.chromedriver-version
+
+  government-frontend-live: &government-frontend-live
+    <<: *government-frontend
+    depends_on:
+      - router-live
+      - content-store-live
+      - static-live
+    environment:
+      GOVUK_ASSET_ROOT: government-frontend.dev.gov.uk
+      VIRTUAL_HOST: government-frontend.dev.gov.uk
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    command: bin/rails s -P /tmp/rails.pid
+
+  government-frontend-draft:
+    <<: *government-frontend-live
+    depends_on:
+      - router-draft
+      - content-store-draft
+      - static-draft
+      - static-live
+    environment:
+      GOVUK_ASSET_ROOT: draft-government-frontend.dev.gov.uk
+      VIRTUAL_HOST: draft-government-frontend.dev.gov.uk
+      PLEK_HOSTNAME_PREFIX: "draft-"
+      HOST: 0.0.0.0

@@ -1,8 +1,8 @@
 GOVUK_ROOT_DIR ?= "${HOME}/govuk"
 
-.PHONY: clone pull build clean test $(shell ls */Makefile | xargs -L 1 dirname)
+.PHONY: clone pull build clean test $(shell ls services/*/Makefile | xargs -L 1 dirname)
 
-APPS ?= $(shell ls */Makefile | xargs -L 1 dirname)
+APPS ?= $(shell ls services/*/Makefile | xargs -L 1 dirname)
 
 default:
 	@echo "Run 'make build' to bootstrap govuk-docker"
@@ -34,4 +34,4 @@ test:
 		echo "$(subst /Makefile,,$<)" && git clone "git@github.com:alphagov/$(subst /Makefile,,$<).git" "${GOVUK_ROOT_DIR}/$(subst /Makefile,,$<)"; \
 	fi
 
-include $(shell ls */Makefile)
+include $(shell ls services/*/Makefile)

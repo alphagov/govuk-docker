@@ -1,0 +1,22 @@
+version: '3.7'
+
+x-content-data-admin: &content-data-admin
+  build:
+    context: .
+    dockerfile: services/content-data-admin/Dockerfile
+  image: content-data-admin
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+    - home:/home/build
+  working_dir: /govuk/content-data-admin
+
+services:
+  content-data-admin-default:
+    <<: *content-data-admin
+    privileged: true
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres/content-data-admin"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres/content-data-admin-test"

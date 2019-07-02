@@ -1,0 +1,28 @@
+version: '3.7'
+
+x-govuk-developer-docs: &govuk-developer-docs
+  build:
+    context: .
+    dockerfile: services/govuk-developer-docs/Dockerfile
+  image: govuk-developer-docs
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+    - home:/home/build
+  working_dir: /govuk/govuk-developer-docs
+
+services:
+  govuk-developer-docs-default:
+    <<: *govuk-developer-docs
+    environment:
+      LANG: "C.UTF-8"
+
+  govuk-developer-docs-web:
+    <<: *govuk-developer-docs
+    depends_on:
+      - nginx-proxy
+    environment:
+      VIRTUAL_HOST: govuk-developer-docs.dev.gov.uk
+    ports:
+      - "4567"
+    command: bundle exec middleman server --bind-address 0.0.0.0
