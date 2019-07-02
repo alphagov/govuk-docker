@@ -13,8 +13,10 @@ GOVUK_ROOT_DIR ?= "${HOME}/govuk"
 APPS ?= $(shell ls services/*/Makefile | xargs -L 1 dirname | xargs -L 1 basename)
 
 default:
-	@echo "Run 'make build' to bootstrap govuk-docker"
-	@echo "Or 'make APP-NAME' to set up an app"
+	@echo "Run 'make APP-NAME' to set up an app and its dependencies."
+	@echo
+	@echo "For example:"
+	@echo "    make content-publisher"
 
 clone: $(addprefix ../,$(APPS))
 
