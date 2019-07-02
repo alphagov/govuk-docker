@@ -101,8 +101,7 @@ The following apps are supported by govuk-docker to some extent.
    - ⚠ content-data-admin
       * **TODO: Missing support for a webserver stack**
    - ✅ content-publisher
-   - ⚠ content-store
-      * [MongoDB config](https://github.com/alphagov/govuk-docker/blob/master/content-store/mongoid.yml#L14) is overriden to use a different test DB
+   - ✅ content-store
    - ⚠ content-tagger
       * [chromedriver-helper](https://github.com/alphagov/govuk-docker/blob/master/content-tagger/docker-compose.yml#L13) version lock is manually added
    - ⚠ government-frontend

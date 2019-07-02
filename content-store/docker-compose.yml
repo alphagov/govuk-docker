@@ -7,7 +7,6 @@ x-content-store: &content-store
   image: content-store
   volumes:
     - ..:/govuk:delegated
-    - ./content-store/mongoid.yml:/govuk/content-store/config/mongoid.yml
     - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/content-store
