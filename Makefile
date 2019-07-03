@@ -14,7 +14,7 @@ APPS ?= $(shell ls ${GOVUK_DOCKER_DIR}/services/*/Makefile | xargs -L 1 dirname 
 #     $ touch clean
 #     $ make clean
 #     make: `clean' is up to date.
-.PHONY: clone pull clean test
+.PHONY: clone pull clean test all-apps
 
 default:
 	@echo "Run 'make APP-NAME' to set up an app and its dependencies."
@@ -37,6 +37,10 @@ test:
 	# Test that the docker-compose config is valid. This will error if there are errors
 	# in the YAML files, or incompatible features are used.
 	bin/govuk-docker compose config
+
+# This will be slow and may repeat work, so generally you don't want
+# to run this.
+all-apps: $(APPS) clean
 
 # Clone an app, for example:
 #
