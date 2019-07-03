@@ -42,12 +42,12 @@ services:
       - "3000"
     command: bin/rails s -P /tmp/rails.pid
 
-  whitehall-e2e:
+  whitehall-app-e2e:
     <<: *whitehall-app
     depends_on:
       - mysql
       - redis
       - static-app
       - nginx-proxy
-      - asset-manager-e2e
-      - publishing-api-e2e
+      - asset-manager-app-e2e
+      - publishing-api-app-e2e

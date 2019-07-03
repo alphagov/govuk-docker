@@ -37,7 +37,7 @@ services:
       - "3000"
     command: bin/rails s -P /tmp/rails.pid
 
-  asset-manager-e2e:
+  asset-manager-app-e2e:
     <<: *asset-manager-app
     depends_on:
       - mongo

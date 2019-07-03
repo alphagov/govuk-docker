@@ -41,7 +41,7 @@ services:
       - "3000"
     command: bin/rails s -P /tmp/rails.pid
 
-  publishing-api-e2e:
+  publishing-api-app-e2e:
     <<: *publishing-api-app
     depends_on:
       - postgres

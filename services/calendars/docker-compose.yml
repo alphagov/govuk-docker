@@ -46,4 +46,4 @@ services:
   calendars-setup:
     <<: *calendars
     depends_on:
-      - publishing-api-e2e
+      - publishing-api-app-e2e

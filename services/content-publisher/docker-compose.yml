@@ -41,14 +41,14 @@ services:
       - "3000"
     command: bin/rails s -P /tmp/rails.pid
 
-  content-publisher-e2e:
+  content-publisher-app-e2e:
     <<: *content-publisher-app
     depends_on:
       - postgres
       - redis
       - content-publisher-worker
-      - publishing-api-e2e
-      - asset-manager-e2e
+      - publishing-api-app-e2e
+      - asset-manager-app-e2e
       - nginx-proxy
 
   content-publisher-worker:
@@ -56,8 +56,8 @@ services:
     depends_on:
       - postgres
       - redis
-      - publishing-api-e2e
-      - asset-manager-e2e
+      - publishing-api-app-e2e
+      - asset-manager-app-e2e
     environment:
       DATABASE_URL: "postgresql://postgres@postgres/content-publisher"
       REDIS_URL: redis://redis

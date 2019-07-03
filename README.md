@@ -21,7 +21,7 @@ whitehall$ govuk-docker run rake
 content-tagger$ govuk-docker run --stack app
 
 # Start content-publisher rails plus an end-to-end stack
-content-publisher$ govuk-docker run --stack e2e
+content-publisher$ govuk-docker run --stack app-e2e
 ```
 
 In the last two commands, the app will be available in your browser at *app-name.dev.gov.uk*.

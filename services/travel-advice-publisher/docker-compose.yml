@@ -41,14 +41,14 @@ services:
       - "3000"
     command: bin/rails s -P /tmp/rails.pid
 
-  travel-advice-publisher-e2e:
+  travel-advice-publisher-app-e2e:
     <<: *travel-advice-publisher
     depends_on:
       - postgres
       - redis
       - travel-advice-publisher-worker
-      - publishing-api-e2e
-      - asset-manager-e2e
+      - publishing-api-app-e2e
+      - asset-manager-app-e2e
       - nginx-proxy
 
   travel-advice-publisher-worker:
@@ -56,8 +56,8 @@ services:
     depends_on:
       - mongo
       - redis
-      - publishing-api-e2e
-      - asset-manager-e2e
+      - publishing-api-app-e2e
+      - asset-manager-app-e2e
     environment:
       DATABASE_URL: "postgresql://postgres@postgres/travel-advice-publisher"
       REDIS_URL: redis://redis
