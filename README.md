@@ -17,11 +17,14 @@ publish a document end-to-end e.g.
 # Run whitehall rake plus any required dependencies (DBs)
 whitehall$ govuk-docker run rake
 
+# Run whitehall rake plus a minimal app stack
+whitehall$ govuk-docker run --stack app rake
+
 # Start content-tagger rails plus a minimal app stack
-content-tagger$ govuk-docker run --stack app
+content-tagger$ govuk-docker startup
 
 # Start content-publisher rails plus an end-to-end stack
-content-publisher$ govuk-docker run --stack app-e2e
+content-publisher$ govuk-docker startup e2e
 ```
 
 In the last two commands, the app will be available in your browser at *app-name.dev.gov.uk*.

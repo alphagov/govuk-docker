@@ -53,4 +53,10 @@ class GovukDockerCLI < Thor
   def run(*args)
     Commands::Run.new(options[:stack], args).call
   end
+
+  desc "startup [VARIATION]", "Run the service in the current directory with the `app` stack. Variations can be provided, for example `live` or `draft`."
+  def startup(variation = nil)
+    stack = variation ? "app-#{variation}" : "app"
+    Commands::Run.new(stack, []).call
+  end
 end
