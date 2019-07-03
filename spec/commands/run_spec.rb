@@ -54,7 +54,7 @@ describe Commands::Run do
 
   context "with a service that doesn't exist" do
     let(:service) { "no-example-service" }
-    let(:stack) { "default" }
+    let(:stack) { "lite" }
 
     it "should fail" do
       expect { subject.call }.to raise_error(UnknownService)
