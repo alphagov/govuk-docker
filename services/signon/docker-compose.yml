@@ -23,7 +23,7 @@ services:
       TEST_DATABASE_URL: "mysql2://root:root@mysql/signon_test"
       REDIS_HOST: redis
 
-  signon-web:
+  signon-app:
     <<: *signon
     depends_on:
       - mysql
