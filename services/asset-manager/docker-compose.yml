@@ -22,7 +22,7 @@ services:
       TEST_MONGODB_URI: "mongodb://mongo/asset-manager-test"
       REDIS_URL: redis://redis
 
-  asset-manager-backend: &asset-manager-backend
+  asset-manager-app: &asset-manager-app
     <<: *asset-manager
     depends_on:
       - mongo
@@ -38,7 +38,7 @@ services:
     command: bin/rails s -P /tmp/rails.pid
 
   asset-manager-e2e:
-    <<: *asset-manager-backend
+    <<: *asset-manager-app
     depends_on:
       - mongo
       - redis

@@ -23,7 +23,7 @@ services:
       TEST_DATABASE_URL: "postgresql://postgres@postgres/link-checker-api-test"
       REDIS_URL: redis://redis
 
-  link-checker-api-backend: &link-checker-api-backend
+  link-checker-api-app: &link-checker-api-app
     <<: *link-checker-api
     depends_on:
       - link-checker-api-worker

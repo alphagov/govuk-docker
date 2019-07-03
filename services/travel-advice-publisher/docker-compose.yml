@@ -23,14 +23,14 @@ services:
       TEST_MONGODB_URI: "mongodb://mongo/travel-advice-publisher-test"
       REDIS_URL: redis://redis
 
-  travel-advice-publisher-backend: &travel-advice-publisher-backend
+  travel-advice-publisher-app: &travel-advice-publisher-app
     <<: *travel-advice-publisher
     depends_on:
       - mongo
       - redis
-      - publishing-api-backend
-      - asset-manager-backend
-      - content-store-live
+      - publishing-api-app
+      - asset-manager-app
+      - content-store-app
       - nginx-proxy
     environment:
       MONGODB_URI: "mongodb://mongo/travel-advice-publisher"

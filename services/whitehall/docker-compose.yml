@@ -24,15 +24,15 @@ services:
       TEST_DATABASE_URL: "mysql2://root:root@mysql/whitehall_test"
       REDIS_URL: redis://redis
 
-  whitehall-backend: &whitehall-backend
+  whitehall-app: &whitehall-app
     <<: *whitehall
     depends_on:
       - mysql
       - redis
-      - static-backend
+      - static-app
       - nginx-proxy
-      - asset-manager-backend
-      - publishing-api-backend
+      - asset-manager-app
+      - publishing-api-app
     environment:
       DATABASE_URL: "mysql2://root:root@mysql/whitehall_development"
       REDIS_URL: redis://redis
@@ -43,11 +43,11 @@ services:
     command: bin/rails s -P /tmp/rails.pid
 
   whitehall-e2e:
-    <<: *whitehall-backend
+    <<: *whitehall-app
     depends_on:
       - mysql
       - redis
-      - static-backend
+      - static-app
       - nginx-proxy
       - asset-manager-e2e
       - publishing-api-e2e

@@ -23,15 +23,15 @@ services:
       TEST_DATABASE_URL: "postgresql://postgres@postgres/content-publisher-test"
       REDIS_URL: redis://redis
 
-  content-publisher-backend: &content-publisher-backend
+  content-publisher-app: &content-publisher-app
     <<: *content-publisher
     depends_on:
       - postgres
       - redis
-      - publishing-api-backend
-      - asset-manager-backend
+      - publishing-api-app
+      - asset-manager-app
       - nginx-proxy
-      - content-store-live
+      - content-store-app
     environment:
       DATABASE_URL: "postgresql://postgres@postgres/content-publisher"
       REDIS_URL: redis://redis
@@ -42,7 +42,7 @@ services:
     command: bin/rails s -P /tmp/rails.pid
 
   content-publisher-e2e:
-    <<: *content-publisher-backend
+    <<: *content-publisher-app
     depends_on:
       - postgres
       - redis

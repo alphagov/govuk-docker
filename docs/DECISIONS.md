@@ -66,19 +66,19 @@ Commands like `rails s` are related to running an app; they may require other ap
 
 ```
 services:
-  my_service-live:
+  my_service-app:
     depends_on:
       - postgres
-      - another_service-live
+      - another_service-app
       ...
     command: rails s ...
 
-  my_service-draft:
+  my_service-app-draft:
     environment:
       PLEK_HOSTNAME_PREFIX: "draft-"
     depends_on:
       - postgres
-      - another_service-draft
+      - another_service-app-draft
       ...
     command: rails s ...
 ```
@@ -258,7 +258,7 @@ Running a web app natively makes it available on a specific port; for rails apps
 
 # docker-compose.yml
 services:
-  publishing-api-live:
+  publishing-api-app:
     ...
     ports:
       - "80:80"

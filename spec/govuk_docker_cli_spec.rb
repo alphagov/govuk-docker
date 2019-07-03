@@ -21,11 +21,11 @@ describe GovukDockerCLI do
     end
 
     context "with a stack argument" do
-      let(:args) { ["--stack", "backend"] }
+      let(:args) { ["--stack", "app"] }
 
       it "runs in the specified stack" do
         expect(Commands::Run)
-          .to receive(:new).with("backend", [])
+          .to receive(:new).with("app", [])
           .and_return(command_double)
         subject
       end

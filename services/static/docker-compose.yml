@@ -16,7 +16,7 @@ services:
     environment:
       PATH: "/govuk/static/bin:${PATH}"
 
-  static-backend: &static-backend
+  static-app: &static-app
     <<: *static
     environment:
       GOVUK_ASSET_ROOT: static.dev.gov.uk
@@ -27,11 +27,11 @@ services:
       - "3000"
     command: bin/rails s -P /tmp/rails.pid
 
-  static-live:
-    <<: *static-backend
+  static-app:
+    <<: *static-app
 
-  static-draft:
-    <<: *static-backend
+  static-app-draft:
+    <<: *static-app
     environment:
       VIRTUAL_HOST: draft-static.dev.gov.uk
       HOST: 0.0.0.0
