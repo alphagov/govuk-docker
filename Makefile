@@ -32,6 +32,8 @@ clean:
 	bin/govuk-docker prune
 
 test:
+	# Run the tests for the govuk-docker CLI
+	bundle exec rspec
 	# Test that the docker-compose config is valid. This will error if there are errors
 	# in the YAML files, or incompatible features are used.
 	bin/govuk-docker compose config
