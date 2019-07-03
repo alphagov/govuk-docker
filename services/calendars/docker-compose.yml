@@ -47,3 +47,17 @@ services:
     <<: *calendars
     depends_on:
       - publishing-api-app-e2e
+
+  calendars-app-live:
+    <<: *calendars
+    depends_on:
+      - nginx-proxy
+    environment:
+      GOVUK_WEBSITE_ROOT: https://www.gov.uk
+      PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
+      PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
+      VIRTUAL_HOST: calendars.dev.gov.uk
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    command: bin/rails s -P /tmp/rails.pid
