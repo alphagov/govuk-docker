@@ -3,7 +3,7 @@ version: '3.7'
 x-email-alert-api: &email-alert-api
   build:
     context: .
-    dockerfile: email-alert-api/Dockerfile
+    dockerfile: services/email-alert-api/Dockerfile
   image: email-alert-api
   volumes:
     - ..:/govuk:delegated
