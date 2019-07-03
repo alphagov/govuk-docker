@@ -11,6 +11,10 @@ module Doctor
       message.join("\r\n")
     end
 
+    def installed?
+      system "which dnsmasq 1>/dev/null"
+    end
+
   private
 
     attr_reader :message
@@ -30,19 +34,15 @@ module Doctor
     HEREDOC
 
     def install_state?
-      message << if dnsmasq_installed?
+      message << if installed?
                    DNSMASQ_INSTALLED
                  else
                    INSTALL_DNSMASQ
                  end
     end
 
-    def dnsmasq_installed?
-      system "which dnsmasq 1>/dev/null"
-    end
-
     def run_state?
-      return unless dnsmasq_installed?
+      return unless installed?
 
       message << if dnsmasq_running?
                    DNSMASQ_RUNNING
