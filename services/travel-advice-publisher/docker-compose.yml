@@ -12,7 +12,7 @@ x-travel-advice-publisher: &travel-advice-publisher
   working_dir: /govuk/travel-advice-publisher
 
 services:
-  travel-advice-publisher-default:
+  travel-advice-publisher-lite:
     <<: *travel-advice-publisher
     privileged: true
     depends_on:
@@ -23,14 +23,14 @@ services:
       TEST_MONGODB_URI: "mongodb://mongo/travel-advice-publisher-test"
       REDIS_URL: redis://redis
 
-  travel-advice-publisher-backend: &travel-advice-publisher-backend
+  travel-advice-publisher-app: &travel-advice-publisher-app
     <<: *travel-advice-publisher
     depends_on:
       - mongo
       - redis
-      - publishing-api-backend
-      - asset-manager-backend
-      - content-store-live
+      - publishing-api-app
+      - asset-manager-app
+      - content-store-app
       - nginx-proxy
     environment:
       MONGODB_URI: "mongodb://mongo/travel-advice-publisher"
@@ -41,14 +41,14 @@ services:
       - "3000"
     command: bin/rails s -P /tmp/rails.pid
 
-  travel-advice-publisher-e2e:
+  travel-advice-publisher-app-e2e:
     <<: *travel-advice-publisher
     depends_on:
       - postgres
       - redis
       - travel-advice-publisher-worker
-      - publishing-api-e2e
-      - asset-manager-e2e
+      - publishing-api-app-e2e
+      - asset-manager-app-e2e
       - nginx-proxy
 
   travel-advice-publisher-worker:
@@ -56,8 +56,8 @@ services:
     depends_on:
       - mongo
       - redis
-      - publishing-api-e2e
-      - asset-manager-e2e
+      - publishing-api-app-e2e
+      - asset-manager-app-e2e
     environment:
       DATABASE_URL: "postgresql://postgres@postgres/travel-advice-publisher"
       REDIS_URL: redis://redis

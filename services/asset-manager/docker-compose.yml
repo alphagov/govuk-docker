@@ -12,7 +12,7 @@ x-asset-manager: &asset-manager
   working_dir: /govuk/asset-manager
 
 services:
-  asset-manager-default:
+  asset-manager-lite:
     <<: *asset-manager
     depends_on:
       - mongo
@@ -22,7 +22,7 @@ services:
       TEST_MONGODB_URI: "mongodb://mongo/asset-manager-test"
       REDIS_URL: redis://redis
 
-  asset-manager-backend: &asset-manager-backend
+  asset-manager-app: &asset-manager-app
     <<: *asset-manager
     depends_on:
       - mongo
@@ -37,8 +37,8 @@ services:
       - "3000"
     command: bin/rails s -P /tmp/rails.pid
 
-  asset-manager-e2e:
-    <<: *asset-manager-backend
+  asset-manager-app-e2e:
+    <<: *asset-manager-app
     depends_on:
       - mongo
       - redis

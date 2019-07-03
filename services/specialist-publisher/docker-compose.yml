@@ -12,7 +12,7 @@ x-specialist-publisher: &specialist-publisher
   working_dir: /govuk/specialist-publisher
 
 services:
-  specialist-publisher-default:
+  specialist-publisher-lite:
     <<: *specialist-publisher
     privileged: true
     depends_on:
@@ -23,15 +23,15 @@ services:
       TEST_MONGODB_URI: "mongodb://mongo/specialist-publisher-test"
       REDIS_URL: redis://redis
 
-  specialist-publisher-backend: &specialist-publisher-backend
+  specialist-publisher-app: &specialist-publisher-app
     <<: *specialist-publisher
     depends_on:
       - mongo
       - redis
       - nginx-proxy
-      - publishing-api-backend
-      - asset-manager-backend
-      - email-alert-api-backend
+      - publishing-api-app
+      - asset-manager-app
+      - email-alert-api-app
     environment:
       MONGODB_URI: "mongodb://mongo/specialist-publisher"
       REDIS_URL: redis://redis
@@ -41,15 +41,15 @@ services:
       - "3000"
     command: bin/rails s -P /tmp/rails.pid
 
-  specialist-publisher-e2e:
-    <<: *specialist-publisher-backend
+  specialist-publisher-app-e2e:
+    <<: *specialist-publisher-app
     depends_on:
       - mongo
       - redis
       - specialist-publisher-worker
-      - publishing-api-e2e
-      - asset-manager-e2e
-      - email-alert-api-backend
+      - publishing-api-app-e2e
+      - asset-manager-app-e2e
+      - email-alert-api-app
       - nginx-proxy
 
   specialist-publisher-worker:
@@ -57,8 +57,8 @@ services:
     depends_on:
       - mongo
       - redis
-      - publishing-api-e2e
-      - asset-manager-e2e
+      - publishing-api-app-e2e
+      - asset-manager-app-e2e
     environment:
       MONGODB_URI: "mongodb://mongo/specialist-publisher"
       REDIS_URL: redis://redis

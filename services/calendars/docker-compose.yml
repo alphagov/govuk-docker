@@ -11,18 +11,18 @@ x-calendars: &calendars
   working_dir: /govuk/calendars
 
 services:
-  calendars-default:
+  calendars-lite:
     <<: *calendars
     volumes:
       - ..:/govuk:delegated
       - bundle:/usr/local/bundle
 
-  calendars-live: &calendars-live
+  calendars-app: &calendars-app
     <<: *calendars
     depends_on:
-      - router-live
-      - content-store-live
-      - static-live
+      - router-app
+      - content-store-app
+      - static-app
     environment:
       GOVUK_ASSET_ROOT: calendars.dev.gov.uk
       VIRTUAL_HOST: calendars.dev.gov.uk
@@ -31,12 +31,12 @@ services:
       - "3000"
     command: bin/rails s -P /tmp/rails.pid
 
-  calendars-draft:
-    <<: *calendars-live
+  calendars-app-draft:
+    <<: *calendars-app
     depends_on:
-      - router-draft
-      - content-store-draft
-      - static-draft
+      - router-app-draft
+      - content-store-app-draft
+      - static-app-draft
     environment:
       GOVUK_ASSET_ROOT: draft-calendars.dev.gov.uk
       VIRTUAL_HOST: draft-calendars.dev.gov.uk
@@ -46,4 +46,4 @@ services:
   calendars-setup:
     <<: *calendars
     depends_on:
-      - publishing-api-e2e
+      - publishing-api-app-e2e

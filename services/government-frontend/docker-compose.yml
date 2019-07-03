@@ -11,19 +11,19 @@ x-government-frontend: &government-frontend
   working_dir: /govuk/government-frontend
 
 services:
-  government-frontend-default:
+  government-frontend-lite:
     <<: *government-frontend
     privileged: true
     volumes:
       - ..:/govuk:delegated
       - bundle:/usr/local/bundle
 
-  government-frontend-live: &government-frontend-live
+  government-frontend-app: &government-frontend-app
     <<: *government-frontend
     depends_on:
-      - router-live
-      - content-store-live
-      - static-live
+      - router-app
+      - content-store-app
+      - static-app
     environment:
       GOVUK_ASSET_ROOT: government-frontend.dev.gov.uk
       VIRTUAL_HOST: government-frontend.dev.gov.uk
@@ -32,13 +32,13 @@ services:
       - "3000"
     command: bin/rails s -P /tmp/rails.pid
 
-  government-frontend-draft:
-    <<: *government-frontend-live
+  government-frontend-app-draft:
+    <<: *government-frontend-app
     depends_on:
-      - router-draft
-      - content-store-draft
-      - static-draft
-      - static-live
+      - router-app-draft
+      - content-store-app-draft
+      - static-app-draft
+      - static-app
     environment:
       GOVUK_ASSET_ROOT: draft-government-frontend.dev.gov.uk
       VIRTUAL_HOST: draft-government-frontend.dev.gov.uk

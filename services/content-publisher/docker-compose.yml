@@ -12,7 +12,7 @@ x-content-publisher: &content-publisher
   working_dir: /govuk/content-publisher
 
 services:
-  content-publisher-default:
+  content-publisher-lite:
     <<: *content-publisher
     privileged: true
     depends_on:
@@ -23,15 +23,15 @@ services:
       TEST_DATABASE_URL: "postgresql://postgres@postgres/content-publisher-test"
       REDIS_URL: redis://redis
 
-  content-publisher-backend: &content-publisher-backend
+  content-publisher-app: &content-publisher-app
     <<: *content-publisher
     depends_on:
       - postgres
       - redis
-      - publishing-api-backend
-      - asset-manager-backend
+      - publishing-api-app
+      - asset-manager-app
       - nginx-proxy
-      - content-store-live
+      - content-store-app
     environment:
       DATABASE_URL: "postgresql://postgres@postgres/content-publisher"
       REDIS_URL: redis://redis
@@ -41,14 +41,14 @@ services:
       - "3000"
     command: bin/rails s -P /tmp/rails.pid
 
-  content-publisher-e2e:
-    <<: *content-publisher-backend
+  content-publisher-app-e2e:
+    <<: *content-publisher-app
     depends_on:
       - postgres
       - redis
       - content-publisher-worker
-      - publishing-api-e2e
-      - asset-manager-e2e
+      - publishing-api-app-e2e
+      - asset-manager-app-e2e
       - nginx-proxy
 
   content-publisher-worker:
@@ -56,8 +56,8 @@ services:
     depends_on:
       - postgres
       - redis
-      - publishing-api-e2e
-      - asset-manager-e2e
+      - publishing-api-app-e2e
+      - asset-manager-app-e2e
     environment:
       DATABASE_URL: "postgresql://postgres@postgres/content-publisher"
       REDIS_URL: redis://redis

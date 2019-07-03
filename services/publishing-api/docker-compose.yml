@@ -12,7 +12,7 @@ x-publishing-api: &publishing-api
   working_dir: /govuk/publishing-api
 
 services:
-  publishing-api-default:
+  publishing-api-lite:
     <<: *publishing-api
     depends_on:
       - postgres
@@ -26,7 +26,7 @@ services:
       TEST_DATABASE_URL: "postgresql://postgres@postgres/publishing-api-test"
       REDIS_URL: redis://redis
 
-  publishing-api-backend: &publishing-api-backend
+  publishing-api-app: &publishing-api-app
     <<: *publishing-api
     depends_on:
       - postgres
@@ -41,8 +41,8 @@ services:
       - "3000"
     command: bin/rails s -P /tmp/rails.pid
 
-  publishing-api-e2e:
-    <<: *publishing-api-backend
+  publishing-api-app-e2e:
+    <<: *publishing-api-app
     depends_on:
       - postgres
       - redis
@@ -55,8 +55,8 @@ services:
       - postgres
       - redis
       - rabbitmq
-      - content-store-draft
-      - content-store-live
+      - content-store-app-draft
+      - content-store-app
     environment:
       RABBITMQ_EXCHANGE: published_documents
       RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672

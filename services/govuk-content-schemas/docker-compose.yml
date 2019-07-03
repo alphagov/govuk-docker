@@ -12,5 +12,5 @@ x-govuk-content-schemas: &govuk-content-schemas
   working_dir: /govuk/govuk-content-schemas
 
 services:
-  govuk-content-schemas-default:
+  govuk-content-schemas-lite:
     <<: *govuk-content-schemas

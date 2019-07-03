@@ -12,7 +12,7 @@ x-signon: &signon
   working_dir: /govuk/signon
 
 services:
-  signon-default:
+  signon-lite:
     <<: *signon
     privileged: true
     depends_on:

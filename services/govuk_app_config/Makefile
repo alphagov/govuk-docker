@@ -1,2 +1,2 @@
 govuk_app_config: $(GOVUK_ROOT_DIR)/govuk_app_config
-	$(COMPOSE_RUN) govuk_app_config-default bundle
+	$(COMPOSE_RUN) govuk_app_config-lite bundle

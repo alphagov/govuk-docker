@@ -12,5 +12,5 @@ x-govuk-lint: &govuk-lint
   working_dir: /govuk/govuk-lint
 
 services:
-  govuk-lint-default:
+  govuk-lint-lite:
     <<: *govuk-lint

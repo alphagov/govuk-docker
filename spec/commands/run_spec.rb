@@ -11,7 +11,7 @@ describe Commands::Run do
 
   context "with a service that exists" do
     let(:service) { "example-service" }
-    let(:stack) { "default" }
+    let(:stack) { "lite" }
 
     let(:compose_command) { double }
     before { expect(Commands::Compose).to receive(:new).and_return(compose_command) }
@@ -21,7 +21,7 @@ describe Commands::Run do
 
       it "should run docker compose" do
         expect(compose_command).to receive(:call).with(
-          "run", "--rm", "--service-ports", "example-service-default"
+          "run", "--rm", "--service-ports", "example-service-lite"
         )
         subject.call
       end
@@ -32,7 +32,7 @@ describe Commands::Run do
 
       it "should run docker compose using the `env` command" do
         expect(compose_command).to receive(:call).with(
-          "run", "--rm", "--service-ports", "example-service-default",
+          "run", "--rm", "--service-ports", "example-service-lite",
           "env", "bundle", "exec", "rake", "lint"
         )
         subject.call
@@ -44,7 +44,7 @@ describe Commands::Run do
 
       it "should run docker compose without duplicating `env`" do
         expect(compose_command).to receive(:call).with(
-          "run", "--rm", "--service-ports", "example-service-default",
+          "run", "--rm", "--service-ports", "example-service-lite",
           "env", "bundle", "exec", "rake", "lint"
         )
         subject.call
@@ -54,7 +54,7 @@ describe Commands::Run do
 
   context "with a service that doesn't exist" do
     let(:service) { "no-example-service" }
-    let(:stack) { "default" }
+    let(:stack) { "lite" }
 
     it "should fail" do
       expect { subject.call }.to raise_error(UnknownService)
