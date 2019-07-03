@@ -23,8 +23,9 @@ class GovukDockerCLI < Thor
     Commands::Prune.new.call
   end
 
-  desc "run-this STACK [ARGS]", "Run the service in the current directory with the specified stack (for example `govuk-docker run-this backend`)"
-  def run_this(stack, *args)
-    Commands::RunThis.new(stack, args).call
+  desc "run-this [ARGS]", "Run the service in the current directory with the specified stack (for example `govuk-docker run-this --stack backend`)"
+  option :stack, default: "default"
+  def run_this(*args)
+    Commands::RunThis.new(options[:stack], args).call
   end
 end
