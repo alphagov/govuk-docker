@@ -142,6 +142,23 @@ The following apps are supported by govuk-docker to some extent.
       * Rake task to [create a test taxon](https://github.com/alphagov/whitehall/blob/master/lib/tasks/taxonomy.rake#L11) for publishing is not idempotent
       * Placeholder images don't work as missing proxy for [/government/assets](https://github.com/alphagov/whitehall/blob/master/app/presenters/publishing_api/news_article_presenter.rb#L133)
 
+## Stacks
+
+Each service provides a number of different 'stacks' which you can use to run
+the app. To provide consistency we have a convention for these names:
+
+- **lite**: This stack provides only the minimum number of dependencies to run
+  the application code. This is useful for running the tests, or a Rails
+  console, for example. It won't be useful for opening the app in a browser.
+- **app**: This stack provides the dependencies necessary to run the app in the
+  browser. Variations on this are allowed where necessary such as:
+  - **app-draft**: if the application uses the content-store, this stack will
+    point to the [draft content-store](https://docs.publishing.service.gov.uk/manual/content-preview.html).
+  - **app-live**: if the app is a read-only frontend app, the live stack will
+    point the production versions of content-store and search-api.
+  - **app-e2e**: to run the app with all the other apps necessary to provide
+    full end to end user journeys.
+
 ## FAQs
 
 ### Troubleshoot your installation
