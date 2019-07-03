@@ -28,6 +28,7 @@ services:
           - router-api.dev.gov.uk
           - router.dev.gov.uk
           - signon.dev.gov.uk
+          - specialist-publisher.dev.gov.uk
           - static.dev.gov.uk
           - support.dev.gov.uk
           - support-api.dev.gov.uk
