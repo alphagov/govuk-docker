@@ -1,22 +1,34 @@
+require 'yaml'
+require_relative '../errors/unknown_service'
+require_relative '../errors/unknown_stack'
+
 module Commands
   class Base
-    def initialize(service = nil, config_directory = nil, system = nil)
-      @config_directory = config_directory || default_config_directory
+    def initialize(service = nil, config_directory = nil, system = nil, stack = nil)
       @service = service || default_service
+      @config_directory = config_directory || default_config_directory
       @system = system || default_system
+      @stack = stack
     end
 
   private
 
-    attr_reader :config_directory, :service, :system
+    attr_reader :config_directory, :service, :system, :stack
 
-    def check_service_exists
-      raise "Unknown service #{service}." unless service_exists?
+    def available_stacks
+      service_path = File.join(config_directory, "services/#{service}/docker-compose.yml")
+      service_file = YAML.load_file(service_path)
+      @available_stacks ||= service_file["services"].map do |service_with_stack|
+        service_with_stack.first.delete_prefix(service + '-')
+      end
     end
 
-    def service_exists?
-      search_string = "services/#{service}/docker-compose.yml"
-      docker_compose_paths.any? { |path| path.include?(search_string) }
+    def check_service_exists
+      raise UnknownService.new(service, config_directory) unless service_exists?
+    end
+
+    def check_stack_exists
+      raise UnknownStack.new(stack, available_stacks) unless stack_exists?
     end
 
     def docker_compose_paths
@@ -35,6 +47,15 @@ module Commands
 
     def default_system
       Kernel.method(:system)
+    end
+
+    def service_exists?
+      search_string = "services/#{service}/docker-compose.yml"
+      docker_compose_paths.any? { |path| path.include?(search_string) }
+    end
+
+    def stack_exists?
+      available_stacks.include?(stack)
     end
   end
 end

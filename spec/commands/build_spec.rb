@@ -1,5 +1,6 @@
 require "spec_helper"
 require_relative "../../lib/commands/build"
+require_relative "../../lib/errors/unknown_service"
 
 describe Commands::Build do
   let(:config_directory) { "spec/fixtures" }
@@ -21,7 +22,7 @@ describe Commands::Build do
     let(:service) { "no-example-service" }
 
     it "should fail" do
-      expect { subject.call }.to raise_error(/Unknown service/)
+      expect { subject.call }.to raise_error(UnknownService)
     end
   end
 end
