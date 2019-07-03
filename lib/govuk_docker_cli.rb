@@ -5,6 +5,7 @@ require_relative "./commands/compose"
 require_relative "./commands/prune"
 require_relative "./commands/run"
 require_relative "./doctor/dnsmasq"
+require_relative "./doctor/docker"
 
 class GovukDockerCLI < Thor
   # https://github.com/ddollar/foreman/blob/83fd5eeb8c4b522cb84d8e74031080143ea6353b/lib/foreman/cli.rb#L29-L35
@@ -42,6 +43,8 @@ class GovukDockerCLI < Thor
   def doctor
     puts "Checking dnsmasq"
     puts Doctor::Dnsmasq.new.call
+    puts "\r\nChecking docker"
+    puts Doctor::Docker.new.call
   end
 
   desc "prune", "Remove all docker containers, volumes and images"
