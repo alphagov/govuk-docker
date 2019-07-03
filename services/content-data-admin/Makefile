@@ -1,3 +1,3 @@
-content-data-admin: ../content-data-admin
-	bin/govuk-docker compose run content-data-admin-default bundle
-	bin/govuk-docker compose run content-data-admin-default sh -c 'rake db:migrate 2>/dev/null || rake db:setup'
+content-data-admin: $(GOVUK_ROOT_DIR)/content-data-admin
+	$(COMPOSE_RUN) content-data-admin-default bundle
+	$(COMPOSE_RUN) content-data-admin-default sh -c 'rake db:migrate 2>/dev/null || rake db:setup'

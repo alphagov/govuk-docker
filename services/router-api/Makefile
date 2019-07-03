@@ -1,2 +1,2 @@
-router-api: ../router-api router
-	bin/govuk-docker compose run router-api-default bundle
+router-api: $(GOVUK_ROOT_DIR)/router-api router
+	$(COMPOSE_RUN) router-api-default bundle

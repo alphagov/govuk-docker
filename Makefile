@@ -1,4 +1,10 @@
-GOVUK_ROOT_DIR ?= "${HOME}/govuk"
+GOVUK_ROOT_DIR   ?= $(HOME)/govuk
+GOVUK_DOCKER_DIR ?= $(GOVUK_ROOT_DIR)/govuk-docker
+GOVUK_DOCKER     ?= $(GOVUK_DOCKER_DIR)/bin/govuk-docker
+
+COMPOSE_RUN = $(GOVUK_DOCKER) compose run
+
+APPS ?= $(shell ls ${GOVUK_DOCKER_DIR}/services/*/Makefile | xargs -L 1 dirname | xargs -L 1 basename)
 
 # This is a Makefile best practice to say that these are not file
 # names.  For example, if you were to create a file called "clean",
@@ -9,8 +15,6 @@ GOVUK_ROOT_DIR ?= "${HOME}/govuk"
 #     $ make clean
 #     make: `clean' is up to date.
 .PHONY: clone pull clean test
-
-APPS ?= $(shell ls services/*/Makefile | xargs -L 1 dirname | xargs -L 1 basename)
 
 default:
 	@echo "Run 'make APP-NAME' to set up an app and its dependencies."
@@ -36,13 +40,13 @@ test:
 
 # Clone an app, for example:
 #
-#     make ../content-publisher
+#     make $HOME/govuk/content-publisher
 #
 # The 'services/%/Makefile' bit is to double-check that this is a git
 # repository, as all of our apps have a Makefile.
-../%: services/%/Makefile
+$(GOVUK_ROOT_DIR)/%: $(GOVUK_DOCKER_DIR)/services/%/Makefile
 	if [ ! -d "${GOVUK_ROOT_DIR}/$*" ]; then \
 		echo "$*" && git clone "git@github.com:alphagov/$*.git" "${GOVUK_ROOT_DIR}/$*"; \
 	fi
 
-include $(shell ls services/*/Makefile)
+include $(shell ls ${GOVUK_DOCKER_DIR}/services/*/Makefile)

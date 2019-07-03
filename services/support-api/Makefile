@@ -1,3 +1,3 @@
-support-api: ../support-api
-	bin/govuk-docker compose run support-api-default bundle
-	bin/govuk-docker compose run support-api-default sh -c 'rake db:migrate 2>/dev/null || rake db:setup'
+support-api: $(GOVUK_ROOT_DIR)/support-api
+	$(COMPOSE_RUN) support-api-default bundle
+	$(COMPOSE_RUN) support-api-default sh -c 'rake db:migrate 2>/dev/null || rake db:setup'

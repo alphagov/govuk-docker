@@ -1,2 +1,2 @@
-plek: ../plek
-	bin/govuk-docker compose run plek-default bundle
+plek: $(GOVUK_ROOT_DIR)/plek
+	$(COMPOSE_RUN) plek-default bundle
