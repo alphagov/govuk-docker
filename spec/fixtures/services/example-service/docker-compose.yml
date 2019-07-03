@@ -1,2 +1,3 @@
 services:
-  example-service: {}
+  example-service-default: {}
+  example-service-test: {}
