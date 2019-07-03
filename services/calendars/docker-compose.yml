@@ -3,7 +3,7 @@ version: '3.7'
 x-calendars: &calendars
   build:
     context: .
-    dockerfile: calendars/Dockerfile
+    dockerfile: services/calendars/Dockerfile
   image: calendars
   volumes:
     - ..:/govuk:delegated
