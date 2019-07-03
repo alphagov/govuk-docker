@@ -1,2 +1,2 @@
-calendars: ../calendars
-	bin/govuk-docker run calendars-default bundle
+calendars: $(GOVUK_ROOT_DIR)/calendars
+	$(COMPOSE_RUN) calendars-default bundle
