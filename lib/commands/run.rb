@@ -1,7 +1,7 @@
 require_relative './base'
 require_relative './compose'
 
-class Commands::RunThis < Commands::Base
+class Commands::Run < Commands::Base
   def initialize(stack, args, service = nil, config_directory = nil)
     super(service, config_directory)
     @stack = stack

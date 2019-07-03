@@ -3,7 +3,7 @@ require "thor"
 require_relative "./commands/build_this"
 require_relative "./commands/compose"
 require_relative "./commands/prune"
-require_relative "./commands/run_this"
+require_relative "./commands/run"
 require_relative "./doctor/dnsmasq"
 
 class GovukDockerCLI < Thor
@@ -39,9 +39,11 @@ class GovukDockerCLI < Thor
     Commands::Prune.new.call
   end
 
-  desc "run-this [ARGS]", "Run the service in the current directory with the specified stack (for example `govuk-docker run-this --stack backend`)"
+  desc "run [ARGS]", "Run the service in the current directory with the specified stack (for example `govuk-docker run --stack backend`)"
   option :stack, default: "default"
-  def run_this(*args)
-    Commands::RunThis.new(options[:stack], args).call
+  def run(*args)
+    Commands::Run.new(options[:stack], args).call
   end
+
+  map "run-this" => "run"
 end

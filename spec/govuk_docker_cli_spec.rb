@@ -8,12 +8,12 @@ describe GovukDockerCLI do
   let(:command_double) { double }
   before { allow(command_double).to receive(:call) }
 
-  describe "run-this" do
-    let(:command) { "run-this" }
+  describe "run" do
+    let(:command) { "run" }
 
     context "without a stack argument" do
       it "runs in the default stack" do
-        expect(Commands::RunThis)
+        expect(Commands::Run)
           .to receive(:new).with("default", [])
           .and_return(command_double)
         subject
@@ -24,7 +24,7 @@ describe GovukDockerCLI do
       let(:args) { ["--stack", "backend"] }
 
       it "runs in the specified stack" do
-        expect(Commands::RunThis)
+        expect(Commands::Run)
           .to receive(:new).with("backend", [])
           .and_return(command_double)
         subject
@@ -35,7 +35,7 @@ describe GovukDockerCLI do
       let(:args) { ["bundle", "exec", "rspec"] }
 
       it "runs the command with additinal arguments" do
-        expect(Commands::RunThis)
+        expect(Commands::Run)
           .to receive(:new).with("default", ["bundle", "exec", "rspec"])
           .and_return(command_double)
         subject
