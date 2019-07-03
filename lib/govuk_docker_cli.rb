@@ -7,6 +7,15 @@ require_relative "./commands/run_this"
 require_relative "./doctor/dnsmasq"
 
 class GovukDockerCLI < Thor
+  # https://github.com/ddollar/foreman/blob/83fd5eeb8c4b522cb84d8e74031080143ea6353b/lib/foreman/cli.rb#L29-L35
+  class << self
+    # Hackery. Take the run method away from Thor so that we can redefine it.
+    def is_thor_reserved_word?(word, type)
+      return false if word == "run"
+      super
+    end
+  end
+
   package_name "govuk-docker"
 
   desc "build-this", "Build the service in the current directory"
