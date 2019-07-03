@@ -25,7 +25,7 @@ private
 
   def extra_args
     return [] if args.empty?
-    return args if args == ["env"]
+    return args if args.first == "env"
     ["env"] + args
   end
 end

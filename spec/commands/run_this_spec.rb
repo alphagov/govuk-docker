@@ -19,7 +19,7 @@ describe Commands::RunThis do
     context "with no extra arguments" do
       let(:args) { [] }
 
-      it "should run docker compose for one service when the service and stack exists" do
+      it "should run docker compose" do
         expect(compose_command).to receive(:call).with(
           "run", "--rm", "--service-ports", "example-service-default"
         )
@@ -30,7 +30,19 @@ describe Commands::RunThis do
     context "with some extra arguments" do
       let(:args) { ["bundle", "exec", "rake", "lint"] }
 
-      it "should run docker compose for one service when the service and stack exists" do
+      it "should run docker compose using the `env` command" do
+        expect(compose_command).to receive(:call).with(
+          "run", "--rm", "--service-ports", "example-service-default",
+          "env", "bundle", "exec", "rake", "lint"
+        )
+        subject.call
+      end
+    end
+
+    context "with an env command" do
+      let(:args) { ["env", "bundle", "exec", "rake", "lint"] }
+
+      it "should run docker compose without duplicating `env`" do
         expect(compose_command).to receive(:call).with(
           "run", "--rm", "--service-ports", "example-service-default",
           "env", "bundle", "exec", "rake", "lint"
