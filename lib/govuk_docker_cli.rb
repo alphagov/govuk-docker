@@ -44,6 +44,4 @@ class GovukDockerCLI < Thor
   def run(*args)
     Commands::Run.new(options[:stack], args).call
   end
-
-  map "run-this" => "run"
 end
