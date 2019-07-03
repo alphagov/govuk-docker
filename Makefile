@@ -7,14 +7,14 @@ COMPOSE_RUN = $(GOVUK_DOCKER) compose run
 APPS ?= $(shell ls ${GOVUK_DOCKER_DIR}/services/*/Makefile | xargs -L 1 dirname | xargs -L 1 basename)
 
 # This is a Makefile best practice to say that these are not file
-# names.  For example, if you were to create a file called "clean",
-# then `make clean` should still invoke the rule, it shouldn't do
+# names.  For example, if you were to create a file called "test",
+# then `make test` should still invoke the rule, it shouldn't do
 # this:
 #
-#     $ touch clean
-#     $ make clean
-#     make: `clean' is up to date.
-.PHONY: clone pull clean test all-apps
+#     $ touch test
+#     $ make test
+#     make: `test' is up to date.
+.PHONY: clone pull test all-apps
 
 default:
 	@echo "Run 'make APP-NAME' to set up an app and its dependencies."
@@ -26,10 +26,6 @@ clone: $(addprefix ../,$(APPS))
 
 pull:
 	echo $(APPS) | cut -d/ -f3 | xargs -P8 -n1 ./bin/update-git-repo.sh
-
-clean:
-	bin/govuk-docker compose stop
-	bin/govuk-docker prune
 
 test:
 	# Linting
@@ -43,7 +39,9 @@ test:
 
 # This will be slow and may repeat work, so generally you don't want
 # to run this.
-all-apps: $(APPS) clean
+all-apps: $(APPS)
+	bin/govuk-docker compose stop
+	bin/govuk-docker prune
 
 # Clone an app, for example:
 #
