@@ -1,7 +1,7 @@
 require "spec_helper"
-require_relative "../../lib/commands/build_this"
+require_relative "../../lib/commands/build"
 
-describe Commands::BuildThis do
+describe Commands::Build do
   let(:config_directory) { "spec/fixtures" }
   let(:service) { nil }
 
