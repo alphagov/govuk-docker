@@ -1,6 +1,6 @@
-content-store: ../content-store router-api govuk-content-schemas
-	bin/govuk-docker compose run content-store-default bundle
-	bin/govuk-docker compose run content-store-default rake db:create
-	bin/govuk-docker compose run content-store-default rails runner 'User.first || User.create'
-	bin/govuk-docker compose run content-store-draft rake db:create
-	bin/govuk-docker compose run content-store-draft rails runner 'User.first || User.create'
+content-store: $(GOVUK_ROOT_DIR)/content-store router-api govuk-content-schemas
+	$(COMPOSE_RUN) content-store-default bundle
+	$(COMPOSE_RUN) content-store-default rake db:create
+	$(COMPOSE_RUN) content-store-default rails runner 'User.first || User.create'
+	$(COMPOSE_RUN) content-store-draft rake db:create
+	$(COMPOSE_RUN) content-store-draft rails runner 'User.first || User.create'

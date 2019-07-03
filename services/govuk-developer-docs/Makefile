@@ -1,2 +1,2 @@
-govuk-developer-docs: ../govuk-developer-docs
-	bin/govuk-docker compose run govuk-developer-docs-default bundle
+govuk-developer-docs: $(GOVUK_ROOT_DIR)/govuk-developer-docs
+	$(COMPOSE_RUN) govuk-developer-docs-default bundle

@@ -1,2 +1,2 @@
-govuk_app_config: ../govuk_app_config
-	bin/govuk-docker compose run govuk_app_config-default bundle
+govuk_app_config: $(GOVUK_ROOT_DIR)/govuk_app_config
+	$(COMPOSE_RUN) govuk_app_config-default bundle

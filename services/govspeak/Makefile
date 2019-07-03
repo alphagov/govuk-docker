@@ -1,2 +1,2 @@
-govspeak: ../govspeak
-	bin/govuk-docker compose run govspeak-default bundle
+govspeak: $(GOVUK_ROOT_DIR)/govspeak
+	$(COMPOSE_RUN) govspeak-default bundle

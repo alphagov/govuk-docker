@@ -1,2 +1,2 @@
-support: ../support support-api
-	bin/govuk-docker compose run support-default bundle
+support: $(GOVUK_ROOT_DIR)/support support-api
+	$(COMPOSE_RUN) support-default bundle
