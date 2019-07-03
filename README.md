@@ -128,8 +128,7 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ govuk-developer-docs
    - ✅ govuk-lint
    - ✅ govuk_app_config
-   - ❌ govuk_publishing_components
-      * Unable to run `rake` due to an [old version of Jasmine](https://github.com/jasmine/jasmine-gem/issues/285)
+   - ✅ govuk_publishing_components
    - ✅ miller-columns-element
    - ✅ plek
    - ✅ publishing-api
