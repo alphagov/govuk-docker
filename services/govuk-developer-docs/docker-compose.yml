@@ -17,7 +17,7 @@ services:
     environment:
       LANG: "C.UTF-8"
 
-  govuk-developer-docs-web:
+  govuk-developer-docs-app:
     <<: *govuk-developer-docs
     depends_on:
       - nginx-proxy

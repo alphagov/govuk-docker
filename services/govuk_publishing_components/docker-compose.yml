@@ -16,7 +16,7 @@ services:
     <<: *govuk_publishing_components
     privileged: true
 
-  govuk_publishing_components-web:
+  govuk_publishing_components-app:
     <<: *govuk_publishing_components
     depends_on:
       - nginx-proxy

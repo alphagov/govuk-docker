@@ -27,9 +27,6 @@ services:
       - "3000"
     command: bin/rails s -P /tmp/rails.pid
 
-  static-app:
-    <<: *static-app
-
   static-app-draft:
     <<: *static-app
     environment:
