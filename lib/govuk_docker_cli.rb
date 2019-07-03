@@ -24,6 +24,15 @@ class GovukDockerCLI < Thor
   end
 
   desc "compose ARGS", "Run `docker-compose` with ARGS"
+  long_desc <<-LONGDESC
+    List all stacks across all apps:
+
+    > govuk-docker compose ps --services
+
+    Stop all containers
+
+    > govuk-docker compose stop
+  LONGDESC
   def compose(*args)
     Commands::Compose.new.call(*args)
   end
