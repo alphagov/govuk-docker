@@ -1,7 +1,7 @@
 require "spec_helper"
-require_relative "../../lib/commands/run_this"
+require_relative "../../lib/commands/run"
 
-describe Commands::RunThis do
+describe Commands::Run do
   let(:config_directory) { "spec/fixtures" }
   let(:service) { nil }
   let(:stack) { nil }

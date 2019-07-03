@@ -15,13 +15,13 @@ publish a document end-to-end e.g.
 
 ```
 # Run whitehall rake plus any required dependencies (DBs)
-whitehall$ govuk-docker run-this rake
+whitehall$ govuk-docker run rake
 
 # Start content-tagger rails plus a minimal backend stack
-content-tagger$ govuk-docker run-this --stack backend
+content-tagger$ govuk-docker run --stack backend
 
 # Start content-publisher rails plus an end-to-end stack
-content-publisher$ govuk-docker run-this --stack e2e
+content-publisher$ govuk-docker run --stack e2e
 ```
 
 In the last two commands, the app will be available in your browser at *app-name.dev.gov.uk*.
@@ -147,13 +147,13 @@ Sometimes things go wrong or some investigation is needed. As govuk-docker is ju
 
 ```
 # tail logs for running services
-govuk-docker logs -f
+govuk-docker compose logs -f
 
 # get all the running containers
 docker ps -a
 
 # get a terminal inside a service
-govuk-docker run-this bash
+govuk-docker run bash
 ```
 
 ### How to: add a new service

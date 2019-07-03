@@ -3,10 +3,19 @@ require "thor"
 require_relative "./commands/build_this"
 require_relative "./commands/compose"
 require_relative "./commands/prune"
-require_relative "./commands/run_this"
+require_relative "./commands/run"
 require_relative "./doctor/dnsmasq"
 
 class GovukDockerCLI < Thor
+  # https://github.com/ddollar/foreman/blob/83fd5eeb8c4b522cb84d8e74031080143ea6353b/lib/foreman/cli.rb#L29-L35
+  class << self
+    # Hackery. Take the run method away from Thor so that we can redefine it.
+    def is_thor_reserved_word?(word, type)
+      return false if word == "run"
+      super
+    end
+  end
+
   package_name "govuk-docker"
 
   desc "build-this", "Build the service in the current directory"
@@ -30,9 +39,9 @@ class GovukDockerCLI < Thor
     Commands::Prune.new.call
   end
 
-  desc "run-this [ARGS]", "Run the service in the current directory with the specified stack (for example `govuk-docker run-this --stack backend`)"
+  desc "run [ARGS]", "Run the service in the current directory with the specified stack (for example `govuk-docker run --stack backend`)"
   option :stack, default: "default"
-  def run_this(*args)
-    Commands::RunThis.new(options[:stack], args).call
+  def run(*args)
+    Commands::Run.new(options[:stack], args).call
   end
 end
