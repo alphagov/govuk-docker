@@ -58,7 +58,7 @@ describe GovukDockerCLI do
 
       it "runs the command with additional arguments" do
         expect(Commands::Run)
-          .to receive(:new).with("lite", false, ["bundle", "exec", "rspec"], nil)
+          .to receive(:new).with("lite", false, %w[bundle exec rspec], nil)
           .and_return(command_double)
         subject
       end
@@ -66,7 +66,7 @@ describe GovukDockerCLI do
 
     context "with a verbose argument" do
       let(:args) { ["--verbose"] }
-        it "runs in the verbose mode" do
+      it "runs in the verbose mode" do
         expect(Commands::Run)
           .to receive(:new).with('lite', true, [], nil)
           .and_return(command_double)
@@ -76,7 +76,7 @@ describe GovukDockerCLI do
 
     context "without a verbose argument" do
       let(:args) { [] }
-        it "runs in silent mode" do
+      it "runs in silent mode" do
         expect(Commands::Run)
           .to receive(:new).with('lite', false, [], nil)
           .and_return(command_double)

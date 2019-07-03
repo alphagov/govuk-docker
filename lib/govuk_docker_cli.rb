@@ -41,8 +41,9 @@ class GovukDockerCLI < Thor
 
     > govuk-docker compose stop
   LONGDESC
+  option :verbose, type: :boolean, default: false
   def compose(*args)
-    Commands::Compose.new.call(*args)
+    Commands::Compose.new.call(options[:verbose], *args)
   end
 
   desc "doctor", "Various tests to help diagnose issues when running govuk-docker"
