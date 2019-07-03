@@ -56,7 +56,7 @@ describe Commands::Run do
     let(:service) { "no-example-service" }
 
     it "should fail" do
-      expect { subject.call }.to raise_error(/Unknown service/)
+      expect { subject.call }.to raise_error(UnknownService)
     end
   end
 end

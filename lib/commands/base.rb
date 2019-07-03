@@ -1,3 +1,5 @@
+require_relative '../errors/unknown_service'
+
 module Commands
   class Base
     def initialize(service = nil, config_directory = nil, system = nil)
@@ -11,7 +13,7 @@ module Commands
     attr_reader :config_directory, :service, :system
 
     def check_service_exists
-      raise "Unknown service #{service}." unless service_exists?
+      raise UnknownService.new(service, config_directory) unless service_exists?
     end
 
     def service_exists?
