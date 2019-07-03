@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
-gem "thor"
-gem "rspec"
+gem "govuk-lint"
 gem "pry"
+gem "rspec"
+gem "thor"

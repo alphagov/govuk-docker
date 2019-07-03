@@ -7,14 +7,13 @@ class UnknownStack < StandardError
 
   def message
     <<~ERROR_MESSAGE
-    Unknown stack: #{stack}.\n
-    Available stacks:\n
-    #{available_stacks.join("\n")}
+      Unknown stack: #{stack}.\n
+      Available stacks:\n
+      #{available_stacks.join("\n")}
     ERROR_MESSAGE
   end
 
 private
 
   attr_reader :stack, :available_stacks
-
 end
