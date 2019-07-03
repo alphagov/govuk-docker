@@ -11,21 +11,43 @@ describe GovukDockerCLI do
   describe "run" do
     let(:command) { "run" }
 
-    context "without a stack argument" do
+    context "without stack and service arguments" do
       it "runs in the lite stack" do
         expect(Commands::Run)
-          .to receive(:new).with("lite", [])
+          .to receive(:new).with("lite", [], nil)
           .and_return(command_double)
         subject
       end
     end
 
-    context "with a stack argument" do
+    context "with stack and service arguments" do
+      let(:args) { ["--service", "static", "--stack", "app"] }
+
+      it "runs in the specified stack" do
+        expect(Commands::Run)
+          .to receive(:new).with("app", [], "static")
+          .and_return(command_double)
+        subject
+      end
+    end
+
+    context "with stack argument and no service argument" do
       let(:args) { ["--stack", "app"] }
 
       it "runs in the specified stack" do
         expect(Commands::Run)
-          .to receive(:new).with("app", [])
+          .to receive(:new).with("app", [], nil)
+          .and_return(command_double)
+        subject
+      end
+    end
+
+    context "with service argument and no stack argument" do
+      let(:args) { ["--service", "static"] }
+
+      it "runs in the specified stack" do
+        expect(Commands::Run)
+          .to receive(:new).with("lite", [], "static")
           .and_return(command_double)
         subject
       end
@@ -36,7 +58,7 @@ describe GovukDockerCLI do
 
       it "runs the command with additinal arguments" do
         expect(Commands::Run)
-          .to receive(:new).with("lite", %w[bundle exec rspec])
+          .to receive(:new).with("lite", %w[bundle exec rspec], nil)
           .and_return(command_double)
         subject
       end
@@ -61,6 +83,30 @@ describe GovukDockerCLI do
       it "runs in the specified stack" do
         expect(Commands::Run)
           .to receive(:new).with("app-live", [])
+          .and_return(command_double)
+        subject
+      end
+    end
+  end
+
+  describe "build" do
+    let(:command) { "build" }
+
+    context "without the service argument" do
+      it "builds the working directory's service" do
+        expect(Commands::Build)
+          .to receive(:new).with(nil)
+          .and_return(command_double)
+        subject
+      end
+    end
+
+    context "with the service argument" do
+      let(:args) { ["--service", "static"] }
+
+      it "builds the specified service" do
+        expect(Commands::Build)
+          .to receive(:new).with("static")
           .and_return(command_double)
         subject
       end

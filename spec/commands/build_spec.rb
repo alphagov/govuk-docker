@@ -12,7 +12,7 @@ describe Commands::Build do
   context "when a service exists" do
     let(:service) { "example-service" }
 
-    it "should run docker compose when a service exists" do
+    it "should run docker compose" do
       expect(system).to receive(:call).with("make", "-f", "#{config_directory}/Makefile", "example-service")
       subject.call
     end
