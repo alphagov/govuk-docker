@@ -5,7 +5,7 @@ describe GovukDockerCLI do
   let(:command) { nil }
   let(:args) { [] }
   subject { described_class.start([command] + args) }
-  let(:command_double) { double }
+  let(:command_double) { instance_double Commands::Run }
   before { allow(command_double).to receive(:call) }
 
   describe "run" do

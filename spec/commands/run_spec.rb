@@ -13,7 +13,7 @@ describe Commands::Run do
     let(:service) { "example-service" }
     let(:stack) { "lite" }
 
-    let(:compose_command) { double }
+    let(:compose_command) { instance_double Commands::Compose }
     before { expect(Commands::Compose).to receive(:new).and_return(compose_command) }
 
     context "with no extra arguments" do
