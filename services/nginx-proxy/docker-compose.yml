@@ -20,6 +20,7 @@ services:
           - content-tagger.dev.gov.uk
           - draft-content-store.dev.gov.uk
           - draft-government-frontend.dev.gov.uk
+          - draft-manuals-frontend.dev.gov.uk
           - draft-origin.dev.gov.uk
           - draft-router-api.dev.gov.uk
           - draft-router.dev.gov.uk
@@ -28,6 +29,7 @@ services:
           - govuk_publishing_components.dev.gov.uk
           - govuk-developer-docs.dev.gov.uk
           - link-checker-api.dev.gov.uk
+          - manuals-frontend.dev.gov.uk
           - publisher.dev.gov.uk
           - publishing-api.dev.gov.uk
           - router-api.dev.gov.uk
