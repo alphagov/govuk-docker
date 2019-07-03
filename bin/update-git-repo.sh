@@ -64,7 +64,12 @@ cd "$(dirname "$0")"
 
 REPO="$1"
 
-cd "../../$REPO"
+if [ -d "../../$REPO" ]; then
+  cd "../../$REPO"
+else
+  warn "directory not found"
+  exit
+fi
 
 BRANCH=$(git symbolic-ref HEAD | sed 's|^refs/heads/||')
 
