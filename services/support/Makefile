@@ -1,2 +1,2 @@
 support: ../support support-api
-	bin/govuk-docker run support-default bundle
+	bin/govuk-docker compose run support-default bundle
