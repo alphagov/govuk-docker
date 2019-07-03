@@ -1,0 +1,2 @@
+inherit_gem:
+  govuk-lint: "configs/rubocop/all.yml"
