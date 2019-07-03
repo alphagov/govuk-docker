@@ -23,9 +23,9 @@ services:
   calculators-app: &calculators-app
     <<: *calculators
     depends_on:
-      - router-live
-      - content-store-live
-      - static-live
+      - router-app
+      - content-store-app
+      - static-app
     environment:
       GOVUK_ASSET_ROOT: calculators.dev.gov.uk
       VIRTUAL_HOST: calculators.dev.gov.uk
@@ -34,19 +34,19 @@ services:
       - "3000"
     command: bin/rails s -P /tmp/rails.pid
 
-  calculators-draft:
+  calculators-app-draft:
     <<: *calculators-app
     depends_on:
-      - router-draft
-      - content-store-draft
-      - static-draft
+      - router-app-draft
+      - content-store-app-draft
+      - static-app-draft
     environment:
       GOVUK_ASSET_ROOT: draft-calculators.dev.gov.uk
       VIRTUAL_HOST: draft-calculators.dev.gov.uk
       PLEK_HOSTNAME_PREFIX: "draft-"
       HOST: 0.0.0.0
 
-  calculators-live:
+  calculators-app-live:
     <<: *calculators-app
     environment:
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
