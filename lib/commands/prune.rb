@@ -2,7 +2,7 @@ require_relative './base'
 
 class Commands::Prune < Commands::Base
   def call
-    commands.each { |command| @system.call(command) }
+    commands.each { |command| system.call(command) }
   end
 
 private

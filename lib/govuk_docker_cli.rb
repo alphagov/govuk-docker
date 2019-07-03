@@ -1,6 +1,6 @@
 require "thor"
 
-require_relative "./commands/build_this"
+require_relative "./commands/build"
 require_relative "./commands/compose"
 require_relative "./commands/prune"
 require_relative "./commands/run"
@@ -18,9 +18,9 @@ class GovukDockerCLI < Thor
 
   package_name "govuk-docker"
 
-  desc "build-this", "Build the service in the current directory"
-  def build_this
-    Commands::BuildThis.new.call
+  desc "build", "Build the service in the current directory"
+  def build
+    Commands::Build.new.call
   end
 
   desc "compose ARGS", "Run `docker-compose` with ARGS"
