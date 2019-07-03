@@ -110,6 +110,8 @@ The following apps are supported by govuk-docker to some extent.
 
    - ✅ asset-manager
    - ✅ calendars
+   - ⚠ calculators
+      * Web UI doesn't work without the content item being present in the content-store.
    - ⚠ content-data-admin
       * **TODO: Missing support for a webserver stack**
    - ✅ content-publisher

@@ -1,0 +1,56 @@
+version: '3.7'
+
+x-calculators: &calculators
+  build:
+    context: .
+    dockerfile: services/calculators/Dockerfile
+  image: calculators
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+    - home:/home/build
+  working_dir: /govuk/calculators
+
+services:
+  calculators-lite:
+    <<: *calculators
+    # Tests need the privileged flag
+    privileged: true
+    volumes:
+      - ..:/govuk:delegated
+      - bundle:/usr/local/bundle
+
+  calculators-app: &calculators-app
+    <<: *calculators
+    depends_on:
+      - router-live
+      - content-store-live
+      - static-live
+    environment:
+      GOVUK_ASSET_ROOT: calculators.dev.gov.uk
+      VIRTUAL_HOST: calculators.dev.gov.uk
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    command: bin/rails s -P /tmp/rails.pid
+
+  calculators-draft:
+    <<: *calculators-app
+    depends_on:
+      - router-draft
+      - content-store-draft
+      - static-draft
+    environment:
+      GOVUK_ASSET_ROOT: draft-calculators.dev.gov.uk
+      VIRTUAL_HOST: draft-calculators.dev.gov.uk
+      PLEK_HOSTNAME_PREFIX: "draft-"
+      HOST: 0.0.0.0
+
+  calculators-live:
+    <<: *calculators-app
+    environment:
+      GOVUK_WEBSITE_ROOT: https://www.gov.uk
+      PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
+      PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
+      VIRTUAL_HOST: calculators.dev.gov.uk
+      HOST: 0.0.0.0
