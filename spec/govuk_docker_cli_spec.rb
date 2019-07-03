@@ -42,4 +42,28 @@ describe GovukDockerCLI do
       end
     end
   end
+
+  describe "startup" do
+    let(:command) { "startup" }
+
+    context "without a variation argument" do
+      it "runs in the backend stack" do
+        expect(Commands::Run)
+          .to receive(:new).with("app", [])
+          .and_return(command_double)
+        subject
+      end
+    end
+
+    context "with a variation argument" do
+      let(:args) { %w(live) }
+
+      it "runs in the specified stack" do
+        expect(Commands::Run)
+          .to receive(:new).with("app-live", [])
+          .and_return(command_double)
+        subject
+      end
+    end
+  end
 end
