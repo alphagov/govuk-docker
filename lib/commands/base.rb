@@ -4,16 +4,17 @@ require_relative '../errors/unknown_stack'
 
 module Commands
   class Base
-    def initialize(service = nil, config_directory = nil, system = nil, stack = nil)
+    def initialize(service = nil, config_directory = nil, system = nil, stack = nil, verbose = false)
       @service = service || default_service
       @config_directory = config_directory || default_config_directory
       @system = system || default_system
       @stack = stack
+      @verbose = verbose
     end
 
   private
 
-    attr_reader :config_directory, :service, :system, :stack
+    attr_reader :config_directory, :service, :system, :stack, :verbose
 
     def available_stacks
       service_path = File.join(config_directory, "services/#{service}/docker-compose.yml")

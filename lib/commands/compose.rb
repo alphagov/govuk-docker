@@ -1,7 +1,7 @@
 require_relative './base'
 
 class Commands::Compose < Commands::Base
-  def call(*args)
+  def call(verbose, *args)
     args.insert(0, "docker-compose")
     args.insert(1, *docker_compose_args)
     puts args.join(" ")

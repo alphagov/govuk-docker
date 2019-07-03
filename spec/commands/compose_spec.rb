@@ -4,6 +4,7 @@ require_relative "../../lib/commands/compose"
 describe Commands::Compose do
   let(:fake_system) { double }
   let(:config_directory) { "spec/fixtures" }
+  let(:verbose) { true }
 
   subject { described_class.new(nil, config_directory, fake_system) }
 
@@ -15,6 +16,6 @@ describe Commands::Compose do
       "fake args"
     )
 
-    subject.call("fake args")
+    subject.call(verbose, "fake args")
   end
 end
