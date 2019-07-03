@@ -5,7 +5,7 @@ class Commands::Compose < Commands::Base
     args.insert(0, "docker-compose")
     args.insert(1, *docker_compose_args)
     puts args.join(" ")
-    @system.call(*args)
+    system.call(*args)
   end
 
 private

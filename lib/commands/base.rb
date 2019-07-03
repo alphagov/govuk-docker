@@ -8,7 +8,7 @@ module Commands
 
   private
 
-    attr_reader :config_directory, :service
+    attr_reader :config_directory, :service, :system
 
     def check_service_exists
       raise "Unknown service #{service}." unless service_exists?

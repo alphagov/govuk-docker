@@ -4,17 +4,15 @@ require_relative "../../lib/commands/build"
 describe Commands::Build do
   let(:config_directory) { "spec/fixtures" }
   let(:service) { nil }
+  let(:system) { double(:system) }
 
-  subject { described_class.new(service, config_directory) }
+  subject { described_class.new(service, config_directory, system) }
 
   context "when a service exists" do
     let(:service) { "example-service" }
 
-    let(:compose_command) { double }
-    before { expect(Commands::Compose).to receive(:new).and_return(compose_command) }
-
     it "should run docker compose when a service exists" do
-      expect(compose_command).to receive(:call).with("build", "example-service-default")
+      expect(system).to receive(:call).with("make", "-f", "#{config_directory}/Makefile", "example-service")
       subject.call
     end
   end
