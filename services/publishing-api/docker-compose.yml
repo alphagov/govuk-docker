@@ -12,7 +12,7 @@ x-publishing-api: &publishing-api
   working_dir: /govuk/publishing-api
 
 services:
-  publishing-api-default:
+  publishing-api-lite:
     <<: *publishing-api
     depends_on:
       - postgres

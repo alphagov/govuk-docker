@@ -12,5 +12,5 @@ x-govuk_publisher_components: &govspeak
   working_dir: /govuk/govspeak
 
 services:
-  govspeak-default:
+  govspeak-lite:
     <<: *govspeak

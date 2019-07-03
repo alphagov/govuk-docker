@@ -12,7 +12,7 @@ x-support: &support
   working_dir: /govuk/support
 
 services:
-  support-default:
+  support-lite:
     <<: *support
     depends_on:
       - redis

@@ -12,7 +12,7 @@ x-content-store: &content-store
   working_dir: /govuk/content-store
 
 services:
-  content-store-default:
+  content-store-lite:
     <<: *content-store
     depends_on:
       - mongo

@@ -12,9 +12,9 @@ describe GovukDockerCLI do
     let(:command) { "run" }
 
     context "without a stack argument" do
-      it "runs in the default stack" do
+      it "runs in the lite stack" do
         expect(Commands::Run)
-          .to receive(:new).with("default", [])
+          .to receive(:new).with("lite", [])
           .and_return(command_double)
         subject
       end
@@ -36,7 +36,7 @@ describe GovukDockerCLI do
 
       it "runs the command with additinal arguments" do
         expect(Commands::Run)
-          .to receive(:new).with("default", ["bundle", "exec", "rspec"])
+          .to receive(:new).with("lite", ["bundle", "exec", "rspec"])
           .and_return(command_double)
         subject
       end

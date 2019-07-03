@@ -12,7 +12,7 @@ x-specialist-publisher: &specialist-publisher
   working_dir: /govuk/specialist-publisher
 
 services:
-  specialist-publisher-default:
+  specialist-publisher-lite:
     <<: *specialist-publisher
     privileged: true
     depends_on:

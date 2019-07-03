@@ -12,7 +12,7 @@ x-content-publisher: &content-publisher
   working_dir: /govuk/content-publisher
 
 services:
-  content-publisher-default:
+  content-publisher-lite:
     <<: *content-publisher
     privileged: true
     depends_on:

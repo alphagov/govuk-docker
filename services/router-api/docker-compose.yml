@@ -12,7 +12,7 @@ x-router-api: &router-api
   working_dir: /govuk/router-api
 
 services:
-  router-api-default:
+  router-api-lite:
     <<: *router-api
     depends_on:
       - mongo

@@ -12,7 +12,7 @@ x-govuk-developer-docs: &govuk-developer-docs
   working_dir: /govuk/govuk-developer-docs
 
 services:
-  govuk-developer-docs-default:
+  govuk-developer-docs-lite:
     <<: *govuk-developer-docs
     environment:
       LANG: "C.UTF-8"

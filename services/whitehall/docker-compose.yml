@@ -12,7 +12,7 @@ x-whitehall: &whitehall
   working_dir: /govuk/whitehall
 
 services:
-  whitehall-default:
+  whitehall-lite:
     <<: *whitehall
     privileged: true
     depends_on:

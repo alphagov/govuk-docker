@@ -12,7 +12,7 @@ x-content-tagger: &content-tagger
   working_dir: /govuk/content-tagger
 
 services:
-  content-tagger-default:
+  content-tagger-lite:
     <<: *content-tagger
     privileged: true
     depends_on:

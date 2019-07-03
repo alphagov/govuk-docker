@@ -10,6 +10,6 @@ x-miller-columns-element: &miller-columns-element
   working_dir: /govuk/miller-columns-element
 
 services:
-  miller-columns-element-default:
+  miller-columns-element-lite:
     <<: *miller-columns-element
     privileged: true

@@ -12,7 +12,7 @@ x-govuk_publishing_components: &govuk_publishing_components
   working_dir: /govuk/govuk_publishing_components
 
 services:
-  govuk_publishing_components-default:
+  govuk_publishing_components-lite:
     <<: *govuk_publishing_components
     privileged: true
 

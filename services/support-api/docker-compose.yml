@@ -12,7 +12,7 @@ x-support-api: &support-api
   working_dir: /govuk/support-api
 
 services:
-  support-api-default:
+  support-api-lite:
     <<: *support-api
     depends_on:
       - postgres

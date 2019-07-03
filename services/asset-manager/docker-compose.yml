@@ -12,7 +12,7 @@ x-asset-manager: &asset-manager
   working_dir: /govuk/asset-manager
 
 services:
-  asset-manager-default:
+  asset-manager-lite:
     <<: *asset-manager
     depends_on:
       - mongo

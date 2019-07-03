@@ -12,7 +12,7 @@ x-router: &router
   working_dir: /go/src/github.com/alphagov/router
 
 services:
-  router-default:
+  router-lite:
     <<: *router
     depends_on:
       - mongo

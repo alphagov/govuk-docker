@@ -11,7 +11,7 @@ x-calendars: &calendars
   working_dir: /govuk/calendars
 
 services:
-  calendars-default:
+  calendars-lite:
     <<: *calendars
     volumes:
       - ..:/govuk:delegated

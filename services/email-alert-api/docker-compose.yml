@@ -11,7 +11,7 @@ x-email-alert-api: &email-alert-api
   working_dir: /govuk/email-alert-api
 
 services:
-  email-alert-api-default:
+  email-alert-api-lite:
     <<: *email-alert-api
     depends_on:
       - postgres

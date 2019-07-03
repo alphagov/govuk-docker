@@ -12,5 +12,5 @@ x-plek: &plek
   working_dir: /govuk/plek
 
 services:
-  plek-default:
+  plek-lite:
     <<: *plek

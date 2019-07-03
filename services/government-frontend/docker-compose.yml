@@ -11,7 +11,7 @@ x-government-frontend: &government-frontend
   working_dir: /govuk/government-frontend
 
 services:
-  government-frontend-default:
+  government-frontend-lite:
     <<: *government-frontend
     privileged: true
     volumes:

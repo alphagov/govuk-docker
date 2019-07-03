@@ -1,2 +1,2 @@
 calendars: $(GOVUK_ROOT_DIR)/calendars
-	$(COMPOSE_RUN) calendars-default bundle
+	$(COMPOSE_RUN) calendars-lite bundle

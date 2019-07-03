@@ -50,11 +50,11 @@ Most service commands fall into one of two groups:
    - `rake`, `rspec`, `bundle`, etc.
    - `rails s`, `./router`, `sidekiq`, etc.
 
-The first set of commands are related to building and testing a service; then require only minimal dependencies and have many variants. In order to support these commands, **govuk-docker defines a `default` stack for each service, with minimal dependencies and with specific support for testing** e.g.
+The first set of commands are related to building and testing a service; then require only minimal dependencies and have many variants. In order to support these commands, **govuk-docker defines a `lite` stack for each service, with minimal dependencies and with specific support for testing** e.g.
 
 ```
 services:
-  my_service-default:
+  my_service-lite:
     environment:
       TEST_DATABASE_URL: ...
       ...
@@ -113,7 +113,7 @@ x-my_service: &my_service
   ...
 
 services:
-  my_service-default:
+  my_service-lite:
     <<: *my_service
     volumes: ...
 ```
@@ -229,7 +229,7 @@ In order to reduce typing, **govuk-docker CLI extends docker-compose with a `run
 
 Most service commands fall into one of two groups:
 
-   - `govuk-docker run my_service-default [rake, rspec, bundle, etc.]`
+   - `govuk-docker run my_service-lite [rake, rspec, bundle, etc.]`
    - `govuk-docker run my_service-web_stack`
 
 In order to reduce typing, **the govuk-docker README recommends the use of aliases for these types of command**. For example, the first can be shortened to `alias gdrd=govuk-docker run-this default` by making use of [cli-exists](#cli-exists). And in order to promote interoperability between govuk-docker commands and native commands, **govuk-docker does not recommend any aliases that override existing commands e.g. `rake`**.
@@ -240,7 +240,7 @@ Using a CLI wrapper for docker/compose has the potential to introduce confusion,
 
 ### cli-buildthis
 
-Sometimes it's necessary to (re)build the image for a specific service. This could be due to a new version of the language used by the service, or other iterations of its Dockerfile. Using [cli-exists](#cli-exists), this can be written as `gd build my_service-default`. Although this is supported by [make-setup](#make-setup), which covers all services, it can also take a long time to run. If the changes were pulled en-masse, it may also be unclear which service images need (re)building, or the developer may simply forget they need to do this, or defer (re)building until the point of use. For these reasons, it may be necessary to (re)build an image at the point of use i.e. when trying to run a service command. In order to support this, and using [docker-stacks](#docker-stacks), **govuk-docker CLI extends docker-compose with a `build` command that automatically infers the service image to (re)build, using the default stack** for the service.
+Sometimes it's necessary to (re)build the image for a specific service. This could be due to a new version of the language used by the service, or other iterations of its Dockerfile. Using [cli-exists](#cli-exists), this can be written as `gd build my_service-lite`. Although this is supported by [make-setup](#make-setup), which covers all services, it can also take a long time to run. If the changes were pulled en-masse, it may also be unclear which service images need (re)building, or the developer may simply forget they need to do this, or defer (re)building until the point of use. For these reasons, it may be necessary to (re)build an image at the point of use i.e. when trying to run a service command. In order to support this, and using [docker-stacks](#docker-stacks), **govuk-docker CLI extends docker-compose with a `build` command that automatically infers the service image to (re)build, using the default stack** for the service.
 
 ### cli-env
 
