@@ -28,7 +28,7 @@ describe Commands::Run do
     end
 
     context "with some extra arguments" do
-      let(:args) { ["bundle", "exec", "rake", "lint"] }
+      let(:args) { %w[bundle exec rake lint] }
 
       it "should run docker compose using the `env` command" do
         expect(compose_command).to receive(:call).with(
@@ -40,7 +40,7 @@ describe Commands::Run do
     end
 
     context "with an env command" do
-      let(:args) { ["env", "bundle", "exec", "rake", "lint"] }
+      let(:args) { %w[env bundle exec rake lint] }
 
       it "should run docker compose without duplicating `env`" do
         expect(compose_command).to receive(:call).with(

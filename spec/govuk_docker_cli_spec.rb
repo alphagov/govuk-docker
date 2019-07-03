@@ -32,11 +32,11 @@ describe GovukDockerCLI do
     end
 
     context "with additional arguments" do
-      let(:args) { ["bundle", "exec", "rspec"] }
+      let(:args) { %w[bundle exec rspec] }
 
       it "runs the command with additinal arguments" do
         expect(Commands::Run)
-          .to receive(:new).with("lite", ["bundle", "exec", "rspec"])
+          .to receive(:new).with("lite", %w[bundle exec rspec])
           .and_return(command_double)
         subject
       end

@@ -7,9 +7,9 @@ class UnknownService < StandardError
 
   def message
     <<~ERROR_MESSAGE
-    Unknown service: #{service}.\n
-    Available services:\n
-    #{available_services.join("\n")}
+      Unknown service: #{service}.\n
+      Available services:\n
+      #{available_services.join("\n")}
     ERROR_MESSAGE
   end
 
@@ -23,5 +23,4 @@ private
       File.basename(service)
     end
   end
-
 end

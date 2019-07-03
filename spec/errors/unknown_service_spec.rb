@@ -9,9 +9,9 @@ describe UnknownService do
     available_service = 'example-service'
 
     expected_message = <<~MESSAGE
-    Unknown service: #{incorrect_service}.\n
-    Available services:\n
-    #{available_service}
+      Unknown service: #{incorrect_service}.\n
+      Available services:\n
+      #{available_service}
     MESSAGE
 
     expect(described_class.new(incorrect_service, config_directory).message).to eq expected_message
