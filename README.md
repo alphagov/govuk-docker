@@ -141,6 +141,17 @@ The following apps are supported by govuk-docker to some extent.
 
 ## FAQs
 
+### Troubleshoot your installation
+
+The `doctor` command will attempt to ensure your installation is in a runnable
+state and suggest remedial steps if it finds anything wrong
+
+```
+govuk-docker doctor
+```
+
+This will currently only test whether you have dnsmasq installed and running.
+
 ### How to: diagnose and troubleshoot
 
 Sometimes things go wrong or some investigation is needed. As govuk-docker is just a bunch of docker config and a CLI wrapper, it's still possible to use all the standard docker commands to help fix issues and get more info e.g.
