@@ -7,3 +7,4 @@ Rails:
 AllCops:
   Exclude:
       - 'vendor/**/*'
+      - 'tmp/**/*'
