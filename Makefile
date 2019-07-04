@@ -40,7 +40,7 @@ test:
 
 	# Test that the docker-compose config is valid. This will error if there are errors
 	# in the YAML files, or incompatible features are used.
-	bin/govuk-docker compose config | grep -v "ERROR"
+	bin/govuk-docker compose config --quiet | grep -v "ERROR"
 
 # This will be slow and may repeat work, so generally you don't want
 # to run this.
