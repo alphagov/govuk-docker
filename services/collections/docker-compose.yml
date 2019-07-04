@@ -1,0 +1,61 @@
+version: '3.7'
+
+x-collections: &collections
+  build:
+    context: .
+    dockerfile: services/collections/Dockerfile
+  image: collections
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+  working_dir: /govuk/collections
+
+services:
+  collections-lite:
+    <<: *collections
+    volumes:
+      - ..:/govuk:delegated
+      - bundle:/usr/local/bundle
+
+  # TODO: doesn't work yet because collections also relies on search-api
+  collections-app: &collections-app
+    <<: *collections
+    depends_on:
+      - router-app
+      - content-store-app
+      - static-app
+    environment:
+      GOVUK_ASSET_ROOT: collections.dev.gov.uk
+      VIRTUAL_HOST: collections.dev.gov.uk
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    command: bin/rails s -P /tmp/rails.pid
+
+  # TODO: this doesn't work yet because collections also relies on search-api
+  collections-app-draft:
+    <<: *collections-app
+    depends_on:
+      - router-app-draft
+      - content-store-app-draft
+      - static-app-draft
+    environment:
+      GOVUK_ASSET_ROOT: draft-collections.dev.gov.uk
+      VIRTUAL_HOST: draft-collections.dev.gov.uk
+      PLEK_HOSTNAME_PREFIX: "draft-"
+      HOST: 0.0.0.0
+
+  collections-app-live:
+    <<: *collections
+    depends_on:
+      - nginx-proxy-app
+    environment:
+      GOVUK_WEBSITE_ROOT: https://www.gov.uk
+      PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
+      PLEK_SERVICE_SEARCH_URI: https://www.gov.uk/api
+      PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
+      VIRTUAL_HOST: collections.dev.gov.uk
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    command: bin/rails s -P /tmp/rails.pid
