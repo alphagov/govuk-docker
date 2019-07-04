@@ -5,8 +5,8 @@ module Doctor
     end
 
     def call
-      get_dnsmasq_install_state
-      get_dnsmasq_run_state
+      install_state?
+      run_state?
 
       message.join("\r\n")
     end
@@ -29,7 +29,7 @@ module Doctor
       You should start it with `sudo brew services start dnsmasq`.
     HEREDOC
 
-    def get_dnsmasq_install_state
+    def install_state?
       message << if dnsmasq_installed?
                    DNSMASQ_INSTALLED
                  else
@@ -41,7 +41,7 @@ module Doctor
       system "which dnsmasq 1>/dev/null"
     end
 
-    def get_dnsmasq_run_state
+    def run_state?
       return unless dnsmasq_installed?
 
       message << if dnsmasq_running?

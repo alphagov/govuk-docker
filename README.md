@@ -174,7 +174,11 @@ state and suggest remedial steps if it finds anything wrong
 govuk-docker doctor
 ```
 
-This will currently only test whether you have dnsmasq installed and running.
+This will test whether or not your system meets the following requirements:
+
+* dnsmasq installed and running
+* docker installed
+* docker-compose installed
 
 ### How to: diagnose and troubleshoot
 
