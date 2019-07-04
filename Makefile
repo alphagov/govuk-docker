@@ -33,7 +33,7 @@ clean:
 
 test:
 	# Linting
-	bundle exec rubocop .
+	bundle exec rubocop . --parallel
 
 	# Run the tests for the govuk-docker CLI
 	bundle exec rspec
