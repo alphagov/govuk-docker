@@ -22,7 +22,7 @@ default:
 	@echo "For example:"
 	@echo "    make content-publisher"
 
-clone: $(addprefix ../,$(APPS))
+clone: $(addprefix $(GOVUK_ROOT_DIR)/,$(APPS))
 
 pull:
 	echo $(APPS) | cut -d/ -f3 | xargs -P8 -n1 ./bin/update-git-repo.sh
