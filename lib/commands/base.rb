@@ -4,17 +4,16 @@ require_relative '../errors/unknown_stack'
 
 module Commands
   class Base
-    def initialize(service = nil, config_directory = nil, system = nil, stack = nil, verbose = false)
+    def initialize(service = nil, config_directory = nil, stack = nil, verbose = false)
       @service = service || default_service
       @config_directory = config_directory || default_config_directory
-      @system = system || default_system
       @stack = stack
       @verbose = verbose
     end
 
   private
 
-    attr_reader :config_directory, :service, :system, :stack, :verbose
+    attr_reader :config_directory, :service, :stack, :verbose
 
     def available_stacks
       service_path = File.join(config_directory, "services/#{service}/docker-compose.yml")
@@ -44,10 +43,6 @@ module Commands
 
     def default_service
       ENV.fetch("GOVUK_DOCKER_SERVICE", File.basename(Dir.pwd))
-    end
-
-    def default_system
-      Kernel.method(:system)
     end
 
     def service_exists?
