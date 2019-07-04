@@ -33,14 +33,14 @@ clean:
 
 test:
 	# Linting
-	bundle exec rubocop .
+	bundle exec rubocop . --parallel
 
 	# Run the tests for the govuk-docker CLI
 	bundle exec rspec
 
 	# Test that the docker-compose config is valid. This will error if there are errors
 	# in the YAML files, or incompatible features are used.
-	bin/govuk-docker compose config --quiet | grep -v "ERROR"
+	sh bin/test-docker-compose.sh
 
 # This will be slow and may repeat work, so generally you don't want
 # to run this.
