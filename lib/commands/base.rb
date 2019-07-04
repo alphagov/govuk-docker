@@ -4,11 +4,11 @@ require_relative '../errors/unknown_stack'
 
 module Commands
   class Base
-    def initialize(config_directory = nil, service = nil, stack = nil, verbose = nil)
-      @config_directory = config_directory || default_config_directory
-      @service = service || default_service
-      @stack = stack || default_stack
-      @verbose = verbose || default_verbose
+    def initialize(options)
+      @config_directory = options[:config_directory] || default_config_directory
+      @service = options[:service] || default_service
+      @stack = options[:stack] || default_stack
+      @verbose = options[:verbose] || default_verbose
     end
 
   private

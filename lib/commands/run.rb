@@ -7,7 +7,7 @@ class Commands::Run < Commands::Base
     check_stack_exists
 
     Commands::Compose
-      .new(config_directory, service, stack, verbose)
+      .new(config_directory: config_directory, service: service, stack: stack, verbose: verbose)
       .call(
         ["run", "--rm", "--service-ports", container_name] + docker_compose_args(args)
       )
