@@ -3,11 +3,11 @@ version: '3.7'
 x-collections: &collections
   build:
     context: .
-    dockerfile: services/collections/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: collections
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
+    - home:/home/build
   working_dir: /govuk/collections
 
 services:

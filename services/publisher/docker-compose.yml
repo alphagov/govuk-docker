@@ -3,11 +3,10 @@ version: '3.7'
 x-publisher: &publisher
   build:
     context: .
-    dockerfile: services/publisher/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: publisher
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/publisher
 

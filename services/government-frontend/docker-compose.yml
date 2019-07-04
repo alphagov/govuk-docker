@@ -3,11 +3,11 @@ version: '3.7'
 x-government-frontend: &government-frontend
   build:
     context: .
-    dockerfile: services/government-frontend/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: government-frontend
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
+    - home:/home/build
   working_dir: /govuk/government-frontend
 
 services:

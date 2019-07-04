@@ -3,11 +3,11 @@ version: '3.7'
 x-calendars: &calendars
   build:
     context: .
-    dockerfile: services/calendars/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: calendars
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
+    - home:/home/build
   working_dir: /govuk/calendars
 
 services:

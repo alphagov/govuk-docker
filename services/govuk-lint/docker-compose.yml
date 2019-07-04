@@ -3,11 +3,10 @@ version: '3.7'
 x-govuk-lint: &govuk-lint
   build:
     context: .
-    dockerfile: services/govuk-lint/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: govuk-lint
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/govuk-lint
 

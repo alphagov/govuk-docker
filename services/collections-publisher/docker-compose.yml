@@ -3,11 +3,10 @@ version: '3.7'
 x-collections-publisher: &collections-publisher
   build:
     context: .
-    dockerfile: services/collections-publisher/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: collections-publisher
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/collections-publisher
 

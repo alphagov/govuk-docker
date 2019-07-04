@@ -3,11 +3,10 @@ version: '3.7'
 x-signon: &signon
   build:
     context: .
-    dockerfile: services/signon/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: signon
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/signon
 

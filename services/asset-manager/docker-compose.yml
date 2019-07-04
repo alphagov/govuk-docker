@@ -7,7 +7,6 @@ x-asset-manager: &asset-manager
   image: asset-manager
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/asset-manager
 

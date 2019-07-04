@@ -3,11 +3,10 @@ version: '3.7'
 x-calculators: &calculators
   build:
     context: .
-    dockerfile: services/calculators/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: calculators
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/calculators
 

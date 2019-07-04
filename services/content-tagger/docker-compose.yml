@@ -3,11 +3,10 @@ version: '3.7'
 x-content-tagger: &content-tagger
   build:
     context: .
-    dockerfile: services/content-tagger/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: content-tagger
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/content-tagger
 

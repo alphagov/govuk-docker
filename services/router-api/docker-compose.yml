@@ -3,11 +3,10 @@ version: '3.7'
 x-router-api: &router-api
   build:
     context: .
-    dockerfile: services/router-api/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: router-api
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/router-api
 

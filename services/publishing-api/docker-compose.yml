@@ -3,11 +3,10 @@ version: '3.7'
 x-publishing-api: &publishing-api
   build:
     context: .
-    dockerfile: services/publishing-api/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: publishing-api
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/publishing-api
 

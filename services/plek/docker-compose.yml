@@ -3,11 +3,10 @@ version: '3.7'
 x-plek: &plek
   build:
     context: .
-    dockerfile: services/plek/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: plek
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/plek
 
