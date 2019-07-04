@@ -130,6 +130,8 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ content-publisher
    - ✅ content-store
    - ✅ content-tagger
+   - ⚠  collections
+    * Only works with live data
    - ✅ email-alert-api
    - ❌ finder-frontend
    - ❌ frontend
