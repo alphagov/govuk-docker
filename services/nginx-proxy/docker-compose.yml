@@ -13,6 +13,7 @@ services:
         aliases:
           - asset-manager.dev.gov.uk
           - calendars.dev.gov.uk
+          - collections.dev.gov.uk
           - collections-publisher.dev.gov.uk
           - content-publisher.dev.gov.uk
           - content-store.dev.gov.uk
