@@ -10,8 +10,6 @@ RUN apt-get install -y qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base g
 RUN apt-get install -y qt5-default libnss3-dev libxss1 libappindicator1 libindicator7
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && apt install -y ./google-chrome*.deb
 
-RUN apt-get clean
-
 RUN useradd -m build
 USER build
 
