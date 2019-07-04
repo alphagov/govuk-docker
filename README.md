@@ -145,6 +145,7 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ router
    - ✅ router-api
    - ✅ signon
+   - ✅ smart-answers
    - ✅ specialist-publisher
    - ✅ service-manual-frontend
    - ⚠ static

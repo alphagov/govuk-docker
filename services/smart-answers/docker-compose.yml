@@ -1,0 +1,32 @@
+version: '3.7'
+
+x-smart-answers: &smart-answers
+  build:
+    context: .
+    dockerfile: services/smart-answers/Dockerfile
+  image: smart-answers
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+    - home:/home/build
+  working_dir: /govuk/smart-answers
+
+services:
+  smart-answers-lite:
+    <<: *smart-answers
+    privileged: true
+
+  smart-answers-app:
+    <<: *smart-answers
+    depends_on:
+      - nginx-proxy
+      - publishing-api-app
+      - asset-manager-app
+      - static-app
+      - content-store-app
+    environment:
+      VIRTUAL_HOST: smart-answers.dev.gov.uk
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    command: bin/rails s -P /tmp/rails.pid
