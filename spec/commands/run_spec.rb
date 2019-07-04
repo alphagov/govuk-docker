@@ -8,7 +8,7 @@ describe Commands::Run do
   let(:args)    { nil }
   let(:verbose) { false }
 
-  subject { described_class.new(config_directory, service, stack, verbose) }
+  subject { described_class.new(config_directory: config_directory, service: service, stack: stack, verbose: verbose) }
 
   context "with a service that exists" do
     let(:service) { "example-service" }
@@ -17,7 +17,7 @@ describe Commands::Run do
     let(:compose_command) { double }
     before do
       expect(Commands::Compose).to receive(:new)
-        .with(config_directory, service, stack, verbose)
+        .with(config_directory: config_directory, service: service, stack: stack, verbose: verbose)
         .and_return(compose_command)
     end
 

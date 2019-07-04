@@ -14,7 +14,7 @@ describe GovukDockerCLI do
     context "without stack and service arguments" do
       it "runs in the lite stack" do
         expect(Commands::Run)
-          .to receive(:new).with(nil, nil, "lite", false)
+          .to receive(:new).with(stack: "lite", verbose: false)
           .and_return(command_double)
         expect(command_double).to receive(:call).with([])
         subject
@@ -26,7 +26,7 @@ describe GovukDockerCLI do
 
       it "runs in the specified stack" do
         expect(Commands::Run)
-          .to receive(:new).with(nil, "static", "app", false)
+          .to receive(:new).with(service: "static", stack: "app", verbose: false)
           .and_return(command_double)
         expect(command_double).to receive(:call).with([])
         subject
@@ -38,7 +38,7 @@ describe GovukDockerCLI do
 
       it "runs in the specified stack" do
         expect(Commands::Run)
-          .to receive(:new).with(nil, nil, "app", false)
+          .to receive(:new).with(stack: "app", verbose: false)
           .and_return(command_double)
         expect(command_double).to receive(:call).with([])
         subject
@@ -50,7 +50,7 @@ describe GovukDockerCLI do
 
       it "runs in the specified stack" do
         expect(Commands::Run)
-          .to receive(:new).with(nil, "static", "lite", false)
+          .to receive(:new).with(service: "static", stack: "lite", verbose: false)
           .and_return(command_double)
         expect(command_double).to receive(:call).with([])
         subject
@@ -62,7 +62,7 @@ describe GovukDockerCLI do
 
       it "runs the command with additional arguments" do
         expect(Commands::Run)
-          .to receive(:new).with(nil, nil, "lite", false)
+          .to receive(:new).with(stack: "lite", verbose: false)
           .and_return(command_double)
         expect(command_double).to receive(:call).with(%w[bundle exec rspec])
         subject
@@ -73,7 +73,7 @@ describe GovukDockerCLI do
       let(:args) { ["--verbose"] }
       it "runs in the verbose mode" do
         expect(Commands::Run)
-          .to receive(:new).with(nil, nil, 'lite', true)
+          .to receive(:new).with(stack: "lite", verbose: true)
           .and_return(command_double)
         expect(command_double).to receive(:call).with([])
         subject
@@ -84,7 +84,7 @@ describe GovukDockerCLI do
       let(:args) { [] }
       it "runs in silent mode" do
         expect(Commands::Run)
-          .to receive(:new).with(nil, nil, 'lite', false)
+          .to receive(:new).with(stack: "lite", verbose: false)
           .and_return(command_double)
         expect(command_double).to receive(:call).with([])
         subject
@@ -98,7 +98,7 @@ describe GovukDockerCLI do
     context "without a variation argument" do
       it "runs in the app stack" do
         expect(Commands::Run)
-          .to receive(:new).with(nil, nil, "app", false)
+          .to receive(:new).with(stack: "app", verbose: false)
           .and_return(command_double)
         expect(command_double).to receive(:call).with(no_args)
         subject
@@ -110,7 +110,7 @@ describe GovukDockerCLI do
 
       it "runs in the specified stack" do
         expect(Commands::Run)
-          .to receive(:new).with(nil, nil, "app-live", false)
+          .to receive(:new).with(stack: "app-live", verbose: false)
           .and_return(command_double)
         expect(command_double).to receive(:call).with(no_args)
         subject
@@ -124,7 +124,7 @@ describe GovukDockerCLI do
     context "without the service argument" do
       it "builds the working directory's service" do
         expect(Commands::Build)
-          .to receive(:new).with(nil, nil)
+          .to receive(:new).with(stack: "lite", verbose: false)
           .and_return(command_double)
         subject
       end
@@ -135,7 +135,7 @@ describe GovukDockerCLI do
 
       it "builds the specified service" do
         expect(Commands::Build)
-          .to receive(:new).with(nil, "static")
+          .to receive(:new).with(service: "static", stack: "lite", verbose: false)
           .and_return(command_double)
         subject
       end

@@ -22,6 +22,10 @@ class GovukDockerCLI < Thor
 
   package_name "govuk-docker"
 
+  class_option :service, type: :string, default: nil
+  class_option :stack, type: :string, default: "lite"
+  class_option :verbose, type: :boolean, default: false
+
   desc "build [ARGS]", "Build a service"
   long_desc <<~LONGDESC
     By default, it builds the service in the current directory.
@@ -29,7 +33,7 @@ class GovukDockerCLI < Thor
   LONGDESC
   option :service, default: nil
   def build
-    Commands::Build.new(nil, options[:service]).call
+    Commands::Build.new(options).call
   end
 
   desc "compose ARGS", "Run `docker-compose` with ARGS"
@@ -42,9 +46,8 @@ class GovukDockerCLI < Thor
 
     > govuk-docker compose stop
   LONGDESC
-  option :verbose, type: :boolean, default: false
   def compose(*args)
-    Commands::Compose.new(nil, nil, nil, options[:verbose]).call(args)
+    Commands::Compose.new(options).call(args)
   end
 
   desc "doctor", "Various tests to help diagnose issues when running govuk-docker"
@@ -74,18 +77,13 @@ class GovukDockerCLI < Thor
     It can run with a different stack if specified (e.g. `govuk-docker run --stack app`).
     These two options can be combined (e.g. `govuk-docker run --service static --stack app`).
   LONGDESC
-  option :stack, default: "lite"
-  option :service, default: nil
-  option :verbose, type: :boolean, default: false
   def run(*args)
-    Commands::Run.new(nil, options[:service], options[:stack], options[:verbose]).call(args)
+    Commands::Run.new(options).call(args)
   end
 
   desc "startup [VARIATION]", "Run the service in the current directory with the `app` stack. Variations can be provided, for example `live` or `draft`."
-  option :service, default: nil
-  option :verbose, type: :boolean, default: false
   def startup(variation = nil)
     stack = variation ? "app-#{variation}" : "app"
-    Commands::Run.new(nil, options[:service], stack, options[:verbose]).call
+    Commands::Run.new(options.merge(stack: stack)).call
   end
 end

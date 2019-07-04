@@ -5,7 +5,7 @@ describe Commands::Compose do
   let(:config_directory) { "spec/fixtures" }
   let(:verbose) { nil }
 
-  subject { described_class.new(config_directory, nil, nil, verbose) }
+  subject { described_class.new(config_directory: config_directory, verbose: verbose) }
 
   context "when in verbose mode" do
     let(:verbose) { true }
