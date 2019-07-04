@@ -31,6 +31,7 @@ services:
           - router-api.dev.gov.uk
           - router.dev.gov.uk
           - service-manual-frontend.dev.gov.uk
+          - search-api.dev.gov.uk
           - signon.dev.gov.uk
           - smart-answers.dev.gov.uk
           - specialist-publisher.dev.gov.uk
