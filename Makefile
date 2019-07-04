@@ -22,7 +22,7 @@ default:
 	@echo "For example:"
 	@echo "    make content-publisher"
 
-clone: $(addprefix ../,$(APPS))
+clone: $(addprefix $(GOVUK_ROOT_DIR)/,$(APPS))
 
 pull:
 	echo $(APPS) | cut -d/ -f3 | xargs -P8 -n1 ./bin/update-git-repo.sh
@@ -53,7 +53,7 @@ all-apps: $(APPS) clean
 # The 'services/%/Makefile' bit is to double-check that this is a git
 # repository, as all of our apps have a Makefile.
 $(GOVUK_ROOT_DIR)/%: $(GOVUK_DOCKER_DIR)/services/%/Makefile
-	if [ ! -d "${GOVUK_ROOT_DIR}/$*" ]; then \
+	@if [ ! -d "${GOVUK_ROOT_DIR}/$*" ]; then \
 		echo "$*" && git clone "git@github.com:alphagov/$*.git" "${GOVUK_ROOT_DIR}/$*"; \
 	fi
 
