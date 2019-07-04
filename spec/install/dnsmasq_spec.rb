@@ -7,10 +7,12 @@ describe Install::Dnsmasq do
   let(:shell_double) { double }
   before do
     allow(Thor::Shell::Basic).to receive(:new).and_return(shell_double)
+    allow(subject).to receive(:puts)
   end
 
   context "disallowing the script to continue" do
     it "shouldn't do anything" do
+      expect(subject).to receive(:puts).with(/Any local changes/)
       expect(shell_double).to receive(:yes?).and_return(false)
       expect(Doctor::Dnsmasq).to_not receive(:new)
       expect(File).to_not receive(:read)
@@ -24,6 +26,7 @@ describe Install::Dnsmasq do
       allow(shell_double).to receive(:yes?).and_return(true)
       allow(Doctor::Dnsmasq).to receive(:new).and_return(double(installed?: false))
       allow(subject).to receive(:system).with("brew install dnsmasq")
+      allow(subject).to receive(:puts)
       allow(File).to receive(:read).with("/etc/resolver/dev.gov.uk").and_return("")
       allow(File).to receive(:read).with("/usr/local/etc/dnsmasq.conf").and_return("")
       allow(File).to receive(:read).with("/usr/local/etc/dnsmasq.d/development.conf").and_return("")
@@ -34,11 +37,13 @@ describe Install::Dnsmasq do
     end
 
     it "installs dnsmasq using brew" do
+      expect(subject).to receive(:puts).with(/Installing/)
       expect(subject).to receive(:system).with("brew install dnsmasq")
       subject.call
     end
 
     it "writes to the various files" do
+      expect(subject).to receive(:puts).with(/Writing/)
       expect(File).to receive(:write)
         .with("/etc/resolver/dev.gov.uk", "nameserver 127.0.0.1\n")
       expect(File).to receive(:write)
@@ -51,6 +56,7 @@ describe Install::Dnsmasq do
     end
 
     it "restarts dnsmasq" do
+      expect(subject).to receive(:puts).with(/Restarting/)
       expect(subject).to receive(:system).with("sudo brew services restart dnsmasq")
       subject.call
     end
