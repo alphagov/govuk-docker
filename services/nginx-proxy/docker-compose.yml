@@ -22,16 +22,17 @@ services:
           - draft-router.dev.gov.uk
           - draft-static.dev.gov.uk
           - government-frontend.dev.gov.uk
-          - govuk-developer-docs.dev.gov.uk
           - govuk_publishing_components.dev.gov.uk
+          - govuk-developer-docs.dev.gov.uk
           - publishing-api.dev.gov.uk
           - router-api.dev.gov.uk
           - router.dev.gov.uk
+          - service-manual-frontend.dev.gov.uk
           - signon.dev.gov.uk
           - specialist-publisher.dev.gov.uk
           - static.dev.gov.uk
-          - support.dev.gov.uk
           - support-api.dev.gov.uk
+          - support.dev.gov.uk
           - travel-advice-publisher.dev.gov.uk
           - whitehall-admin.dev.gov.uk
           - www-origin.dev.gov.uk
