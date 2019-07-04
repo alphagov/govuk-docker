@@ -26,7 +26,7 @@ class GovukDockerCLI < Thor
   class_option :stack, type: :string, default: "lite"
   class_option :verbose, type: :boolean, default: false
 
-  desc "build [ARGS]", "Build a service"
+  desc "build", "Build the service"
   long_desc <<~LONGDESC
     By default, it builds the service in the current directory.
     It can build a different service if specified (e.g. `govuk-docker build --service static`).
@@ -70,7 +70,7 @@ class GovukDockerCLI < Thor
     Commands::Prune.new.call
   end
 
-  desc "run [ARGS]", "Run a service"
+  desc "run [ARGS]", "Run the service"
   long_desc <<~LONGDESC
     By default, it runs the service in the current directory with the `lite` stack.
     It can run a different service if specified (e.g. `govuk-docker run --service static`).
