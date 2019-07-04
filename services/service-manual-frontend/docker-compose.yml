@@ -1,0 +1,58 @@
+version: '3.7'
+
+x-service-manual-frontend: &service-manual-frontend-base
+  build:
+    context: .
+    dockerfile: services/service-manual-frontend/Dockerfile
+  image: service-manual-frontend
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+  working_dir: /govuk/service-manual-frontend
+
+services:
+  service-manual-frontend-lite:
+    <<: *service-manual-frontend-base
+    volumes:
+      - ..:/govuk:delegated
+      - bundle:/usr/local/bundle
+
+  service-manual-frontend-app: &service-manual-frontend-app
+    <<: *service-manual-frontend-base
+    depends_on:
+      - router-app
+      - content-store-app
+      - static-app
+    environment:
+      GOVUK_ASSET_ROOT: service-manual-frontend.dev.gov.uk
+      VIRTUAL_HOST: service-manual-frontend.dev.gov.uk
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    command: bin/rails s -P /tmp/rails.pid
+
+  service-manual-frontend-app-draft:
+    <<: *service-manual-frontend-app
+    depends_on:
+      - router-app-draft
+      - content-store-app-draft
+      - static-app-draft
+    environment:
+      GOVUK_ASSET_ROOT: draft-service-manual-frontend.dev.gov.uk
+      VIRTUAL_HOST: draft-service-manual-frontend.dev.gov.uk
+      PLEK_HOSTNAME_PREFIX: "draft-"
+      HOST: 0.0.0.0
+
+  service-manual-frontend-app-live:
+    <<: *service-manual-frontend-base
+    depends_on:
+      - nginx-proxy
+    environment:
+      GOVUK_WEBSITE_ROOT: https://www.gov.uk
+      PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
+      PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
+      VIRTUAL_HOST: service-manual-frontend.dev.gov.uk
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    command: bin/rails s -P /tmp/rails.pid

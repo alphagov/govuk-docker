@@ -146,6 +146,7 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ router-api
    - ✅ signon
    - ✅ specialist-publisher
+   - ✅ service-manual-frontend
    - ⚠ static
       * JavaScript 404 errors when previewing pages, possibly [related to analytics](https://github.com/alphagov/static/blob/master/app/assets/javascripts/analytics/init.js.erb#L28)
    - ✅ support
