@@ -8,7 +8,7 @@ describe Commands::Run do
   let(:args)    { nil }
   let(:verbose) { false }
 
-  subject { described_class.new(stack, verbose, args, service, config_directory) }
+  subject { described_class.new(args, config_directory, service, stack, verbose) }
 
   context "with a service that exists" do
     let(:service) { "example-service" }

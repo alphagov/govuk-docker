@@ -6,7 +6,7 @@ describe Commands::Build do
   let(:config_directory) { "spec/fixtures" }
   let(:service) { nil }
 
-  subject { described_class.new(service, config_directory) }
+  subject { described_class.new(config_directory, service) }
 
   context "when a service exists" do
     let(:service) { "example-service" }

@@ -2,8 +2,8 @@ require_relative './base'
 require_relative './compose'
 
 class Commands::Run < Commands::Base
-  def initialize(stack, verbose, args, service = nil, config_directory = nil)
-    super(service, config_directory, stack, verbose)
+  def initialize(args, config_directory = nil, service = nil, stack = nil, verbose = false)
+    super(config_directory, service, stack, verbose)
     @args = args
   end
 

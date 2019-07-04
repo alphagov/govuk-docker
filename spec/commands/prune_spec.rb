@@ -4,7 +4,7 @@ require_relative "../../lib/commands/prune"
 describe Commands::Prune do
   let(:config_directory) { "spec/fixtures" }
 
-  subject { described_class.new(nil, config_directory) }
+  subject { described_class.new(config_directory) }
 
   it "calls the necessary prune commands" do
     expect(subject).to receive(:system).with("docker container prune -f")
