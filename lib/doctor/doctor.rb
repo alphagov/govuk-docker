@@ -1,0 +1,53 @@
+module Doctor
+  def self.messages
+    {
+      dnsmasq: dnsmasq_messages,
+      docker: docker_messages,
+      docker_compose: docker_compose_messages
+    }
+  end
+
+  def self.docker_messages
+    {
+      installed: "✅ Docker is installed",
+      not_installed: <<~HEREDOC,
+        ❌ Docker not found.
+        You should install Docker by grabbing the latest image from https://docs.docker.com/docker-for-mac/release-notes/.
+        For manual installation, visit https://docs.docker.com/install/.
+      HEREDOC
+      running: "✅ Docker is running",
+      not_running: <<~HEREDOC
+        ❌ Docker is not running.
+        You should start it with `sudo brew services start dnsmasq`.
+      HEREDOC
+    }
+  end
+
+  def self.docker_compose_messages
+    {
+      installed: "✅ Docker is installed",
+      not_installed: <<~HEREDOC,
+        ❌ Docker Compose not found.
+        You should install Docker by grabbing the latest image from https://docs.docker.com/docker-for-mac/release-notes/.
+        For manual installation, visit https://docs.docker.com/compose/install/
+      HEREDOC
+    }
+  end
+
+  def self.dnsmasq_messages
+    {
+      installed: "✅ Dnsmasq is installed",
+      not_installed: <<~HEREDOC,
+        ❌ Dnsmasq not found.
+        You should install it with `brew install dnsmasq`.
+        For a manual installation, visit http://www.thekelleys.org.uk/dnsmasq/doc.html
+      HEREDOC
+      running: "✅ Dnsmasq is running",
+      not_running: <<~HEREDOC
+        ❌ Dnsmasq is not running.
+        Dnsmasq needs to run as root.
+        You should start it with `sudo brew services start dnsmasq`.
+      HEREDOC
+    }
+  end
+end
