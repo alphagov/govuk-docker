@@ -1,0 +1,22 @@
+version: '3.7'
+
+x-search-api: &search-api
+  build:
+    context: .
+    dockerfile: services/search-api/Dockerfile
+  image: search-api
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+    - home:/home/build
+  working_dir: /govuk/search-api
+
+services:
+  search-api-lite:
+    <<: *search-api
+    depends_on:
+      - redis
+      - elasticsearch5
+    environment:
+      REDIS_HOST: redis
+      ELASTICSEARCH_URI: http://elasticsearch5:9200
