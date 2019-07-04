@@ -12,6 +12,7 @@ services:
       default:
         aliases:
           - asset-manager.dev.gov.uk
+          - calendars.dev.gov.uk
           - content-publisher.dev.gov.uk
           - content-store.dev.gov.uk
           - content-tagger.dev.gov.uk
