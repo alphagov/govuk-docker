@@ -1,4 +1,4 @@
-class UnknownStack < StandardError
+class UnknownStack < Thor::Error
   def initialize(stack, available_stacks)
     @stack = stack
     @available_stacks = available_stacks
