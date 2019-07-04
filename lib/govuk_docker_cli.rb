@@ -78,7 +78,7 @@ class GovukDockerCLI < Thor
   option :service, default: nil
   option :verbose, type: :boolean, default: false
   def run(*args)
-    Commands::Run.new(args, nil, options[:service], options[:stack], options[:verbose]).call
+    Commands::Run.new(nil, options[:service], options[:stack], options[:verbose]).call(args)
   end
 
   desc "startup [VARIATION]", "Run the service in the current directory with the `app` stack. Variations can be provided, for example `live` or `draft`."
@@ -86,6 +86,6 @@ class GovukDockerCLI < Thor
   option :verbose, type: :boolean, default: false
   def startup(variation = nil)
     stack = variation ? "app-#{variation}" : "app"
-    Commands::Run.new([], nil, options[:service], stack, options[:verbose]).call
+    Commands::Run.new(nil, options[:service], stack, options[:verbose]).call
   end
 end

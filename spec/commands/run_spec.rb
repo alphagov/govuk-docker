@@ -8,7 +8,7 @@ describe Commands::Run do
   let(:args)    { nil }
   let(:verbose) { false }
 
-  subject { described_class.new(args, config_directory, service, stack, verbose) }
+  subject { described_class.new(config_directory, service, stack, verbose) }
 
   context "with a service that exists" do
     let(:service) { "example-service" }
@@ -24,7 +24,7 @@ describe Commands::Run do
         expect(compose_command).to receive(:call).with(
           verbose, "run", "--rm", "--service-ports", "example-service-lite"
         )
-        subject.call
+        subject.call(args)
       end
     end
 
@@ -36,7 +36,7 @@ describe Commands::Run do
           verbose, "run", "--rm", "--service-ports", "example-service-lite",
           "env", "bundle", "exec", "rake", "lint"
         )
-        subject.call
+        subject.call(args)
       end
     end
 
@@ -48,7 +48,7 @@ describe Commands::Run do
           verbose, "run", "--rm", "--service-ports", "example-service-lite",
           "env", "bundle", "exec", "rake", "lint"
         )
-        subject.call
+        subject.call(args)
       end
     end
   end
@@ -58,7 +58,7 @@ describe Commands::Run do
     let(:stack) { "lite" }
 
     it "should fail" do
-      expect { subject.call }.to raise_error(UnknownService)
+      expect { subject.call(args) }.to raise_error(UnknownService)
     end
   end
 
@@ -67,7 +67,7 @@ describe Commands::Run do
     let(:stack) { "no-example-stack" }
 
     it "should fail" do
-      expect { subject.call }.to raise_error(UnknownStack)
+      expect { subject.call(args) }.to raise_error(UnknownStack)
     end
   end
 end
