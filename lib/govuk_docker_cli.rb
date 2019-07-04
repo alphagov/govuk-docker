@@ -7,8 +7,6 @@ require_relative "./commands/run"
 require_relative "./doctor/dnsmasq"
 require_relative "./doctor/doctor"
 require_relative "./doctor/checkup"
-require_relative "./doctor/docker"
-require_relative "./doctor/docker_compose"
 require_relative "./install/dnsmasq"
 
 class GovukDockerCLI < Thor
