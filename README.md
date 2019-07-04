@@ -71,6 +71,15 @@ for example:
 make content-publisher government-frontend
 ```
 
+The govuk-docker command can configure Dnsmasq for you:
+
+```
+govuk-docker install
+```
+
+If this doesn't work for whatever reason, follow the instructions below to
+install manually:
+
 If you have been using the vagrant based dev vm, take a backup
 of  `/etc/resolver/dev.gov.uk`.
 
