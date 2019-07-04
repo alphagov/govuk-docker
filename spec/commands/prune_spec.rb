@@ -13,4 +13,8 @@ describe Commands::Prune do
 
     subject.call
   end
+
+  it "can be initialized with no arguments" do
+    described_class.new
+  end
 end
