@@ -1,8 +1,10 @@
+require "thor"
 require_relative "../doctor/dnsmasq"
 
 module Install
   class Dnsmasq
     def call
+      check_macos
       install_dnsmasq
       configure_etc_resolver_devgovuk
       configure_usr_local_etc_dnsmasq
@@ -12,6 +14,18 @@ module Install
     end
 
   private
+
+    def macos?
+      %x[uname -a].include?("Darwin")
+    end
+
+    def check_macos
+      return if macos?
+
+      puts "This script currently only works on MacOS."
+      puts "Are you sure you want to continue?"
+      Thor::Shell::Basic.new.yes?
+    end
 
     def install_dnsmasq
       return if Doctor::Dnsmasq.new.installed?

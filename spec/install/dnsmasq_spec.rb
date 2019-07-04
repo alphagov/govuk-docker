@@ -5,6 +5,7 @@ describe Install::Dnsmasq do
   subject { described_class.new }
 
   before do
+    allow(subject).to receive(:macos?).and_return(true)
     allow(Doctor::Dnsmasq).to receive(:new).and_return(double(installed?: false))
     allow(subject).to receive(:system).with("brew install dnsmasq")
     allow(File).to receive(:read).with("/etc/resolver/dev.gov.uk").and_return("")
@@ -45,6 +46,20 @@ describe Install::Dnsmasq do
 
     it "doesn't install dnsmasq with brew" do
       expect(subject).to_not receive(:system).with("brew install dnsmasq")
+      subject.call
+    end
+  end
+
+  context "on a non-MacOS machine" do
+    before do
+      expect(subject).to receive(:macos?).and_return(false)
+    end
+
+    it "asks the user to continue" do
+      shell_double = double
+      expect(Thor::Shell::Basic).to receive(:new).and_return(shell_double)
+      expect(shell_double).to receive(:yes?)
+
       subject.call
     end
   end
