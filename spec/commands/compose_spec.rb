@@ -6,6 +6,9 @@ describe Commands::Compose do
   let(:verbose) { nil }
 
   subject { described_class.new(config_directory: config_directory, verbose: verbose) }
+  before do
+    allow(subject).to receive(:puts)
+  end
 
   context "when in verbose mode" do
     let(:verbose) { true }
@@ -28,8 +31,8 @@ describe Commands::Compose do
         "test args"
       )
 
-      expect { subject.call(["test args"]) }.
-        to output("docker-compose -f spec/fixtures/docker-compose.yml -f spec/fixtures/services/example-service/docker-compose.yml test args\n").to_stdout
+      expect(subject).to receive(:puts).with("docker-compose -f spec/fixtures/docker-compose.yml -f spec/fixtures/services/example-service/docker-compose.yml test args")
+      subject.call(["test args"])
     end
   end
 
@@ -43,8 +46,8 @@ describe Commands::Compose do
         "test args"
       )
 
-      expect { subject.call(["test args"]) }.
-       to output("docker-compose -f [...] test args\n").to_stdout
+      expect(subject).to receive(:puts).with("docker-compose -f [...] test args")
+      subject.call(["test args"])
     end
   end
 end
