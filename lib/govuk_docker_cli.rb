@@ -29,7 +29,7 @@ class GovukDockerCLI < Thor
   LONGDESC
   option :service, default: nil
   def build
-    Commands::Build.new(options[:service]).call
+    Commands::Build.new(nil, options[:service]).call
   end
 
   desc "compose ARGS", "Run `docker-compose` with ARGS"

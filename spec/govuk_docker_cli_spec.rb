@@ -115,7 +115,7 @@ describe GovukDockerCLI do
     context "without the service argument" do
       it "builds the working directory's service" do
         expect(Commands::Build)
-          .to receive(:new).with(nil)
+          .to receive(:new).with(nil, nil)
           .and_return(command_double)
         subject
       end
@@ -126,7 +126,7 @@ describe GovukDockerCLI do
 
       it "builds the specified service" do
         expect(Commands::Build)
-          .to receive(:new).with("static")
+          .to receive(:new).with(nil, "static")
           .and_return(command_double)
         subject
       end
