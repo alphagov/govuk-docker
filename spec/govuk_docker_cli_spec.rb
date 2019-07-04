@@ -14,8 +14,9 @@ describe GovukDockerCLI do
     context "without stack and service arguments" do
       it "runs in the lite stack" do
         expect(Commands::Run)
-          .to receive(:new).with("lite", false, [], nil)
+          .to receive(:new).with(nil, nil, "lite", false)
           .and_return(command_double)
+        expect(command_double).to receive(:call).with([])
         subject
       end
     end
@@ -25,8 +26,9 @@ describe GovukDockerCLI do
 
       it "runs in the specified stack" do
         expect(Commands::Run)
-          .to receive(:new).with("app", false, [], "static")
+          .to receive(:new).with(nil, "static", "app", false)
           .and_return(command_double)
+        expect(command_double).to receive(:call).with([])
         subject
       end
     end
@@ -36,8 +38,9 @@ describe GovukDockerCLI do
 
       it "runs in the specified stack" do
         expect(Commands::Run)
-          .to receive(:new).with("app", false, [], nil)
+          .to receive(:new).with(nil, nil, "app", false)
           .and_return(command_double)
+        expect(command_double).to receive(:call).with([])
         subject
       end
     end
@@ -47,8 +50,9 @@ describe GovukDockerCLI do
 
       it "runs in the specified stack" do
         expect(Commands::Run)
-          .to receive(:new).with("lite", false, [], "static")
+          .to receive(:new).with(nil, "static", "lite", false)
           .and_return(command_double)
+        expect(command_double).to receive(:call).with([])
         subject
       end
     end
@@ -58,8 +62,9 @@ describe GovukDockerCLI do
 
       it "runs the command with additional arguments" do
         expect(Commands::Run)
-          .to receive(:new).with("lite", false, %w[bundle exec rspec], nil)
+          .to receive(:new).with(nil, nil, "lite", false)
           .and_return(command_double)
+        expect(command_double).to receive(:call).with(%w[bundle exec rspec])
         subject
       end
     end
@@ -68,8 +73,9 @@ describe GovukDockerCLI do
       let(:args) { ["--verbose"] }
       it "runs in the verbose mode" do
         expect(Commands::Run)
-          .to receive(:new).with('lite', true, [], nil)
+          .to receive(:new).with(nil, nil, 'lite', true)
           .and_return(command_double)
+        expect(command_double).to receive(:call).with([])
         subject
       end
     end
@@ -78,8 +84,9 @@ describe GovukDockerCLI do
       let(:args) { [] }
       it "runs in silent mode" do
         expect(Commands::Run)
-          .to receive(:new).with('lite', false, [], nil)
+          .to receive(:new).with(nil, nil, 'lite', false)
           .and_return(command_double)
+        expect(command_double).to receive(:call).with([])
         subject
       end
     end
@@ -89,10 +96,11 @@ describe GovukDockerCLI do
     let(:command) { "startup" }
 
     context "without a variation argument" do
-      it "runs in the backend stack" do
+      it "runs in the app stack" do
         expect(Commands::Run)
-          .to receive(:new).with("app", false, [])
+          .to receive(:new).with(nil, nil, "app", false)
           .and_return(command_double)
+        expect(command_double).to receive(:call).with(no_args)
         subject
       end
     end
@@ -102,8 +110,9 @@ describe GovukDockerCLI do
 
       it "runs in the specified stack" do
         expect(Commands::Run)
-          .to receive(:new).with("app-live", false, [])
+          .to receive(:new).with(nil, nil, "app-live", false)
           .and_return(command_double)
+        expect(command_double).to receive(:call).with(no_args)
         subject
       end
     end
@@ -115,7 +124,7 @@ describe GovukDockerCLI do
     context "without the service argument" do
       it "builds the working directory's service" do
         expect(Commands::Build)
-          .to receive(:new).with(nil)
+          .to receive(:new).with(nil, nil)
           .and_return(command_double)
         subject
       end
@@ -126,7 +135,7 @@ describe GovukDockerCLI do
 
       it "builds the specified service" do
         expect(Commands::Build)
-          .to receive(:new).with("static")
+          .to receive(:new).with(nil, "static")
           .and_return(command_double)
         subject
       end

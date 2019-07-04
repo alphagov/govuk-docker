@@ -29,7 +29,7 @@ class GovukDockerCLI < Thor
   LONGDESC
   option :service, default: nil
   def build
-    Commands::Build.new(options[:service]).call
+    Commands::Build.new(nil, options[:service]).call
   end
 
   desc "compose ARGS", "Run `docker-compose` with ARGS"
@@ -44,7 +44,7 @@ class GovukDockerCLI < Thor
   LONGDESC
   option :verbose, type: :boolean, default: false
   def compose(*args)
-    Commands::Compose.new.call(options[:verbose], *args)
+    Commands::Compose.new(nil, nil, nil, options[:verbose]).call(args)
   end
 
   desc "doctor", "Various tests to help diagnose issues when running govuk-docker"
@@ -78,13 +78,14 @@ class GovukDockerCLI < Thor
   option :service, default: nil
   option :verbose, type: :boolean, default: false
   def run(*args)
-    Commands::Run.new(options[:stack], options[:verbose], args, options[:service]).call
+    Commands::Run.new(nil, options[:service], options[:stack], options[:verbose]).call(args)
   end
 
   desc "startup [VARIATION]", "Run the service in the current directory with the `app` stack. Variations can be provided, for example `live` or `draft`."
+  option :service, default: nil
   option :verbose, type: :boolean, default: false
   def startup(variation = nil)
     stack = variation ? "app-#{variation}" : "app"
-    Commands::Run.new(stack, options[:verbose], []).call
+    Commands::Run.new(nil, options[:service], stack, options[:verbose]).call
   end
 end

@@ -1,11 +1,11 @@
 require_relative './base'
 
 class Commands::Compose < Commands::Base
-  def call(verbose, *args)
+  def call(args)
     args.insert(0, "docker-compose")
     args.insert(1, *docker_compose_args)
     verbose ? display_full_commands(args) : display_truncated_commands(args)
-    system.call(*args)
+    system(*args)
   end
 
 private

@@ -5,15 +5,14 @@ require_relative "../../lib/errors/unknown_service"
 describe Commands::Build do
   let(:config_directory) { "spec/fixtures" }
   let(:service) { nil }
-  let(:system) { double(:system) }
 
-  subject { described_class.new(service, config_directory, system) }
+  subject { described_class.new(config_directory, service) }
 
   context "when a service exists" do
     let(:service) { "example-service" }
 
     it "should run docker compose" do
-      expect(system).to receive(:call).with("make", "-f", "#{config_directory}/Makefile", "example-service")
+      expect(subject).to receive(:system).with("make", "-f", "#{config_directory}/Makefile", "example-service")
       subject.call
     end
   end
