@@ -7,6 +7,7 @@ module Doctor
     def call
       install_state?
       run_state?
+      user_state?
 
       message.join("\r\n")
     end
@@ -33,6 +34,13 @@ module Doctor
       You should start it with `sudo brew services start dnsmasq`.
     HEREDOC
 
+    DNSMASQ_USER = "✅ Dnsmasq is running as the correct user".freeze
+    START_DNSMASQ_AS_ROOT = <<~HEREDOC.freeze
+      ❌ Dnsmasq is running under your user.
+      Dnsmasq needs to run as root.
+      You should start it with `sudo brew services start dnsmasq`.
+    HEREDOC
+
     def install_state?
       message << if installed?
                    DNSMASQ_INSTALLED
@@ -53,6 +61,20 @@ module Doctor
 
     def dnsmasq_running?
       system "pgrep dnsmasq 1>/dev/null"
+    end
+
+    def user_state?
+      return unless installed? && dnsmasq_running?
+
+      message << if dnsmasq_user?
+                   DNSMASQ_USER
+                 else
+                   START_DNSMASQ_AS_ROOT
+                 end
+    end
+
+    def dnsmasq_user?
+      system "ps aux | grep `pgrep dnsmasq` | grep -v `whoami` 1>/dev/null"
     end
   end
 end
