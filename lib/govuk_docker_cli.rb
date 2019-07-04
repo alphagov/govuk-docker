@@ -5,6 +5,8 @@ require_relative "./commands/compose"
 require_relative "./commands/prune"
 require_relative "./commands/run"
 require_relative "./doctor/dnsmasq"
+require_relative "./doctor/doctor"
+require_relative "./doctor/checkup"
 require_relative "./doctor/docker"
 require_relative "./doctor/docker_compose"
 require_relative "./install/dnsmasq"
@@ -55,9 +57,17 @@ class GovukDockerCLI < Thor
     puts "Checking dnsmasq"
     puts Doctor::Dnsmasq.new.call
     puts "\r\nChecking docker"
-    puts Doctor::Docker.new.call
+    puts Doctor::Checkup.new(
+      service_name: "docker",
+      checkups: %i(installed running),
+      messages: Doctor.messages[:docker]
+    ).call
     puts "\r\nChecking docker-compose"
-    puts Doctor::DockerCompose.new.call
+    puts Doctor::Checkup.new(
+      service_name: "docker-compose",
+      checkups: %i(installed),
+      messages: Doctor.messages[:docker_compose]
+    ).call
   end
 
   desc "install", "Configures and installs the various dependencies necessary to run govuk-docker successfully"
