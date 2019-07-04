@@ -17,6 +17,9 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
 
+  memcached:
+    image: memcached
+
   mongo:
     image: mongo:2.4
     volumes:

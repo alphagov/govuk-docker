@@ -34,6 +34,7 @@ services:
           - email-alert-api.dev.gov.uk
           - email-alert-frontend.dev.gov.uk
           - frontend.dev.gov.uk
+          - finder-frontend.dev.gov.uk
           - government-frontend.dev.gov.uk
           - govuk-developer-docs.dev.gov.uk
           - govuk-publishing-components.dev.gov.uk
