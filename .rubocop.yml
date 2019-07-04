@@ -1,6 +1,9 @@
 inherit_gem:
   govuk-lint: "configs/rubocop/all.yml"
 
+Rails:
+  Enabled: false
+
 AllCops:
   TargetRubyVersion: 2.6
 
