@@ -27,7 +27,7 @@ services:
     <<: *signon
     depends_on:
       - mysql
-      - nginx-proxy
+      - nginx-proxy-app
     environment:
       DATABASE_URL: "mysql2://root:root@mysql/signon_development"
       VIRTUAL_HOST: signon.dev.gov.uk

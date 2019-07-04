@@ -27,7 +27,7 @@ services:
     depends_on:
       - postgres
       - publishing-api-app
-      - nginx-proxy
+      - nginx-proxy-app
       - redis
     environment:
       DATABASE_URL: "postgresql://postgres@postgres/content-tagger"

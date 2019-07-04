@@ -19,7 +19,7 @@ services:
   smart-answers-app:
     <<: *smart-answers
     depends_on:
-      - nginx-proxy
+      - nginx-proxy-app
       - publishing-api-app
       - asset-manager-app
       - static-app

@@ -20,7 +20,7 @@ services:
   govuk-developer-docs-app:
     <<: *govuk-developer-docs
     depends_on:
-      - nginx-proxy
+      - nginx-proxy-app
     environment:
       VIRTUAL_HOST: govuk-developer-docs.dev.gov.uk
     ports:

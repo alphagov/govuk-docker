@@ -49,7 +49,7 @@ services:
   calculators-app-live:
     <<: *calculators
     depends_on:
-      - nginx-proxy
+      - nginx-proxy-app
     environment:
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api

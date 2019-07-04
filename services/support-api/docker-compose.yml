@@ -27,7 +27,7 @@ services:
     depends_on:
       - postgres
       - redis
-      - nginx-proxy
+      - nginx-proxy-app
     environment:
       DATABASE_URL: "postgresql://postgres@postgres/support-api"
       REDIS_URL: redis://redis
