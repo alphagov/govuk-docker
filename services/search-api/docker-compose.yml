@@ -45,4 +45,41 @@ services:
       - "3000"
     command: bundle exec mr-sparkle --force-polling -- -p 3000
 
+  search-api-worker:
+    <<: *search-api
+    depends_on:
+      - redis
+      - rabbitmq
+      - elasticsearch5
+      - elasticsearch6
+    command: bundle exec sidekiq -C ./config/sidekiq.yml
 
+  search-api-listener-publishing-queue:
+    <<: *search-api
+    depends_on:
+      - rabbitmq
+    command: bundle exec rake message_queue:listen_to_publishing_queue
+
+  search-api-listener-insert-data:
+    <<: *search-api
+    depends_on:
+      - rabbitmq
+    command: bundle exec rake message_queue:insert_data_into_govuk
+
+  search-api-listener-bulk-insert-data:
+    <<: *search-api
+    depends_on:
+      - rabbitmq
+    command: bundle exec rake message_queue:bulk_insert_data_into_govuk
+
+  search-api-app-e2e:
+    <<: *search-api-app
+    depends_on:
+      - nginx-proxy-app
+      - redis
+      - elasticsearch5
+      - elasticsearch6
+      - search-api-worker
+      - search-api-listener-publishing-queue
+      - search-api-listener-insert-data
+      - search-api-listener-bulk-insert-data
