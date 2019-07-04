@@ -5,7 +5,7 @@ describe Commands::Compose do
   let(:config_directory) { "spec/fixtures" }
   let(:verbose) { nil }
 
-  subject { described_class.new(config_directory) }
+  subject { described_class.new(config_directory, nil, nil, verbose) }
 
   context "when in verbose mode" do
     let(:verbose) { true }
@@ -17,7 +17,7 @@ describe Commands::Compose do
         "fake args"
       )
 
-      subject.call(verbose, "fake args")
+      subject.call(["fake args"])
     end
 
     it "outputs the full list of docker compose files" do
@@ -28,7 +28,7 @@ describe Commands::Compose do
         "test args"
       )
 
-      expect { subject.call(verbose, "test args") }.
+      expect { subject.call(["test args"]) }.
         to output("docker-compose -f spec/fixtures/docker-compose.yml -f spec/fixtures/services/example-service/docker-compose.yml test args\n").to_stdout
     end
   end
@@ -43,7 +43,7 @@ describe Commands::Compose do
         "test args"
       )
 
-      expect { subject.call(verbose, "test args") }.
+      expect { subject.call(["test args"]) }.
        to output("docker-compose -f [...] test args\n").to_stdout
     end
   end

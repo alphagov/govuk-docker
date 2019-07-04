@@ -15,14 +15,18 @@ describe Commands::Run do
     let(:stack) { "lite" }
 
     let(:compose_command) { double }
-    before { expect(Commands::Compose).to receive(:new).and_return(compose_command) }
+    before do
+      expect(Commands::Compose).to receive(:new)
+        .with(config_directory, service, stack, verbose)
+        .and_return(compose_command)
+    end
 
     context "with no extra arguments" do
       let(:args) { [] }
 
       it "should run docker compose" do
         expect(compose_command).to receive(:call).with(
-          verbose, "run", "--rm", "--service-ports", "example-service-lite"
+          ["run", "--rm", "--service-ports", "example-service-lite"]
         )
         subject.call(args)
       end
@@ -33,8 +37,7 @@ describe Commands::Run do
 
       it "should run docker compose using the `env` command" do
         expect(compose_command).to receive(:call).with(
-          verbose, "run", "--rm", "--service-ports", "example-service-lite",
-          "env", "bundle", "exec", "rake", "lint"
+          ["run", "--rm", "--service-ports", "example-service-lite", "env", "bundle", "exec", "rake", "lint"]
         )
         subject.call(args)
       end
@@ -45,8 +48,7 @@ describe Commands::Run do
 
       it "should run docker compose without duplicating `env`" do
         expect(compose_command).to receive(:call).with(
-          verbose, "run", "--rm", "--service-ports", "example-service-lite",
-          "env", "bundle", "exec", "rake", "lint"
+          ["run", "--rm", "--service-ports", "example-service-lite", "env", "bundle", "exec", "rake", "lint"]
         )
         subject.call(args)
       end

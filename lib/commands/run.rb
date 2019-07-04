@@ -5,9 +5,12 @@ class Commands::Run < Commands::Base
   def call(args = [])
     check_service_exists
     check_stack_exists
-    Commands::Compose.new.call(
-      verbose, "run", "--rm", "--service-ports", container_name, *docker_compose_args(args)
-    )
+
+    Commands::Compose
+      .new(config_directory, service, stack, verbose)
+      .call(
+        ["run", "--rm", "--service-ports", container_name] + docker_compose_args(args)
+      )
   end
 
 private
