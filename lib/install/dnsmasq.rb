@@ -8,7 +8,6 @@ module Install
       configure_usr_local_etc_dnsmasq
       configure_usr_local_etc_dnsmasq_developmentconf
       restart_dnsmasq
-      verify_dns
       puts "✅ Dnsmasq installation and configuration complete!"
     end
 
@@ -22,18 +21,51 @@ module Install
     end
 
     def configure_etc_resolver_devgovuk
+      write_file(
+        "/etc/resolver/dev.gov.uk",
+        "nameserver 127.0.0.1"
+      )
     end
 
     def configure_usr_local_etc_dnsmasq
+      append_file(
+        "/usr/local/etc/dnsmasq.conf",
+        "conf-dir=/usr/local/etc/dnsmasq.d,*.conf"
+      )
     end
 
     def configure_usr_local_etc_dnsmasq_developmentconf
+      write_file(
+        "/usr/local/etc/dnsmasq.d/development.conf",
+        "address=/dev.gov.uk/127.0.0.1"
+      )
     end
 
     def restart_dnsmasq
+      puts "♻️  Restarting dnsmasq, you may need to enter your root password..."
+      system("sudo brew services restart dnsmasq")
     end
 
-    def verify_dns
+    def file_configured?(path, contents)
+      File.read(path).include?(contents)
+    rescue Errno::ENOENT
+      false
+    end
+
+    def write_file(path, contents)
+      return if file_configured?(path, contents)
+
+      puts "⏳ Writing #{path}"
+      File.write(path, "#{contents}\n")
+    end
+
+    def append_file(path, contents)
+      return if file_configured?(path, contents)
+
+      puts "⏳ Appending #{path}"
+      File.open(path, 'a') do |file|
+        file.write("\n#{contents}\n")
+      end
     end
   end
 end
