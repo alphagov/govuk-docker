@@ -30,7 +30,7 @@ services:
       - mysql
       - redis
       - static-app
-      - nginx-proxy
+      - nginx-proxy-app
       - asset-manager-app
       - publishing-api-app
     environment:
@@ -48,6 +48,6 @@ services:
       - mysql
       - redis
       - static-app
-      - nginx-proxy
+      - nginx-proxy-app
       - asset-manager-app-e2e
       - publishing-api-app-e2e

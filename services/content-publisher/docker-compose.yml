@@ -30,7 +30,7 @@ services:
       - redis
       - publishing-api-app
       - asset-manager-app
-      - nginx-proxy
+      - nginx-proxy-app
       - content-store-app
     environment:
       DATABASE_URL: "postgresql://postgres@postgres/content-publisher"
@@ -49,7 +49,7 @@ services:
       - content-publisher-worker
       - publishing-api-app-e2e
       - asset-manager-app-e2e
-      - nginx-proxy
+      - nginx-proxy-app
 
   content-publisher-worker:
     <<: *content-publisher

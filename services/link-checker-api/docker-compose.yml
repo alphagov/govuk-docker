@@ -27,7 +27,7 @@ services:
     <<: *link-checker-api
     depends_on:
       - link-checker-api-worker
-      - nginx-proxy
+      - nginx-proxy-app
       - postgres
       - redis
     environment:

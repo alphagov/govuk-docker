@@ -25,7 +25,7 @@ services:
     depends_on:
       - mongo
       - router-api-app
-      - nginx-proxy
+      - nginx-proxy-app
     environment:
       MONGODB_URI: "mongodb://mongo/content-store"
       VIRTUAL_HOST: content-store.dev.gov.uk
@@ -39,7 +39,7 @@ services:
     depends_on:
       - mongo
       - router-api-app-draft
-      - nginx-proxy
+      - nginx-proxy-app
     environment:
       PLEK_HOSTNAME_PREFIX: "draft-"
       MONGODB_URI: "mongodb://mongo/draft-content-store"

@@ -27,7 +27,7 @@ services:
     depends_on:
       - mongo
       - redis
-      - nginx-proxy
+      - nginx-proxy-app
     environment:
       MONGODB_URI: "mongodb://mongo/asset-manager"
       REDIS_URL: redis://redis
@@ -42,7 +42,7 @@ services:
     depends_on:
       - mongo
       - redis
-      - nginx-proxy
+      - nginx-proxy-app
       - asset-manager-worker
 
   asset-manager-worker:

@@ -23,7 +23,7 @@ services:
     <<: *support
     depends_on:
       - redis
-      - nginx-proxy
+      - nginx-proxy-app
       - support-api-app
     environment:
       VIRTUAL_HOST: support.dev.gov.uk
