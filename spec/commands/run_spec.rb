@@ -4,10 +4,11 @@ require_relative "../../lib/commands/run"
 describe Commands::Run do
   let(:config_directory) { "spec/fixtures" }
   let(:service) { nil }
-  let(:stack) { nil }
-  let(:args) { nil }
+  let(:stack)   { nil }
+  let(:args)    { nil }
+  let(:verbose) { false }
 
-  subject { described_class.new(stack, args, service, config_directory) }
+  subject { described_class.new(stack, verbose, args, service, config_directory) }
 
   context "with a service that exists" do
     let(:service) { "example-service" }
@@ -21,7 +22,7 @@ describe Commands::Run do
 
       it "should run docker compose" do
         expect(compose_command).to receive(:call).with(
-          "run", "--rm", "--service-ports", "example-service-lite"
+          verbose, "run", "--rm", "--service-ports", "example-service-lite"
         )
         subject.call
       end
@@ -32,7 +33,7 @@ describe Commands::Run do
 
       it "should run docker compose using the `env` command" do
         expect(compose_command).to receive(:call).with(
-          "run", "--rm", "--service-ports", "example-service-lite",
+          verbose, "run", "--rm", "--service-ports", "example-service-lite",
           "env", "bundle", "exec", "rake", "lint"
         )
         subject.call
@@ -44,7 +45,7 @@ describe Commands::Run do
 
       it "should run docker compose without duplicating `env`" do
         expect(compose_command).to receive(:call).with(
-          "run", "--rm", "--service-ports", "example-service-lite",
+          verbose, "run", "--rm", "--service-ports", "example-service-lite",
           "env", "bundle", "exec", "rake", "lint"
         )
         subject.call

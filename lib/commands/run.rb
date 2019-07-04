@@ -2,8 +2,8 @@ require_relative './base'
 require_relative './compose'
 
 class Commands::Run < Commands::Base
-  def initialize(stack, args, service = nil, config_directory = nil)
-    super(service, config_directory, nil, stack)
+  def initialize(stack, verbose, args, service = nil, config_directory = nil)
+    super(service, config_directory, nil, stack, verbose)
     @args = args
   end
 
@@ -11,7 +11,7 @@ class Commands::Run < Commands::Base
     check_service_exists
     check_stack_exists
     Commands::Compose.new.call(
-      "run", "--rm", "--service-ports", container_name, *extra_args
+      verbose, "run", "--rm", "--service-ports", container_name, *extra_args
     )
   end
 

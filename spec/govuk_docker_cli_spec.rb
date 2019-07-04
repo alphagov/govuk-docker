@@ -14,7 +14,7 @@ describe GovukDockerCLI do
     context "without stack and service arguments" do
       it "runs in the lite stack" do
         expect(Commands::Run)
-          .to receive(:new).with("lite", [], nil)
+          .to receive(:new).with("lite", false, [], nil)
           .and_return(command_double)
         subject
       end
@@ -25,7 +25,7 @@ describe GovukDockerCLI do
 
       it "runs in the specified stack" do
         expect(Commands::Run)
-          .to receive(:new).with("app", [], "static")
+          .to receive(:new).with("app", false, [], "static")
           .and_return(command_double)
         subject
       end
@@ -36,7 +36,7 @@ describe GovukDockerCLI do
 
       it "runs in the specified stack" do
         expect(Commands::Run)
-          .to receive(:new).with("app", [], nil)
+          .to receive(:new).with("app", false, [], nil)
           .and_return(command_double)
         subject
       end
@@ -47,7 +47,7 @@ describe GovukDockerCLI do
 
       it "runs in the specified stack" do
         expect(Commands::Run)
-          .to receive(:new).with("lite", [], "static")
+          .to receive(:new).with("lite", false, [], "static")
           .and_return(command_double)
         subject
       end
@@ -56,9 +56,29 @@ describe GovukDockerCLI do
     context "with additional arguments" do
       let(:args) { %w[bundle exec rspec] }
 
-      it "runs the command with additinal arguments" do
+      it "runs the command with additional arguments" do
         expect(Commands::Run)
-          .to receive(:new).with("lite", %w[bundle exec rspec], nil)
+          .to receive(:new).with("lite", false, %w[bundle exec rspec], nil)
+          .and_return(command_double)
+        subject
+      end
+    end
+
+    context "with a verbose argument" do
+      let(:args) { ["--verbose"] }
+      it "runs in the verbose mode" do
+        expect(Commands::Run)
+          .to receive(:new).with('lite', true, [], nil)
+          .and_return(command_double)
+        subject
+      end
+    end
+
+    context "without a verbose argument" do
+      let(:args) { [] }
+      it "runs in silent mode" do
+        expect(Commands::Run)
+          .to receive(:new).with('lite', false, [], nil)
           .and_return(command_double)
         subject
       end
@@ -71,7 +91,7 @@ describe GovukDockerCLI do
     context "without a variation argument" do
       it "runs in the backend stack" do
         expect(Commands::Run)
-          .to receive(:new).with("app", [])
+          .to receive(:new).with("app", false, [])
           .and_return(command_double)
         subject
       end
@@ -82,7 +102,7 @@ describe GovukDockerCLI do
 
       it "runs in the specified stack" do
         expect(Commands::Run)
-          .to receive(:new).with("app-live", [])
+          .to receive(:new).with("app-live", false, [])
           .and_return(command_double)
         subject
       end
