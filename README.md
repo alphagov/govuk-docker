@@ -129,6 +129,7 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ govuk-lint
    - ✅ govuk_app_config
    - ✅ govuk_publishing_components
+   - ✅ info-frontend
    - ✅ miller-columns-element
    - ✅ plek
    - ✅ publishing-api

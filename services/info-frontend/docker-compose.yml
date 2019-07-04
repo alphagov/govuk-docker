@@ -1,0 +1,46 @@
+version: '3.7'
+
+x-tmp: &info-frontend-base
+  build:
+    context: .
+    dockerfile: services/info-frontend/Dockerfile
+  image: info-frontend
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+  working_dir: /govuk/info-frontend
+
+services:
+  info-frontend-lite:
+    <<: *info-frontend-base
+    volumes:
+      - ..:/govuk:delegated
+      - bundle:/usr/local/bundle
+
+  info-frontend-app:
+    <<: *info-frontend-base
+    depends_on:
+      - router-app
+      - content-store-app
+      - static-app
+    environment:
+      GOVUK_ASSET_ROOT: info-frontend.dev.gov.uk
+      VIRTUAL_HOST: info-frontend.dev.gov.uk
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    command: bin/rails s -P /tmp/rails.pid
+
+  info-frontend-app-live:
+    <<: *info-frontend-base
+    depends_on:
+      - nginx-proxy
+    environment:
+      GOVUK_WEBSITE_ROOT: https://www.gov.uk
+      PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
+      PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
+      VIRTUAL_HOST: info-frontend.dev.gov.uk
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    command: bin/rails s -P /tmp/rails.pid
