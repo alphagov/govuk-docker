@@ -44,7 +44,7 @@ However, this high-level statement hides a great number of specific needs, which
 First make sure the following are installed on your system:
 
    - [dnsmasq](http://www.thekelleys.org.uk/dnsmasq/doc.html) to make *app-name.dev.gov.uk* work. You can install this using `brew install dnsmasq`
-   - [docker](https://hub.docker.com/) and [docker-compose](https://docs.docker.com/compose/install/), fairly obviously
+   - [docker](https://hub.docker.com/) and [docker-compose](https://docs.docker.com/compose/install/)
    - [git](https://git-scm.com) if you're setting everything up from scratch
    - A directory `~/govuk` in your home directory
 
