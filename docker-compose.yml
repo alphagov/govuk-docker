@@ -8,6 +8,8 @@ volumes:
   mysql:
   mongo:
   go:
+  elasticsearch5:
+  elasticsearch6:
 
 services:
   postgres:
@@ -42,6 +44,8 @@ services:
       - transport.host=127.0.0.1
       - xpack.security.enabled=false
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    volumes:
+      - elasticsearch5:/usr/share/elasticsearch/data
 
   elasticsearch6:
     image: elasticsearch:6.7.0
@@ -50,3 +54,5 @@ services:
       - transport.host=127.0.0.1
       - xpack.security.enabled=false
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    volumes:
+      - elasticsearch6:/usr/share/elasticsearch/data
