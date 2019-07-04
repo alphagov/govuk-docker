@@ -25,7 +25,7 @@ module Doctor
 
   def self.docker_compose_messages
     {
-      installed: "✅ Docker is installed",
+      installed: "✅ Docker Compose is installed",
       not_installed: <<~HEREDOC,
         ❌ Docker Compose not found.
         You should install Docker by grabbing the latest image from https://docs.docker.com/docker-for-mac/release-notes/.
