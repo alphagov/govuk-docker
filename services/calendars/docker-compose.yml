@@ -3,19 +3,18 @@ version: '3.7'
 x-calendars: &calendars
   build:
     context: .
-    dockerfile: services/calendars/Dockerfile
+    dockerfile: Dockerfile
   image: calendars
   volumes:
     - ..:/govuk:delegated
-    - bundle:/usr/local/bundle
+    - rbenv-versions:/rbenv/versions
+    - rbenv-shims:/rbenv/shims
+    - home:/home/build
   working_dir: /govuk/calendars
 
 services:
   calendars-lite:
     <<: *calendars
-    volumes:
-      - ..:/govuk:delegated
-      - bundle:/usr/local/bundle
 
   calendars-app: &calendars-app
     <<: *calendars

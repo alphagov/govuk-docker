@@ -3,11 +3,12 @@ version: '3.7'
 x-content-tagger: &content-tagger
   build:
     context: .
-    dockerfile: services/content-tagger/Dockerfile
+    dockerfile: Dockerfile
   image: content-tagger
   volumes:
     - ..:/govuk:delegated
-    - bundle:/usr/local/bundle
+    - rbenv-versions:/rbenv/versions
+    - rbenv-shims:/rbenv/shims
     - home:/home/build
   working_dir: /govuk/content-tagger
 

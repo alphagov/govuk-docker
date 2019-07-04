@@ -3,11 +3,12 @@ version: '3.7'
 x-link-checker-api: &link-checker-api
   build:
     context: .
-    dockerfile: services/link-checker-api/Dockerfile
+    dockerfile: Dockerfile
   image: link-checker-api
   volumes:
     - ..:/govuk:delegated
-    - bundle:/usr/local/bundle
+    - rbenv-versions:/rbenv/versions
+    - rbenv-shims:/rbenv/shims
     - home:/home/build
   working_dir: /govuk/link-checker-api
 

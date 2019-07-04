@@ -3,11 +3,12 @@ version: '3.7'
 x-publishing-api: &publishing-api
   build:
     context: .
-    dockerfile: services/publishing-api/Dockerfile
+    dockerfile: Dockerfile
   image: publishing-api
   volumes:
     - ..:/govuk:delegated
-    - bundle:/usr/local/bundle
+    - rbenv-versions:/rbenv/versions
+    - rbenv-shims:/rbenv/shims
     - home:/home/build
   working_dir: /govuk/publishing-api
 

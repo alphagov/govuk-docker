@@ -3,11 +3,12 @@ version: '3.7'
 x-content-publisher: &content-publisher
   build:
     context: .
-    dockerfile: services/content-publisher/Dockerfile
+    dockerfile: Dockerfile
   image: content-publisher
   volumes:
     - ..:/govuk:delegated
-    - bundle:/usr/local/bundle
+    - rbenv-versions:/rbenv/versions
+    - rbenv-shims:/rbenv/shims
     - home:/home/build
   working_dir: /govuk/content-publisher
 

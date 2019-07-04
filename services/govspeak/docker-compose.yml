@@ -3,11 +3,12 @@ version: '3.7'
 x-govuk_publisher_components: &govspeak
   build:
     context: .
-    dockerfile: services/govspeak/Dockerfile
+    dockerfile: Dockerfile
   image: govspeak
   volumes:
     - ..:/govuk:delegated
-    - bundle:/usr/local/bundle
+    - rbenv-versions:/rbenv/versions
+    - rbenv-shims:/rbenv/shims
     - home:/home/build
   working_dir: /govuk/govspeak
 

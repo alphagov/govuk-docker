@@ -1,3 +1,4 @@
 email-alert-api: $(GOVUK_ROOT_DIR)/email-alert-api
+	$(COMPOSE_RUN) email-alert-api rbenv install -s && gem install --conservative bundler
 	$(COMPOSE_RUN) email-alert-api-lite bundle
 	$(COMPOSE_RUN) email-alert-api-lite sh -c 'bin/rake db:migrate 2>/dev/null || bin/rake db:setup'

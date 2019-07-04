@@ -3,11 +3,12 @@ version: '3.7'
 x-govuk-content-schemas: &govuk-content-schemas
   build:
     context: .
-    dockerfile: services/govuk-content-schemas/Dockerfile
+    dockerfile: Dockerfile
   image: govuk-content-schemas
   volumes:
     - ..:/govuk:delegated
-    - bundle:/usr/local/bundle
+    - rbenv-versions:/rbenv/versions
+    - rbenv-shims:/rbenv/shims
     - home:/home/build
   working_dir: /govuk/govuk-content-schemas
 

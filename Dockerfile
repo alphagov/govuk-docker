@@ -1,10 +1,9 @@
-FROM buildpack-deps
+# Standard Dockerfile for GOV.UK services. Random service-specific stuff should *not*
+# go in this file. Instead, you should copy this file into the directory for the
+# service and make any changes to it there.
 
-RUN export VERSION=2.1.1 && \
-    wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$VERSION-linux-x86_64.tar.bz2 2>&1 && \
-    tar -vxf phantomjs-$VERSION-linux-x86_64.tar.bz2 && \
-    cp -v phantomjs-$VERSION-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs && \
-    rm -vr phantomjs-$VERSION-linux-x86_64
+# Install packages for building ruby
+FROM buildpack-deps
 
 # Install chrome and its dependencies
 RUN apt-get update -qq && apt-get install -y libxss1 libappindicator1 libindicator7
@@ -23,9 +22,9 @@ RUN git clone https://github.com/sstephenson/ruby-build.git /rbenv/plugins/ruby-
 RUN /rbenv/plugins/ruby-build/install.sh
 ENV PATH /rbenv/bin:$PATH
 ENV PATH /rbenv/shims:${PATH}
-RUN mkdir /rbenv/versions
-RUN chmod o+w /rbenv/versions
+RUN mkdir /rbenv/versions /rbenv/shims
 
 RUN useradd -m build
+RUN chown build /rbenv/versions /rbenv/shims
 USER build
 ENV RBENV_ROOT /rbenv

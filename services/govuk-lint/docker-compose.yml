@@ -3,11 +3,12 @@ version: '3.7'
 x-govuk-lint: &govuk-lint
   build:
     context: .
-    dockerfile: services/govuk-lint/Dockerfile
+    dockerfile: Dockerfile
   image: govuk-lint
   volumes:
     - ..:/govuk:delegated
-    - bundle:/usr/local/bundle
+    - rbenv-versions:/rbenv/versions
+    - rbenv-shims:/rbenv/shims
     - home:/home/build
   working_dir: /govuk/govuk-lint
 

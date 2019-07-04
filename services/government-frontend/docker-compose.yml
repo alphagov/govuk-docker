@@ -7,7 +7,9 @@ x-government-frontend: &government-frontend
   image: government-frontend
   volumes:
     - ..:/govuk:delegated
-    - bundle:/usr/local/bundle
+    - rbenv-versions:/rbenv/versions
+    - rbenv-shims:/rbenv/shims
+    - home:/home/build
   working_dir: /govuk/government-frontend
 
 services:

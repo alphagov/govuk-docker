@@ -8,6 +8,8 @@ volumes:
   mysql:
   mongo:
   go:
+  rbenv-versions:
+  rbenv-shims:
 
 services:
   postgres:

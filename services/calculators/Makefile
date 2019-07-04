@@ -1,2 +1,3 @@
 calculators: ../calculators
-	bin/govuk-docker compose run calculators-lite bundle
+	$(COMPOSE_RUN) calculators-lite rbenv install -s && gem install --conservative bundler
+	$(COMPOSE_RUN) calculators-lite bundle

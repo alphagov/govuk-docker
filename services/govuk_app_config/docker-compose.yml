@@ -3,11 +3,12 @@ version: '3.7'
 x-govuk_app_config: &govuk_app_config
   build:
     context: .
-    dockerfile: services/govuk_app_config/Dockerfile
+    dockerfile: Dockerfile
   image: govuk_app_config
   volumes:
     - ..:/govuk:delegated
-    - bundle:/usr/local/bundle
+    - rbenv-versions:/rbenv/versions
+    - rbenv-shims:/rbenv/shims
     - home:/home/build
   working_dir: /govuk/govuk_app_config
 

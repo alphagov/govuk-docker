@@ -3,11 +3,12 @@ version: '3.7'
 x-calculators: &calculators
   build:
     context: .
-    dockerfile: services/calculators/Dockerfile
+    dockerfile: Dockerfile
   image: calculators
   volumes:
     - ..:/govuk:delegated
-    - bundle:/usr/local/bundle
+    - rbenv-versions:/rbenv/versions
+    - rbenv-shims:/rbenv/shims
     - home:/home/build
   working_dir: /govuk/calculators
 
@@ -16,9 +17,6 @@ services:
     <<: *calculators
     # Tests need the privileged flag
     privileged: true
-    volumes:
-      - ..:/govuk:delegated
-      - bundle:/usr/local/bundle
 
   calculators-app: &calculators-app
     <<: *calculators
