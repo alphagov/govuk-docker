@@ -1,0 +1,55 @@
+version: '3.7'
+
+x-collections-publisher: &collections-publisher
+  build:
+    context: .
+    dockerfile: services/collections-publisher/Dockerfile
+  image: collections-publisher
+  volumes:
+    - ..:/govuk:delegated
+    - bundle:/usr/local/bundle
+    - home:/home/build
+  working_dir: /govuk/collections-publisher
+
+services:
+  collections-publisher-lite:
+    <<: *collections-publisher
+    privileged: true
+    depends_on:
+      - mysql
+      - redis
+    environment:
+      # the app uses this URL to generate a test database URL
+      DATABASE_URL: "mysql2://root:root@mysql/collections_publisher_development"
+      REDIS_URL: redis://redis
+      DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
+
+  collections-publisher-app: &collections-publisher-app
+    <<: *collections-publisher
+    depends_on:
+      - mysql
+      - redis
+      - content-store-app
+      - link-checker-api-app
+      - nginx-proxy-app
+      - publishing-api-app
+      - collections-publisher-worker
+    environment:
+      DATABASE_URL: "mysql2://root:root@mysql/collections_publisher_development"
+      REDIS_URL: redis://redis
+      VIRTUAL_HOST: collections-publisher.dev.gov.uk
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    command: bin/rails s -P /tmp/rails.pid
+
+  collections-publisher-worker:
+    <<: *collections-publisher
+    depends_on:
+      - redis
+      - mysql
+      - publishing-api-app
+    environment:
+      DATABASE_URL: "mysql2://root:root@mysql/collections_publisher_development"
+      REDIS_URL: redis://redis
+    command: bundle exec sidekiq -C ./config/sidekiq.yml
