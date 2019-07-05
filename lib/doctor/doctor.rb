@@ -49,10 +49,16 @@ module Doctor
         You should start it with `sudo brew services start dnsmasq`.
       HEREDOC
       running_as_different_user: "✅ Dnsmasq is running as the correct user",
-      not_running_as_different_user: <<~HEREDOC
+      not_running_as_different_user: <<~HEREDOC,
         ❌ Dnsmasq is running under your user.
         Dnsmasq needs to run as root.
         You should start it with `sudo brew services start dnsmasq`.
+      HEREDOC
+      dnsmasq_resolver: "✅ Dnsmasq is resolving DNS requests",
+      not_dnsmasq_resolver: <<~HEREDOC,
+        ❌ Something else (possibly Vagrant-dns) is configured to resolve DNS requests for dev.gov.uk.
+          The /etc/resolver/dev.gov.uk file needs to be updated to only contain
+          nameserver 127.0.0.1
       HEREDOC
     }
   end
