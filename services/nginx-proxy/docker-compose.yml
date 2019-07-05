@@ -27,6 +27,8 @@ services:
           - government-frontend.dev.gov.uk
           - govuk_publishing_components.dev.gov.uk
           - govuk-developer-docs.dev.gov.uk
+          - link-checker-api.dev.gov.uk
+          - publisher.dev.gov.uk
           - publishing-api.dev.gov.uk
           - router-api.dev.gov.uk
           - router.dev.gov.uk

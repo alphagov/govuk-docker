@@ -144,6 +144,7 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ info-frontend
    - ✅ miller-columns-element
    - ✅ plek
+   - ✅ publisher
    - ✅ publishing-api
    - ✅ router
    - ✅ router-api
