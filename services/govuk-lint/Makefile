@@ -1,2 +1,2 @@
 govuk-lint: $(GOVUK_ROOT_DIR)/$@
-	govuk-docker compose run $@-lite bundle
+	$(GOVUK_DOCKER) compose run $@-lite bundle
