@@ -97,10 +97,8 @@ describe GovukDockerCLI do
 
     context "without a variation argument" do
       it "runs in the app stack" do
-        expect(Commands::Run)
-          .to receive(:new).with(stack: "app", verbose: false)
-          .and_return(command_double)
-        expect(command_double).to receive(:call).with(no_args)
+        expect(Commands::Startup).to receive(:new).and_return(command_double)
+        expect(command_double).to receive(:call).with(nil)
         subject
       end
     end
@@ -109,10 +107,8 @@ describe GovukDockerCLI do
       let(:args) { %w(live) }
 
       it "runs in the specified stack" do
-        expect(Commands::Run)
-          .to receive(:new).with(stack: "app-live", verbose: false)
-          .and_return(command_double)
-        expect(command_double).to receive(:call).with(no_args)
+        expect(Commands::Startup).to receive(:new).and_return(command_double)
+        expect(command_double).to receive(:call).with("live")
         subject
       end
     end

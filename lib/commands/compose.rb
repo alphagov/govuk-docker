@@ -21,6 +21,6 @@ private
   end
 
   def docker_compose_args
-    docker_compose_paths.flat_map { |filename| ["-f", filename] }
+    docker_compose_paths.sort.flat_map { |filename| ["-f", filename] }
   end
 end

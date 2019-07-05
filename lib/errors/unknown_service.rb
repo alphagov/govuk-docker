@@ -19,7 +19,7 @@ private
 
   def available_services
     service_folders = File.join(config_directory, "services", '*')
-    Dir.glob(service_folders).map do |service|
+    Dir.glob(service_folders).sort.map do |service|
       File.basename(service)
     end
   end
