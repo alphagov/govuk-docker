@@ -18,7 +18,7 @@ module Doctor
       running: "✅ Docker is running",
       not_running: <<~HEREDOC
         ❌ Docker is not running.
-        You should start it with `sudo brew services start dnsmasq`.
+        You should start it with `sudo brew services start docker`.
       HEREDOC
     }
   end

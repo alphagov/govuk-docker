@@ -7,6 +7,7 @@ require_relative "./commands/run"
 require_relative "./commands/startup"
 require_relative "./doctor/doctor"
 require_relative "./doctor/checkup"
+require_relative "./setup/docker"
 require_relative "./setup/dnsmasq"
 require_relative "./setup/repo"
 
@@ -93,9 +94,15 @@ class GovukDockerCLI < Thor
   end
 
   desc "setup", "Configures and installs the various dependencies necessary to run `govuk-docker` successfully"
+  long_desc <<~LONGDESC
+    * Docker
+    * Docker-compose
+    * Dnsmasq
+  LONGDESC
   def setup
     Setup::Repo.new(shell).call
     puts
+    Setup::Docker.new(shell).call
     Setup::Dnsmasq.new(shell).call
   end
 
