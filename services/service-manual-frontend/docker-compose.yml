@@ -13,9 +13,6 @@ x-service-manual-frontend: &service-manual-frontend-base
 services:
   service-manual-frontend-lite:
     <<: *service-manual-frontend-base
-    volumes:
-      - $GOVUK_ROOT_DIR:/govuk:delegated
-      - bundle:/usr/local/bundle
 
   service-manual-frontend-app: &service-manual-frontend-app
     <<: *service-manual-frontend-base

@@ -13,9 +13,6 @@ x-tmp: &info-frontend-base
 services:
   info-frontend-lite:
     <<: *info-frontend-base
-    volumes:
-      - $GOVUK_ROOT_DIR:/govuk:delegated
-      - bundle:/usr/local/bundle
 
   info-frontend-app:
     <<: *info-frontend-base
