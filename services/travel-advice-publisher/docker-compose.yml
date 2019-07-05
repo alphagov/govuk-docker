@@ -6,7 +6,7 @@ x-travel-advice-publisher: &travel-advice-publisher
     dockerfile: services/travel-advice-publisher/Dockerfile
   image: travel-advice-publisher
   volumes:
-    - $GOVUK_ROOT_DIR:/govuk:delegated
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/travel-advice-publisher

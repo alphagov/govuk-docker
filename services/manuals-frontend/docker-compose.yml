@@ -6,7 +6,7 @@ x-manuals-frontend: &manuals-frontend
     dockerfile: services/manuals-frontend/Dockerfile
   image: manuals-frontend
   volumes:
-    - $GOVUK_ROOT_DIR:/govuk:delegated
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - bundle:/usr/local/bundle
   working_dir: /govuk/manuals-frontend
 

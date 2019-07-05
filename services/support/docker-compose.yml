@@ -6,7 +6,7 @@ x-support: &support
     dockerfile: services/support/Dockerfile
   image: support
   volumes:
-    - $GOVUK_ROOT_DIR:/govuk:delegated
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/support
