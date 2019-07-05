@@ -1,4 +1,5 @@
 require 'yaml'
+require_relative '../paths'
 require_relative '../errors/unknown_service'
 require_relative '../errors/unknown_stack'
 
@@ -51,7 +52,7 @@ module Commands
     end
 
     def default_config_directory
-      File.join(__dir__, "..", "..")
+      GovukDocker::Paths.govuk_docker_dir
     end
 
     def default_service
