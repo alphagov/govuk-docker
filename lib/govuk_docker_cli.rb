@@ -4,6 +4,7 @@ require_relative "./commands/build"
 require_relative "./commands/compose"
 require_relative "./commands/prune"
 require_relative "./commands/run"
+require_relative "./commands/startup"
 require_relative "./doctor/dnsmasq"
 require_relative "./doctor/doctor"
 require_relative "./doctor/checkup"
@@ -91,7 +92,6 @@ class GovukDockerCLI < Thor
 
   desc "startup [VARIATION]", "Run the service in the current directory with the `app` stack. Variations can be provided, for example `live` or `draft`."
   def startup(variation = nil)
-    stack = variation ? "app-#{variation}" : "app"
-    Commands::Run.new(options.merge(stack: stack)).call
+    Commands::Startup.new(options).call(variation)
   end
 end
