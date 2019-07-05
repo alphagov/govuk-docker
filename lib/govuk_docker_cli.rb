@@ -70,7 +70,7 @@ class GovukDockerCLI < Thor
 
   desc "install", "Configures and installs the various dependencies necessary to run `govuk-docker` successfully"
   def install
-    Install::Dnsmasq.new.call
+    Install::Dnsmasq.new(shell).call
   end
 
   desc "prune", "Remove all docker containers, volumes and images"
