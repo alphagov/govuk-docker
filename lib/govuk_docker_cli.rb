@@ -23,21 +23,20 @@ class GovukDockerCLI < Thor
 
   package_name "govuk-docker"
 
-  class_option :service, type: :string, default: nil
-  class_option :stack, type: :string, default: "lite"
-  class_option :verbose, type: :boolean, default: false
+  class_option :service, type: :string, default: nil, desc: "The service, defaults to the name of the current working directory (for example `government-frontend`)"
+  class_option :stack, type: :string, default: "lite", desc: "The stack of the service (for example `lite`)"
+  class_option :verbose, type: :boolean, default: false, desc: "If verbose, the docker-compose arguments will be displayed in full"
 
-  desc "build", "Build the service"
+  desc "build", "Build the containers for the service, equivalent to running `make` in the `govuk-docker` directory"
   long_desc <<~LONGDESC
     By default, it builds the service in the current directory.
     It can build a different service if specified (e.g. `govuk-docker build --service static`).
   LONGDESC
-  option :service, default: nil
   def build
     Commands::Build.new(options).call
   end
 
-  desc "compose ARGS", "Run `docker-compose` with ARGS"
+  desc "compose ARGS", "Run `docker-compose` with ARGS in the `govuk-docker` environment"
   long_desc <<-LONGDESC
     List all stacks across all apps:
 
@@ -51,7 +50,7 @@ class GovukDockerCLI < Thor
     Commands::Compose.new(options).call(args)
   end
 
-  desc "doctor", "Various tests to help diagnose issues when running govuk-docker"
+  desc "doctor", "Various tests to help diagnose issues when running `govuk-docker`"
   def doctor
     puts "Checking dnsmasq"
     puts Doctor::Dnsmasq.new.call
@@ -69,7 +68,7 @@ class GovukDockerCLI < Thor
     ).call
   end
 
-  desc "install", "Configures and installs the various dependencies necessary to run govuk-docker successfully"
+  desc "install", "Configures and installs the various dependencies necessary to run `govuk-docker` successfully"
   def install
     Install::Dnsmasq.new.call
   end
@@ -79,7 +78,7 @@ class GovukDockerCLI < Thor
     Commands::Prune.new(options).call
   end
 
-  desc "run [ARGS]", "Run the service"
+  desc "run [ARGS]", "Run the container for a service, with option arguments"
   long_desc <<~LONGDESC
     By default, it runs the service in the current directory with the `lite` stack.
     It can run a different service if specified (e.g. `govuk-docker run --service static`).
@@ -90,7 +89,7 @@ class GovukDockerCLI < Thor
     Commands::Run.new(options).call(args)
   end
 
-  desc "startup [VARIATION]", "Run the service in the current directory with the `app` stack. Variations can be provided, for example `live` or `draft`."
+  desc "startup [VARIATION]", "Run the container for a service in the `app` stack, with optional variations, such as `live` or `draft`"
   def startup(variation = nil)
     Commands::Startup.new(options).call(variation)
   end
