@@ -150,6 +150,7 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ govuk_app_config
    - ✅ govuk_publishing_components
    - ✅ info-frontend
+   - ✅ manuals-frontend
    - ✅ miller-columns-element
    - ✅ plek
    - ✅ publisher
