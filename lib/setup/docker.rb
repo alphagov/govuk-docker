@@ -1,4 +1,5 @@
 require_relative "./base"
+require_relative "../doctor/checkup"
 
 class Setup::Docker < Setup::Base
   def call
@@ -17,11 +18,23 @@ private
   end
 
   def install_docker
+    return if Doctor::Checkup.new(
+      service_name: "docker",
+      checkups: %i(installed),
+      messages: {}
+    ).installed?
+
     puts "⏳ Installing Docker"
     system("brew cask install docker")
   end
 
   def install_docker_compose
+    return if Doctor::Checkup.new(
+      service_name: "docker-compose",
+      checkups: %i(installed),
+      messages: {}
+    ).installed?
+
     puts "⏳ Installing Docker-compose"
     system("brew install docker-compose")
   end
