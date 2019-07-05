@@ -44,6 +44,7 @@ services:
     depends_on:
       - postgres
       - redis
+      - nginx-proxy-app
     environment:
       DATABASE_URL: "postgresql://postgres@postgres/link-checker-api"
       REDIS_URL: redis://redis
