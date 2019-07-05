@@ -6,7 +6,7 @@ describe UnknownService do
     incorrect_service = 'incorrect_service'
     config_directory = 'spec/fixtures'
 
-    available_service = 'example-service'
+    available_service = "example-service\nnginx-proxy"
 
     expected_message = <<~MESSAGE
       Unknown service: #{incorrect_service}.\n

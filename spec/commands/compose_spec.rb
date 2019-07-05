@@ -17,6 +17,7 @@ describe Commands::Compose do
         "docker-compose",
         "-f", "spec/fixtures/docker-compose.yml",
         "-f", "spec/fixtures/services/example-service/docker-compose.yml",
+        "-f", "spec/fixtures/services/nginx-proxy/docker-compose.yml",
         "fake args"
       )
 
@@ -28,10 +29,13 @@ describe Commands::Compose do
         "docker-compose",
         "-f", "spec/fixtures/docker-compose.yml",
         "-f", "spec/fixtures/services/example-service/docker-compose.yml",
+        "-f", "spec/fixtures/services/nginx-proxy/docker-compose.yml",
         "test args"
       )
 
-      expect(subject).to receive(:puts).with("docker-compose -f spec/fixtures/docker-compose.yml -f spec/fixtures/services/example-service/docker-compose.yml test args")
+      expect(subject).to receive(:puts)
+        .with("docker-compose -f spec/fixtures/docker-compose.yml -f spec/fixtures/services/example-service/docker-compose.yml -f spec/fixtures/services/nginx-proxy/docker-compose.yml test args")
+
       subject.call(["test args"])
     end
   end
@@ -43,6 +47,7 @@ describe Commands::Compose do
         "docker-compose",
         "-f", "spec/fixtures/docker-compose.yml",
         "-f", "spec/fixtures/services/example-service/docker-compose.yml",
+        "-f", "spec/fixtures/services/nginx-proxy/docker-compose.yml",
         "test args"
       )
 
