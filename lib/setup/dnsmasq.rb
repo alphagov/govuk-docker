@@ -1,5 +1,5 @@
 require_relative "./base"
-require_relative "../doctor/dnsmasq"
+require_relative "../doctor/checkup"
 
 class Setup::Dnsmasq < Setup::Base
   def call
@@ -31,7 +31,11 @@ private
   end
 
   def install_dnsmasq
-    return if Doctor::Dnsmasq.new.installed?
+    return if Doctor::Checkup.new(
+      service_name: "dnsmasq",
+      checkups: %i(installed),
+      messages: {}
+    ).installed?
 
     puts "⏳ Installing dnsmasq"
     system("brew install dnsmasq")
