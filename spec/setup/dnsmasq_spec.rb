@@ -1,7 +1,7 @@
 require "spec_helper"
-require_relative "../../lib/install/dnsmasq"
+require_relative "../../lib/setup/dnsmasq"
 
-describe Install::Dnsmasq do
+describe Setup::Dnsmasq do
   let(:shell_double) { double }
 
   subject { described_class.new(shell_double) }

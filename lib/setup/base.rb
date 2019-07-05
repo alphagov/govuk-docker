@@ -1,6 +1,6 @@
 require "thor"
 
-module Install
+module Setup
   class Base
     def initialize(shell)
       @shell = shell

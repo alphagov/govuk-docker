@@ -1,7 +1,7 @@
 require_relative "./base"
 require_relative "../doctor/dnsmasq"
 
-class Install::Dnsmasq < Install::Base
+class Setup::Dnsmasq < Setup::Base
   def call
     return unless check_continue
 
