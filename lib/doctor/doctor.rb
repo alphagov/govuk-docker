@@ -43,8 +43,14 @@ module Doctor
         For a manual installation, visit http://www.thekelleys.org.uk/dnsmasq/doc.html
       HEREDOC
       running: "✅ Dnsmasq is running",
-      not_running: <<~HEREDOC
+      not_running: <<~HEREDOC,
         ❌ Dnsmasq is not running.
+        Dnsmasq needs to run as root.
+        You should start it with `sudo brew services start dnsmasq`.
+      HEREDOC
+      running_as_different_user: "✅ Dnsmasq is running as the correct user",
+      not_running_as_different_user: <<~HEREDOC
+        ❌ Dnsmasq is running under your user.
         Dnsmasq needs to run as root.
         You should start it with `sudo brew services start dnsmasq`.
       HEREDOC
