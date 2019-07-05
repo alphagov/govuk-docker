@@ -16,6 +16,7 @@ module Doctor
     def checkup
       installed? if checkups.include?(:installed)
       running? if checkups.include?(:running)
+      running_as_different_user? if checkups.include?(:running_as_different_user)
     end
 
     def installed?
@@ -34,6 +35,7 @@ module Doctor
     def generate_return_message
       install_state_message if checkups.include?(:installed)
       run_state_message if checkups.include?(:running)
+      running_user_message if checkups.include?(:running_as_different_user)
     end
 
     def install_state_message
@@ -49,6 +51,18 @@ module Doctor
                           messages[:running]
                         else
                           messages[:not_running]
+                        end
+    end
+
+    def running_as_different_user?
+      @running_as_different_user ||= system "ps aux | grep `pgrep #{service_name}` | grep -v `whoami` 1>/dev/null"
+    end
+
+    def running_user_message
+      return_message << if running_as_different_user?
+                          messages[:running_as_different_user]
+                        else
+                          messages[:not_running_as_different_user]
                         end
     end
   end
