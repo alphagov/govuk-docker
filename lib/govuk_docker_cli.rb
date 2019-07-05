@@ -8,6 +8,7 @@ require_relative "./commands/startup"
 require_relative "./doctor/doctor"
 require_relative "./doctor/checkup"
 require_relative "./setup/dnsmasq"
+require_relative "./setup/repo"
 
 class GovukDockerCLI < Thor
   # https://github.com/ddollar/foreman/blob/83fd5eeb8c4b522cb84d8e74031080143ea6353b/lib/foreman/cli.rb#L29-L35
@@ -93,6 +94,8 @@ class GovukDockerCLI < Thor
 
   desc "setup", "Configures and installs the various dependencies necessary to run `govuk-docker` successfully"
   def setup
+    Setup::Repo.new(shell).call
+    puts
     Setup::Dnsmasq.new(shell).call
   end
 
