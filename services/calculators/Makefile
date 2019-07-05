@@ -1,2 +1,3 @@
-calculators: $(GOVUK_ROOT_DIR)/calculators
-	$(COMPOSE_RUN) calculators-lite bundle
+calculators: $(GOVUK_ROOT_DIR)/$@
+	govuk-docker compose build $@-lite
+	govuk-docker compose run $@-lite bundle

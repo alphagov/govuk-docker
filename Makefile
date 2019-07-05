@@ -2,8 +2,6 @@ GOVUK_ROOT_DIR   ?= $(HOME)/govuk
 GOVUK_DOCKER_DIR ?= $(GOVUK_ROOT_DIR)/govuk-docker
 GOVUK_DOCKER     ?= $(GOVUK_DOCKER_DIR)/bin/govuk-docker
 
-COMPOSE_RUN = $(GOVUK_DOCKER) compose run
-
 APPS ?= $(shell ls ${GOVUK_DOCKER_DIR}/services/*/Makefile | xargs -L 1 dirname | xargs -L 1 basename)
 
 # This is a Makefile best practice to say that these are not file

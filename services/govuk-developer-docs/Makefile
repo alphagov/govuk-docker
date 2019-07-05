@@ -1,2 +1,3 @@
-govuk-developer-docs: $(GOVUK_ROOT_DIR)/govuk-developer-docs
-	$(COMPOSE_RUN) govuk-developer-docs-lite bundle
+govuk-developer-docs: $(GOVUK_ROOT_DIR)/$@
+	govuk-docker compose build $@-lite
+	govuk-docker compose run $@-lite bundle

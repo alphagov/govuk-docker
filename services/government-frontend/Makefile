@@ -1,2 +1,3 @@
-government-frontend: $(GOVUK_ROOT_DIR)/government-frontend content-store router static govuk-content-schemas
-	$(COMPOSE_RUN) government-frontend-lite bundle
+government-frontend: $(GOVUK_ROOT_DIR)/$@ content-store router static govuk-content-schemas
+	govuk-docker compose build $@-lite
+	govuk-docker compose run $@-lite bundle
