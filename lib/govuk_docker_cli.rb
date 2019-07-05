@@ -57,7 +57,11 @@ class GovukDockerCLI < Thor
   desc "doctor", "Various tests to help diagnose issues when running `govuk-docker`"
   def doctor
     puts "Checking dnsmasq"
-    puts Doctor::Dnsmasq.new.call
+    puts Doctor::Checkup.new(
+      service_name: "dnsmasq",
+      checkups: %i(installed running running_as_different_user),
+      messages: Doctor.messages[:dnsmasq]
+    ).call
     puts "\r\nChecking docker"
     puts Doctor::Checkup.new(
       service_name: "docker",
