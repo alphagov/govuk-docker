@@ -1,12 +1,8 @@
-require "thor"
+require_relative "./base"
 require_relative "../doctor/dnsmasq"
 
 module Install
-  class Dnsmasq
-    def initialize(shell)
-      @shell = shell
-    end
-
+  class Dnsmasq < Base
     def call
       return unless check_continue
 
@@ -19,8 +15,6 @@ module Install
     end
 
   private
-
-    attr_reader :shell
 
     def check_continue
       puts "Any local changes in these files may get overwriten by this script:"
