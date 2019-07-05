@@ -14,5 +14,10 @@ describe GovukDocker::Commands::Base do
       allow(subject).to receive(:system)
       expect { subject.system_command }.to raise_error("Non-zero exit code")
     end
+
+    it "does not raise if told not to" do
+      allow(subject).to receive(:system)
+      expect { subject.system_command(raise_on_error: false) }.to_not raise_error
+    end
   end
 end

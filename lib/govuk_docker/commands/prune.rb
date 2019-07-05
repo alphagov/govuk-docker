@@ -2,7 +2,7 @@ require_relative './base'
 
 class GovukDocker::Commands::Prune < GovukDocker::Commands::Base
   def call
-    commands.each { |command| system_command command }
+    commands.each { |command| system_command(command, raise_on_error: false) }
   end
 
 private
