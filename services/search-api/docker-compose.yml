@@ -6,7 +6,7 @@ x-search-api: &search-api
     dockerfile: services/search-api/Dockerfile
   image: search-api
   volumes:
-    - ..:/govuk:delegated
+    - $GOVUK_ROOT_DIR:/govuk:delegated
     - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/search-api

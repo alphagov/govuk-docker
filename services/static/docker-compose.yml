@@ -6,7 +6,7 @@ x-static: &static
     dockerfile: services/static/Dockerfile
   image: static
   volumes:
-    - ..:/govuk:delegated
+    - $GOVUK_ROOT_DIR:/govuk:delegated
     - bundle:/usr/local/bundle
   working_dir: /govuk/static
 

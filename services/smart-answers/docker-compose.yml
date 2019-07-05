@@ -6,7 +6,7 @@ x-smart-answers: &smart-answers
     dockerfile: services/smart-answers/Dockerfile
   image: smart-answers
   volumes:
-    - ..:/govuk:delegated
+    - $GOVUK_ROOT_DIR:/govuk:delegated
     - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/smart-answers

@@ -6,7 +6,7 @@ x-collections-publisher: &collections-publisher
     dockerfile: services/collections-publisher/Dockerfile
   image: collections-publisher
   volumes:
-    - ..:/govuk:delegated
+    - $GOVUK_ROOT_DIR:/govuk:delegated
     - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/collections-publisher

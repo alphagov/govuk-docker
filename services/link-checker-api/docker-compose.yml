@@ -6,7 +6,7 @@ x-link-checker-api: &link-checker-api
     dockerfile: services/link-checker-api/Dockerfile
   image: link-checker-api
   volumes:
-    - ..:/govuk:delegated
+    - $GOVUK_ROOT_DIR:/govuk:delegated
     - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/link-checker-api

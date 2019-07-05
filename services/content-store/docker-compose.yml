@@ -6,7 +6,7 @@ x-content-store: &content-store
     dockerfile: services/content-store/Dockerfile
   image: content-store
   volumes:
-    - ..:/govuk:delegated
+    - $GOVUK_ROOT_DIR:/govuk:delegated
     - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/content-store

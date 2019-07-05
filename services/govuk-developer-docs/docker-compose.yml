@@ -6,7 +6,7 @@ x-govuk-developer-docs: &govuk-developer-docs
     dockerfile: services/govuk-developer-docs/Dockerfile
   image: govuk-developer-docs
   volumes:
-    - ..:/govuk:delegated
+    - $GOVUK_ROOT_DIR:/govuk:delegated
     - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/govuk-developer-docs

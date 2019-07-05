@@ -6,7 +6,7 @@ x-content-publisher: &content-publisher
     dockerfile: services/content-publisher/Dockerfile
   image: content-publisher
   volumes:
-    - ..:/govuk:delegated
+    - $GOVUK_ROOT_DIR:/govuk:delegated
     - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/content-publisher
