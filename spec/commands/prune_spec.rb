@@ -1,5 +1,5 @@
 require "spec_helper"
-require_relative "../../lib/commands/prune"
+require_relative "../../lib/govuk_docker/commands/prune"
 
 describe Commands::Prune do
   let(:config_directory) { "spec/fixtures" }

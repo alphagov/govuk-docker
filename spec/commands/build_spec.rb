@@ -1,6 +1,6 @@
 require "spec_helper"
-require_relative "../../lib/commands/build"
-require_relative "../../lib/errors/unknown_service"
+require_relative "../../lib/govuk_docker/commands/build"
+require_relative "../../lib/govuk_docker/errors/unknown_service"
 
 describe Commands::Build do
   let(:config_directory) { "spec/fixtures" }

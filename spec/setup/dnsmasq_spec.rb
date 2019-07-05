@@ -1,5 +1,5 @@
 require "spec_helper"
-require_relative "../../lib/setup/dnsmasq"
+require_relative "../../lib/govuk_docker/setup/dnsmasq"
 
 describe Setup::Dnsmasq do
   let(:shell_double) { double }

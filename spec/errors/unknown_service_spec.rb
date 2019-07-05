@@ -1,5 +1,5 @@
 require "spec_helper"
-require_relative "../../lib/errors/unknown_service"
+require_relative "../../lib/govuk_docker/errors/unknown_service"
 
 describe UnknownService do
   it "should print a list of available services in the error message" do

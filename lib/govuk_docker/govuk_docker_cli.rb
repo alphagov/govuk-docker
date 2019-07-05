@@ -57,7 +57,7 @@ class GovukDockerCLI < Thor
 
   desc "doctor", "Various tests to help diagnose issues when running `govuk-docker`"
   def doctor
-    puts "Cheching govuk-docker"
+    puts "Checking govuk-docker"
     puts Doctor::Checkup.new(
       service_name: "govuk-docker",
       checkups: %i(up_to_date),
@@ -109,6 +109,7 @@ class GovukDockerCLI < Thor
     Setup::Repo.new(shell).call
     puts
     Setup::Docker.new(shell).call
+    puts
     Setup::Dnsmasq.new(shell).call
   end
 

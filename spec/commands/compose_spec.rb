@@ -1,5 +1,5 @@
 require "spec_helper"
-require_relative "../../lib/commands/compose"
+require_relative "../../lib/govuk_docker/commands/compose"
 
 describe Commands::Compose do
   let(:config_directory) { "spec/fixtures" }

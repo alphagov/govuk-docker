@@ -1,5 +1,5 @@
 require "spec_helper"
-require "./lib/doctor/checkup"
+require "./lib/govuk_docker/doctor/checkup"
 
 describe Doctor::Checkup do
   let(:service_name) { "fake_service" }

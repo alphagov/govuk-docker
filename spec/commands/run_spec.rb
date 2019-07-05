@@ -1,5 +1,5 @@
 require "spec_helper"
-require_relative "../../lib/commands/run"
+require_relative "../../lib/govuk_docker/commands/run"
 
 describe Commands::Run do
   let(:config_directory) { "spec/fixtures" }

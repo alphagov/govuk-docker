@@ -1,5 +1,5 @@
 require "spec_helper"
-require_relative "../../lib/setup/docker"
+require_relative "../../lib/govuk_docker/setup/docker"
 
 describe Setup::Docker do
   let(:shell_double) { double }
