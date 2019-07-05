@@ -6,7 +6,7 @@ x-publishing-api: &publishing-api
     dockerfile: services/publishing-api/Dockerfile
   image: publishing-api
   volumes:
-    - $GOVUK_ROOT_DIR:/govuk:delegated
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/publishing-api

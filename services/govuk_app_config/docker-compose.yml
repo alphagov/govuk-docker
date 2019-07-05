@@ -6,7 +6,7 @@ x-govuk_app_config: &govuk_app_config
     dockerfile: services/govuk_app_config/Dockerfile
   image: govuk_app_config
   volumes:
-    - $GOVUK_ROOT_DIR:/govuk:delegated
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/govuk_app_config

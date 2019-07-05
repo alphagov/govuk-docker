@@ -6,7 +6,7 @@ x-email-alert-api: &email-alert-api
     dockerfile: services/email-alert-api/Dockerfile
   image: email-alert-api
   volumes:
-    - $GOVUK_ROOT_DIR:/govuk:delegated
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - bundle:/usr/local/bundle
   working_dir: /govuk/email-alert-api
 

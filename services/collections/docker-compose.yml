@@ -6,7 +6,7 @@ x-collections: &collections
     dockerfile: services/collections/Dockerfile
   image: collections
   volumes:
-    - $GOVUK_ROOT_DIR:/govuk:delegated
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - bundle:/usr/local/bundle
   working_dir: /govuk/collections
 
