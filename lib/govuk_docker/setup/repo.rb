@@ -1,7 +1,7 @@
 require_relative "./base"
 require_relative "../paths"
 
-class Setup::Repo < Setup::Base
+class GovukDocker::Setup::Repo < GovukDocker::Setup::Base
   def call
     unless should_clone_or_pull?
       puts "Ignoring git repo because of local changes."

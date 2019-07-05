@@ -1,6 +1,6 @@
 require "thor"
 
-module Setup
+module GovukDocker::Setup
   class Base
     def initialize(shell)
       @shell = shell

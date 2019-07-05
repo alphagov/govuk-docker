@@ -1,7 +1,7 @@
 require "spec_helper"
 require_relative "../../lib/govuk_docker/setup/docker"
 
-describe Setup::Docker do
+describe GovukDocker::Setup::Docker do
   let(:shell_double) { double }
 
   subject { described_class.new(shell_double) }
@@ -11,7 +11,7 @@ describe Setup::Docker do
     it "shouldn't do anything" do
       expect(subject).to receive(:puts).with(/This will install Docker/)
       expect(shell_double).to receive(:yes?).and_return(false)
-      expect(Doctor::Checkup).to_not receive(:new)
+      expect(GovukDocker::Doctor::Checkup).to_not receive(:new)
       expect(subject).to_not receive(:system)
       subject.call
     end
@@ -27,8 +27,8 @@ describe Setup::Docker do
 
     context "docker dependencies are not installed" do
       before do
-        allow(Doctor::Checkup).to receive(:new).with(service_name: "docker", checkups: %i(installed), messages: {}).and_return(double(installed?: false))
-        allow(Doctor::Checkup).to receive(:new).with(service_name: "docker-compose", checkups: %i(installed), messages: {}).and_return(double(installed?: false))
+        allow(GovukDocker::Doctor::Checkup).to receive(:new).with(service_name: "docker", checkups: %i(installed), messages: {}).and_return(double(installed?: false))
+        allow(GovukDocker::Doctor::Checkup).to receive(:new).with(service_name: "docker-compose", checkups: %i(installed), messages: {}).and_return(double(installed?: false))
       end
 
       it "installs docker using brew" do
@@ -46,8 +46,8 @@ describe Setup::Docker do
 
     context "docker dependencies are already installed" do
       before do
-        allow(Doctor::Checkup).to receive(:new).with(service_name: "docker", checkups: %i(installed), messages: {}).and_return(double(installed?: true))
-        allow(Doctor::Checkup).to receive(:new).with(service_name: "docker-compose", checkups: %i(installed), messages: {}).and_return(double(installed?: true))
+        allow(GovukDocker::Doctor::Checkup).to receive(:new).with(service_name: "docker", checkups: %i(installed), messages: {}).and_return(double(installed?: true))
+        allow(GovukDocker::Doctor::Checkup).to receive(:new).with(service_name: "docker-compose", checkups: %i(installed), messages: {}).and_return(double(installed?: true))
       end
       it "doesn't install docker using brew" do
         expect(subject).to_not receive(:system).with("brew cask install docker")

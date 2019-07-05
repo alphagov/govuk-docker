@@ -1,4 +1,4 @@
-class UnknownService < Thor::Error
+class GovukDocker::UnknownService < Thor::Error
   def initialize(service, config_directory)
     @service = service
     @config_directory = config_directory

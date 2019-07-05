@@ -1,7 +1,7 @@
 require "spec_helper"
 require_relative "../../lib/govuk_docker/commands/compose"
 
-describe Commands::Compose do
+describe GovukDocker::Commands::Compose do
   let(:config_directory) { "spec/fixtures" }
   let(:verbose) { nil }
 

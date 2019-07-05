@@ -1,4 +1,4 @@
-module Doctor
+module GovukDocker::Doctor
   def self.messages
     {
       govuk_docker: govuk_docker_messages,

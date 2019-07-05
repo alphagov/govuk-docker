@@ -1,7 +1,7 @@
 require "spec_helper"
 require_relative "../lib/govuk_docker/cli"
 
-describe GovukDockerCLI do
+describe GovukDocker::CLI do
   let(:command) { nil }
   let(:args) { [] }
   subject { described_class.start([command] + args) }
@@ -13,7 +13,7 @@ describe GovukDockerCLI do
 
     context "without stack and service arguments" do
       it "runs in the lite stack" do
-        expect(Commands::Run)
+        expect(GovukDocker::Commands::Run)
           .to receive(:new).with(stack: "lite", verbose: false)
           .and_return(command_double)
         expect(command_double).to receive(:call).with([])
@@ -25,7 +25,7 @@ describe GovukDockerCLI do
       let(:args) { ["--service", "static", "--stack", "app"] }
 
       it "runs in the specified stack" do
-        expect(Commands::Run)
+        expect(GovukDocker::Commands::Run)
           .to receive(:new).with(service: "static", stack: "app", verbose: false)
           .and_return(command_double)
         expect(command_double).to receive(:call).with([])
@@ -37,7 +37,7 @@ describe GovukDockerCLI do
       let(:args) { ["--stack", "app"] }
 
       it "runs in the specified stack" do
-        expect(Commands::Run)
+        expect(GovukDocker::Commands::Run)
           .to receive(:new).with(stack: "app", verbose: false)
           .and_return(command_double)
         expect(command_double).to receive(:call).with([])
@@ -49,7 +49,7 @@ describe GovukDockerCLI do
       let(:args) { ["--service", "static"] }
 
       it "runs in the specified stack" do
-        expect(Commands::Run)
+        expect(GovukDocker::Commands::Run)
           .to receive(:new).with(service: "static", stack: "lite", verbose: false)
           .and_return(command_double)
         expect(command_double).to receive(:call).with([])
@@ -61,7 +61,7 @@ describe GovukDockerCLI do
       let(:args) { %w[bundle exec rspec] }
 
       it "runs the command with additional arguments" do
-        expect(Commands::Run)
+        expect(GovukDocker::Commands::Run)
           .to receive(:new).with(stack: "lite", verbose: false)
           .and_return(command_double)
         expect(command_double).to receive(:call).with(%w[bundle exec rspec])
@@ -72,7 +72,7 @@ describe GovukDockerCLI do
     context "with a verbose argument" do
       let(:args) { ["--verbose"] }
       it "runs in the verbose mode" do
-        expect(Commands::Run)
+        expect(GovukDocker::Commands::Run)
           .to receive(:new).with(stack: "lite", verbose: true)
           .and_return(command_double)
         expect(command_double).to receive(:call).with([])
@@ -83,7 +83,7 @@ describe GovukDockerCLI do
     context "without a verbose argument" do
       let(:args) { [] }
       it "runs in silent mode" do
-        expect(Commands::Run)
+        expect(GovukDocker::Commands::Run)
           .to receive(:new).with(stack: "lite", verbose: false)
           .and_return(command_double)
         expect(command_double).to receive(:call).with([])
@@ -97,7 +97,7 @@ describe GovukDockerCLI do
     let(:args) { %w[rspec] }
 
     it "runs the `run` command with `bundle exec` plus additional arguments" do
-      expect(Commands::Run)
+      expect(GovukDocker::Commands::Run)
         .to receive(:new).with(stack: "lite", verbose: false)
         .and_return(command_double)
       expect(command_double).to receive(:call).with(%w[bundle exec rspec])
@@ -110,7 +110,7 @@ describe GovukDockerCLI do
 
     context "without a variation argument" do
       it "runs in the app stack" do
-        expect(Commands::Startup).to receive(:new).and_return(command_double)
+        expect(GovukDocker::Commands::Startup).to receive(:new).and_return(command_double)
         expect(command_double).to receive(:call).with(nil)
         subject
       end
@@ -120,7 +120,7 @@ describe GovukDockerCLI do
       let(:args) { %w(live) }
 
       it "runs in the specified stack" do
-        expect(Commands::Startup).to receive(:new).and_return(command_double)
+        expect(GovukDocker::Commands::Startup).to receive(:new).and_return(command_double)
         expect(command_double).to receive(:call).with("live")
         subject
       end
@@ -132,7 +132,7 @@ describe GovukDockerCLI do
 
     context "without the service argument" do
       it "builds the working directory's service" do
-        expect(Commands::Build)
+        expect(GovukDocker::Commands::Build)
           .to receive(:new).with(stack: "lite", verbose: false)
           .and_return(command_double)
         subject
@@ -143,7 +143,7 @@ describe GovukDockerCLI do
       let(:args) { ["--service", "static"] }
 
       it "builds the specified service" do
-        expect(Commands::Build)
+        expect(GovukDocker::Commands::Build)
           .to receive(:new).with(service: "static", stack: "lite", verbose: false)
           .and_return(command_double)
         subject

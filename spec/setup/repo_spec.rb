@@ -1,7 +1,7 @@
 require "spec_helper"
 require_relative "../../lib/govuk_docker/setup/repo"
 
-describe Setup::Repo do
+describe GovukDocker::Setup::Repo do
   let(:shell_double) { double }
   let(:path) { "/home/test/govuk/govuk-docker" }
 

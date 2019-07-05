@@ -1,6 +1,6 @@
 require_relative './base'
 
-class Commands::Compose < Commands::Base
+class GovukDocker::Commands::Compose < GovukDocker::Commands::Base
   def call(args)
     args.insert(0, "docker-compose")
     args.insert(1, *docker_compose_args)

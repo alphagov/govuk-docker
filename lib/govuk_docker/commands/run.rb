@@ -1,12 +1,12 @@
 require_relative './base'
 require_relative './compose'
 
-class Commands::Run < Commands::Base
+class GovukDocker::Commands::Run < GovukDocker::Commands::Base
   def call(args = [])
     check_service_exists
     check_stack_exists
 
-    Commands::Compose
+    GovukDocker::Commands::Compose
       .new(config_directory: config_directory, service: service, stack: stack, verbose: verbose)
       .call(
         ["run", "--rm", "--service-ports", container_name] + docker_compose_args(args)

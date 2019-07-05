@@ -1,7 +1,7 @@
 require_relative "./base"
 require_relative "../doctor/checkup"
 
-class Setup::Docker < Setup::Base
+class GovukDocker::Setup::Docker < GovukDocker::Setup::Base
   def call
     return unless check_continue
 
@@ -18,7 +18,7 @@ private
   end
 
   def install_docker
-    return if Doctor::Checkup.new(
+    return if GovukDocker::Doctor::Checkup.new(
       service_name: "docker",
       checkups: %i(installed),
       messages: {}
@@ -29,7 +29,7 @@ private
   end
 
   def install_docker_compose
-    return if Doctor::Checkup.new(
+    return if GovukDocker::Doctor::Checkup.new(
       service_name: "docker-compose",
       checkups: %i(installed),
       messages: {}

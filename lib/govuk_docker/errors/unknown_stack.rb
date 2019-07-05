@@ -1,4 +1,4 @@
-class UnknownStack < Thor::Error
+class GovukDocker::UnknownStack < Thor::Error
   def initialize(stack, available_stacks)
     @stack = stack
     @available_stacks = available_stacks

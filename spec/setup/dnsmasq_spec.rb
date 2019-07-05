@@ -1,7 +1,7 @@
 require "spec_helper"
 require_relative "../../lib/govuk_docker/setup/dnsmasq"
 
-describe Setup::Dnsmasq do
+describe GovukDocker::Setup::Dnsmasq do
   let(:shell_double) { double }
 
   subject { described_class.new(shell_double) }
@@ -11,7 +11,7 @@ describe Setup::Dnsmasq do
     it "shouldn't do anything" do
       expect(subject).to receive(:puts).with(/Any local changes/)
       expect(shell_double).to receive(:yes?).and_return(false)
-      expect(Doctor::Checkup).to_not receive(:new)
+      expect(GovukDocker::Doctor::Checkup).to_not receive(:new)
       expect(File).to_not receive(:read)
       expect(subject).to_not receive(:system)
       subject.call
@@ -21,7 +21,7 @@ describe Setup::Dnsmasq do
   context "allowing the script to continue" do
     before do
       allow(shell_double).to receive(:yes?).and_return(true)
-      allow(Doctor::Checkup).to receive(:new).with(service_name: "dnsmasq", checkups: %i(installed), messages: {}).and_return(double(installed?: false))
+      allow(GovukDocker::Doctor::Checkup).to receive(:new).with(service_name: "dnsmasq", checkups: %i(installed), messages: {}).and_return(double(installed?: false))
       allow(subject).to receive(:system).with("brew install dnsmasq")
       allow(subject).to receive(:puts)
       allow(File).to receive(:read).with("/etc/resolver/dev.gov.uk").and_return("")
@@ -60,7 +60,7 @@ describe Setup::Dnsmasq do
 
     context "dnsmasq is already installed" do
       before do
-        expect(Doctor::Checkup).to receive(:new).with(service_name: "dnsmasq", checkups: %i(installed), messages: {}).and_return(double(installed?: true))
+        expect(GovukDocker::Doctor::Checkup).to receive(:new).with(service_name: "dnsmasq", checkups: %i(installed), messages: {}).and_return(double(installed?: true))
       end
 
       it "doesn't install dnsmasq with brew" do

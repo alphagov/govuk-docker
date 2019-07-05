@@ -2,7 +2,7 @@ require "spec_helper"
 require_relative "../../lib/govuk_docker/commands/build"
 require_relative "../../lib/govuk_docker/errors/unknown_service"
 
-describe Commands::Build do
+describe GovukDocker::Commands::Build do
   let(:config_directory) { "spec/fixtures" }
   let(:service) { nil }
 
@@ -25,7 +25,7 @@ describe Commands::Build do
     let(:service) { "no-example-service" }
 
     it "should fail" do
-      expect { subject.call }.to raise_error(UnknownService)
+      expect { subject.call }.to raise_error(GovukDocker::UnknownService)
     end
   end
 end
