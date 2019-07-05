@@ -11,6 +11,27 @@ module Commands
       @verbose = options[:verbose] || default_verbose
     end
 
+    def system_command(*args)
+      system(*args) || raise("Non-zero exit code")
+    end
+
+    def service_exists?
+      search_string = "services/#{service}/docker-compose.yml"
+      docker_compose_paths.any? { |path| path.include?(search_string) }
+    end
+
+    def stack_exists?
+      available_stacks.include?(stack)
+    end
+
+    def check_service_exists
+      raise UnknownService.new(service, config_directory) unless service_exists?
+    end
+
+    def check_stack_exists
+      raise UnknownStack.new(stack, available_stacks) unless stack_exists?
+    end
+
   private
 
     attr_reader :config_directory, :service, :stack, :verbose
@@ -23,27 +44,10 @@ module Commands
       end
     end
 
-    def check_service_exists
-      raise UnknownService.new(service, config_directory) unless service_exists?
-    end
-
-    def check_stack_exists
-      raise UnknownStack.new(stack, available_stacks) unless stack_exists?
-    end
-
     def docker_compose_paths
       base_path = File.join(config_directory, "docker-compose.yml")
       services_path = File.join(config_directory, "services", "*", "docker-compose.yml")
       [base_path] + Dir.glob(services_path)
-    end
-
-    def service_exists?
-      search_string = "services/#{service}/docker-compose.yml"
-      docker_compose_paths.any? { |path| path.include?(search_string) }
-    end
-
-    def stack_exists?
-      available_stacks.include?(stack)
     end
 
     def default_config_directory

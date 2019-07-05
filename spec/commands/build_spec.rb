@@ -8,10 +8,14 @@ describe Commands::Build do
 
   subject { described_class.new(config_directory: config_directory, service: service) }
 
+  before do
+    allow(subject).to receive(:system) { 0 }
+  end
+
   context "when a service exists" do
     let(:service) { "example-service" }
 
-    it "should run docker compose" do
+    it "should make the service" do
       expect(subject).to receive(:system).with("make", "-f", "#{config_directory}/Makefile", "example-service")
       subject.call
     end

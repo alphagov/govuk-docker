@@ -6,8 +6,10 @@ describe Commands::Compose do
   let(:verbose) { nil }
 
   subject { described_class.new(config_directory: config_directory, verbose: verbose) }
+
   before do
     allow(subject).to receive(:puts)
+    allow(subject).to receive(:system) { 0 }
   end
 
   context "when in verbose mode" do
@@ -42,7 +44,7 @@ describe Commands::Compose do
 
   context "when in silent mode" do
     let(:verbose) { false }
-    it "outputs a truncated list of docker commands" do
+    it "outputs a truncated list of docker compose files" do
       expect(subject).to receive(:system).with(
         "docker-compose",
         "-f", "spec/fixtures/docker-compose.yml",
