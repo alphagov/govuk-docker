@@ -1,3 +1,10 @@
+PATH
+  remote: .
+  specs:
+    govuk-docker (0.0.1)
+      colorize
+      thor
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -68,11 +75,10 @@ PLATFORMS
 
 DEPENDENCIES
   climate_control
-  colorize
+  govuk-docker!
   govuk-lint
   pry
   rspec
-  thor
 
 BUNDLED WITH
    1.17.2
