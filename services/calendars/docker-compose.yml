@@ -13,9 +13,6 @@ x-calendars: &calendars
 services:
   calendars-lite:
     <<: *calendars
-    volumes:
-      - $GOVUK_ROOT_DIR:/govuk:delegated
-      - bundle:/usr/local/bundle
 
   calendars-app: &calendars-app
     <<: *calendars

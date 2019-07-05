@@ -13,9 +13,6 @@ x-collections: &collections
 services:
   collections-lite:
     <<: *collections
-    volumes:
-      - $GOVUK_ROOT_DIR:/govuk:delegated
-      - bundle:/usr/local/bundle
 
   # TODO: doesn't work yet because collections also relies on search-api
   collections-app: &collections-app

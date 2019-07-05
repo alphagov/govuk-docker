@@ -16,9 +16,6 @@ services:
     <<: *calculators
     # Tests need the privileged flag
     privileged: true
-    volumes:
-      - $GOVUK_ROOT_DIR:/govuk:delegated
-      - bundle:/usr/local/bundle
 
   calculators-app: &calculators-app
     <<: *calculators
