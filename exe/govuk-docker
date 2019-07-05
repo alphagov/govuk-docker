@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "govuk_docker"
+require "govuk_docker/cli"
+GovukDocker::CLI.start(ARGV)

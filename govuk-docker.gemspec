@@ -16,7 +16,9 @@ Gem::Specification.new do |s|
   s.description  = "A local environment for GOV.UK powered by Docker"
 
   s.required_ruby_version = ">= 2.6.0"
-  s.files        = Dir.glob("lib/**/*") + %w(README.md)
+  s.files        = Dir.glob("exe/**/*") + Dir.glob("lib/**/*") + %w(README.md)
+  s.bindir       = "exe"
+  s.executables  = s.files.grep(%r{^exe/}) { |f| File.basename(f) }
   s.require_path = "lib"
   s.add_dependency "colorize"
   s.add_dependency "thor"
