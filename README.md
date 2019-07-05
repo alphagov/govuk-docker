@@ -74,7 +74,7 @@ make content-publisher government-frontend
 The govuk-docker command can configure Dnsmasq for you:
 
 ```
-govuk-docker install
+govuk-docker setup
 ```
 
 If this doesn't work for whatever reason, follow the instructions below to

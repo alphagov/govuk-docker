@@ -8,7 +8,7 @@ require_relative "./commands/startup"
 require_relative "./doctor/dnsmasq"
 require_relative "./doctor/doctor"
 require_relative "./doctor/checkup"
-require_relative "./install/dnsmasq"
+require_relative "./setup/dnsmasq"
 
 class GovukDockerCLI < Thor
   # https://github.com/ddollar/foreman/blob/83fd5eeb8c4b522cb84d8e74031080143ea6353b/lib/foreman/cli.rb#L29-L35
@@ -68,11 +68,6 @@ class GovukDockerCLI < Thor
     ).call
   end
 
-  desc "install", "Configures and installs the various dependencies necessary to run `govuk-docker` successfully"
-  def install
-    Install::Dnsmasq.new.call
-  end
-
   desc "prune", "Remove all docker containers, volumes and images"
   def prune
     Commands::Prune.new(options).call
@@ -87,6 +82,11 @@ class GovukDockerCLI < Thor
   LONGDESC
   def run(*args)
     Commands::Run.new(options).call(args)
+  end
+
+  desc "setup", "Configures and installs the various dependencies necessary to run `govuk-docker` successfully"
+  def setup
+    Setup::Dnsmasq.new(shell).call
   end
 
   desc "be [ARGS]", "Alias for `run bundle exec`"

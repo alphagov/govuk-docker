@@ -1,14 +1,11 @@
 require "spec_helper"
-require_relative "../../lib/install/dnsmasq"
+require_relative "../../lib/setup/dnsmasq"
 
-describe Install::Dnsmasq do
-  subject { described_class.new }
-
+describe Setup::Dnsmasq do
   let(:shell_double) { double }
-  before do
-    allow(Thor::Shell::Basic).to receive(:new).and_return(shell_double)
-    allow(subject).to receive(:puts)
-  end
+
+  subject { described_class.new(shell_double) }
+  before { allow(subject).to receive(:puts) }
 
   context "disallowing the script to continue" do
     it "shouldn't do anything" do
