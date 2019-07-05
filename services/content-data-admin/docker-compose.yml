@@ -3,11 +3,10 @@ version: '3.7'
 x-content-data-admin: &content-data-admin
   build:
     context: .
-    dockerfile: services/content-data-admin/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: content-data-admin
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/content-data-admin
 

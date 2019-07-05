@@ -3,11 +3,11 @@ version: '3.7'
 x-email-alert-api: &email-alert-api
   build:
     context: .
-    dockerfile: services/email-alert-api/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: email-alert-api
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
+    - home:/home/build
   working_dir: /govuk/email-alert-api
 
 services:

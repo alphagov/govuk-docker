@@ -3,11 +3,10 @@ version: '3.7'
 x-content-store: &content-store
   build:
     context: .
-    dockerfile: services/content-store/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: content-store
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/content-store
 

@@ -135,10 +135,6 @@ Decisions made to support this need: [docker-stacks](DECISIONS.md#docker-stacks)
 
 Decisions made to support this need: [docker-mount1](DECISIONS.md#docker-mount1)
 
->**As a** developer on a GOV.UK service<br>
->**I want** to edit service dependencies<br>
->**So that** I can investigate a bug<br>
-
 ### Automating Tests
 
 >**As a** developer on a GOV.UK service <br>

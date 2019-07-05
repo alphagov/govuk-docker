@@ -3,11 +3,11 @@ version: '3.7'
 x-tmp: &info-frontend-base
   build:
     context: .
-    dockerfile: services/info-frontend/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: info-frontend
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
+    - home:/home/build
   working_dir: /govuk/info-frontend
 
 services:

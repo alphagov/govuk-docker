@@ -3,11 +3,10 @@ version: '3.7'
 x-smart-answers: &smart-answers
   build:
     context: .
-    dockerfile: services/smart-answers/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: smart-answers
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/smart-answers
 

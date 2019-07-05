@@ -7,7 +7,6 @@ x-specialist-publisher: &specialist-publisher
   image: specialist-publisher
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/specialist-publisher
 

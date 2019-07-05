@@ -3,11 +3,10 @@ version: '3.7'
 x-govuk_publishing_components: &govuk_publishing_components
   build:
     context: .
-    dockerfile: services/govuk_publishing_components/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: govuk_publishing_components
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/govuk_publishing_components
 

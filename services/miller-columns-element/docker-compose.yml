@@ -3,10 +3,11 @@ version: '3.7'
 x-miller-columns-element: &miller-columns-element
   build:
     context: .
-    dockerfile: services/miller-columns-element/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: miller-columns-element
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
   working_dir: /govuk/miller-columns-element
 
 services:

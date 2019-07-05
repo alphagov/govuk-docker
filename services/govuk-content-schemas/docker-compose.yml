@@ -3,11 +3,10 @@ version: '3.7'
 x-govuk-content-schemas: &govuk-content-schemas
   build:
     context: .
-    dockerfile: services/govuk-content-schemas/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: govuk-content-schemas
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/govuk-content-schemas
 

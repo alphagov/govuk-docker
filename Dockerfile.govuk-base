@@ -1,3 +1,7 @@
+# Standard Dockerfile for GOV.UK services. Random service-specific stuff should *not*
+# go in this file. Instead, you should copy this file into the directory for the
+# service and make any changes to it there.
+
 # Install packages for building ruby
 FROM buildpack-deps
 
@@ -25,10 +29,6 @@ RUN git clone https://github.com/sstephenson/rbenv.git /rbenv
 RUN git clone https://github.com/sstephenson/ruby-build.git /rbenv/plugins/ruby-build
 RUN /rbenv/plugins/ruby-build/install.sh
 ENV PATH /rbenv/bin:$PATH
-
-# Install virus scanner utility
-RUN apt-get update -qq && apt-get upgrade -y && apt-get install -y clamav
-RUN ln -sf /usr/bin/clamscan /usr/bin/govuk_clamscan
 
 RUN useradd -m build
 ENV PATH /home/build/.rbenv/shims:${PATH}

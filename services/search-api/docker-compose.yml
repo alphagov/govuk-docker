@@ -3,11 +3,10 @@ version: '3.7'
 x-search-api: &search-api
   build:
     context: .
-    dockerfile: services/search-api/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: search-api
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/search-api
   environment:

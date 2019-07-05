@@ -3,11 +3,11 @@ version: '3.7'
 x-service-manual-frontend: &service-manual-frontend-base
   build:
     context: .
-    dockerfile: services/service-manual-frontend/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: service-manual-frontend
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - bundle:/usr/local/bundle
+    - home:/home/build
   working_dir: /govuk/service-manual-frontend
 
 services:
