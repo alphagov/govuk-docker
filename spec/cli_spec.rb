@@ -1,5 +1,5 @@
 require "spec_helper"
-require_relative "../lib/govuk_docker/govuk_docker_cli"
+require_relative "../lib/govuk_docker/cli"
 
 describe GovukDockerCLI do
   let(:command) { nil }

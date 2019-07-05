@@ -18,5 +18,5 @@ end
 require "rubygems"
 require "bundler/setup"
 
-require_relative "../lib/govuk_docker/govuk_docker_cli"
+require_relative "../lib/govuk_docker/cli"
 GovukDockerCLI.start(ARGV)
