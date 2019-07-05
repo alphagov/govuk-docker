@@ -1,3 +1,5 @@
+require_relative "../paths"
+
 module Doctor
   class Checkup
     def initialize(service_name:, checkups:, messages:)
@@ -14,10 +16,15 @@ module Doctor
     end
 
     def checkup
+      up_to_date? if checkups.include?(:up_to_date)
       installed? if checkups.include?(:installed)
       running? if checkups.include?(:running)
       running_as_different_user? if checkups.include?(:running_as_different_user)
       dnsmasq_resolver? if checkups.include?(:dnsmasq_resolver)
+    end
+
+    def up_to_date?
+      @up_to_date ||= !(system "git -C #{GovukDocker::Paths.govuk_docker_dir} diff master origin/master | cat 1>/dev/null")
     end
 
     def installed?
@@ -34,10 +41,19 @@ module Doctor
     attr_accessor :return_message
 
     def generate_return_message
+      up_to_date_state_message if checkups.include?(:up_to_date)
       install_state_message if checkups.include?(:installed)
       run_state_message if checkups.include?(:running)
       running_user_message if checkups.include?(:running_as_different_user)
       dnsmasq_resolver_message if checkups.include?(:dnsmasq_resolver)
+    end
+
+    def up_to_date_state_message
+      return_message << if up_to_date?
+                          messages[:up_to_date]
+                        else
+                          messages[:outdated]
+                        end
     end
 
     def install_state_message

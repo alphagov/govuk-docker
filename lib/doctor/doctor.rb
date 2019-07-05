@@ -1,9 +1,20 @@
 module Doctor
   def self.messages
     {
+      govuk_docker: govuk_docker_messages,
       dnsmasq: dnsmasq_messages,
       docker: docker_messages,
       docker_compose: docker_compose_messages
+    }
+  end
+
+  def self.govuk_docker_messages
+    {
+      up_to_date: "✅ govuk-docker is up-to-date",
+      outdated: <<~HEREDOC,
+        ❌ govuk-docker is outdated.
+        You should pull the latest version from https://github.com/alphagov/govuk-docker/.
+      HEREDOC
     }
   end
 
