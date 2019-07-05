@@ -5,6 +5,8 @@ describe Doctor::Checkup do
   let(:service_name) { "fake_service" }
   let(:messages) {
     {
+      up_to_date: "fake_service is up-to-date",
+      outdated: "fake_service is outdated",
       installed: "fake_service is installed",
       not_installed: "fake_service is not installed",
       running: "fake_service is running",
@@ -15,6 +17,38 @@ describe Doctor::Checkup do
       not_dnsmasq_resolver: "A different service is resolving your dns"
     }
   }
+
+  context "when the repository is up-to-date" do
+    it "should report that it is up-to-date" do
+      subject = described_class.new(
+        service_name: service_name,
+        checkups: %i(up_to_date),
+        messages: messages
+      )
+
+      ClimateControl.modify GOVUK_DOCKER_DIR: "/some/directory" do
+        allow(subject).to receive(:system).with("git -C /some/directory diff master origin/master | cat 1>/dev/null").and_return(false)
+
+        expect(subject.call).to eq("fake_service is up-to-date")
+      end
+    end
+  end
+
+  context "when the repository is outdated" do
+    it "should report that it is outdated" do
+      subject = described_class.new(
+        service_name: service_name,
+        checkups: %i(up_to_date),
+        messages: messages
+      )
+
+      ClimateControl.modify GOVUK_DOCKER_DIR: "/some/directory" do
+        allow(subject).to receive(:system).with("git -C /some/directory diff master origin/master | cat 1>/dev/null").and_return(true)
+
+        expect(subject.call).to eq("fake_service is outdated")
+      end
+    end
+  end
 
   context "when a service is installed" do
     it "should report that it is installed" do
