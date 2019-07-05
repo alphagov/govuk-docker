@@ -147,6 +147,8 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ publishing-api
    - ✅ router
    - ✅ router-api
+   - ⚠  search-api
+    * Tests fail as they run against [both Elasticsearch instances](https://github.com/alphagov/search-api/pull/1618)
    - ✅ signon
    - ✅ smart-answers
    - ✅ specialist-publisher
