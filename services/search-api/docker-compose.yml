@@ -44,6 +44,11 @@ services:
       - "3000"
     command: bundle exec mr-sparkle --force-polling -- -p 3000
 
+  search-api-setup:
+    <<: *search-api
+    depends_on:
+      - publishing-api-app-e2e
+
   search-api-worker:
     <<: *search-api
     depends_on:
