@@ -116,6 +116,14 @@ To check whether dnsmasq name server at 127.0.0.1 can resolve subdomains of dev.
 app.dev.gov.uk.		0	IN	A	127.0.0.1
 ```
 
+## Environment variables
+
+Both govuk-docker and the Makefile respect the following environment variables:
+
+- `$GOVUK_ROOT_DIR` - directory where app repositories live, defaults to `$HOME/govuk`
+- `$GOVUK_DOCKER_DIR` - directory where the govuk-docker repository lives, defaults to `$GOVUK_ROOT_DIR/govuk-docker`
+- `$GOVUK_DOCKER` - path of the govuk-docker script, defaults to `$GOVUK_DOCKER_DIR/bin/govuk-docker`
+
 ## Compatibility
 
 The following apps are supported by govuk-docker to some extent.
