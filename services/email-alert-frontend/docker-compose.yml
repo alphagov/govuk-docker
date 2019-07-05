@@ -1,0 +1,15 @@
+version: '3.7'
+
+x-email-alert-frontend: &email-alert-frontend
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: email-alert-frontend
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/email-alert-frontend
+
+services:
+  email-alert-frontend-lite:
+    <<: *email-alert-frontend
