@@ -6,7 +6,7 @@ x-asset-manager: &asset-manager
     dockerfile: services/asset-manager/Dockerfile
   image: asset-manager
   volumes:
-    - ..:/govuk:delegated
+    - $GOVUK_ROOT_DIR:/govuk:delegated
     - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/asset-manager

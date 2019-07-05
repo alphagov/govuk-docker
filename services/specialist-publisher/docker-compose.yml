@@ -6,7 +6,7 @@ x-specialist-publisher: &specialist-publisher
     dockerfile: services/specialist-publisher/Dockerfile
   image: specialist-publisher
   volumes:
-    - ..:/govuk:delegated
+    - $GOVUK_ROOT_DIR:/govuk:delegated
     - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/specialist-publisher

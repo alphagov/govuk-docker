@@ -6,7 +6,7 @@ x-government-frontend: &government-frontend
     dockerfile: services/government-frontend/Dockerfile
   image: government-frontend
   volumes:
-    - ..:/govuk:delegated
+    - $GOVUK_ROOT_DIR:/govuk:delegated
     - bundle:/usr/local/bundle
   working_dir: /govuk/government-frontend
 
@@ -15,7 +15,7 @@ services:
     <<: *government-frontend
     privileged: true
     volumes:
-      - ..:/govuk:delegated
+      - $GOVUK_ROOT_DIR:/govuk:delegated
       - bundle:/usr/local/bundle
 
   government-frontend-app: &government-frontend-app

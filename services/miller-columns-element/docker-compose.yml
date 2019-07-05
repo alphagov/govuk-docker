@@ -6,7 +6,7 @@ x-miller-columns-element: &miller-columns-element
     dockerfile: services/miller-columns-element/Dockerfile
   image: miller-columns-element
   volumes:
-    - ..:/govuk:delegated
+    - $GOVUK_ROOT_DIR:/govuk:delegated
   working_dir: /govuk/miller-columns-element
 
 services:

@@ -6,7 +6,7 @@ x-tmp: &info-frontend-base
     dockerfile: services/info-frontend/Dockerfile
   image: info-frontend
   volumes:
-    - ..:/govuk:delegated
+    - $GOVUK_ROOT_DIR:/govuk:delegated
     - bundle:/usr/local/bundle
   working_dir: /govuk/info-frontend
 
@@ -14,7 +14,7 @@ services:
   info-frontend-lite:
     <<: *info-frontend-base
     volumes:
-      - ..:/govuk:delegated
+      - $GOVUK_ROOT_DIR:/govuk:delegated
       - bundle:/usr/local/bundle
 
   info-frontend-app:

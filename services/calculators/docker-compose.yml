@@ -6,7 +6,7 @@ x-calculators: &calculators
     dockerfile: services/calculators/Dockerfile
   image: calculators
   volumes:
-    - ..:/govuk:delegated
+    - $GOVUK_ROOT_DIR:/govuk:delegated
     - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/calculators
@@ -17,7 +17,7 @@ services:
     # Tests need the privileged flag
     privileged: true
     volumes:
-      - ..:/govuk:delegated
+      - $GOVUK_ROOT_DIR:/govuk:delegated
       - bundle:/usr/local/bundle
 
   calculators-app: &calculators-app

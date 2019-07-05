@@ -6,7 +6,7 @@ x-service-manual-frontend: &service-manual-frontend-base
     dockerfile: services/service-manual-frontend/Dockerfile
   image: service-manual-frontend
   volumes:
-    - ..:/govuk:delegated
+    - $GOVUK_ROOT_DIR:/govuk:delegated
     - bundle:/usr/local/bundle
   working_dir: /govuk/service-manual-frontend
 
@@ -14,7 +14,7 @@ services:
   service-manual-frontend-lite:
     <<: *service-manual-frontend-base
     volumes:
-      - ..:/govuk:delegated
+      - $GOVUK_ROOT_DIR:/govuk:delegated
       - bundle:/usr/local/bundle
 
   service-manual-frontend-app: &service-manual-frontend-app

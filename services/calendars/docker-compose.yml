@@ -6,7 +6,7 @@ x-calendars: &calendars
     dockerfile: services/calendars/Dockerfile
   image: calendars
   volumes:
-    - ..:/govuk:delegated
+    - $GOVUK_ROOT_DIR:/govuk:delegated
     - bundle:/usr/local/bundle
   working_dir: /govuk/calendars
 
@@ -14,7 +14,7 @@ services:
   calendars-lite:
     <<: *calendars
     volumes:
-      - ..:/govuk:delegated
+      - $GOVUK_ROOT_DIR:/govuk:delegated
       - bundle:/usr/local/bundle
 
   calendars-app: &calendars-app

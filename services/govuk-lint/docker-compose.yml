@@ -6,7 +6,7 @@ x-govuk-lint: &govuk-lint
     dockerfile: services/govuk-lint/Dockerfile
   image: govuk-lint
   volumes:
-    - ..:/govuk:delegated
+    - $GOVUK_ROOT_DIR:/govuk:delegated
     - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/govuk-lint

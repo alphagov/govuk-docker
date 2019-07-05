@@ -6,7 +6,7 @@ x-support-api: &support-api
     dockerfile: services/support-api/Dockerfile
   image: support-api
   volumes:
-    - ..:/govuk:delegated
+    - $GOVUK_ROOT_DIR:/govuk:delegated
     - bundle:/usr/local/bundle
     - home:/home/build
   working_dir: /govuk/support-api
