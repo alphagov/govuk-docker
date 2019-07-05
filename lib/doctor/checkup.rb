@@ -17,6 +17,7 @@ module Doctor
       installed? if checkups.include?(:installed)
       running? if checkups.include?(:running)
       running_as_different_user? if checkups.include?(:running_as_different_user)
+      dnsmasq_resolver? if checkups.include?(:dnsmasq_resolver)
     end
 
     def installed?
@@ -36,6 +37,7 @@ module Doctor
       install_state_message if checkups.include?(:installed)
       run_state_message if checkups.include?(:running)
       running_user_message if checkups.include?(:running_as_different_user)
+      dnsmasq_resolver_message if checkups.include?(:dnsmasq_resolver)
     end
 
     def install_state_message
@@ -63,6 +65,18 @@ module Doctor
                           messages[:running_as_different_user]
                         else
                           messages[:not_running_as_different_user]
+                        end
+    end
+
+    def dnsmasq_resolver?
+      File.read('/etc/resolver/dev.gov.uk').strip == "nameserver 127.0.0.1"
+    end
+
+    def dnsmasq_resolver_message
+      return_message << if dnsmasq_resolver?
+                          messages[:dnsmasq_resolver]
+                        else
+                          messages[:not_dnsmasq_resolver]
                         end
     end
   end
