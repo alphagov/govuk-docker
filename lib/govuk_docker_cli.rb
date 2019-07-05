@@ -19,6 +19,10 @@ class GovukDockerCLI < Thor
 
       super
     end
+
+    def exit_on_failure?
+      true
+    end
   end
 
   package_name "govuk-docker"
