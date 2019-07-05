@@ -89,6 +89,11 @@ class GovukDockerCLI < Thor
     Commands::Run.new(options).call(args)
   end
 
+  desc "be [ARGS]", "Alias for `run bundle exec`"
+  def be(*args)
+    Commands::Run.new(options).call(%w[bundle exec] + args)
+  end
+
   desc "startup [VARIATION]", "Run the container for a service in the `app` stack, with optional variations, such as `live` or `draft`"
   def startup(variation = nil)
     Commands::Startup.new(options).call(variation)

@@ -92,6 +92,19 @@ describe GovukDockerCLI do
     end
   end
 
+  describe "be" do
+    let(:command) { "be" }
+    let(:args) { %w[rspec] }
+
+    it "runs the `run` command with `bundle exec` plus additional arguments" do
+      expect(Commands::Run)
+        .to receive(:new).with(stack: "lite", verbose: false)
+        .and_return(command_double)
+      expect(command_double).to receive(:call).with(%w[bundle exec rspec])
+      subject
+    end
+  end
+
   describe "startup" do
     let(:command) { "startup" }
 
