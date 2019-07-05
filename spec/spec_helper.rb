@@ -1,3 +1,4 @@
+require 'climate_control'
 require 'pry'
 require 'thor'
 

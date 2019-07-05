@@ -8,7 +8,7 @@ node {
     overrideTestTask: {
       stage("Run tests") {
         govuk.withStatsdTiming("test_task") {
-          sh "make test"
+          sh "GOVUK_DOCKER_DIR=. make test"
         }
       }
     }
