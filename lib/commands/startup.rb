@@ -71,5 +71,7 @@ private
     else
       false
     end
+  rescue Errno::EHOSTDOWN
+    false
   end
 end
