@@ -1,2 +1,3 @@
-govuk_publishing_components: $(GOVUK_ROOT_DIR)/govuk_publishing_components
-	$(COMPOSE_RUN) govuk_publishing_components-lite bundle
+govuk_publishing_components: $(GOVUK_ROOT_DIR)/$@
+	govuk-docker compose build $@-lite
+	govuk-docker compose run $@-lite bundle

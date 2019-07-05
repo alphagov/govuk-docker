@@ -1,2 +1,3 @@
-miller-columns-element: $(GOVUK_ROOT_DIR)/miller-columns-element
-	$(COMPOSE_RUN) miller-columns-element-lite npm install
+miller-columns-element: $(GOVUK_ROOT_DIR)/$@
+	govuk-docker compose build $@-lite
+	govuk-docker compose run $@-lite npm install

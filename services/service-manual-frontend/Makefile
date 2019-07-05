@@ -1,2 +1,3 @@
-service-manual-frontend: $(GOVUK_ROOT_DIR)/service-manual-frontend
-	$(COMPOSE_RUN) service-manual-frontend-lite bundle
+service-manual-frontend: $(GOVUK_ROOT_DIR)/$@
+	govuk-docker compose build $@-lite
+	govuk-docker compose run $@-lite bundle

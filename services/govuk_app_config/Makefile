@@ -1,2 +1,3 @@
-govuk_app_config: $(GOVUK_ROOT_DIR)/govuk_app_config
-	$(COMPOSE_RUN) govuk_app_config-lite bundle
+govuk_app_config: $(GOVUK_ROOT_DIR)/$@
+	govuk-docker compose build $@-lite
+	govuk-docker compose run $@-lite bundle

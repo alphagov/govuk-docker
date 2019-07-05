@@ -1,2 +1,3 @@
-router-api: $(GOVUK_ROOT_DIR)/router-api router
-	$(COMPOSE_RUN) router-api-lite bundle
+router-api: $(GOVUK_ROOT_DIR)/$@ router
+	govuk-docker compose build $@-lite
+	govuk-docker compose run $@-lite bundle

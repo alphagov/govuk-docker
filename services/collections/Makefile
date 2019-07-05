@@ -1,2 +1,3 @@
-collections: $(GOVUK_ROOT_DIR)/collections
-	$(COMPOSE_RUN) collections-lite bundle
+collections: $(GOVUK_ROOT_DIR)/$@
+	govuk-docker compose build $@-lite
+	govuk-docker compose run $@-lite bundle
