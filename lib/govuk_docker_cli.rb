@@ -75,7 +75,7 @@ class GovukDockerCLI < Thor
 
   desc "prune", "Remove all docker containers, volumes and images"
   def prune
-    Commands::Prune.new.call
+    Commands::Prune.new(options).call
   end
 
   desc "run [ARGS]", "Run the service"
