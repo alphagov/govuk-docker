@@ -13,8 +13,8 @@ services:
         aliases:
           - asset-manager.dev.gov.uk
           - calendars.dev.gov.uk
-          - collections.dev.gov.uk
           - collections-publisher.dev.gov.uk
+          - collections.dev.gov.uk
           - content-publisher.dev.gov.uk
           - content-store.dev.gov.uk
           - content-tagger.dev.gov.uk
@@ -38,8 +38,8 @@ services:
           - publishing-api.dev.gov.uk
           - router-api.dev.gov.uk
           - router.dev.gov.uk
-          - service-manual-frontend.dev.gov.uk
           - search-api.dev.gov.uk
+          - service-manual-frontend.dev.gov.uk
           - signon.dev.gov.uk
           - smart-answers.dev.gov.uk
           - specialist-publisher.dev.gov.uk
