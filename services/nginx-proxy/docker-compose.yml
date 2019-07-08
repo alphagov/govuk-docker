@@ -12,12 +12,14 @@ services:
       default:
         aliases:
           - asset-manager.dev.gov.uk
+          - calculators.dev.gov.uk
           - calendars.dev.gov.uk
           - collections-publisher.dev.gov.uk
           - collections.dev.gov.uk
           - content-publisher.dev.gov.uk
           - content-store.dev.gov.uk
           - content-tagger.dev.gov.uk
+          - draft-calculators.dev.gov.uk
           - draft-content-store.dev.gov.uk
           - draft-frontend.dev.gov.uk
           - draft-government-frontend.dev.gov.uk
