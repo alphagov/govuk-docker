@@ -12,12 +12,16 @@ services:
       default:
         aliases:
           - asset-manager.dev.gov.uk
+          - calculators.dev.gov.uk
           - calendars.dev.gov.uk
-          - collections.dev.gov.uk
           - collections-publisher.dev.gov.uk
+          - collections.dev.gov.uk
           - content-publisher.dev.gov.uk
           - content-store.dev.gov.uk
           - content-tagger.dev.gov.uk
+          - draft-calculators.dev.gov.uk
+          - draft-calendars.dev.gov.uk
+          - draft-collections.dev.gov.uk
           - draft-content-store.dev.gov.uk
           - draft-frontend.dev.gov.uk
           - draft-government-frontend.dev.gov.uk
@@ -25,21 +29,23 @@ services:
           - draft-origin.dev.gov.uk
           - draft-router-api.dev.gov.uk
           - draft-router.dev.gov.uk
+          - draft-service-manual-frontend.dev.gov.uk
           - draft-static.dev.gov.uk
           - email-alert-api.dev.gov.uk
           - email-alert-frontend.dev.gov.uk
           - frontend.dev.gov.uk
           - government-frontend.dev.gov.uk
-          - govuk_publishing_components.dev.gov.uk
           - govuk-developer-docs.dev.gov.uk
+          - govuk-publishing-components.dev.gov.uk
+          - info-frontend.dev.gov.uk
           - link-checker-api.dev.gov.uk
           - manuals-frontend.dev.gov.uk
           - publisher.dev.gov.uk
           - publishing-api.dev.gov.uk
           - router-api.dev.gov.uk
           - router.dev.gov.uk
-          - service-manual-frontend.dev.gov.uk
           - search-api.dev.gov.uk
+          - service-manual-frontend.dev.gov.uk
           - signon.dev.gov.uk
           - smart-answers.dev.gov.uk
           - specialist-publisher.dev.gov.uk
