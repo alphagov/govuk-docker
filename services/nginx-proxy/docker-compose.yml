@@ -30,8 +30,8 @@ services:
           - email-alert-frontend.dev.gov.uk
           - frontend.dev.gov.uk
           - government-frontend.dev.gov.uk
-          - govuk_publishing_components.dev.gov.uk
           - govuk-developer-docs.dev.gov.uk
+          - govuk-publishing-components.dev.gov.uk
           - link-checker-api.dev.gov.uk
           - manuals-frontend.dev.gov.uk
           - publisher.dev.gov.uk
