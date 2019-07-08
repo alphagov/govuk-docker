@@ -29,7 +29,7 @@ module Doctor
       running: "✅ Docker is running",
       not_running: <<~HEREDOC
         ❌ Docker is not running.
-        You should start it with `sudo brew services start dnsmasq`.
+        Please make sure Docker is running before using govuk-docker.
       HEREDOC
     }
   end
