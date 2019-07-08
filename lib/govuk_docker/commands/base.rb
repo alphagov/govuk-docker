@@ -3,7 +3,7 @@ require_relative '../paths'
 require_relative '../errors/unknown_service'
 require_relative '../errors/unknown_stack'
 
-module Commands
+module GovukDocker::Commands
   class Base
     def initialize(options = {})
       @config_directory = options[:config_directory] || default_config_directory
@@ -26,11 +26,11 @@ module Commands
     end
 
     def check_service_exists
-      raise UnknownService.new(service, config_directory) unless service_exists?
+      raise GovukDocker::UnknownService.new(service, config_directory) unless service_exists?
     end
 
     def check_stack_exists
-      raise UnknownStack.new(stack, available_stacks) unless stack_exists?
+      raise GovukDocker::UnknownStack.new(stack, available_stacks) unless stack_exists?
     end
 
   private

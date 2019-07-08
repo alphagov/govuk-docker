@@ -1,7 +1,7 @@
 require "spec_helper"
-require_relative "../../lib/errors/unknown_stack"
+require_relative "../../lib/govuk_docker/errors/unknown_stack"
 
-describe UnknownStack do
+describe GovukDocker::UnknownStack do
   it "should print a list of available stack in the error message" do
     incorrect_stack = 'incorrect'
     available_stacks = %w[test lite]

@@ -1,6 +1,6 @@
 require_relative './base'
 
-class Commands::Prune < Commands::Base
+class GovukDocker::Commands::Prune < GovukDocker::Commands::Base
   def call
     commands.each { |command| system_command command }
   end

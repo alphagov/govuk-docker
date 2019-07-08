@@ -1,7 +1,7 @@
 require "spec_helper"
-require_relative "../../lib/commands/base"
+require_relative "../../lib/govuk_docker/commands/base"
 
-describe Commands::Base do
+describe GovukDocker::Commands::Base do
   subject { described_class.new }
 
   describe "#system_command" do

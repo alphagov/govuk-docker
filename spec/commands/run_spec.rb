@@ -1,7 +1,7 @@
 require "spec_helper"
-require_relative "../../lib/commands/run"
+require_relative "../../lib/govuk_docker/commands/run"
 
-describe Commands::Run do
+describe GovukDocker::Commands::Run do
   let(:config_directory) { "spec/fixtures" }
   let(:service) { nil }
   let(:stack)   { nil }
@@ -16,7 +16,7 @@ describe Commands::Run do
 
     let(:compose_command) { double }
     before do
-      expect(Commands::Compose).to receive(:new)
+      expect(GovukDocker::Commands::Compose).to receive(:new)
         .with(config_directory: config_directory, service: service, stack: stack, verbose: verbose)
         .and_return(compose_command)
     end
@@ -60,7 +60,7 @@ describe Commands::Run do
     let(:stack) { "lite" }
 
     it "should fail" do
-      expect { subject.call(args) }.to raise_error(UnknownService)
+      expect { subject.call(args) }.to raise_error(GovukDocker::UnknownService)
     end
   end
 
@@ -69,7 +69,7 @@ describe Commands::Run do
     let(:stack) { "no-example-stack" }
 
     it "should fail" do
-      expect { subject.call(args) }.to raise_error(UnknownStack)
+      expect { subject.call(args) }.to raise_error(GovukDocker::UnknownStack)
     end
   end
 end

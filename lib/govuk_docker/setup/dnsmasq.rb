@@ -1,7 +1,7 @@
 require_relative "./base"
 require_relative "../doctor/checkup"
 
-class Setup::Dnsmasq < Setup::Base
+class GovukDocker::Setup::Dnsmasq < GovukDocker::Setup::Base
   def call
     return unless check_continue
 
@@ -31,7 +31,7 @@ private
   end
 
   def install_dnsmasq
-    return if Doctor::Checkup.new(
+    return if GovukDocker::Doctor::Checkup.new(
       service_name: "dnsmasq",
       checkups: %i(installed),
       messages: {}

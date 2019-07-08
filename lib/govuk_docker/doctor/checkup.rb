@@ -1,6 +1,6 @@
 require_relative "../paths"
 
-module Doctor
+module GovukDocker::Doctor
   class Checkup
     def initialize(service_name:, checkups:, messages:)
       @checkups = checkups
