@@ -12,8 +12,8 @@ module GovukDocker::Commands
       @verbose = options[:verbose] || default_verbose
     end
 
-    def system_command(*args)
-      system(*args) || raise("Non-zero exit code")
+    def system_command(*args, raise_on_error: true)
+      system(*args) || raise_on_error && raise("Non-zero exit code")
     end
 
     def service_exists?
