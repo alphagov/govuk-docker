@@ -1,0 +1,40 @@
+version: '3.7'
+
+x-search-admin: &search-admin-base
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: search-admin
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/search-admin
+
+services:
+  search-admin-lite:
+    <<: *search-admin-base
+    privileged: true
+    depends_on:
+      - mysql
+    environment:
+      # the app uses this URL to generate a test database URL
+      DATABASE_URL: "mysql2://root:root@mysql/search_admin_development"
+      TEST_DATABASE_URL: "mysql2://root:root@mysql/search_admin_test"
+      REDIS_URL: redis://redis
+      DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
+
+  search-admin-app: &search-admin-app
+    <<: *search-admin-base
+    depends_on:
+      - mysql
+      - nginx-proxy-app
+      - publishing-api-app
+      - search-api-app
+    environment:
+      DATABASE_URL: "mysql2://root:root@mysql/search_admin_development"
+      REDIS_URL: redis://redis
+      VIRTUAL_HOST: search-admin.dev.gov.uk
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    command: bin/rails s -P /tmp/rails.pid
