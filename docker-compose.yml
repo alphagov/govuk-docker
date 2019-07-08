@@ -21,6 +21,9 @@ services:
     image: mongo:2.4
     volumes:
       - mongo:/data/db
+    ports:
+      - "27017:27017"
+      - "27018:27018"
 
   mysql:
     image: mysql:5.5.58
