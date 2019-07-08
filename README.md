@@ -141,6 +141,7 @@ The following apps are supported by govuk-docker to some extent.
    - ⚠  collections
     * Only works with live data
    - ✅ email-alert-api
+   - ✅ email-alert-frontend
    - ❌ finder-frontend
    - ❌ frontend
    - ✅ government-frontend

@@ -25,6 +25,8 @@ services:
           - draft-router-api.dev.gov.uk
           - draft-router.dev.gov.uk
           - draft-static.dev.gov.uk
+          - email-alert-api.dev.gov.uk
+          - email-alert-frontend.dev.gov.uk
           - government-frontend.dev.gov.uk
           - govuk_publishing_components.dev.gov.uk
           - govuk-developer-docs.dev.gov.uk
