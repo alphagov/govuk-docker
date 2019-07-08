@@ -15,7 +15,7 @@ describe GovukDocker::Commands::Prune do
   end
 
   it "removes temporary anonymous volumes" do
-    expect(subject).to receive(:system).with("docker volume rm $(docker volume ls -q -f 'dangling=true' | grep -x '.{64,}') 2> /dev/null")
+    expect(subject).to receive(:system).with("docker volume rm $(docker volume ls -q -f 'dangling=true' | grep -x '.{64,}') 2> /dev/null || true")
     subject.call
   end
 
