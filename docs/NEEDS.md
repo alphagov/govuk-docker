@@ -3,6 +3,12 @@
 
 # Needs
 
+The aim of govuk-docker is to meet the following primary need.
+
+> **As a** developer on GOV.UK apps <br/>
+> **I want** a GOV.UK environment optimised for development <br/>
+> **So that** I can develop GOV.UK apps efficiently
+
 This is a thorough but non-exhaustive list of the needs for developing in the GOV.UK ecosystem. All of the needs should be independent of the decisions that try to address them, which is why none refer to govuk-docker specifically.
 
 Format:
