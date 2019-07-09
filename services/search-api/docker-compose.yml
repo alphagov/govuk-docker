@@ -38,11 +38,16 @@ services:
       REDIS_HOST: redis
       ELASTICSEARCH_URI: http://elasticsearch5:9200
       ELASTICSEARCH_B_URI: http://elasticsearch6:9200
-      VIRTUAL_HOST: search-api.dev.gov.uk
+      VIRTUAL_HOST: search-api.dev.gov.uk, search.dev.gov.uk
       HOST: 0.0.0.0
     ports:
       - "3000"
     command: bundle exec mr-sparkle --force-polling -- -p 3000
+
+  search-api-setup:
+    <<: *search-api
+    depends_on:
+      - publishing-api-app-e2e
 
   search-api-worker:
     <<: *search-api

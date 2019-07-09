@@ -1,0 +1,50 @@
+version: '3.7'
+
+x-finder-frontend: &finder-frontend
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: finder-frontend
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/finder-frontend
+
+services:
+  finder-frontend-lite:
+    <<: *finder-frontend
+    privileged: true
+    depends_on:
+      - memcached
+    environment:
+      MEMCACHE_SERVERS: memcached
+
+  finder-frontend-app: &finder-frontend-app
+    <<: *finder-frontend
+    depends_on:
+      - router-app
+      - content-store-app
+      - static-app
+      - search-api-app-e2e
+      - memcached
+    environment:
+      GOVUK_ASSET_ROOT: finder-frontend.dev.gov.uk
+      VIRTUAL_HOST: finder-frontend.dev.gov.uk
+      HOST: 0.0.0.0
+      MEMCACHE_SERVERS: memcached
+    ports:
+      - "3000"
+    command: bin/rails s -P /tmp/rails.pid
+
+  finder-frontend-app-live:
+    <<: *finder-frontend-app
+    depends_on:
+      - nginx-proxy-app
+    environment:
+      PLEK_SERVICE_SEARCH_URI: https://www.gov.uk/api
+      PLEK_SERVICE_WHITEHALL_ADMIN_URI: https://www.gov.uk
+      GOVUK_WEBSITE_ROOT: https://www.gov.uk
+      PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
+      PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
+      VIRTUAL_HOST: finder-frontend.dev.gov.uk
+      HOST: 0.0.0.0

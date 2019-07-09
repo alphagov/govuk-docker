@@ -9,7 +9,7 @@ RSpec.describe "Docker compose files" do
     domains = Dir.glob("services/**/docker-compose.yml").map do |filename|
       services = YAML.load_file(filename)["services"]
       services.map do |_service_name, opts|
-        opts.dig("environment", "VIRTUAL_HOST").to_s.split(",")
+        opts.dig("environment", "VIRTUAL_HOST").to_s.gsub(/\s+/, "").split(",")
       end
     end
 
