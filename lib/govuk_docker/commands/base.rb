@@ -13,7 +13,7 @@ module GovukDocker::Commands
     end
 
     def system_command(*args, raise_on_error: true)
-      system(*args) || raise_on_error && raise("Non-zero exit code")
+      system(*args) || raise_on_error && raise(Thor::Error.new("Command failed with non-zero exit code"))
     end
 
     def service_exists?
