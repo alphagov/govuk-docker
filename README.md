@@ -52,59 +52,22 @@ Now in the `~/govuk` directory, run the following commands.
 git clone git@github.com:alphagov/govuk-docker.git
 cd govuk-docker
 bundle install
-```
-
-You can now clone and setup the apps you need with `make APP-NAME`,
-for example:
-
-```
-make content-publisher government-frontend
-```
-
-The govuk-docker command can configure Dnsmasq for you:
-
-```
 govuk-docker setup
 ```
 
-If this doesn't work for whatever reason, follow the instructions below to
-install manually:
-
-If you have been using the vagrant based dev vm, take a backup
-of  `/etc/resolver/dev.gov.uk`.
+You can now clone and setup the apps you need:
 
 ```
-cp /etc/resolver/dev.gov.uk ~/dev.gov.uk
+govuk-docker build --service content-publisher
 ```
 
-Then create or update `/etc/resolver/dev.gov.uk`. If you've been using the vagrant based dev VM, you'll need to replace `/etc/resolver/dev.gov.uk`
+To test it out:
 
 ```
-nameserver 127.0.0.1
-```
-To check if the new config has been applied, you can run `scutil --dns` to check that `dev.gov.uk` appears in the list.
-
-Then append the following to the bottom of `/usr/local/etc/dnsmasq.conf`
-```
-conf-dir=/usr/local/etc/dnsmasq.d,*.conf
+govuk-docker startup --service content-publisher
 ```
 
-Then create or append to `/usr/local/etc/dnsmasq.d/development.conf`
-```
-address=/dev.gov.uk/127.0.0.1
-```
-
-Once you've updated those files, restart dnsmasq:
-```
-sudo brew services restart dnsmasq
-```
-
-To check whether dnsmasq name server at 127.0.0.1 can resolve subdomains of dev.gov.uk run `dig app.dev.gov.uk @127.0.0.1`. The response has to include the following answer section:
-
-```
-;; ANSWER SECTION:
-app.dev.gov.uk.		0	IN	A	127.0.0.1
-```
+If this doesn't work for whatever reason, follow the [instructions to set up Dnsmasq manually](#how-to-set-up-dnsmasq-manually).
 
 ### Environment variables
 
@@ -240,6 +203,44 @@ Sometimes it's useful to get all changes for all repos e.g. to support finding t
 
 ```
 make pull
+```
+
+### How to: set up Dnsmasq manually
+
+If you have been using the vagrant based dev vm, take a backup
+of  `/etc/resolver/dev.gov.uk`.
+
+```
+cp /etc/resolver/dev.gov.uk ~/dev.gov.uk
+```
+
+Then create or update `/etc/resolver/dev.gov.uk`. If you've been using the vagrant based dev VM, you'll need to replace `/etc/resolver/dev.gov.uk`
+
+```
+nameserver 127.0.0.1
+```
+To check if the new config has been applied, you can run `scutil --dns` to check that `dev.gov.uk` appears in the list.
+
+Then append the following to the bottom of `/usr/local/etc/dnsmasq.conf`
+```
+conf-dir=/usr/local/etc/dnsmasq.d,*.conf
+```
+
+Then create or append to `/usr/local/etc/dnsmasq.d/development.conf`
+```
+address=/dev.gov.uk/127.0.0.1
+```
+
+Once you've updated those files, restart dnsmasq:
+```
+sudo brew services restart dnsmasq
+```
+
+To check whether dnsmasq name server at 127.0.0.1 can resolve subdomains of dev.gov.uk run `dig app.dev.gov.uk @127.0.0.1`. The response has to include the following answer section:
+
+```
+;; ANSWER SECTION:
+app.dev.gov.uk.		0	IN	A	127.0.0.1
 ```
 
 ## Licence
