@@ -40,19 +40,13 @@ test:
 # to run this.
 all-apps: $(APPS)
 
-bundle-%: $(GOVUK_ROOT_DIR)/%
+bundle-%: clone-%
 	$(GOVUK_DOCKER) compose build $*-lite
 	$(GOVUK_DOCKER) compose run $*-lite rbenv install -s
 	$(GOVUK_DOCKER) compose run $*-lite gem install --conservative bundler -v $$(grep -A1 "BUNDLED WITH" Gemfile.lock | tail -1)
 	$(GOVUK_DOCKER) compose run $*-lite bundle
 
-# Clone an app, for example:
-#
-#     make $HOME/govuk/content-publisher
-#
-# The 'services/%/Makefile' bit is to double-check that this is a git
-# repository, as all of our apps have a Makefile.
-$(GOVUK_ROOT_DIR)/%: $(GOVUK_DOCKER_DIR)/services/%/Makefile
+clone-%:
 	@if [ ! -d "${GOVUK_ROOT_DIR}/$*" ]; then \
 		echo "$*" && git clone "git@github.com:alphagov/$*.git" "${GOVUK_ROOT_DIR}/$*"; \
 	fi
