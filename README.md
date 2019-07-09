@@ -219,19 +219,23 @@ Then create or update `/etc/resolver/dev.gov.uk`. If you've been using the vagra
 ```
 nameserver 127.0.0.1
 ```
+
 To check if the new config has been applied, you can run `scutil --dns` to check that `dev.gov.uk` appears in the list.
 
-Then append the following to the bottom of `/usr/local/etc/dnsmasq.conf`
+Then append the following to the bottom of `/usr/local/etc/dnsmasq.conf`:
+
 ```
 conf-dir=/usr/local/etc/dnsmasq.d,*.conf
 ```
 
-Then create or append to `/usr/local/etc/dnsmasq.d/development.conf`
+Then create or append to `/usr/local/etc/dnsmasq.d/development.conf`:
+
 ```
 address=/dev.gov.uk/127.0.0.1
 ```
 
 Once you've updated those files, restart dnsmasq:
+
 ```
 sudo brew services restart dnsmasq
 ```
