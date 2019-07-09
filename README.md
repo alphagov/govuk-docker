@@ -1,54 +1,44 @@
-** WIP and could receive breaking changes at any time. **
-
-# govuk-docker
+# GOV.UK Docker
 
 GOV.UK development environment using Docker.
 
 ![diagram](docs/diagram.png)
 
-## Introduction
+The GOV.UK website uses a microservice architecture. Developing in this ecosystem is a challenge, due to the range of environments to maintain, both for the app being developed and its dependencies.
 
-The GOV.UK website is a microservice architecture, formed of many apps working together. Developing in this ecosystem is a challenge, due to the range of environments to maintain, both for the app being developed and its dependencies.
+The aim of govuk-docker is to make it easy to develop any GOV.UK app. It achieves this by providing a variety of environments or _stacks_ for each app, in which you can run tests, start a debugger, publish a document end-to-end.
 
-The aim of govuk-docker is to make it easy to develop any GOV.UK app. It achieves this by providing a variety of environments or _stacks_ for each app, in which you can run tests, start a debugger,
-publish a document end-to-end e.g.
+## Background
 
-```
-# Run whitehall rake plus any required dependencies (DBs)
-whitehall$ govuk-docker run rake
+[RFC 106: Use Docker for local development](https://github.com/alphagov/govuk-rfcs/blob/master/rfc-106-docker-for-local-development.md) describes the background for choosing Docker.
 
-# Run whitehall rake plus a minimal app stack
-whitehall$ govuk-docker run --stack app rake
+To guide development we [have documented the user needs](docs/NEEDS.md) and [associated decisions](docs/DECISIONS.md) in this repo.
 
-# Start content-tagger rails plus a minimal app stack
+## Usage
+
+```sh
+# Run a Rake task on Whitehall
+whitehall$ govuk-docker run bundle exec rake -T
+
+# Start content-tagger including dependencies. Visit it at content-tagger.dev.gov.uk
 content-tagger$ govuk-docker startup
 
-# Start content-publisher rails plus an end-to-end stack
+# Start content-publisher plus an "end-to-end" stack
 content-publisher$ govuk-docker startup e2e
 ```
 
-In the last two commands, the app will be available in your browser at *app-name.dev.gov.uk*.
+## Installation
 
-## User Needs
-
-The aim of govuk-docker is to meet the following primary need.
-
-> **As a** developer on GOV.UK apps <br/>
-> **I want** a GOV.UK environment optimised for development <br/>
-> **So that** I can develop GOV.UK apps efficiently
-
-However, this high-level statement hides a great number of specific needs, which also help to clarify the design decisions for govuk-docker. These lower-level [needs](docs/NEEDS.md) and associated [decisions](docs/DECISIONS.md) are set out in separate documents.
-
-## Prerequisites
+### Prerequisites
 
 First make sure the following are installed on your system:
 
-   - [dnsmasq](http://www.thekelleys.org.uk/dnsmasq/doc.html) to make *app-name.dev.gov.uk* work. You can install this using `brew install dnsmasq`
-   - [docker](https://hub.docker.com/) and [docker-compose](https://docs.docker.com/compose/install/)
-   - [git](https://git-scm.com) if you're setting everything up from scratch
-   - A directory `~/govuk` in your home directory
+- [dnsmasq](http://www.thekelleys.org.uk/dnsmasq/doc.html) to make *$app-name.dev.gov.uk* work. You can install this using `brew install dnsmasq`.
+- [docker](https://hub.docker.com/) and [docker-compose](https://docs.docker.com/compose/install/)
+- [git](https://git-scm.com) if you're setting everything up from scratch
+- A directory `~/govuk` in your home directory
 
-## Setup
+### Setup
 
 Start with the following in your bash config.
 
@@ -56,12 +46,12 @@ Start with the following in your bash config.
 export PATH=$PATH:~/govuk/govuk-docker/bin
 ```
 
-Now in the `govuk` directory, run the following commands.
+Now in the `~/govuk` directory, run the following commands.
 
 ```
 git clone git@github.com:alphagov/govuk-docker.git
 cd govuk-docker
-bundle
+bundle install
 ```
 
 You can now clone and setup the apps you need with `make APP-NAME`,
@@ -116,7 +106,7 @@ To check whether dnsmasq name server at 127.0.0.1 can resolve subdomains of dev.
 app.dev.gov.uk.		0	IN	A	127.0.0.1
 ```
 
-## Environment variables
+### Environment variables
 
 Both govuk-docker and the Makefile respect the following environment variables:
 
@@ -192,9 +182,9 @@ the app. To provide consistency we have a convention for these names:
   - **app-e2e**: to run the app with all the other apps necessary to provide
     full end to end user journeys.
 
-## FAQs
+## How to's
 
-### Troubleshoot your installation
+### How to: troubleshoot your installation
 
 The `doctor` command will attempt to ensure your installation is in a runnable
 state and suggest remedial steps if it finds anything wrong
@@ -238,10 +228,19 @@ This will usually involve editing a `Dockerfile`, for things like system package
 
 If a new service has been added to govuk-docker, first pull the latest version to get the changes. Then use `make app-name` to clone (if necessary) and set up just that app and its dependencies.
 
+For example:
+
+```
+make content-publisher
+```
+
 ### How to: update everything!
 
-Sometimes it's useful to get all changes for all repos e.g. to support finding things with a govuk-wide grep. This can be done by running `make pull`.
+Sometimes it's useful to get all changes for all repos e.g. to support finding things with a govuk-wide grep. This can be done by running:
 
+```
+make pull
+```
 
 ## Licence
 
