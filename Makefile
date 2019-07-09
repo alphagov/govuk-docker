@@ -4,14 +4,8 @@ GOVUK_DOCKER     ?= $(GOVUK_DOCKER_DIR)/bin/govuk-docker
 
 APPS ?= $(shell ls ${GOVUK_DOCKER_DIR}/services/*/Makefile | xargs -L 1 dirname | xargs -L 1 basename)
 
-# This is a Makefile best practice to say that these are not file
-# names.  For example, if you were to create a file called "clone",
-# then `make clone` should still invoke the rule, it shouldn't do
-# this:
-#
-#     $ touch clone
-#     $ make clone
-#     make: `clone' is up to date.
+# Best practice to ensure these targets always execute, even if a
+# file like 'clone' exists in the current directory.
 .PHONY: clone pull test all-apps
 
 default:
