@@ -1,6 +1,2 @@
-link-checker-api: $(GOVUK_ROOT_DIR)/link-checker-api
-	$(GOVUK_DOCKER) compose build $@-lite
-	$(GOVUK_DOCKER) compose run $@-lite rbenv install -s
-	$(GOVUK_DOCKER) compose run $@-lite gem install --conservative bundler -v "~>1.0"
-	$(GOVUK_DOCKER) compose run $@-lite bundle
+link-checker-api: bundle-link-checker-api
 	$(GOVUK_DOCKER) compose run $@-lite sh -c 'bin/rake db:migrate 2>/dev/null || bin/rake db:setup'

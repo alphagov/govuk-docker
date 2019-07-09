@@ -1,6 +1,2 @@
-publisher: $(GOVUK_ROOT_DIR)/publisher publishing-api calendars link-checker-api
-	$(GOVUK_DOCKER) compose build $@-lite
-	$(GOVUK_DOCKER) compose run $@-lite rbenv install -s
-	$(GOVUK_DOCKER) compose run $@-lite gem install --conservative bundler -v "~>1.0"
-	$(GOVUK_DOCKER) compose run $@-lite bundle
+publisher: bundle-publisher publishing-api calendars link-checker-api
 	$(GOVUK_DOCKER) compose run $@-lite sh -c 'rake db:migrate 2>/dev/null || rake db:setup'

@@ -40,6 +40,12 @@ test:
 # to run this.
 all-apps: $(APPS)
 
+bundle-%: $(GOVUK_ROOT_DIR)/%
+	$(GOVUK_DOCKER) compose build $*-lite
+	$(GOVUK_DOCKER) compose run $*-lite rbenv install -s
+	$(GOVUK_DOCKER) compose run $*-lite gem install --conservative bundler -v $$(grep -A1 "BUNDLED WITH" Gemfile.lock | tail -1)
+	$(GOVUK_DOCKER) compose run $*-lite bundle
+
 # Clone an app, for example:
 #
 #     make $HOME/govuk/content-publisher
