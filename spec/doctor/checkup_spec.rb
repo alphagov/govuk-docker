@@ -70,6 +70,25 @@ describe GovukDocker::Doctor::Checkup do
     end
   end
 
+  context "when a service is installed to /usr/local/sbin" do
+    subject do
+      described_class.new(
+        service_name: service_name,
+        checkups: %i(installed),
+        messages: messages
+      )
+    end
+
+    before do
+      expect(subject).to receive(:system).with("which fake_service 1>/dev/null").and_return(false)
+      expect(File).to receive(:exist?).with("/usr/local/sbin/fake_service").and_return(true)
+    end
+
+    it "should report that it is installed" do
+      expect(subject.call).to eq("fake_service is installed")
+    end
+  end
+
   context "when a service is not installed" do
     it "should report that it needs to be installed" do
       subject = described_class.new(
