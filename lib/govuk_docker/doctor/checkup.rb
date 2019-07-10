@@ -28,7 +28,9 @@ module GovukDocker::Doctor
     end
 
     def installed?
-      @installed ||= system "which #{service_name} 1>/dev/null"
+      # some people don't have /usr/local/sbin in their PATH
+      @installed ||= system("which #{service_name} 1>/dev/null") \
+                       || File.exist?("/usr/local/sbin/#{service_name}")
     end
 
     def running?
