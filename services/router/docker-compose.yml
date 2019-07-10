@@ -7,7 +7,7 @@ x-router: &router
   image: router
   volumes:
     - go:/go
-    - ../router:/go/src/github.com/alphagov/router:delegated
+    - ${GOVUK_ROOT_DIR:-~/govuk}/router:/go/src/github.com/alphagov/router:delegated
     - home:/home/build
   working_dir: /go/src/github.com/alphagov/router
 
