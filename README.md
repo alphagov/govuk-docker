@@ -57,12 +57,14 @@ For a full list of govuk-docker commands, run `govuk-docker help`.
 
 ### Prerequisites
 
-First make sure the following are installed on your system:
+govuk-docker has the following dependencies:
 
-- [dnsmasq](http://www.thekelleys.org.uk/dnsmasq/doc.html) to make *$app-name.dev.gov.uk* work. You can install this using `brew install dnsmasq`.
-- [docker](https://hub.docker.com/) and [docker-compose](https://docs.docker.com/compose/install/)
-- [git](https://git-scm.com) if you're setting everything up from scratch
+- [brew](https://brew.sh/). (If you don't use a Mac, you'll need to dig into the `govuk-docker setup` command and manually install the things referenced).
+- [git](https://git-scm.com)
+- Ruby (whatever version is specified in [.ruby-version](https://github.com/alphagov/govuk-docker/blob/master/.ruby-version))
 - A directory `~/govuk` in your home directory
+
+All other dependencies will be installed for you automatically.
 
 ### Setup
 
