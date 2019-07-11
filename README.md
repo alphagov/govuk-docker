@@ -195,6 +195,12 @@ This will test whether or not your system meets the following requirements:
 Sometimes things go wrong or some investigation is needed. As govuk-docker is just a bunch of docker config and a CLI wrapper, it's still possible to use all the standard docker commands to help fix issues and get more info e.g.
 
 ```
+# make sure govuk-docker is up-to-date
+git pull
+
+# make sure the service is built OK
+govuk-docker build
+
 # tail logs for running services
 govuk-docker compose logs -f
 
@@ -203,26 +209,6 @@ docker ps -a
 
 # get a terminal inside a service
 govuk-docker run bash
-```
-
-### How to: add a new service
-
-Here's an example commit that does just that.
-
-https://github.com/alphagov/govuk-docker/commit/1cd31a5fa3469cce47637db81f17ca1b03d72f89
-
-### How to: change a service e.g. upgrade Ruby
-
-This will usually involve editing a `Dockerfile`, for things like system packages or new language versions; or a `docker-compose.yml` file, for things like environment variables and dependencies on other services. When a `Dockerfile` changes, the associated image needs to be rebuilt, which can be done in the service directory by running `gdb`.
-
-### How to: setup a specific service
-
-If a new service has been added to govuk-docker, first pull the latest version to get the changes. Then use `make app-name` to clone (if necessary) and set up just that app and its dependencies.
-
-For example:
-
-```
-make content-publisher
 ```
 
 ### How to: update everything!
