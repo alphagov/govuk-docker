@@ -195,6 +195,12 @@ This will test whether or not your system meets the following requirements:
 Sometimes things go wrong or some investigation is needed. As govuk-docker is just a bunch of docker config and a CLI wrapper, it's still possible to use all the standard docker commands to help fix issues and get more info e.g.
 
 ```
+# make sure govuk-docker is up-to-date
+git pull
+
+# make sure the service is built OK
+govuk-docker build
+
 # tail logs for running services
 govuk-docker compose logs -f
 
