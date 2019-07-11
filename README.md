@@ -205,16 +205,6 @@ docker ps -a
 govuk-docker run bash
 ```
 
-### How to: setup a specific service
-
-If a new service has been added to govuk-docker, first pull the latest version to get the changes. Then use `make app-name` to clone (if necessary) and set up just that app and its dependencies.
-
-For example:
-
-```
-make content-publisher
-```
-
 ### How to: update everything!
 
 Sometimes it's useful to get all changes for all repos e.g. to support finding things with a govuk-wide grep. This can be done by running:
