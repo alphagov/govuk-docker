@@ -205,10 +205,6 @@ docker ps -a
 govuk-docker run bash
 ```
 
-### How to: change a service e.g. upgrade Ruby
-
-This will usually involve editing a `Dockerfile`, for things like system packages or new language versions; or a `docker-compose.yml` file, for things like environment variables and dependencies on other services. When a `Dockerfile` changes, the associated image needs to be rebuilt, which can be done in the service directory by running `gdb`.
-
 ### How to: setup a specific service
 
 If a new service has been added to govuk-docker, first pull the latest version to get the changes. Then use `make app-name` to clone (if necessary) and set up just that app and its dependencies.
