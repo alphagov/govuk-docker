@@ -83,19 +83,7 @@ bundle install
 govuk-docker setup
 ```
 
-You can now clone and setup the apps you need:
-
-```
-govuk-docker build --service content-publisher
-```
-
-To test it out:
-
-```
-govuk-docker startup --service content-publisher
-```
-
-If this doesn't work for whatever reason, follow the [instructions to set up Dnsmasq manually](#how-to-set-up-dnsmasq-manually).
+You can now [clone and setup the apps you need](#Usage), after which you can do things like run tests and startup the app in your browser. If this doesn't work for whatever reason, follow the [instructions to set up Dnsmasq manually](#how-to-set-up-dnsmasq-manually).
 
 ### Environment variables
 
