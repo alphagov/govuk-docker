@@ -16,40 +16,32 @@ To guide development we [have documented the user needs](docs/NEEDS.md) and [ass
 
 ## Usage
 
-To run a GOV.UK application, `govuk-docker build` it first (you only need to do this once per application). We'll use collections-publisher as an example:
+Do this to run the tests for a service:
 
 ```sh
 cd ~/govuk/collections-publisher
+
+# You only need to do this once per service
 govuk-docker build
+
+govuk-docker run bundle exec rake
 ```
 
-Then you run it with `govuk-docker startup`:
+Do this to start a GOV.UK web app:
 
 ```sh
-# Start collections-publisher including dependencies. Visit it at collections-publisher.dev.gov.uk
+cd ~/govuk/collections-publisher
+
+# You only need to do this once per service
+govuk-docker build
+
+# Start collections-publisher including dependencies.
+# Visit it at collections-publisher.dev.gov.uk
 govuk-docker startup
 ```
 
-govuk-docker knows which application we're running based on the name of the current directory, matching it with the [corresponding docker-compose.yml in govuk-docker/services](https://github.com/alphagov/govuk-docker/blob/master/services/content-tagger/docker-compose.yml)). Alternatively, you can build and run applications from any directory by specifying a `service` CLI parameter:
+govuk-docker knows which application we're running based on the name of the current directory, matching it with the corresponding [docker-compose.yml](https://github.com/alphagov/govuk-docker/blob/master/services/content-tagger/docker-compose.yml) in `govuk-docker/services`.
 
-```sh
-govuk-docker build --service collections-publisher
-govuk-docker startup --service collections-publisher
-```
-
-`govuk-docker startup` runs the application on the `app` [stack](#stacks) by default, but you can override the stack by passing an unnamed parameter which will be taken as the stack name, with an `app-` prefix. Example:
-
-```sh
-# Start content-publisher plus the "app-e2e" (end-to-end) stack
-govuk-docker startup --service content-publisher e2e
-```
-
-Another useful govuk-docker command is `run`:
-
-```sh
-# Run a Rake task on Whitehall
-cd ~/govuk/whitehall && govuk-docker run bundle exec rake -T
-```
 
 For a full list of govuk-docker commands, run `govuk-docker help`.
 
@@ -83,19 +75,7 @@ bundle install
 govuk-docker setup
 ```
 
-You can now clone and setup the apps you need:
-
-```
-govuk-docker build --service content-publisher
-```
-
-To test it out:
-
-```
-govuk-docker startup --service content-publisher
-```
-
-If this doesn't work for whatever reason, follow the [instructions to set up Dnsmasq manually](#how-to-set-up-dnsmasq-manually).
+You can now [clone and setup the apps you need](#Usage), after which you can do things like run tests and startup the app in your browser. If this doesn't work for whatever reason, follow the [instructions to set up Dnsmasq manually](#how-to-set-up-dnsmasq-manually).
 
 ### Environment variables
 
@@ -172,6 +152,15 @@ the app. To provide consistency we have a convention for these names:
     point the production versions of content-store and search-api.
   - **app-e2e**: to run the app with all the other apps necessary to provide
     full end to end user journeys.
+
+`govuk-docker startup` runs the application on the `app` [stack](#stacks) by default, but you can override the stack by passing an unnamed parameter which will be taken as the stack name, with an `app-` prefix. Example:
+
+```sh
+cd ~/govuk/content-publisher
+
+# Start content-publisher with an "app-e2e" (end-to-end) stack
+govuk-docker startup e2e
+```
 
 ## How to's
 
