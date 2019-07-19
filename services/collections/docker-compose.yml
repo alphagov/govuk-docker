@@ -13,6 +13,7 @@ x-collections: &collections
 services:
   collections-lite:
     <<: *collections
+    privileged: true
 
   # TODO: doesn't work yet because collections also relies on search-api
   collections-app: &collections-app
