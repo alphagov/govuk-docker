@@ -107,6 +107,7 @@ The following apps are supported by govuk-docker to some extent.
    - ❌ frontend
    - ✅ government-frontend
    - ✅ govspeak
+   - ✅ govuk-cdn-config
    - ✅ govuk-developer-docs
    - ✅ govuk-lint
    - ✅ govuk_app_config
