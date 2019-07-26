@@ -71,7 +71,7 @@ private
     else
       false
     end
-  rescue Errno::EHOSTDOWN
+  rescue Errno::EHOSTDOWN, Errno::ECONNREFUSED
     false
   end
 end
