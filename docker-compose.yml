@@ -10,6 +10,7 @@ volumes:
   go:
   elasticsearch5:
   elasticsearch6:
+  replication:
 
 x-default-healthcheck: &default-healthcheck
   interval: 10s
@@ -74,6 +75,8 @@ services:
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
     volumes:
       - elasticsearch5:/usr/share/elasticsearch/data
+      - ./config/elasticsearch5.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - replication:/replication
 
   elasticsearch6:
     image: elasticsearch:6.7.0
@@ -87,3 +90,5 @@ services:
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
     volumes:
       - elasticsearch6:/usr/share/elasticsearch/data
+      - ./config/elasticsearch6.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - replication:/replication
