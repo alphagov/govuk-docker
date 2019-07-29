@@ -30,6 +30,22 @@ private
     shell.yes?("Are you sure you want to continue?")
   end
 
+  def check_continue_as_sudo
+    puts
+    puts "🚨 This script needs to write to the following as sudo:"
+    puts "- /etc/resolver/dev.gov.uk"
+    puts
+    puts "You will be asked for your password if you continue."
+    puts
+    puts "If this makes you uncomfortable, you should manually"
+    puts "create the file and its contents after the rest of the script finishes."
+    puts " echo \"nameserver 127.0.0.1\" >> /etc/resolver/dev.gov.uk"
+    puts "should do the trick."
+    puts
+
+    shell.yes?("Are you sure you want to allow the script to create /etc/resolver/dev.gov.uk as sudo?")
+  end
+
   def install_dnsmasq
     return if GovukDocker::Doctor::Checkup.new(
       service_name: "dnsmasq",
@@ -44,7 +60,8 @@ private
   def configure_etc_resolver_devgovuk
     write_file(
       "/etc/resolver/dev.gov.uk",
-      "nameserver 127.0.0.1"
+      "nameserver 127.0.0.1",
+      true
     )
   end
 
@@ -73,11 +90,22 @@ private
     false
   end
 
-  def write_file(path, contents)
+  def write_file(path, contents, as_sudo = false)
     return if file_configured?(path, contents)
 
+    if as_sudo
+      return unless check_continue_as_sudo
+    end
+
+    ensure_directory_exists(path, as_sudo)
+
     puts "⏳ Writing #{path}"
-    File.write(path, "#{contents}\n")
+
+    if as_sudo
+      system("echo \"#{contents}\n\" | sudo tee #{path}")
+    else
+      File.write(path, "#{contents}\n")
+    end
   end
 
   def append_file(path, contents)
@@ -86,6 +114,19 @@ private
     puts "⏳ Appending #{path}"
     File.open(path, 'a') do |file|
       file.write("\n#{contents}\n")
+    end
+  end
+
+  def ensure_directory_exists(path, as_sudo = false)
+    dir = File.dirname(path)
+    return if Dir.exist?(dir)
+
+    puts "⏳ Creating directory #{dir}, you may need to enter your root password"
+
+    if as_sudo
+      system "sudo mkdir #{dir}"
+    else
+      Dir.mkdir(dir) unless as_sudo
     end
   end
 end
