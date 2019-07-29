@@ -75,7 +75,7 @@ services:
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
     volumes:
       - elasticsearch5:/usr/share/elasticsearch/data
-      - ./config/elasticsearch5.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./services/elasticsearch5/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - replication:/replication
 
   elasticsearch6:
@@ -90,5 +90,5 @@ services:
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
     volumes:
       - elasticsearch6:/usr/share/elasticsearch/data
-      - ./config/elasticsearch6.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./services/elasticsearch6/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - replication:/replication
