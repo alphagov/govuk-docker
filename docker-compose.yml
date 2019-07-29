@@ -9,8 +9,9 @@ volumes:
   mongo:
   go:
   elasticsearch5:
+  elasticsearch5-replication:
   elasticsearch6:
-  replication:
+  elasticsearch6-replication:
 
 x-default-healthcheck: &default-healthcheck
   interval: 10s
@@ -76,7 +77,7 @@ services:
     volumes:
       - elasticsearch5:/usr/share/elasticsearch/data
       - ./services/elasticsearch5/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - replication:/replication
+      - elasticsearch5-replication:/replication
 
   elasticsearch6:
     image: elasticsearch:6.7.0
@@ -91,4 +92,4 @@ services:
     volumes:
       - elasticsearch6:/usr/share/elasticsearch/data
       - ./services/elasticsearch6/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - replication:/replication
+      - elasticsearch6-replication:/replication
