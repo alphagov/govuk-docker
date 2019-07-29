@@ -1,0 +1,15 @@
+version: '3.7'
+
+x-cache-clearing-service: &cache-clearing-service
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: cache-clearing-service
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/cache-clearing-service
+
+services:
+  cache-clearing-service-lite:
+    <<: *cache-clearing-service

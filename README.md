@@ -90,6 +90,9 @@ Both govuk-docker and the Makefile respect the following environment variables:
 The following apps are supported by govuk-docker to some extent.
 
    - ✅ asset-manager
+   - ⚠ cache-clearing-service
+      * Tests pass
+      * Queues are not set-up, so cache-clearing-service can't be run locally
    - ✅ calendars
    - ⚠ calculators
       * Web UI doesn't work without the content item being present in the content-store.
