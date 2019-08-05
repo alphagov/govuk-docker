@@ -45,9 +45,9 @@ services:
       test: "mysql --user=root --password=root -e 'SELECT 1'"
     volumes:
       - mysql:/var/lib/mysql
+    command: --max_allowed_packet=1073741824
     environment:
       MYSQL_ROOT_PASSWORD: root
-      max_allowed_packet: 1073741824
 
   redis:
     image: redis
