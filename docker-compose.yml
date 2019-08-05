@@ -47,6 +47,7 @@ services:
       - mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
+      max_allowed_packet: 1073741824
 
   redis:
     image: redis
