@@ -11,16 +11,9 @@ volumes:
   elasticsearch5:
   elasticsearch6:
 
-x-default-healthcheck: &default-healthcheck
-  interval: 10s
-  timeout: 20s
-
 services:
   postgres:
     image: postgres:9.6
-    healthcheck:
-      << : *default-healthcheck
-      test: "psql --username 'postgres' -c 'SELECT 1'"
     volumes:
       - postgres:/var/lib/postgresql/data
 
@@ -29,9 +22,6 @@ services:
 
   mongo:
     image: mongo:2.4
-    healthcheck:
-      << : *default-healthcheck
-      test: "echo 'db.stats().ok' | mongo localhost:27017/test --quiet"
     volumes:
       - mongo:/data/db
     ports:
@@ -40,9 +30,6 @@ services:
 
   mysql:
     image: mysql:5.5.58
-    healthcheck:
-      << : *default-healthcheck
-      test: "mysql --user=root --password=root -e 'SELECT 1'"
     volumes:
       - mysql:/var/lib/mysql
     environment:
@@ -51,23 +38,14 @@ services:
 
   redis:
     image: redis
-    healthcheck:
-      << : *default-healthcheck
-      test: "redis-cli ping"
 
   rabbitmq:
     image: rabbitmq
-    healthcheck:
-      << : *default-healthcheck
-      test: "rabbitmqctl node_health_check"
     volumes:
       - rabbitmq:/var/lib/rabbitmq
 
   elasticsearch5:
     image: elasticsearch:5.6.14
-    healthcheck:
-      << : *default-healthcheck
-      test: "curl --silent --fail localhost:9200/_cluster/health || exit 1"
     environment:
       - http.host=0.0.0.0
       - transport.host=127.0.0.1
@@ -78,9 +56,6 @@ services:
 
   elasticsearch6:
     image: elasticsearch:6.7.0
-    healthcheck:
-      << : *default-healthcheck
-      test: "curl --silent --fail localhost:9200/_cluster/health || exit 1"
     environment:
       - http.host=0.0.0.0
       - transport.host=127.0.0.1
