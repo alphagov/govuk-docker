@@ -42,7 +42,7 @@ describe GovukDocker::Setup::Dnsmasq do
     it "writes to the various files" do
       expect(subject).to receive(:puts).with(/Writing/)
       expect(File).to receive(:write)
-        .with("/etc/resolver/dev.gov.uk", "nameserver 127.0.0.1\n")
+        .with("/etc/resolver/dev.gov.uk", "nameserver 127.0.0.1\nport 53\n")
       expect(File).to receive(:write)
         .with("/usr/local/etc/dnsmasq.d/development.conf", "address=/dev.gov.uk/127.0.0.1\n")
       file_double = double

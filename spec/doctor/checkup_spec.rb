@@ -180,7 +180,7 @@ describe GovukDocker::Doctor::Checkup do
         messages: messages
       )
 
-      allow(File).to receive(:read).with("/etc/resolver/dev.gov.uk").and_return("nameserver 127.0.0.1")
+      allow(File).to receive(:read).with("/etc/resolver/dev.gov.uk").and_return("nameserver 127.0.0.1\nport 53")
 
       expect(subject.call).to eq("fake_service is resolving your dns")
     end

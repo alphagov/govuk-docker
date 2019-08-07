@@ -44,7 +44,7 @@ private
   def configure_etc_resolver_devgovuk
     write_file(
       "/etc/resolver/dev.gov.uk",
-      "nameserver 127.0.0.1"
+      "nameserver 127.0.0.1\nport 53"
     )
   end
 
