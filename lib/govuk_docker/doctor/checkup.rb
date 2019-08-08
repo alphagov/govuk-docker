@@ -87,7 +87,13 @@ module GovukDocker::Doctor
     end
 
     def dnsmasq_resolver?
-      File.read('/etc/resolver/dev.gov.uk').strip == "nameserver 127.0.0.1"
+      dns_lines = File.read('/etc/resolver/dev.gov.uk')
+        .split("\n")
+        .map(&:strip)
+        .reject(&:empty?)
+        .reject { |line| line.start_with?("#") }
+
+      dns_lines.count == 1 && dns_lines.first == "nameserver 127.0.0.1"
     end
 
     def dnsmasq_resolver_message
