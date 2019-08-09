@@ -70,6 +70,7 @@ module GovukDocker::Doctor
         ❌ Something else (possibly Vagrant-dns) is configured to resolve DNS requests for dev.gov.uk.
           The /etc/resolver/dev.gov.uk file needs to be updated to only contain
           nameserver 127.0.0.1
+          port 53
       HEREDOC
     }
   end
