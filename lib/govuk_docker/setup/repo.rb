@@ -30,7 +30,7 @@ private
 
   def check_continue
     puts "This will clone/pull `#{path}`."
-    puts "Any local changes may be overwriten."
+    puts "Any local changes may be overwritten."
     puts
 
     shell.yes?("Are you sure you want to continue?")

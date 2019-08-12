@@ -16,14 +16,14 @@ class GovukDocker::Setup::Dnsmasq < GovukDocker::Setup::Base
 private
 
   def check_continue
-    puts "Any local changes in these files may get overwriten by this script:"
+    puts "Any local changes in these files may get overwritten by this script:"
     puts "- /etc/resolver/dev.gov.uk"
     puts "- /usr/local/etc/dnsmasq.conf"
     puts "- /usr/local/etc/dnsmasq.d/development.conf"
     puts
 
     unless %x[uname -a].include?("Darwin")
-      puts "This script is designed to run on MacOS."
+      puts "This script is designed to run on macOS."
       puts
     end
 
