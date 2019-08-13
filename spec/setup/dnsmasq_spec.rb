@@ -5,7 +5,10 @@ describe GovukDocker::Setup::Dnsmasq do
   let(:shell_double) { double }
 
   subject { described_class.new(shell_double) }
-  before { allow(subject).to receive(:puts) }
+  before do
+    allow(subject).to receive(:puts)
+    allow(File).to receive(:read).and_call_original
+  end
 
   context "disallowing the script to continue" do
     it "shouldn't do anything" do
@@ -40,9 +43,10 @@ describe GovukDocker::Setup::Dnsmasq do
     end
 
     it "writes to the various files" do
+      dns_config = File.read(GovukDocker::Paths.dnsmasq_conf)
       expect(subject).to receive(:puts).with(/Writing/)
       expect(File).to receive(:write)
-        .with("/etc/resolver/dev.gov.uk", "nameserver 127.0.0.1\nport 53\n")
+        .with("/etc/resolver/dev.gov.uk", "#{dns_config}\n")
       expect(File).to receive(:write)
         .with("/usr/local/etc/dnsmasq.d/development.conf", "address=/dev.gov.uk/127.0.0.1\n")
       file_double = double
