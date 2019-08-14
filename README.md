@@ -256,6 +256,76 @@ To check whether dnsmasq name server at 127.0.0.1 can resolve subdomains of dev.
 app.dev.gov.uk.		0	IN	A	127.0.0.1
 ```
 
+### How to: replicate data locally
+
+There may be times when a full database is required locally.  The following sections give examples of how to replicate this data from integration.  All examples reqire pv, which can be installed on a Mac using Brew (`brew install pv`).
+
+#### MySQL
+
+1. Download the relevant database dump from the [AWS S3 Bucket](https://s3.console.aws.amazon.com/s3/buckets/govuk-integration-database-backups/mysql/?region=eu-west-1&tab=overview)
+
+2. Drop and recreate any existing database, e.g. for Whitehall:
+
+```
+govuk-docker compose up -d mysql
+govuk-docker compose run mysql mysql -h mysql -u root --password=root -e "DROP DATABASE IF EXISTS whitehall_development"
+govuk-docker compose run mysql mysql -h mysql -u root --password=root -e "CREATE DATABASE whitehall_development"
+```
+
+3. Import the file into the local MySQL database, e.g. for Whitehall:
+
+```
+pv whitehall_production.dump.gz | gunzip | govuk-docker compose run mysql mysql -h mysql -u root --password=root whitehall_development
+```
+
+#### PostgreSQL
+
+1. Download the relevant database dump from the [AWS S3 Bucket](https://s3.console.aws.amazon.com/s3/buckets/govuk-integration-database-backups/postgres/?region=eu-west-1&tab=overview)
+
+2. Drop and recreate any existing database, e.g. for Publishing API:
+
+```
+govuk-docker compose up -d postgres
+govuk-docker compose run postgres /usr/bin/psql -h postgres -U postgres -qAt DROP DATABASE IF EXISTS "publishing-api"
+govuk-docker compose run postgres /usr/bin/createdb -h postgres -U postgres publishing-api
+```
+
+3. Import the file into the local Postgres database, e.g. for Publishing API:
+
+```
+pv publishing_api_production.dump.gz  | gunzip | govuk-docker compose run postgres /usr/bin/psql -h postgres -U postgres -qAt -d publishing-api
+```
+
+#### MongoDB
+
+1.  Download the relevant database dump from the [AWS S3 Bucket](https://s3.console.aws.amazon.com/s3/object/govuk-integration-database-backups/mongodb/daily/mongo/?region=eu-west-1&tab=overview)
+
+2. Unzip the archive, e.g. for Content Store:
+
+```
+gunzip mongodump-2019-08-12_0023.tgz
+```
+
+3. Update the `docker-compose.yml` file to mount your local directory into the VM, e.g.
+
+```
+  mongo:
+    image: mongo:2.4
+    volumes:
+      - mongo:/data/db
+      - /Path/To/Downloads/mongo:/import
+    ports:
+      - "27017:27017"
+      - "27018:27018"
+```
+
+4. Import the backup files into the local Mongo database, e.g. for Content Store:
+
+```
+govuk-docker compose up -d mongo
+govuk-docker compose run mongo mongorestore --drop --db content-store /import/var/lib/mongodb/backup/mongodump/content_store_production/
+```
+
 ## Licence
 
 [MIT License](LICENCE)
