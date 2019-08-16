@@ -103,7 +103,8 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ content-store
    - ✅ content-tagger
    - ⚠  collections
-    * Only works with live data
+      * You will need to [populate the Content Store database](#mongodb) or run the live stack in order for it to work locally.
+      * To view topic pages locally you still need to use the live stack as they rely on Elasticsearch data which we are yet to be able to import.
    - ✅ email-alert-api
    - ✅ email-alert-frontend
    - ✅ finder-frontend
