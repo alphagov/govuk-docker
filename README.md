@@ -307,6 +307,11 @@ pv publishing_api_production.dump.gz  | gunzip | govuk-docker compose run postgr
 gunzip mongodump-2019-08-12_0023.tgz
 ```
 
+Or if it's a TAR file, you can extract a specific file or directory.  Using the Content Store as an example:
+```
+tar -xvzf mongodump-2019-08-12_0023.tar var/lib/mongodb/backup/mongodump/content_store_production -C directory_for_download
+```
+
 3. Update the `docker-compose.yml` file to mount your local directory into the VM, e.g.
 
 ```
@@ -314,7 +319,7 @@ gunzip mongodump-2019-08-12_0023.tgz
     image: mongo:2.4
     volumes:
       - mongo:/data/db
-      - /Path/To/Downloads/mongo:/import
+      - /Path/To/Downloads/directory_for_download:/import
     ports:
       - "27017:27017"
       - "27018:27018"
