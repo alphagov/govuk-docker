@@ -103,7 +103,8 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ content-store
    - ✅ content-tagger
    - ⚠  collections
-    * Only works with live data
+      * You will need to [populate the Content Store database](#mongodb) or run the live stack in order for it to work locally.
+      * To view topic pages locally you still need to use the live stack as they rely on Elasticsearch data which we are yet to be able to import.
    - ✅ email-alert-api
    - ✅ email-alert-frontend
    - ✅ finder-frontend
@@ -306,6 +307,11 @@ pv publishing_api_production.dump.gz  | gunzip | govuk-docker compose run postgr
 gunzip mongodump-2019-08-12_0023.tgz
 ```
 
+Or if it's a TAR file, you can extract a specific file or directory.  Using the Content Store as an example:
+```
+tar -xvzf mongodump-2019-08-12_0023.tar var/lib/mongodb/backup/mongodump/content_store_production -C directory_for_download
+```
+
 3. Update the `docker-compose.yml` file to mount your local directory into the VM, e.g.
 
 ```
@@ -313,7 +319,7 @@ gunzip mongodump-2019-08-12_0023.tgz
     image: mongo:2.4
     volumes:
       - mongo:/data/db
-      - /Path/To/Downloads/mongo:/import
+      - /Path/To/Downloads/directory_for_download:/import
     ports:
       - "27017:27017"
       - "27018:27018"
