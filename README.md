@@ -93,30 +93,35 @@ The following apps are supported by govuk-docker to some extent.
    - ⚠ cache-clearing-service
       * Tests pass
       * Queues are not set-up, so cache-clearing-service can't be run locally
-   - ✅ calendars
    - ⚠ calculators
       * Web UI doesn't work without the content item being present in the content-store.
+   - ✅ calendars
+   - ⚠  collections
+      * You will need to [populate the Content Store database](#mongodb) or run the live stack in order for it to work locally.
+      * To view topic pages locally you still need to use the live stack as they rely on Elasticsearch data which we are yet to be able to import.
    - ✅ collections-publisher
    - ⚠ content-data-admin
       * **TODO: Missing support for a webserver stack**
    - ✅ content-publisher
    - ✅ content-store
    - ✅ content-tagger
-   - ⚠  collections
-      * You will need to [populate the Content Store database](#mongodb) or run the live stack in order for it to work locally.
-      * To view topic pages locally you still need to use the live stack as they rely on Elasticsearch data which we are yet to be able to import.
    - ✅ email-alert-api
    - ✅ email-alert-frontend
    - ✅ finder-frontend
    - ❌ frontend
    - ✅ government-frontend
    - ✅ govspeak
-   - ✅ govuk-cdn-config
-   - ✅ govuk-developer-docs
-   - ✅ govuk-lint
    - ✅ govuk_app_config
    - ✅ govuk_publishing_components
+   - ✅ govuk-cdn-config
+   - ❓ govuk-content-schemas
+      * Service exists in govuk-docker but is untested
+   - ✅ govuk-developer-docs
+   - ✅ govuk-lint
    - ✅ info-frontend
+   - ⚠ link-checker-api
+      * Works in isolation but not in other services' `e2e` stacks, so must be run in a separate process.
+        See https://github.com/alphagov/govuk-docker/issues/174 for details.
    - ✅ manuals-frontend
    - ✅ miller-columns-element
    - ✅ plek
@@ -124,13 +129,13 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ publishing-api
    - ✅ router
    - ✅ router-api
-   - ⚠  search-api
-    * Tests fail as they run against [both Elasticsearch instances](https://github.com/alphagov/search-api/pull/1618)
    - ✅ search-admin
+   - ⚠  search-api
+      * Tests fail as they run against [both Elasticsearch instances](https://github.com/alphagov/search-api/pull/1618)
+   - ✅ service-manual-frontend
    - ✅ signon
    - ✅ smart-answers
    - ✅ specialist-publisher
-   - ✅ service-manual-frontend
    - ⚠ static
       * JavaScript 404 errors when previewing pages, possibly [related to analytics](https://github.com/alphagov/static/blob/master/app/assets/javascripts/analytics/init.js.erb#L28)
    - ✅ support
