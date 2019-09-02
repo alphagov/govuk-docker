@@ -262,6 +262,14 @@ To check whether dnsmasq name server at 127.0.0.1 can resolve subdomains of dev.
 app.dev.gov.uk.		0	IN	A	127.0.0.1
 ```
 
+### How to: work with local gems
+
+Provide a local gem path relative to the location of the Gemfile you're editing:
+
+```ruby
+gem 'govuk_publishing_components', path: '../govuk_publishing_components' 
+```
+
 ### How to: replicate data locally
 
 There may be times when a full database is required locally.  The following sections give examples of how to replicate this data from integration.  All examples reqire pv, which can be installed on a Mac using Brew (`brew install pv`).
