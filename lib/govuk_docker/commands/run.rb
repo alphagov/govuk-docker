@@ -1,30 +1,24 @@
 require_relative './base'
 require_relative './compose'
+require_relative '../container'
+require_relative '../stack'
 
 class GovukDocker::Commands::Run < GovukDocker::Commands::Base
   def call(args = [])
-    check_service_exists
-    check_stack_exists
+    stack.dependencies.each do |d|
+      GovukDocker::Container.new(d).start
+    end
 
-    GovukDocker::Commands::Compose
-      .new(config_directory: config_directory, service: service, stack: stack, verbose: verbose)
-      .call(
-        ["run", "--rm", "--service-ports", container_name] + docker_compose_args(args)
-      )
+    GovukDocker::Container.new(stack)
+      .run(extra_args: args)
   end
 
 private
 
+  def stack
+    name = "#{service_name}-#{stack_name}"
+    GovukDocker::Stack.find(name)
+  end
+
   attr_reader :args
-
-  def container_name
-    "#{service}-#{stack}"
-  end
-
-  def docker_compose_args(args)
-    return [] if args.empty?
-    return args if args.first == "env"
-
-    %w[env] + args
-  end
 end

@@ -1,0 +1,58 @@
+x-publishing-api: &publishing-api
+  image: publishing-api
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - govuk-docker_home:/home/build
+  working_dir: /govuk/publishing-api
+
+publishing-api-lite:
+  <<: *publishing-api
+  depends_on:
+    - postgres
+    - redis
+    - rabbitmq
+  environment:
+    RABBITMQ_EXCHANGE: published_documents
+    RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
+    DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
+    DATABASE_URL: "postgresql://postgres@postgres/publishing-api"
+    TEST_DATABASE_URL: "postgresql://postgres@postgres/publishing-api-test"
+    REDIS_URL: redis://redis
+
+publishing-api-app: &publishing-api-app
+  <<: *publishing-api
+  depends_on:
+    - postgres
+    - redis
+    - nginx-proxy-app
+  environment:
+    DATABASE_URL: "postgresql://postgres@postgres/publishing-api"
+    REDIS_URL: redis://redis
+    VIRTUAL_HOST: publishing-api.dev.gov.uk
+    HOST: 0.0.0.0
+  ports:
+    - "3000"
+  command: bin/rails s -P /tmp/rails.pid
+
+publishing-api-app-e2e:
+  <<: *publishing-api-app
+  depends_on:
+    - postgres
+    - redis
+    - nginx-proxy-app
+    - publishing-api-worker
+
+publishing-api-worker:
+  <<: *publishing-api
+  depends_on:
+    - postgres
+    - redis
+    - rabbitmq
+    - content-store-app-draft
+    - content-store-app
+  environment:
+    RABBITMQ_EXCHANGE: published_documents
+    RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
+    DATABASE_URL: "postgresql://postgres@postgres/publishing-api"
+    REDIS_URL: redis://redis
+  command: bundle exec sidekiq -C ./config/sidekiq.yml

@@ -7,8 +7,8 @@ module GovukDocker::Commands
   class Base
     def initialize(options = {})
       @config_directory = options[:config_directory] || default_config_directory
-      @service = options[:service] || default_service
-      @stack = options[:stack] || default_stack
+      @service_name = options[:service] || default_service
+      @stack_name = options[:stack] || default_stack
       @verbose = options[:verbose] || default_verbose
     end
 
@@ -35,7 +35,7 @@ module GovukDocker::Commands
 
   private
 
-    attr_reader :config_directory, :service, :stack, :verbose
+    attr_reader :config_directory, :service_name, :stack_name, :verbose
 
     def available_stacks
       service_path = File.join(config_directory, "services/#{service}/docker-compose.yml")

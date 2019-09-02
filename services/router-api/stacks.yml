@@ -1,0 +1,42 @@
+x-router-api: &router-api
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: router-api
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - govuk-docker_home:/home/build
+  working_dir: /govuk/router-api
+
+router-api-lite:
+  <<: *router-api
+  depends_on:
+    - mongo
+  environment:
+    MONGODB_URI: "mongodb://mongo/router"
+    TEST_MONGODB_URI: "mongodb://mongo/router-test"
+
+router-api-app: &router-api-app
+  <<: *router-api
+  depends_on:
+    - mongo
+    - router-app
+  environment:
+    ROUTER_NODES: router-app:3055
+    MONGODB_URI: "mongodb://mongo/router"
+    VIRTUAL_HOST: router-api.dev.gov.uk
+    HOST: 0.0.0.0
+  ports:
+    - "3000"
+  command: bin/rails s -P /tmp/rails.pid
+
+router-api-app-draft:
+  <<: *router-api-app
+  depends_on:
+    - mongo
+    - router-app-draft
+  environment:
+    ROUTER_NODES: router-app-draft:3055
+    MONGODB_URI: "mongodb://mongo/draft-router"
+    VIRTUAL_HOST: draft-router-api.dev.gov.uk
+    HOST: 0.0.0.0
