@@ -44,7 +44,8 @@ private
   def configure_etc_resolver_devgovuk
     write_file(
       "/etc/resolver/dev.gov.uk",
-      "nameserver 127.0.0.1\nport 53"
+      File.read(GovukDocker::Paths.dnsmasq_conf),
+      overwrite: true
     )
   end
 
@@ -73,8 +74,8 @@ private
     false
   end
 
-  def write_file(path, contents)
-    return if file_configured?(path, contents)
+  def write_file(path, contents, overwrite: false)
+    return if file_configured?(path, contents) && !overwrite
 
     puts "⏳ Writing #{path}"
     File.write(path, "#{contents}\n")

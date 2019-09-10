@@ -67,10 +67,8 @@ module GovukDocker::Doctor
       HEREDOC
       dnsmasq_resolver: "✅ Dnsmasq is resolving DNS requests",
       not_dnsmasq_resolver: <<~HEREDOC,
-        ❌ Something else (possibly Vagrant-dns) is configured to resolve DNS requests for dev.gov.uk.
-          The /etc/resolver/dev.gov.uk file needs to be updated to only contain
-          nameserver 127.0.0.1
-          port 53
+        ❌ Your DNS resolver file (/etc/resolver/dev.gov.uk) is out of date with govuk-docker. Try:
+        `sudo cp #{GovukDocker::Paths.dnsmasq_conf} /etc/resolver/dev.gov.uk`
       HEREDOC
     }
   end
