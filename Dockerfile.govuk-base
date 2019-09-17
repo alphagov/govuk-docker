@@ -31,7 +31,7 @@ RUN /rbenv/plugins/ruby-build/install.sh
 ENV PATH /rbenv/bin:$PATH
 
 # Install psql for 'rails dbconsole'
-RUN apt-get install -y postgresql-client
+RUN apt-get update -qq && apt-get install -y postgresql-client
 
 RUN useradd -m build
 ENV PATH /home/build/.rbenv/shims:${PATH}
