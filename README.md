@@ -267,12 +267,12 @@ app.dev.gov.uk.		0	IN	A	127.0.0.1
 Provide a local gem path relative to the location of the Gemfile you're editing:
 
 ```ruby
-gem 'govuk_publishing_components', path: '../govuk_publishing_components' 
+gem 'govuk_publishing_components', path: '../govuk_publishing_components'
 ```
 
 ### How to: replicate data locally
 
-There may be times when a full database is required locally.  The following sections give examples of how to replicate this data from integration.  All examples reqire pv, which can be installed on a Mac using Brew (`brew install pv`).
+There may be times when a full database is required locally.  The following sections give examples of how to replicate this data from integration.  All examples require pv, which can be installed on a Mac using Brew (`brew install pv`).
 
 #### MySQL
 
@@ -291,6 +291,16 @@ govuk-docker compose run mysql mysql -h mysql -u root --password=root -e "CREATE
 ```
 pv whitehall_production.dump.gz | gunzip | govuk-docker compose run mysql mysql -h mysql -u root --password=root whitehall_development
 ```
+
+*For Whitehall*
+
+In order to ensure that Whitehall runs smoothly, your Docker settings may need to be changed in order to handle Whitehall. By default, Docker defaults to using 2 CPU cores and 2GB of RAM, and this is simply not enough to render Whitehall in a Docker container.
+
+You should set it to use at least 4 CPU cores and 8GB of RAM - 6 CPUs and 8 GB of RAM seems to work ok. Open the Docker dropdown via the whale icon in the OSX menu bar and selecting the `Advanced` option.
+
+You should also increase the Docker disk image size to the maximum.
+
+We have found no tangible improvement in increasing swap space size compared to CPU, RAM and disk allocation.
 
 #### PostgreSQL
 
