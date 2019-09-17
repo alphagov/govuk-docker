@@ -296,7 +296,7 @@ pv whitehall_production.dump.gz | gunzip | govuk-docker compose run mysql mysql 
 
 In order to ensure that Whitehall runs smoothly, your Docker settings may need to be changed in order to handle Whitehall. By default, Docker defaults to using 2 CPU cores and 2GB of RAM, and this is simply not enough to render Whitehall in a Docker container.
 
-You should set it to use at least 4 CPU cores and 8GB of RAM - 6 CPUs and 8 GB of RAM seems to work ok. Open the Docker dropdown via the whale icon in the OSX menu bar and selecting the `Advanced` option.
+You should set it to use at least 4 CPU cores and 8GB of RAM - 6 CPUs and 8 GB of RAM seems to work ok. Open the Docker dropdown via the whale icon in the macOS menu bar and selecting the `Advanced` option.
 
 You should also increase the Docker disk image size to the maximum.
 
