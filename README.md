@@ -58,6 +58,19 @@ govuk-docker has the following dependencies:
 
 All other dependencies will be installed for you automatically.
 
+#### Docker settings
+These need to be changed in order to handle intensive apps like Whitehall. Docker defaults to using 2 CPU cores and 2GB of RAM. Open the Docker dropdown via the Docker whale icon in the macOS menu bar, and select the `Advanced` option.
+
+Change to ideally:
+
+* 6 CPUs
+* 12 GB RAM
+* Docker disk image size default is 64GB under the Disk tab
+  * depending on how much free space you have
+  * the minimum should be > 50GB
+
+We have found no tangible improvement in increasing swap space size compared to CPU, RAM and disk allocation.
+
 ### Setup
 
 Start with the following in your bash config.
@@ -291,16 +304,6 @@ govuk-docker compose run mysql mysql -h mysql -u root --password=root -e "CREATE
 ```
 pv whitehall_production.dump.gz | gunzip | govuk-docker compose run mysql mysql -h mysql -u root --password=root whitehall_development
 ```
-
-*For Whitehall*
-
-In order to ensure that Whitehall runs smoothly, your Docker settings may need to be changed in order to handle Whitehall. By default, Docker defaults to using 2 CPU cores and 2GB of RAM, and this is simply not enough to render Whitehall in a Docker container.
-
-You should set it to use at least 4 CPU cores and 8GB of RAM - 6 CPUs and 8 GB of RAM seems to work ok. Open the Docker dropdown via the whale icon in the macOS menu bar and selecting the `Advanced` option.
-
-You should also increase the Docker disk image size to the maximum.
-
-We have found no tangible improvement in increasing swap space size compared to CPU, RAM and disk allocation.
 
 #### PostgreSQL
 
