@@ -59,17 +59,14 @@ govuk-docker has the following dependencies:
 All other dependencies will be installed for you automatically.
 
 #### Docker settings
-These need to be changed in order to handle intensive apps like Whitehall. Docker defaults to using 2 CPU cores and 2GB of RAM. Open the Docker dropdown via the Docker whale icon in the macOS menu bar, and select the `Advanced` option.
+Running GOV.UK applications can be resource intensive and will easily exceed the default configuration of Docker for Mac. To change settings open the Docker dropdown via the Docker whale icon in the macOS menu bar, and select the preferences option.
 
-Change to ideally:
+In `Advanced` settings you should update CPU and RAM resources. These should be at least:
 
 * 6 CPUs
 * 12 GB RAM
-* Docker disk image size default is 64GB under the Disk tab
-  * depending on how much free space you have
-  * the minimum should be > 50GB
 
-We have found no tangible improvement in increasing swap space size compared to CPU, RAM and disk allocation.
+In `Disk` you should ensure there is a high amount of disk space to allow replicating GOV.UK data. 64GB should be sufficient for most usages but you may need > 100GB to clone all GOV.UK integration data.
 
 ### Setup
 
