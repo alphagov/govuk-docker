@@ -5,7 +5,6 @@ class GovukDocker::Setup::Dnsmasq < GovukDocker::Setup::Base
   def call
     return unless check_continue
 
-    install_dnsmasq
     configure_etc_resolver_devgovuk
     configure_usr_local_etc_dnsmasq
     configure_usr_local_etc_dnsmasq_developmentconf
@@ -28,17 +27,6 @@ private
     end
 
     shell.yes?("Are you sure you want to continue?")
-  end
-
-  def install_dnsmasq
-    return if GovukDocker::Doctor::Checkup.new(
-      service_name: "dnsmasq",
-      checkups: %i(installed),
-      messages: {}
-    ).installed?
-
-    puts "⏳ Installing dnsmasq"
-    system("brew install dnsmasq")
   end
 
   def configure_etc_resolver_devgovuk

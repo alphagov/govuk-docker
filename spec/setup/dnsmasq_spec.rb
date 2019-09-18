@@ -24,9 +24,6 @@ describe GovukDocker::Setup::Dnsmasq do
   context "allowing the script to continue" do
     before do
       allow(shell_double).to receive(:yes?).and_return(true)
-      allow(GovukDocker::Doctor::Checkup).to receive(:new).with(service_name: "dnsmasq", checkups: %i(installed), messages: {}).and_return(double(installed?: false))
-      allow(subject).to receive(:system).with("brew install dnsmasq")
-      allow(subject).to receive(:puts)
       allow(File).to receive(:read).with("/etc/resolver/dev.gov.uk").and_return("")
       allow(File).to receive(:read).with("/usr/local/etc/dnsmasq.conf").and_return("")
       allow(File).to receive(:read).with("/usr/local/etc/dnsmasq.d/development.conf").and_return("")
@@ -34,12 +31,6 @@ describe GovukDocker::Setup::Dnsmasq do
       allow(File).to receive(:open).with("/usr/local/etc/dnsmasq.conf", anything)
       allow(File).to receive(:write).with("/usr/local/etc/dnsmasq.d/development.conf", anything)
       allow(subject).to receive(:system).with("sudo brew services restart dnsmasq")
-    end
-
-    it "installs dnsmasq using brew" do
-      expect(subject).to receive(:puts).with(/Installing/)
-      expect(subject).to receive(:system).with("brew install dnsmasq")
-      subject.call
     end
 
     it "writes to the various files" do
@@ -60,17 +51,6 @@ describe GovukDocker::Setup::Dnsmasq do
       expect(subject).to receive(:puts).with(/Restarting/)
       expect(subject).to receive(:system).with("sudo brew services restart dnsmasq")
       subject.call
-    end
-
-    context "dnsmasq is already installed" do
-      before do
-        expect(GovukDocker::Doctor::Checkup).to receive(:new).with(service_name: "dnsmasq", checkups: %i(installed), messages: {}).and_return(double(installed?: true))
-      end
-
-      it "doesn't install dnsmasq with brew" do
-        expect(subject).to_not receive(:system).with("brew install dnsmasq")
-        subject.call
-      end
     end
   end
 end
