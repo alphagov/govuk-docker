@@ -9,6 +9,7 @@ require_relative "./doctor/doctor"
 require_relative "./doctor/checkup"
 require_relative "./setup/docker"
 require_relative "./setup/dnsmasq"
+require_relative "./setup/homebrew_dependencies"
 require_relative "./setup/repo"
 
 class GovukDocker::CLI < Thor
@@ -107,6 +108,8 @@ class GovukDocker::CLI < Thor
   LONGDESC
   def setup
     GovukDocker::Setup::Repo.new(shell).call
+    puts
+    GovukDocker::Setup::HomebrewDependencies.new(shell).call
     puts
     GovukDocker::Setup::Docker.new(shell).call
     puts
