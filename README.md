@@ -58,6 +58,16 @@ govuk-docker has the following dependencies:
 
 All other dependencies will be installed for you automatically.
 
+#### Docker settings
+Running GOV.UK applications can be resource intensive and will easily exceed the default configuration of Docker for Mac. To change settings open the Docker dropdown via the Docker whale icon in the macOS menu bar, and select the preferences option.
+
+In `Advanced` settings you should update CPU and RAM resources. These should be at least:
+
+* 6 CPUs
+* 12 GB RAM
+
+In `Disk` you should ensure there is a high amount of disk space to allow replicating GOV.UK data. 64GB should be sufficient for most usages but you may need > 100GB to clone all GOV.UK integration data.
+
 ### Setup
 
 Start with the following in your bash config.
@@ -267,12 +277,12 @@ app.dev.gov.uk.		0	IN	A	127.0.0.1
 Provide a local gem path relative to the location of the Gemfile you're editing:
 
 ```ruby
-gem 'govuk_publishing_components', path: '../govuk_publishing_components' 
+gem 'govuk_publishing_components', path: '../govuk_publishing_components'
 ```
 
 ### How to: replicate data locally
 
-There may be times when a full database is required locally.  The following sections give examples of how to replicate this data from integration.  All examples reqire pv, which can be installed on a Mac using Brew (`brew install pv`).
+There may be times when a full database is required locally.  The following sections give examples of how to replicate this data from integration.  All examples require pv, which can be installed on a Mac using Brew (`brew install pv`).
 
 #### MySQL
 
