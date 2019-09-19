@@ -1,8 +1,12 @@
 source "https://rubygems.org"
 
+gem "aws-sdk-s3", "~> 1"
 gem "climate_control"
 gem "colorize"
+gem "elasticsearch", "~> 6"
 gem "govuk-lint"
+gem "highline"
 gem "pry"
 gem "rspec"
+gem "ruby-progressbar"
 gem "thor"

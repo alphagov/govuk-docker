@@ -5,6 +5,7 @@ require_relative "./commands/compose"
 require_relative "./commands/prune"
 require_relative "./commands/run"
 require_relative "./commands/startup"
+require_relative "./commands/data_sync/elasticsearch"
 require_relative "./doctor/doctor"
 require_relative "./doctor/checkup"
 require_relative "./setup/dnsmasq"
@@ -121,5 +122,30 @@ class GovukDocker::CLI < Thor
   desc "startup [VARIATION]", "Run the container for a service in the `app` stack, with optional variations, such as `live` or `draft`"
   def startup(variation = nil)
     GovukDocker::Commands::Startup.new(options).call(variation)
+  end
+
+  desc "sync", "Synchronize data from GOV.UK"
+  long_desc <<-LONGDESC
+    This will populate your local docker instance with the most recent snapshot from GOV.UK
+
+    Currently only Elasticsearch is supported.
+
+    This command requires that AWS is set: https://docs.publishing.service.gov.uk/manual/aws-cli-access.html
+
+    Example:
+    govuk-docker sync --elasticsearch_service=elasticsearch5 --keep_download
+  LONGDESC
+  option :skip_download, type: :boolean, default: false, desc: "skip downloading the snapshot from S3"
+  option :skip_restore, type: :boolean, default: false, desc: "skip restoring the snapshot into elasticsearch"
+  option :keep_download, type: :boolean, default: false, desc: "keep the downloaded snapshot"
+  option :elasticsearch_service, default: "elasticsearch6", desc: "elasticsearch service"
+  option :snapshot_directory
+  def sync
+    snapshot_directory = options[:snapshot_directory] || "/tmp/elasticsearch_#{Time.now.strftime('%d-%m-%y')}"
+    ::GovukDocker::Commands::DataSync::Elasticsearch.new(service: options[:elasticsearch_service],
+                                                         snapshot_directory: snapshot_directory,
+                                                         skip_download: options[:skip_download],
+                                                         skip_restore: options[:skip_restore],
+                                                         keep_download: options[:keep_download]).sync_data
   end
 end
