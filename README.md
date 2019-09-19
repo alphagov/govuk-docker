@@ -12,8 +12,6 @@ The aim of govuk-docker is to make it easy to develop any GOV.UK app. It achieve
 
 [RFC 106: Use Docker for local development](https://github.com/alphagov/govuk-rfcs/blob/master/rfc-106-docker-for-local-development.md) describes the background for choosing Docker.
 
-To guide development we [have documented the user needs](docs/NEEDS.md) and [associated decisions](docs/DECISIONS.md) in this repo.
-
 ## Usage
 
 Do this to run the tests for a service:

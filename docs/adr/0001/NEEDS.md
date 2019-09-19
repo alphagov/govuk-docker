@@ -3,6 +3,8 @@
 
 # Needs
 
+**DEPRECATED: much of what follows was written before we adopted a PR/ADR mechanism for making changes in this repo. Needs may have changed since they were written here, so what follows should only be used to provide historical context.**
+
 The aim of govuk-docker is to meet the following primary need.
 
 > **As a** developer on GOV.UK apps <br/>
