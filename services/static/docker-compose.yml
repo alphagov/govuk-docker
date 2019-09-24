@@ -33,5 +33,6 @@ services:
       - redis
     environment:
       REDIS_URL: redis://redis
+      GOVUK_ASSET_ROOT: draft-static.dev.gov.uk
       VIRTUAL_HOST: draft-static.dev.gov.uk
       HOST: 0.0.0.0
