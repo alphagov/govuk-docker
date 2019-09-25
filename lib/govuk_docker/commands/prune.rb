@@ -11,7 +11,7 @@ private
     [
       "docker container prune -f",
       "docker volume rm $(docker volume ls -q -f 'dangling=true' | grep -x '.\{64,\}') 2> /dev/null",
-      "docker image prune -f"
+      "docker image prune -f",
     ]
   end
 end
