@@ -61,25 +61,25 @@ class GovukDocker::CLI < Thor
     puts GovukDocker::Doctor::Checkup.new(
       service_name: "govuk-docker",
       checkups: %i(up_to_date),
-      messages: GovukDocker::Doctor.messages[:govuk_docker]
+      messages: GovukDocker::Doctor.messages[:govuk_docker],
     ).call
     puts "\r\nChecking dnsmasq"
     puts GovukDocker::Doctor::Checkup.new(
       service_name: "dnsmasq",
       checkups: %i(installed running dnsmasq_resolver running_as_different_user),
-      messages: GovukDocker::Doctor.messages[:dnsmasq]
+      messages: GovukDocker::Doctor.messages[:dnsmasq],
     ).call
     puts "\r\nChecking docker"
     puts GovukDocker::Doctor::Checkup.new(
       service_name: "docker",
       checkups: %i(installed running),
-      messages: GovukDocker::Doctor.messages[:docker]
+      messages: GovukDocker::Doctor.messages[:docker],
     ).call
     puts "\r\nChecking docker-compose"
     puts GovukDocker::Doctor::Checkup.new(
       service_name: "docker-compose",
       checkups: %i(installed),
-      messages: GovukDocker::Doctor.messages[:docker_compose]
+      messages: GovukDocker::Doctor.messages[:docker_compose],
     ).call
   end
 
