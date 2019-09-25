@@ -4,7 +4,7 @@ module GovukDocker::Doctor
       govuk_docker: govuk_docker_messages,
       dnsmasq: dnsmasq_messages,
       docker: docker_messages,
-      docker_compose: docker_compose_messages
+      docker_compose: docker_compose_messages,
     }
   end
 
@@ -27,7 +27,7 @@ module GovukDocker::Doctor
         For manual installation, visit https://docs.docker.com/install/.
       HEREDOC
       running: "✅ Docker is running",
-      not_running: <<~HEREDOC
+      not_running: <<~HEREDOC,
         ❌ Docker is not running.
         Please make sure Docker is running before using govuk-docker.
       HEREDOC

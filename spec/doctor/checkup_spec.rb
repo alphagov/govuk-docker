@@ -14,7 +14,7 @@ describe GovukDocker::Doctor::Checkup do
       running_as_different_user: "fake_service is running as correct user",
       not_running_as_different_user: "fake_service is not running as correct user",
       dnsmasq_resolver: "fake_service is resolving your dns",
-      not_dnsmasq_resolver: "A different service is resolving your dns"
+      not_dnsmasq_resolver: "A different service is resolving your dns",
     }
   }
 
