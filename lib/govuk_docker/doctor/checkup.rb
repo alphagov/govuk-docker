@@ -87,7 +87,7 @@ module GovukDocker::Doctor
     end
 
     def dnsmasq_resolver?
-      File.read('/etc/resolver/dev.gov.uk') == File.read(GovukDocker::Paths.dnsmasq_conf)
+      File.read("/etc/resolver/dev.gov.uk") == File.read(GovukDocker::Paths.dnsmasq_conf)
     end
 
     def dnsmasq_resolver_message

@@ -8,6 +8,6 @@ class GovukDocker::Paths
   end
 
   def self.dnsmasq_conf
-    File.join(govuk_docker_dir, 'config/dnsmasq.conf')
+    File.join(govuk_docker_dir, "config/dnsmasq.conf")
   end
 end

@@ -1,5 +1,5 @@
-require_relative './base'
-require_relative './compose'
+require_relative "./base"
+require_relative "./compose"
 
 class GovukDocker::Commands::Build < GovukDocker::Commands::Base
   def call

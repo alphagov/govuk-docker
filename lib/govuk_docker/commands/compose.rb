@@ -1,4 +1,4 @@
-require_relative './base'
+require_relative "./base"
 
 class GovukDocker::Commands::Compose < GovukDocker::Commands::Base
   def call(args)
@@ -16,7 +16,7 @@ private
 
   def display_truncated_commands(args)
     args = args - docker_compose_args
-    args.insert(1, '-f [...]')
+    args.insert(1, "-f [...]")
     puts args.join(" ")
   end
 

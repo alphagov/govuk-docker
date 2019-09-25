@@ -33,21 +33,21 @@ private
     write_file(
       "/etc/resolver/dev.gov.uk",
       File.read(GovukDocker::Paths.dnsmasq_conf),
-      overwrite: true
+      overwrite: true,
     )
   end
 
   def configure_usr_local_etc_dnsmasq
     append_file(
       "/usr/local/etc/dnsmasq.conf",
-      "conf-dir=/usr/local/etc/dnsmasq.d,*.conf"
+      "conf-dir=/usr/local/etc/dnsmasq.d,*.conf",
     )
   end
 
   def configure_usr_local_etc_dnsmasq_developmentconf
     write_file(
       "/usr/local/etc/dnsmasq.d/development.conf",
-      "address=/dev.gov.uk/127.0.0.1"
+      "address=/dev.gov.uk/127.0.0.1",
     )
   end
 
@@ -73,7 +73,7 @@ private
     return if file_configured?(path, contents)
 
     puts "⏳ Appending #{path}"
-    File.open(path, 'a') do |file|
+    File.open(path, "a") do |file|
       file.write("\n#{contents}\n")
     end
   end

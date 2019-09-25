@@ -14,7 +14,7 @@ describe GovukDocker::Doctor::Checkup do
       running_as_different_user: "fake_service is running as correct user",
       not_running_as_different_user: "fake_service is not running as correct user",
       dnsmasq_resolver: "fake_service is resolving your dns",
-      not_dnsmasq_resolver: "A different service is resolving your dns"
+      not_dnsmasq_resolver: "A different service is resolving your dns",
     }
   }
 
@@ -23,7 +23,7 @@ describe GovukDocker::Doctor::Checkup do
       subject = described_class.new(
         service_name: service_name,
         checkups: %i(up_to_date),
-        messages: messages
+        messages: messages,
       )
 
       ClimateControl.modify GOVUK_DOCKER_DIR: "/some/directory" do
@@ -42,7 +42,7 @@ describe GovukDocker::Doctor::Checkup do
       subject = described_class.new(
         service_name: service_name,
         checkups: %i(up_to_date),
-        messages: messages
+        messages: messages,
       )
 
       ClimateControl.modify GOVUK_DOCKER_DIR: "/some/directory" do
@@ -61,7 +61,7 @@ describe GovukDocker::Doctor::Checkup do
       subject = described_class.new(
         service_name: service_name,
         checkups: %i(installed),
-        messages: messages
+        messages: messages,
       )
 
       allow(subject).to receive(:system).with("which fake_service 1>/dev/null").and_return(true)
@@ -75,7 +75,7 @@ describe GovukDocker::Doctor::Checkup do
       described_class.new(
         service_name: service_name,
         checkups: %i(installed),
-        messages: messages
+        messages: messages,
       )
     end
 
@@ -94,7 +94,7 @@ describe GovukDocker::Doctor::Checkup do
       subject = described_class.new(
         service_name: service_name,
         checkups: %i(installed),
-        messages: messages
+        messages: messages,
       )
 
       allow(subject).to receive(:system).with("which fake_service 1>/dev/null").and_return(false)
@@ -108,7 +108,7 @@ describe GovukDocker::Doctor::Checkup do
       subject = described_class.new(
         service_name: service_name,
         checkups: %i(running),
-        messages: messages
+        messages: messages,
       )
 
       allow(subject).to receive(:system).with("pgrep fake_service 1>/dev/null").and_return(true)
@@ -122,7 +122,7 @@ describe GovukDocker::Doctor::Checkup do
       subject = described_class.new(
         service_name: service_name,
         checkups: %i(running),
-        messages: messages
+        messages: messages,
       )
 
       allow(subject).to receive(:system).with("pgrep fake_service 1>/dev/null").and_return(false)
@@ -136,7 +136,7 @@ describe GovukDocker::Doctor::Checkup do
       subject = described_class.new(
         service_name: service_name,
         checkups: %i(installed running),
-        messages: messages
+        messages: messages,
       )
 
       allow(subject).to receive(:system).with("pgrep fake_service 1>/dev/null").and_return(true)
@@ -151,7 +151,7 @@ describe GovukDocker::Doctor::Checkup do
       subject = described_class.new(
         service_name: service_name,
         checkups: %i(running_as_different_user),
-        messages: messages
+        messages: messages,
       )
 
       allow(subject).to receive(:system).with("ps aux | grep `pgrep fake_service` | grep -v `whoami` 1>/dev/null").and_return(true)
@@ -163,7 +163,7 @@ describe GovukDocker::Doctor::Checkup do
       subject = described_class.new(
         service_name: service_name,
         checkups: %i(running_as_different_user),
-        messages: messages
+        messages: messages,
       )
 
       allow(subject).to receive(:system).with("ps aux | grep `pgrep fake_service` | grep -v `whoami` 1>/dev/null").and_return(false)
@@ -177,7 +177,7 @@ describe GovukDocker::Doctor::Checkup do
       described_class.new(
         service_name: service_name,
         checkups: %i(dnsmasq_resolver),
-        messages: messages
+        messages: messages,
       )
     }
 
