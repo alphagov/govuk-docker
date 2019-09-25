@@ -3,7 +3,7 @@ require_relative "../../lib/govuk_docker/errors/unknown_stack"
 
 describe GovukDocker::UnknownStack do
   it "should print a list of available stack in the error message" do
-    incorrect_stack = 'incorrect'
+    incorrect_stack = "incorrect"
     available_stacks = %w[test lite]
 
     expected_message = <<~MESSAGE

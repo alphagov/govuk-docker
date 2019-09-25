@@ -18,7 +18,7 @@ private
   attr_reader :service, :config_directory
 
   def available_services
-    service_folders = File.join(config_directory, "services", '*')
+    service_folders = File.join(config_directory, "services", "*")
     Dir.glob(service_folders).sort.map do |service|
       File.basename(service)
     end

@@ -1,7 +1,7 @@
-require 'yaml'
-require_relative '../paths'
-require_relative '../errors/unknown_service'
-require_relative '../errors/unknown_stack'
+require "yaml"
+require_relative "../paths"
+require_relative "../errors/unknown_service"
+require_relative "../errors/unknown_stack"
 
 module GovukDocker::Commands
   class Base
@@ -41,7 +41,7 @@ module GovukDocker::Commands
       service_path = File.join(config_directory, "services/#{service}/docker-compose.yml")
       service_file = YAML.load_file(service_path)
       @available_stacks ||= service_file["services"].map do |service_with_stack|
-        service_with_stack.first.delete_prefix(service + '-')
+        service_with_stack.first.delete_prefix(service + "-")
       end
     end
 

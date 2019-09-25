@@ -1,9 +1,9 @@
-require 'colorize'
-require 'net/http'
-require 'timeout'
+require "colorize"
+require "net/http"
+require "timeout"
 
-require_relative './base'
-require_relative './run'
+require_relative "./base"
+require_relative "./run"
 
 class GovukDocker::Commands::Startup < GovukDocker::Commands::Base
   def call(variation = nil)
@@ -47,7 +47,7 @@ private
   def find_hostname
     search_hostname = "#{service.tr('_-', '')}.dev.gov.uk"
     possible_hostnames.each do |hostname|
-      return hostname if hostname.tr('_-', '') == search_hostname
+      return hostname if hostname.tr("_-", "") == search_hostname
     end
 
     nil

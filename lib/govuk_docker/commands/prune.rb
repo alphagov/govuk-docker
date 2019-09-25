@@ -1,4 +1,4 @@
-require_relative './base'
+require_relative "./base"
 
 class GovukDocker::Commands::Prune < GovukDocker::Commands::Base
   def call

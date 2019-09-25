@@ -73,7 +73,7 @@ private
     return if file_configured?(path, contents)
 
     puts "⏳ Appending #{path}"
-    File.open(path, 'a') do |file|
+    File.open(path, "a") do |file|
       file.write("\n#{contents}\n")
     end
   end
