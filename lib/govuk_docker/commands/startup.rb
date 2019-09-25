@@ -66,7 +66,7 @@ private
 
   def can_visit?(url)
     case Net::HTTP.get_response(URI(url))
-    when Net::HTTPSuccess, Net::HTTPRedirection then
+    when Net::HTTPSuccess, Net::HTTPRedirection
       true
     else
       false
