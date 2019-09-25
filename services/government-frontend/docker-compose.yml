@@ -35,7 +35,6 @@ services:
       - router-app-draft
       - content-store-app-draft
       - static-app-draft
-      - static-app
     environment:
       GOVUK_ASSET_ROOT: draft-government-frontend.dev.gov.uk
       VIRTUAL_HOST: draft-government-frontend.dev.gov.uk
