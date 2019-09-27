@@ -332,7 +332,7 @@ pv publishing_api_production.dump.gz  | gunzip | govuk-docker compose run postgr
 
 #### MongoDB
 
-1.  Download the relevant database dump from the [AWS S3 Bucket](https://s3.console.aws.amazon.com/s3/object/govuk-integration-database-backups/mongodb/daily/mongo/?region=eu-west-1&tab=overview)
+1.  Download the relevant database dump from the [AWS S3 Bucket](https://s3.console.aws.amazon.com/s3/buckets/govuk-integration-database-backups/mongodb/daily/mongo/?region=eu-west-1&tab=overview)
 
 2. Unzip the archive, e.g. for Content Store:
 
