@@ -232,8 +232,7 @@ make pull
 Sometimes a service just doesn't work as expected, and the easiest thing to do is to start over. This command stops and removes all local govuk Docker containers:
 
 ```
-govuk-docker compose stop
-govuk-docker prune
+govuk-docker compose rm -sv
 ```
 
 You should then be able to `govuk-docker build` your service and have confidence you're not suffering from configuration drift.
