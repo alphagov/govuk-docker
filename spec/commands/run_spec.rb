@@ -26,7 +26,7 @@ describe GovukDocker::Commands::Run do
 
       it "should run docker compose" do
         expect(compose_command).to receive(:call).with(
-          ["run", "--rm", "--service-ports", "example-service-lite"],
+          ["run", "--rm", "example-service-lite"],
         )
         subject.call(args)
       end
@@ -37,7 +37,7 @@ describe GovukDocker::Commands::Run do
 
       it "should run docker compose" do
         expect(compose_command).to receive(:call).with(
-          ["run", "--rm", "--service-ports", "example-service-lite", "bundle", "exec", "rake", "lint"],
+          ["run", "--rm", "example-service-lite", "bundle", "exec", "rake", "lint"],
         )
         subject.call(args)
       end
