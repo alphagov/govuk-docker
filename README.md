@@ -320,7 +320,7 @@ pv whitehall_production.dump.gz | gunzip | govuk-docker compose run mysql mysql 
 
 ```
 govuk-docker compose up -d postgres
-govuk-docker compose run postgres /usr/bin/psql -h postgres -U postgres -qAt DROP DATABASE IF EXISTS "publishing-api"
+govuk-docker compose run postgres /usr/bin/psql -h postgres -U postgres -c DROP DATABASE IF EXISTS "publishing-api"
 govuk-docker compose run postgres /usr/bin/createdb -h postgres -U postgres publishing-api
 ```
 
@@ -332,7 +332,7 @@ pv publishing_api_production.dump.gz  | gunzip | govuk-docker compose run postgr
 
 #### MongoDB
 
-1.  Download the relevant database dump from the [AWS S3 Bucket](https://s3.console.aws.amazon.com/s3/object/govuk-integration-database-backups/mongodb/daily/mongo/?region=eu-west-1&tab=overview)
+1.  Download the relevant database dump from the [AWS S3 Bucket](https://s3.console.aws.amazon.com/s3/buckets/govuk-integration-database-backups/mongodb/daily/mongo/?region=eu-west-1&tab=overview)
 
 2. Unzip the archive, e.g. for Content Store:
 
