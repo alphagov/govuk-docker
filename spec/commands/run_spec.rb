@@ -35,20 +35,9 @@ describe GovukDocker::Commands::Run do
     context "with some extra arguments" do
       let(:args) { %w[bundle exec rake lint] }
 
-      it "should run docker compose using the `env` command" do
+      it "should run docker compose" do
         expect(compose_command).to receive(:call).with(
-          ["run", "--rm", "--service-ports", "example-service-lite", "env", "bundle", "exec", "rake", "lint"],
-        )
-        subject.call(args)
-      end
-    end
-
-    context "with an env command" do
-      let(:args) { %w[env bundle exec rake lint] }
-
-      it "should run docker compose without duplicating `env`" do
-        expect(compose_command).to receive(:call).with(
-          ["run", "--rm", "--service-ports", "example-service-lite", "env", "bundle", "exec", "rake", "lint"],
+          ["run", "--rm", "--service-ports", "example-service-lite", "bundle", "exec", "rake", "lint"],
         )
         subject.call(args)
       end

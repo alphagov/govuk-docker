@@ -365,6 +365,14 @@ govuk-docker compose up -d mongo
 govuk-docker compose run mongo mongorestore --drop --db content-store /import/var/lib/mongodb/backup/mongodump/content_store_production/
 ```
 
+### How to: set environment variables
+
+While most environment variables should be set in the config for a service, sometimes it's necessary to set assign one or more variables at the point of running a command, such as a Rake task. This can be done using `env` e.g.
+
+```
+govuk-docker run content-publisher-lite env MY_VAR=my_val bundle exec rake my_task
+```
+
 ## Licence
 
 [MIT License](LICENCE)
