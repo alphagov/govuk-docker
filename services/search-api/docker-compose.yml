@@ -15,8 +15,7 @@ x-search-api: &search-api
     RABBITMQ_USER: guest
     RABBITMQ_PASSWORD: guest
     REDIS_HOST: redis
-    ELASTICSEARCH_URI: http://elasticsearch5:9200
-    ELASTICSEARCH_B_URI: http://elasticsearch6:9200
+    ELASTICSEARCH_URI: http://elasticsearch6:9200
 
 services:
   search-api-lite:
@@ -34,8 +33,7 @@ services:
       - elasticsearch6
     environment:
       REDIS_HOST: redis
-      ELASTICSEARCH_URI: http://elasticsearch5:9200
-      ELASTICSEARCH_B_URI: http://elasticsearch6:9200
+      ELASTICSEARCH_URI: http://elasticsearch6:9200
       VIRTUAL_HOST: search-api.dev.gov.uk, search.dev.gov.uk
       HOST: 0.0.0.0
     ports:
