@@ -141,8 +141,7 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ router
    - ✅ router-api
    - ✅ search-admin
-   - ⚠  search-api
-      * Tests fail as they run against [both Elasticsearch instances](https://github.com/alphagov/search-api/pull/1618)
+   - ✅ search-api
    - ✅ service-manual-frontend
    - ✅ short-url-manager
    - ✅ signon
