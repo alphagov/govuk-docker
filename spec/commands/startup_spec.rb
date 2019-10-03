@@ -10,8 +10,6 @@ describe GovukDocker::Commands::Startup do
   before { allow(run_double).to receive(:call) }
 
   before do
-    allow(Thread).to receive(:new).and_yield # to run the thread in the current context
-    allow(subject).to receive(:wait_until_can_visit?).and_return(true)
     allow(subject).to receive(:puts)
   end
 
@@ -27,12 +25,5 @@ describe GovukDocker::Commands::Startup do
       expect(GovukDocker::Commands::Run).to receive(:new).with(a_hash_including(stack: "app-e2e")).and_return(run_double)
       subject.call("e2e")
     end
-  end
-
-  it "prints the URL of the app" do
-    expect(GovukDocker::Commands::Run).to receive(:new).with(a_hash_including(stack: "app")).and_return(run_double)
-    expect(subject).to receive(:wait_until_can_visit?).and_return(true)
-    expect(subject).to receive(:puts).with("\e[0;34;49mApplication is available at: http://example_service.dev.gov.uk\e[0m")
-    subject.call
   end
 end
