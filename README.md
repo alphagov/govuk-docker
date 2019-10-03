@@ -453,6 +453,20 @@ While most environment variables should be set in the config for a service, some
 govuk-docker run content-publisher-lite env MY_VAR=my_val bundle exec rake my_task
 ```
 
+### How to: install a new release of Ruby
+
+Many of our services use a `.ruby-version` file in conjunction with `rbenv`. When a new version of Ruby is released and we start upgrading our services, you may start seeing the following error when you run commands.
+
+```
+ruby-build: definition not found: x.y.z
+```
+
+Most of our services share a common Docker image, which needs rebuilding to be aware of the new Ruby version. To fix the error, run the following commands, replacing '<service>' with the name of the service, e.g. 'collections-publisher'.
+```
+govuk-docker compose build --no-cache <service>-lite
+govuk-docker build
+```
+
 ## Licence
 
 [MIT License](LICENCE)
