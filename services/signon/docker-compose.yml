@@ -27,10 +27,12 @@ services:
     depends_on:
       - mysql
       - nginx-proxy-app
+      - redis
     environment:
       DATABASE_URL: "mysql2://root:root@mysql/signon_development"
       VIRTUAL_HOST: signon.dev.gov.uk
       HOST: 0.0.0.0
+      REDIS_HOST: redis
     ports:
       - "3000"
     command: bin/rails s -P /tmp/rails.pid
