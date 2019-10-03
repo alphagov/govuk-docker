@@ -200,27 +200,6 @@ This will test whether or not your system meets the following requirements:
 * docker installed
 * docker-compose installed
 
-### How to: diagnose and troubleshoot
-
-Sometimes things go wrong or some investigation is needed. As govuk-docker is just a bunch of docker config and a CLI wrapper, it's still possible to use all the standard docker commands to help fix issues and get more info e.g.
-
-```
-# make sure govuk-docker is up-to-date
-git pull
-
-# make sure the service is built OK
-govuk-docker build
-
-# tail logs for running services
-govuk-docker compose logs -f
-
-# get all the running containers
-docker ps -a
-
-# get a terminal inside a service
-govuk-docker run bash
-```
-
 ### How to: update everything!
 
 Sometimes it's useful to get all changes for all repos e.g. to support finding things with a govuk-wide grep. This can be done by running:
