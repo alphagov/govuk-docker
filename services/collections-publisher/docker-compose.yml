@@ -55,4 +55,9 @@ services:
   collections-publisher-app-e2e:
     <<: *collections-publisher-app
     depends_on:
+      - redis
+      - mysql
+      - content-store-app
+      - link-checker-api-app
+      - nginx-proxy-app
       - collections-publisher-worker
