@@ -7,7 +7,7 @@ govuk-docker has the following dependencies:
 - [brew](https://brew.sh/). (If you don't use a Mac, you'll need to dig into the `govuk-docker setup` command and manually install the things referenced).
 - [git](https://git-scm.com)
 - Ruby (whatever version is specified in [.ruby-version](https://github.com/alphagov/govuk-docker/blob/master/.ruby-version))
-  - Follow these [instructions to update Ruby using brew](#how-to-update-ruby)
+  - Follow these [instructions to update Ruby using brew](#how-to-install-or-update-ruby)
 - A directory `~/govuk` in your home directory
 
 All other dependencies will be installed for you automatically.
@@ -67,7 +67,7 @@ This will test whether or not your system meets the following requirements:
 * docker-compose installed
 
 
-### How to: install/update Ruby
+### How to: install or update Ruby
 
 Follow the instructions to install [rbenv](https://github.com/rbenv/rbenv#installation) using [brew](https://brew.sh/).
 
