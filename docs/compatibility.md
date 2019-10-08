@@ -10,6 +10,7 @@ The following apps are supported by govuk-docker to some extent.
    - ⚠ calculators
       * Web UI doesn't work without the content item being present in the content-store.
    - ✅ calendars
+   - ❌ ckan
    - ⚠  collections
       * You will need to [populate the Content Store database](#mongodb) or run the live stack in order for it to work locally.
       * To view topic pages locally you still need to use the live stack as they rely on Elasticsearch data which we are yet to be able to import.
@@ -21,6 +22,8 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ content-publisher
    - ✅ content-store
    - ✅ content-tagger
+   - ❌ datagovuk_find
+   - ❌ datagovuk_publish
    - ✅ email-alert-api
    - ✅ email-alert-frontend
    - ❌ email-alert-service
@@ -46,6 +49,7 @@ The following apps are supported by govuk-docker to some extent.
    - ❌ local-links-manager
    - ✅ manuals-frontend
    - ❌ manuals-publisher
+   - ❌ mapit
    - ❌ maslow
    - ✅ miller-columns-element
    - ✅ plek
