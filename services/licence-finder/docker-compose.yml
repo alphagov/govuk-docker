@@ -1,0 +1,42 @@
+version: '3.7'
+
+x-licence-finder: &licence-finder
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: licence-finder
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/licence-finder
+
+services:
+  licence-finder-lite: &licence-finder-lite
+    <<: *licence-finder
+    privileged: true
+    depends_on:
+      - mongo
+      - elasticsearch6
+    environment:
+      MONGODB_URI: "mongodb://mongo/licence-finder_development"
+      ELASTICSEARCH_URI: http://elasticsearch6:9200
+
+  licence-finder-app:
+    <<: *licence-finder
+    depends_on:
+      - mongo
+      - redis
+      - static-app
+      - elasticsearch6
+      - content-store-app
+      - nginx-proxy-app
+    environment:
+      REDIS_URL: redis://redis
+      VIRTUAL_HOST: licence-finder.dev.gov.uk
+      MONGODB_URI: "mongodb://mongo/licence-finder_development"
+      ELASTICSEARCH_URI: http://elasticsearch6:9200
+      PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    command: bin/rails s --restart
