@@ -9,7 +9,7 @@ class GovukDocker::Commands::Run < GovukDocker::Commands::Base
     GovukDocker::Commands::Compose
       .new(config_directory: config_directory, service: service, stack: stack, verbose: verbose)
       .call(
-        ["run", "--rm", "--service-ports", container_name] + args,
+        ["run", "--rm", container_name] + args,
       )
   end
 

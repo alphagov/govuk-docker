@@ -49,7 +49,8 @@ For a full list of govuk-docker commands, run `govuk-docker help`.
 ## Stacks
 
 Each service provides a number of different 'stacks' which you can use to run
-the app. To provide consistency we have a convention for these names:
+the app. You can see the stacks for a service in its [config file](services/content-publisher/docker-compose.yml).
+To provide consistency we have a convention for these names:
 
 - **lite**: This stack provides only the minimum number of dependencies to run
   the application code. This is useful for running the tests, or a Rails
