@@ -3,6 +3,7 @@
 The following apps are supported by govuk-docker to some extent.
 
    - ✅ asset-manager
+   - ❌ bouncer
    - ⚠ cache-clearing-service
       * Tests pass
       * Queues are not set-up, so cache-clearing-service can't be run locally
@@ -13,15 +14,19 @@ The following apps are supported by govuk-docker to some extent.
       * You will need to [populate the Content Store database](#mongodb) or run the live stack in order for it to work locally.
       * To view topic pages locally you still need to use the live stack as they rely on Elasticsearch data which we are yet to be able to import.
    - ✅ collections-publisher
+   - ❌ contacts-admin
    - ⚠ content-data-admin
       * **TODO: Missing support for a webserver stack**
+   - ❌ content-data-api
    - ✅ content-publisher
    - ✅ content-store
    - ✅ content-tagger
    - ✅ email-alert-api
    - ✅ email-alert-frontend
+   - ❌ email-alert-service
+   - ❌ feedback
    - ✅ finder-frontend
-   - ❌ frontend
+   - ❓ frontend
    - ✅ government-frontend
    - ✅ govspeak
    - ✅ govuk_app_config
@@ -31,20 +36,28 @@ The following apps are supported by govuk-docker to some extent.
       * Service exists in govuk-docker but is untested
    - ✅ govuk-developer-docs
    - ✅ govuk-lint
+   - ❌ hmrc-manuals-api
+   - ❌ imminence
    - ✅ info-frontend
+   - ❌ licence-finder
    - ⚠ link-checker-api
       * Works in isolation but not in other services' `e2e` stacks, so must be run in a separate process.
         See https://github.com/alphagov/govuk-docker/issues/174 for details.
+   - ❌ local-links-manager
    - ✅ manuals-frontend
+   - ❌ manuals-publisher
+   - ❌ maslow
    - ✅ miller-columns-element
    - ✅ plek
    - ✅ publisher
    - ✅ publishing-api
+   - ❌ release
    - ✅ router
    - ✅ router-api
    - ✅ search-admin
    - ✅ search-api
    - ✅ service-manual-frontend
+   - ❌ service-manual-publisher
    - ✅ short-url-manager
    - ✅ signon
    - ✅ smart-answers
@@ -53,6 +66,7 @@ The following apps are supported by govuk-docker to some extent.
       * JavaScript 404 errors when previewing pages, possibly [related to analytics](https://github.com/alphagov/static/blob/master/app/assets/javascripts/analytics/init.js.erb#L28)
    - ✅ support
    - ✅ support-api
+   - ❌ transition
    - ✅ travel-advice-publisher
    - ⚠ whitehall
       * Who knows, really - several tests are failing, lots pass ;-)
