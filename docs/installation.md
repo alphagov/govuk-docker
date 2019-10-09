@@ -27,7 +27,7 @@ In `Disk` you should ensure there is a high amount of disk space to allow replic
 Start with the following in your bash config.
 
 ```
-export PATH=$PATH:~/govuk/govuk-docker/bin
+export PATH=$PATH:~/govuk/govuk-docker/exe
 ```
 
 Now in the `~/govuk` directory, run the following commands.
@@ -36,10 +36,34 @@ Now in the `~/govuk` directory, run the following commands.
 git clone git@github.com:alphagov/govuk-docker.git
 cd govuk-docker
 bundle install
-govuk-docker setup
+bin/setup
 ```
 
 You can now [clone and setup the apps you need](../README.md#Usage), after which you can do things like run tests and startup the app in your browser. If this doesn't work for whatever reason, follow the [instructions on how to resolve setup issues](#how-tos).
+
+### Shortcuts
+
+Typing the [full commands](../README.md#usage) is likely to get tiring. We've added a couple of lightweight helper scripts alongside govuk-docker, which figure out the application you're running based on the name of the current directory.
+
+```
+# full commands
+govuk-docker run content-publisher-lite bundle exec rake
+govuk-docker up content-publisher-app
+
+# shortcuts
+# assuming you're in the content-publisher directory
+govuk-docker-run bundle exec rake
+govuk-docker-up
+```
+
+Here are some suggested aliases that make things even shorter.
+
+```
+alias gd="govuk-docker"
+alias gdr="govuk-docker-run"
+alias gdu="govuk-docker-up"
+alias gdbe="govuk-docker-run bundle exec"
+```
 
 ## Environment variables
 
@@ -53,11 +77,11 @@ Both govuk-docker and the Makefile respect the following environment variables:
 
 ### How to: troubleshoot your installation
 
-The `doctor` command will attempt to ensure your installation is in a runnable
+The `doctor` script will attempt to ensure your installation is in a runnable
 state and suggest remedial steps if it finds anything wrong
 
 ```
-govuk-docker doctor
+bin/doctor
 ```
 
 This will test whether or not your system meets the following requirements:

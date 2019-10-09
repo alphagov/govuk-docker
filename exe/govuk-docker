@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# **************************************************************
+# DO NOT ADD NEW STUFF IN HERE
+#
+# This is meant to be a simple wrapper script to pass some '-f'
+# flags to docker-compose. Its behaviour should not depend on
+# its arguments. We do not want our own bespoke CLI, as this can
+# only lead to complexity, performance and maintenance overheads
+# on top of docker and docker-compose.
+# **************************************************************
+
+COMPOSE_FLAGS=("-f" "$(dirname "$0")/../docker-compose.yml")
+COMPOSE_FILES="$(dirname "$0")/../services/*/docker-compose.yml"
+
+for file in $COMPOSE_FILES; do
+  COMPOSE_FLAGS+=("-f" "$file")
+done
+
+echo "docker-compose -f [...] $*"
+docker-compose "${COMPOSE_FLAGS[@]}" "$@"
