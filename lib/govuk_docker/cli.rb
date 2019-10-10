@@ -4,6 +4,7 @@ require_relative "./commands/build"
 require_relative "./commands/compose"
 require_relative "./commands/prune"
 require_relative "./commands/run"
+require_relative "./commands/ssh"
 require_relative "./commands/startup"
 require_relative "./doctor/doctor"
 require_relative "./doctor/checkup"
@@ -97,6 +98,20 @@ class GovukDocker::CLI < Thor
   LONGDESC
   def run(*args)
     GovukDocker::Commands::Run.new(options).call(args)
+  end
+
+  desc "ssh [VARIATION]", "ssh into a running container for a service"
+  long_desc <<~LONGDESC
+    By default, it opens a shell for the service in the `app` stack
+
+    It can run a different stack if specified (e.g. `govuk-docker ssh lite`).
+
+    Examples
+
+    cd ~/govuk/search-api; govuk-docker ssh draft
+  LONGDESC
+  def ssh(variation = nil)
+    GovukDocker::Commands::Ssh.new(options).call(variation)
   end
 
   desc "setup", "Configures and installs the various dependencies necessary to run `govuk-docker` successfully"
