@@ -43,7 +43,7 @@ services:
       HOST: 0.0.0.0
 
   calculators-app-live:
-    <<: *calculators
+    <<: *calculators-app
     depends_on:
       - nginx-proxy-app
     environment:
@@ -52,6 +52,3 @@ services:
       PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
       VIRTUAL_HOST: calculators.dev.gov.uk
       HOST: 0.0.0.0
-    ports:
-      - "3000"
-    command: bin/rails s -P /tmp/rails.pid

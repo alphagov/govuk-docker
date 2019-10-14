@@ -27,10 +27,10 @@ services:
       HOST: 0.0.0.0
     ports:
       - "3000"
-    command: bin/rails s -P /tmp/rails.pid
+    command: bin/rails s --restart
 
   manuals-frontend-app-draft:
-    <<: *manuals-frontend
+    <<: *manuals-frontend-app
     depends_on:
       - router-app-draft
       - content-store-app-draft
@@ -40,12 +40,9 @@ services:
       VIRTUAL_HOST: draft-manuals-frontend.dev.gov.uk
       PLEK_HOSTNAME_PREFIX: "draft-"
       HOST: 0.0.0.0
-    ports:
-      - "3000"
-    command: bin/rails s -P /tmp/rails.pid
 
   manuals-frontend-app-live:
-    <<: *manuals-frontend
+    <<: *manuals-frontend-app
     depends_on:
       - nginx-proxy-app
     environment:
@@ -54,6 +51,3 @@ services:
       PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
       VIRTUAL_HOST: manuals-frontend.dev.gov.uk
       HOST: 0.0.0.0
-    ports:
-      - "3000"
-    command: bin/rails s -P /tmp/rails.pid

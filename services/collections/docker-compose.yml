@@ -44,7 +44,7 @@ services:
       HOST: 0.0.0.0
 
   collections-app-live:
-    <<: *collections
+    <<: *collections-app
     depends_on:
       - nginx-proxy-app
     environment:
@@ -54,6 +54,3 @@ services:
       PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
       VIRTUAL_HOST: collections.dev.gov.uk
       HOST: 0.0.0.0
-    ports:
-      - "3000"
-    command: bin/rails s -P /tmp/rails.pid

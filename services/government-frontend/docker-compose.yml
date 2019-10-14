@@ -42,7 +42,7 @@ services:
       HOST: 0.0.0.0
 
   government-frontend-app-live:
-    <<: *government-frontend
+    <<: *government-frontend-app
     depends_on:
       - nginx-proxy-app
     environment:
@@ -51,6 +51,3 @@ services:
       PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
       VIRTUAL_HOST: government-frontend.dev.gov.uk
       HOST: 0.0.0.0
-    ports:
-      - "3000"
-    command: bin/rails s -P /tmp/rails.pid
