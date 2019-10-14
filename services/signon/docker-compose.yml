@@ -35,4 +35,4 @@ services:
       REDIS_HOST: redis
     ports:
       - "3000"
-    command: bin/rails s -P /tmp/rails.pid
+    command: bin/rails s --restart

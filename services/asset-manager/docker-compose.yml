@@ -34,7 +34,7 @@ services:
       HOST: 0.0.0.0
     ports:
       - "3000"
-    command: bin/rails s -P /tmp/rails.pid
+    command: bin/rails s --restart
 
   asset-manager-app-e2e:
     <<: *asset-manager-app

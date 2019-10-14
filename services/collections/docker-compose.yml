@@ -28,7 +28,7 @@ services:
       HOST: 0.0.0.0
     ports:
       - "3000"
-    command: bin/rails s -P /tmp/rails.pid
+    command: bin/rails s --restart
 
   # TODO: this doesn't work yet because collections also relies on search-api
   collections-app-draft:

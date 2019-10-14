@@ -34,7 +34,7 @@ services:
       MEMCACHE_SERVERS: memcached
     ports:
       - "3000"
-    command: bin/rails s -P /tmp/rails.pid
+    command: bin/rails s --restart
 
   finder-frontend-app-live:
     <<: *finder-frontend-app
