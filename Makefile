@@ -20,9 +20,6 @@ pull:
 	echo $(APPS) | cut -d/ -f3 | xargs -P8 -n1 ./bin/update-git-repo.sh
 
 test:
-	# Linting
-	bundle exec rubocop . --parallel
-
 	# Run the tests for the govuk-docker CLI
 	bundle exec rspec
 
