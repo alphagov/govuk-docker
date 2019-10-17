@@ -20,15 +20,12 @@ pull:
 	echo $(APPS) | cut -d/ -f3 | xargs -P8 -n1 ./bin/update-git-repo.sh
 
 test:
-	# Linting
-	bundle exec rubocop . --parallel
-
 	# Run the tests for the govuk-docker CLI
 	bundle exec rspec
 
 	# Test that the docker-compose config is valid. This will error if there are errors
 	# in the YAML files, or incompatible features are used.
-	sh bin/test-docker-compose.sh
+	$(GOVUK_DOCKER) compose config > /dev/null
 
 # This will be slow and may repeat work, so generally you don't want
 # to run this.
