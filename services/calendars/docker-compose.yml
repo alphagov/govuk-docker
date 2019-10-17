@@ -26,7 +26,7 @@ services:
       HOST: 0.0.0.0
     ports:
       - "3000"
-    command: bin/rails s -P /tmp/rails.pid
+    command: bin/rails s --restart
 
   calendars-app-draft:
     <<: *calendars-app
@@ -46,7 +46,7 @@ services:
       - publishing-api-app-e2e
 
   calendars-app-live:
-    <<: *calendars
+    <<: *calendars-app
     depends_on:
       - nginx-proxy-app
     environment:
@@ -57,4 +57,3 @@ services:
       HOST: 0.0.0.0
     ports:
       - "3000"
-    command: bin/rails s -P /tmp/rails.pid

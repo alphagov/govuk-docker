@@ -25,7 +25,7 @@ services:
       HOST: 0.0.0.0
     ports:
       - "3000"
-    command: bin/rails s -P /tmp/rails.pid
+    command: bin/rails s --restart
 
   static-app-draft:
     <<: *static-app
