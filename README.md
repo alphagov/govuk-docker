@@ -127,21 +127,7 @@ TODO
 
 #### PostgreSQL
 
-1. Download the relevant database dump from the [AWS S3 Bucket](https://s3.console.aws.amazon.com/s3/buckets/govuk-integration-database-backups/postgres/?region=eu-west-1&tab=overview)
-
-2. Drop and recreate any existing database, e.g. for Publishing API:
-
-```
-govuk-docker up -d postgres
-govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -c 'DROP DATABASE IF EXISTS "publishing-api"'
-govuk-docker run postgres /usr/bin/createdb -h postgres -U postgres publishing-api
-```
-
-3. Import the file into the local Postgres database, e.g. for Publishing API:
-
-```
-pv publishing_api_production.dump.gz  | gunzip | govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -qAt -d publishing-api
-```
+TODO
 
 #### MongoDB
 
