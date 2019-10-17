@@ -123,21 +123,7 @@ TODO
 
 #### MySQL
 
-1. Download the relevant database dump from the [AWS S3 Bucket](https://s3.console.aws.amazon.com/s3/buckets/govuk-integration-database-backups/mysql/?region=eu-west-1&tab=overview)
-
-2. Drop and recreate any existing database, e.g. for Whitehall:
-
-```
-govuk-docker up -d mysql
-govuk-docker run mysql mysql -h mysql -u root --password=root -e "DROP DATABASE IF EXISTS whitehall_development"
-govuk-docker run mysql mysql -h mysql -u root --password=root -e "CREATE DATABASE whitehall_development"
-```
-
-3. Import the file into the local MySQL database, e.g. for Whitehall:
-
-```
-pv whitehall_production.dump.gz | gunzip | govuk-docker run mysql mysql -h mysql -u root --password=root whitehall_development
-```
+TODO
 
 #### PostgreSQL
 
