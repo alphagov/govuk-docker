@@ -117,6 +117,10 @@ gem 'govuk_publishing_components', path: '../govuk_publishing_components'
 
 There may be times when a full database is required locally.  The following sections give examples of how to replicate this data from integration.  All examples require pv, which can be installed on a Mac using Brew (`brew install pv`).
 
+#### Elasticsearch
+
+TODO
+
 #### MySQL
 
 1. Download the relevant database dump from the [AWS S3 Bucket](https://s3.console.aws.amazon.com/s3/buckets/govuk-integration-database-backups/mysql/?region=eu-west-1&tab=overview)
