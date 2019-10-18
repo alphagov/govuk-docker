@@ -131,38 +131,7 @@ TODO
 
 #### MongoDB
 
-1.  Download the relevant database dump from the [AWS S3 Bucket](https://s3.console.aws.amazon.com/s3/buckets/govuk-integration-database-backups/mongodb/daily/mongo/?region=eu-west-1&tab=overview)
-
-2. Unzip the archive, e.g. for Content Store:
-
-```
-gunzip mongodump-2019-08-12_0023.tgz
-```
-
-Or if it's a TAR file, you can extract a specific file or directory.  Using the Content Store as an example:
-```
-tar -xvzf mongodump-2019-08-12_0023.tar var/lib/mongodb/backup/mongodump/content_store_production -C directory_for_download
-```
-
-3. Update the `docker-compose.yml` file to mount your local directory into the VM, e.g.
-
-```
-  mongo:
-    image: mongo:2.4
-    volumes:
-      - mongo:/data/db
-      - /Path/To/Downloads/directory_for_download:/import
-    ports:
-      - "27017:27017"
-      - "27018:27018"
-```
-
-4. Import the backup files into the local Mongo database, e.g. for Content Store:
-
-```
-govuk-docker up -d mongo
-govuk-docker run mongo mongorestore --drop --db content-store /import/var/lib/mongodb/backup/mongodump/content_store_production/
-```
+TODO
 
 ### How to: set environment variables
 
