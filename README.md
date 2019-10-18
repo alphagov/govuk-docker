@@ -115,23 +115,18 @@ gem 'govuk_publishing_components', path: '../govuk_publishing_components'
 
 ### How to: replicate data locally
 
-There may be times when a full database is required locally.  The following sections give examples of how to replicate this data from integration.  All examples require pv, which can be installed on a Mac using Brew (`brew install pv`).
+There may be times when a full database is required locally.  The following scripts in the `bin` directory allow replicating data from integration:
 
-#### Elasticsearch
+- `replicate-elasticsearch.sh`
+- `replicate-mongodb.sh APP-NAME`
+- `replicate-mysql.sh APP-NAME`
+- `replicate-postgresql.sh APP-NAME`
 
-TODO
+All the scripts, other than `replicate-elasticsearch.sh`, take the name of the app to replicate data for.
 
-#### MySQL
+Draft data can be replicated with `replicate-mongodb.sh draft-content-store` and `replicate-mongodb.sh draft-router`.
 
-TODO
-
-#### PostgreSQL
-
-TODO
-
-#### MongoDB
-
-TODO
+If the script hangs at "waiting for mongo..." (or whatever the database is), try stopping your govuk-docker containers and running the script again.  Data is cached, so it won't be downloaded a second time.
 
 ### How to: set environment variables
 
