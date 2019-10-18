@@ -14,8 +14,10 @@ if echo "$app" | grep -q '_'; then
   exit 1
 fi
 
+replication_dir="${GOVUK_DOCKER_REPLICATION_DIR:-${GOVUK_DOCKER_DIR:-${GOVUK_ROOT_DIR:-$HOME/govuk}/govuk-docker}/replication}"
+
 bucket="govuk-integration-database-backups"
-archive_dir="$HOME/govuk-data-sync/mysql"
+archive_dir="${replication_dir}/mysql"
 archive_file="${app//-/_}_production.dump.gz"
 archive_path="${archive_dir}/${archive_file}"
 

@@ -14,8 +14,10 @@ if echo "$app" | grep -q '_'; then
   exit 1
 fi
 
+replication_dir="${GOVUK_DOCKER_REPLICATION_DIR:-${GOVUK_DOCKER_DIR:-${GOVUK_ROOT_DIR:-$HOME/govuk}/govuk-docker}/replication}"
+
 bucket="govuk-integration-database-backups"
-archive_dir="$HOME/govuk-data-sync/postgresql"
+archive_dir="${replication_dir}/postgresql"
 
 case "$app" in
   "support-api")

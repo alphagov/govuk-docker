@@ -2,15 +2,17 @@
 
 set -eu
 
+replication_dir="${GOVUK_DOCKER_REPLICATION_DIR:-${GOVUK_DOCKER_DIR:-${GOVUK_ROOT_DIR:-$HOME/govuk}/govuk-docker}/replication}"
+
 bucket="govuk-integration-elasticsearch6-manual-snapshots"
-archive_path="$HOME/govuk-data-sync/elasticsearch-6"
+archive_path="${replication_dir}/elasticsearch-6"
 
 echo "Replicating elasticsearch"
 
 if [[ -e "$archive_path" ]]; then
   echo "Skipping download - remove ${archive_path} to force"
 else
-  mkdir -p "$archive_path"
+  mkdir -p "$replication_dir"
   aws --profile govuk-integration s3 sync "s3://${bucket}/" "${archive_path}/"
 fi
 
