@@ -1,0 +1,36 @@
+version: '3.7'
+
+x-authenticating-proxy: &authenticating-proxy
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: authenticating-proxy
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/authenticating-proxy
+
+services:
+  authenticating-proxy-lite:
+    <<: *authenticating-proxy
+    depends_on:
+      - mongo
+    environment:
+      GOVUK_UPSTREAM_URI: http://draft-origin.dev.gov.uk
+      MONGODB_URI: "mongodb://mongo/authenticating-proxy"
+      TEST_MONGODB_URI: "mongodb://mongo/authenticating-proxy-test"
+
+  authenticating-proxy-app: &authenticating-proxy-app
+    <<: *authenticating-proxy
+    depends_on:
+      - mongo
+      - nginx-proxy-app
+      - router-app-draft
+    environment:
+      GOVUK_UPSTREAM_URI: http://draft-origin.dev.gov.uk
+      MONGODB_URI: "mongodb://mongo/authenticating-proxy"
+      VIRTUAL_HOST: authenticating-proxy.dev.gov.uk
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    command: bin/rails s --restart
