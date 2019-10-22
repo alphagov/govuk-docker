@@ -1,0 +1,36 @@
+version: '3.7'
+
+x-transition: &transition
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: transition
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/transition
+
+services:
+  transition-lite:
+    <<: *transition
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres/transition"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres/transition-test"
+
+  transition-app: &transition-app
+    <<: *transition
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres/transition"
+      REDIS_URL: redis://redis
+      VIRTUAL_HOST: transition.dev.gov.uk
+      HOST: 0.0.0.0
+    ports:
+      - "3000"
+    # Change to 'bin/rails --restart' when rails >= 5.2
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && rails s"
