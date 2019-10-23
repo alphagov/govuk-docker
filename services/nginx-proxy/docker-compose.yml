@@ -12,6 +12,7 @@ services:
       default:
         aliases:
           - asset-manager.dev.gov.uk
+          - authenticating-proxy.dev.gov.uk
           - calculators.dev.gov.uk
           - calendars.dev.gov.uk
           - collections-publisher.dev.gov.uk
