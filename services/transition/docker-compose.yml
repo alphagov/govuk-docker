@@ -13,6 +13,7 @@ x-transition: &transition
 services:
   transition-lite:
     <<: *transition
+    privileged: true
     depends_on:
       - postgres
       - redis
