@@ -24,6 +24,7 @@ services:
     depends_on:
       - router-app
       - content-store-app
+      - publishing-api-app
       - static-app
       - search-api-app-e2e
       - memcached
