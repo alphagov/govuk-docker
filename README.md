@@ -112,7 +112,7 @@ make pull
 
 ### How to: clear your Docker containers
 
-Sometimes a service just doesn't work as expected, and the easiest thing to do is to start over. This command stops and removes all local govuk Docker containers:
+Sometimes a service just doesn't work as expected, and the easiest thing to do is to start over. This command stops and removes **all** local Docker containers:
 
 ```
 govuk-docker compose rm -sv
