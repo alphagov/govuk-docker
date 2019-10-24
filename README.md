@@ -8,7 +8,7 @@ The GOV.UK website uses a microservice architecture. Developing in this ecosyste
 
 The aim of govuk-docker is to make it easy to develop any GOV.UK app. It achieves this by providing a variety of environments or _stacks_ for each app, in which you can run tests, start a debugger, publish a document end-to-end.
 
-[RFC 106: Use Docker for local development](https://github.com/alphagov/govuk-rfcs/blob/master/rfc-106-docker-for-local-development.md) describes the background for choosing Docker. See [here](docs/compatibility.md) for a list of which services work with govuk-docker.
+[RFC 106: Use Docker for local development](https://github.com/alphagov/govuk-rfcs/blob/master/rfc-106-docker-for-local-development.md) describes the background for choosing Docker. See the [list of services which work with govuk-docker](docs/compatibility.md).
 
 ## Installation
 
