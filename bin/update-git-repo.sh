@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 set -e
 
@@ -13,14 +13,15 @@ truncate () {
   local len="$1"
   local str="$2"
   if [ "${#str}" -gt "$len" ]; then
-    printf "$str" | awk "{ s=substr(\$0, 1, $len-3); print s \"...\"; }"
+    printf "%s" "$str" | awk "{ s=substr(\$0, 1, $len-3); print s \"...\"; }"
   else
-    printf "$str"
+    printf "%s" "$str"
   fi
 }
 
 catch_errors () {
-  out=$(mktemp -t update-git.XXXXXX)
+  local out=$(mktemp -t update-git.XXXXXX)
+  # shellcheck disable=SC2064
   trap "rm -f '$out'" EXIT
 
   if ! "$@" >"$out" 2>&1; then
@@ -42,17 +43,17 @@ start () {
 
 ok () {
   start "$REPO" "$BRANCH"
-  echo "${ANSI_GREEN}${@}${ANSI_RESET}" >&2
+  echo -e "${ANSI_GREEN}${*}${ANSI_RESET}" >&2
 }
 
 warn () {
   start "$REPO" "$BRANCH"
-  echo "${ANSI_YELLOW}${@}${ANSI_RESET}" >&2
+  echo -e "${ANSI_YELLOW}${*}${ANSI_RESET}" >&2
 }
 
 error () {
   start "$REPO" "$BRANCH"
-  echo "${ANSI_RED}${@}${ANSI_RESET}" >&2
+  echo -e "${ANSI_RED}${*}${ANSI_RESET}" >&2
 }
 
 if [ "$#" -ne "1" ]; then
