@@ -7,12 +7,7 @@ if [[ "$#" == "0" ]]; then
   exit 1
 fi
 
-app="$1"
-
-if echo "$app" | grep -q '_'; then
-  echo "app names do not have underscores in them"
-  exit 1
-fi
+app="${1//_/-}"
 
 replication_dir="${GOVUK_DOCKER_REPLICATION_DIR:-${GOVUK_DOCKER_DIR:-${GOVUK_ROOT_DIR:-$HOME/govuk}/govuk-docker}/replication}"
 
