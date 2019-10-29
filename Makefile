@@ -1,6 +1,7 @@
 GOVUK_ROOT_DIR   ?= $(HOME)/govuk
 GOVUK_DOCKER_DIR ?= $(GOVUK_ROOT_DIR)/govuk-docker
 GOVUK_DOCKER     ?= $(GOVUK_DOCKER_DIR)/bin/govuk-docker
+SHELLCHECK       ?= shellcheck
 
 APPS ?= $(shell ls ${GOVUK_DOCKER_DIR}/services/*/Makefile | xargs -L 1 dirname | xargs -L 1 basename)
 
@@ -26,6 +27,9 @@ test:
 	# Test that the docker-compose config is valid. This will error if there are errors
 	# in the YAML files, or incompatible features are used.
 	$(GOVUK_DOCKER) compose config > /dev/null
+
+	# Validate shell scripts
+	$(SHELLCHECK) $(shell ls ${GOVUK_DOCKER_DIR}/bin/*.sh)
 
 # This will be slow and may repeat work, so generally you don't want
 # to run this.
