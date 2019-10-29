@@ -126,8 +126,6 @@ All the scripts, other than `replicate-elasticsearch.sh`, take the name of the a
 
 Draft data can be replicated with `replicate-mongodb.sh draft-content-store` and `replicate-mongodb.sh draft-router`.
 
-If the script hangs at "waiting for mongo..." (or whatever the database is), try stopping your govuk-docker containers and running the script again.  Data is cached, so it won't be downloaded a second time.
-
 ### How to: set environment variables
 
 While most environment variables should be set in the config for a service, sometimes it's necessary to set assign one or more variables at the point of running a command, such as a Rake task. This can be done using `env` e.g.

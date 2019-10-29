@@ -39,6 +39,9 @@ else
   aws --profile govuk-integration s3 cp "s3://${bucket}/postgres/$(date '+%Y-%m-%d')/${archive_file}" "${archive_path}"
 fi
 
+echo "stopping running govuk-docker containers..."
+govuk-docker compose down
+
 govuk-docker compose up -d postgres
 trap 'govuk-docker compose stop postgres' EXIT
 

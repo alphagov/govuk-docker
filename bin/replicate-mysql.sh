@@ -30,6 +30,9 @@ else
   aws --profile govuk-integration s3 cp "s3://${bucket}/mysql/$(date '+%Y-%m-%d')/${archive_file}" "${archive_path}"
 fi
 
+echo "stopping running govuk-docker containers..."
+govuk-docker compose down
+
 govuk-docker compose up -d mysql
 trap 'govuk-docker compose stop mysql' EXIT
 

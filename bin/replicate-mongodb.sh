@@ -64,6 +64,9 @@ mkdir -p "$extract_path"
 
 pv "$archive_path" | gunzip | tar -zx -f - -C "$extract_path" "var/lib/mongodb/backup/mongodump/${database}"
 
+echo "stopping running govuk-docker containers..."
+govuk-docker compose down
+
 container=$(govuk-docker compose run -d --rm -v "${extract_path}:/replication" mongo | tail -n1)
 # we want $container to be expanded now
 # shellcheck disable=SC2064
