@@ -3,41 +3,41 @@
 case $1 in
   doctor)
     echo '*** REMOVED: use bin/doctor instead ***'
-    echo 'https://github.com/alphagov/govuk-docker/blob/e00ab054d8d94132f1539b0027eefbe44e168f6f/docs/installation.md#how-to-troubleshoot-your-installation'
+    echo 'https://github.com/alphagov/govuk-docker/blob/master/docs/installation.md#how-to-troubleshoot-your-installation'
     exit 1
     ;;
 
   setup)
     echo '*** REMOVED: use bin/setup instead ***'
-    echo 'https://github.com/alphagov/govuk-docker/blob/e00ab054d8d94132f1539b0027eefbe44e168f6f/docs/installation.md#setup'
+    echo 'https://github.com/alphagov/govuk-docker/blob/master/docs/installation.md#setup'
     exit 1
     ;;
 
   build)
     echo '*** REMOVED: use make <service> instead ***'
-    echo 'https://github.com/alphagov/govuk-docker/blob/e00ab054d8d94132f1539b0027eefbe44e168f6f/README.md#usage'
+    echo 'https://github.com/alphagov/govuk-docker/blob/master/README.md#usage'
     exit 1
     ;;
 esac
 
 echo '*** REMOVED: use exe/govuk-docker instead ***'
-echo 'https://github.com/alphagov/govuk-docker/blob/e00ab054d8d94132f1539b0027eefbe44e168f6f/docs/installation.md#setup'
+echo 'https://github.com/alphagov/govuk-docker/blob/master/docs/installation.md#setup'
 echo
 
 case $1 in
   startup)
     echo '*** REMOVED: use exe/govuk-docker up <service>-<stack> instead ***'
-    echo 'https://github.com/alphagov/govuk-docker/blob/e00ab054d8d94132f1539b0027eefbe44e168f6f/docs/installation.md\#shortcuts'
+    echo 'https://github.com/alphagov/govuk-docker/blob/master/docs/installation.md\#shortcuts'
     ;;
 
   run)
     echo '*** REMOVED: use exe/govuk-docker run <service>-<stack> instead ***'
-    echo 'https://github.com/alphagov/govuk-docker/blob/e00ab054d8d94132f1539b0027eefbe44e168f6f/docs/installation.md\#shortcuts'
+    echo 'https://github.com/alphagov/govuk-docker/blob/master/docs/installation.md\#shortcuts'
     ;;
 
   prune)
     echo '*** REMOVED: use exe/govuk-docker rm -sv instead ***'
-    echo 'https://github.com/alphagov/govuk-docker/blob/e00ab054d8d94132f1539b0027eefbe44e168f6f/README.md#how-to-clear-your-docker-containers'
+    echo 'https://github.com/alphagov/govuk-docker/blob/master/README.md#how-to-clear-your-docker-containers'
     ;;
 esac
 
