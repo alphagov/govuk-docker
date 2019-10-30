@@ -18,6 +18,7 @@ services:
     <<: *static
     depends_on:
       - redis
+      - nginx-proxy-app
     environment:
       REDIS_URL: redis://redis
       GOVUK_ASSET_ROOT: static.dev.gov.uk
@@ -31,6 +32,7 @@ services:
     <<: *static-app
     depends_on:
       - redis
+      - nginx-proxy-app
     environment:
       REDIS_URL: redis://redis
       GOVUK_ASSET_ROOT: draft-static.dev.gov.uk
