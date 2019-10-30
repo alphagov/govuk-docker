@@ -2,13 +2,13 @@
 
 case $1 in
   doctor)
-    echo '*** REMOVED: use bundle exec bin/doctor instead ***'
+    echo '*** REMOVED: use bin/doctor instead ***'
     echo 'https://github.com/alphagov/govuk-docker/blob/e00ab054d8d94132f1539b0027eefbe44e168f6f/docs/installation.md#how-to-troubleshoot-your-installation'
     exit 1
     ;;
 
   setup)
-    echo '*** REMOVED: use bundle exec bin/setup instead ***'
+    echo '*** REMOVED: use bin/setup instead ***'
     echo 'https://github.com/alphagov/govuk-docker/blob/e00ab054d8d94132f1539b0027eefbe44e168f6f/docs/installation.md#setup'
     exit 1
     ;;
