@@ -35,17 +35,17 @@ else
 fi
 
 echo "stopping running govuk-docker containers..."
-govuk-docker compose down
+govuk-docker down
 
-govuk-docker compose up -d postgres
+govuk-docker up -d postgres
 trap 'govuk-docker compose stop postgres' EXIT
 
 echo "waiting for postgres..."
-until govuk-docker compose run postgres /usr/bin/psql -h postgres -U postgres -c 'SELECT 1' &>/dev/null; do
+until govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -c 'SELECT 1' &>/dev/null; do
   sleep 1
 done
 
 database="$app"
-govuk-docker compose run postgres /usr/bin/psql -h postgres -U postgres -c "DROP DATABASE IF EXISTS \"${database}\""
-govuk-docker compose run postgres /usr/bin/createdb -h postgres -U postgres "$database"
-pv "$archive_path"  | gunzip | grep -v 'ALTER \(.*\) OWNER TO \(.*\);' | govuk-docker compose run postgres /usr/bin/psql -h postgres -U postgres -qAt -d "$database"
+govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -c "DROP DATABASE IF EXISTS \"${database}\""
+govuk-docker run postgres /usr/bin/createdb -h postgres -U postgres "$database"
+pv "$archive_path"  | gunzip | grep -v 'ALTER \(.*\) OWNER TO \(.*\);' | govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -qAt -d "$database"

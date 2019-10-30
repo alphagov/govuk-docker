@@ -26,18 +26,18 @@ else
 fi
 
 echo "stopping running govuk-docker containers..."
-govuk-docker compose down
+govuk-docker down
 
-govuk-docker compose up -d mysql
+govuk-docker up -d mysql
 trap 'govuk-docker compose stop mysql' EXIT
 
 echo "waiting for mysql..."
-until govuk-docker compose run mysql mysql -h mysql -u root --password=root -e 'SELECT 1' &>/dev/null; do
+until govuk-docker run mysql mysql -h mysql -u root --password=root -e 'SELECT 1' &>/dev/null; do
   sleep 1
 done
 
 database="${app//-/_}_development"
 
-govuk-docker compose run mysql mysql -h mysql -u root --password=root -e "DROP DATABASE IF EXISTS \`${database}\`"
-govuk-docker compose run mysql mysql -h mysql -u root --password=root -e "CREATE DATABASE \`${database}\`"
-pv "$archive_path" | gunzip | govuk-docker compose run mysql mysql -h mysql -u root --password=root "$database"
+govuk-docker run mysql mysql -h mysql -u root --password=root -e "DROP DATABASE IF EXISTS \`${database}\`"
+govuk-docker run mysql mysql -h mysql -u root --password=root -e "CREATE DATABASE \`${database}\`"
+pv "$archive_path" | gunzip | govuk-docker run mysql mysql -h mysql -u root --password=root "$database"
