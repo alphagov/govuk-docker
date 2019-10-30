@@ -19,30 +19,24 @@ The aim of govuk-docker is to make it easy to develop any GOV.UK app. It achieve
 Do this to run the tests for a service:
 
 ```sh
-# You may need to clone the service first
+make collections-publisher
+
 cd ~/govuk/collections-publisher
 
-# You only need to do this once per service
-govuk-docker build
-
-govuk-docker run bundle exec rake
+govuk-docker run collections-publisher-lite bundle exec rake
 ```
 
 Do this to start a GOV.UK web app:
 
 ```sh
-cd ~/govuk/collections-publisher
+make collections-publisher
 
-# You only need to do this once per service
-govuk-docker build
+cd ~/govuk/collections-publisher
 
 # Start collections-publisher including dependencies.
 # Visit it at collections-publisher.dev.gov.uk
-govuk-docker startup
+govuk-docker up collections-publisher-app
 ```
-
-govuk-docker knows which application we're running based on the name of the current directory, matching it with the corresponding [docker-compose.yml](https://github.com/alphagov/govuk-docker/blob/master/services/content-tagger/docker-compose.yml) in `govuk-docker/services`.
-
 
 For a full list of govuk-docker commands, run `govuk-docker help`.
 
@@ -64,15 +58,6 @@ To provide consistency we have a convention for these names:
   - **app-e2e**: to run the app with all the other apps necessary to provide
     full end to end user journeys.
 
-`govuk-docker startup` runs the application on the `app` [stack](#stacks) by default, but you can override the stack by passing an unnamed parameter which will be taken as the stack name, with an `app-` prefix. Example:
-
-```sh
-cd ~/govuk/content-publisher
-
-# Start content-publisher with an "app-e2e" (end-to-end) stack
-govuk-docker startup e2e
-```
-
 ### Interoperability of stacks
 
 Even if an e2e stack is started, functionality won't necessarily work as expected "end to end" as govuk-docker doesn't mimick the routing we have on GOV.UK. For example, publishing apps that link to draft-origin.dev.gov.uk frontends will see a server error, as draft-origin isn't a service in govuk-docker.
@@ -90,16 +75,16 @@ Sometimes things go wrong or some investigation is needed. As govuk-docker is ju
 git pull
 
 # make sure the service is built OK
-govuk-docker build
+make -f <service>
 
 # tail logs for running services
-govuk-docker compose logs -f
+govuk-docker logs -f
 
 # get all the running containers
 docker ps -a
 
 # get a terminal inside a service
-govuk-docker run bash
+govuk-docker run <service>-lite bash
 ```
 
 ### How to: update everything!
@@ -115,7 +100,7 @@ make pull
 Sometimes a service just doesn't work as expected, and the easiest thing to do is to start over. This command stops and removes all local govuk Docker containers:
 
 ```
-govuk-docker compose rm -sv
+govuk-docker rm -sv
 ```
 
 You should then be able to `govuk-docker build` your service and have confidence you're not suffering from configuration drift.
@@ -139,15 +124,15 @@ There may be times when a full database is required locally.  The following sect
 2. Drop and recreate any existing database, e.g. for Whitehall:
 
 ```
-govuk-docker compose up -d mysql
-govuk-docker compose run mysql mysql -h mysql -u root --password=root -e "DROP DATABASE IF EXISTS whitehall_development"
-govuk-docker compose run mysql mysql -h mysql -u root --password=root -e "CREATE DATABASE whitehall_development"
+govuk-docker up -d mysql
+govuk-docker run mysql mysql -h mysql -u root --password=root -e "DROP DATABASE IF EXISTS whitehall_development"
+govuk-docker run mysql mysql -h mysql -u root --password=root -e "CREATE DATABASE whitehall_development"
 ```
 
 3. Import the file into the local MySQL database, e.g. for Whitehall:
 
 ```
-pv whitehall_production.dump.gz | gunzip | govuk-docker compose run mysql mysql -h mysql -u root --password=root whitehall_development
+pv whitehall_production.dump.gz | gunzip | govuk-docker run mysql mysql -h mysql -u root --password=root whitehall_development
 ```
 
 #### PostgreSQL
@@ -157,15 +142,15 @@ pv whitehall_production.dump.gz | gunzip | govuk-docker compose run mysql mysql 
 2. Drop and recreate any existing database, e.g. for Publishing API:
 
 ```
-govuk-docker compose up -d postgres
-govuk-docker compose run postgres /usr/bin/psql -h postgres -U postgres -c DROP DATABASE IF EXISTS "publishing-api"
-govuk-docker compose run postgres /usr/bin/createdb -h postgres -U postgres publishing-api
+govuk-docker up -d postgres
+govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -c DROP DATABASE IF EXISTS "publishing-api"
+govuk-docker run postgres /usr/bin/createdb -h postgres -U postgres publishing-api
 ```
 
 3. Import the file into the local Postgres database, e.g. for Publishing API:
 
 ```
-pv publishing_api_production.dump.gz  | gunzip | govuk-docker compose run postgres /usr/bin/psql -h postgres -U postgres -qAt -d publishing-api
+pv publishing_api_production.dump.gz  | gunzip | govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -qAt -d publishing-api
 ```
 
 #### MongoDB
@@ -199,8 +184,8 @@ tar -xvzf mongodump-2019-08-12_0023.tar var/lib/mongodb/backup/mongodump/content
 4. Import the backup files into the local Mongo database, e.g. for Content Store:
 
 ```
-govuk-docker compose up -d mongo
-govuk-docker compose run mongo mongorestore --drop --db content-store /import/var/lib/mongodb/backup/mongodump/content_store_production/
+govuk-docker up -d mongo
+govuk-docker run mongo mongorestore --drop --db content-store /import/var/lib/mongodb/backup/mongodump/content_store_production/
 ```
 
 ### How to: set environment variables
@@ -221,8 +206,10 @@ ruby-build: definition not found: x.y.z
 
 Most of our services share a common Docker image, which needs rebuilding to be aware of the new Ruby version. To fix the error, run the following commands, replacing '<service>' with the name of the service, e.g. 'collections-publisher'.
 ```
-govuk-docker compose build --no-cache <service>-lite
-govuk-docker build
+govuk-docker build --no-cache <service>-lite
+
+# in the govuk-docker directory
+make <service>
 ```
 
 ## Licence

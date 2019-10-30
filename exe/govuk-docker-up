@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# **************************************************************
+# DO NOT ADD NEW STUFF IN HERE
+#
+# This is meant to be a simple wrapper script to reduce typing
+# for day-to-day commands. Its behaviour should not depend on
+# its arguments. We do not want our own bespoke CLI, as this can
+# only lead to complexity, performance and maintenance overheads
+# on top of docker and docker-compose.
+# **************************************************************
+
+STACK=${1:-app}
+govuk-docker up "$(basename "$(pwd)")-$STACK"
