@@ -1,5 +1,3 @@
-require "thor"
-
 module GovukDocker::Setup
   class Base
     def initialize(shell)

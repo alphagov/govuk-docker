@@ -1,10 +1,9 @@
 #!/usr/bin/env ruby
 
-require 'bundler/setup'
+$LOAD_PATH.unshift(File.expand_path("../../lib", __FILE__))
 
-require_relative "../lib/govuk_docker"
-require_relative "../lib/govuk_docker/doctor/doctor"
-require_relative "../lib/govuk_docker/doctor/checkup"
+require 'bundler/setup'
+require "govuk_docker"
 
 puts "Checking govuk-docker"
 puts GovukDocker::Doctor::Checkup.new(

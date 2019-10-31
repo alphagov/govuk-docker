@@ -1,6 +1,3 @@
-require_relative "./base"
-require_relative "../doctor/checkup"
-
 class GovukDocker::Setup::Dnsmasq < GovukDocker::Setup::Base
   def call
     return unless check_continue
