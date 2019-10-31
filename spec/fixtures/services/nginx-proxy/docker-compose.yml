@@ -1,6 +1,0 @@
-services:
-  nginx-proxy-app:
-    networks:
-      default:
-        aliases:
-          - example_service.dev.gov.uk
