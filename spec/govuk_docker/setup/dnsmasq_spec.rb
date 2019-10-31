@@ -1,5 +1,4 @@
 require "spec_helper"
-require_relative "../../lib/govuk_docker/setup/dnsmasq"
 
 describe GovukDocker::Setup::Dnsmasq do
   let(:shell_double) { double }
