@@ -143,7 +143,7 @@ pv whitehall_production.dump.gz | gunzip | govuk-docker run mysql mysql -h mysql
 
 ```
 govuk-docker up -d postgres
-govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -c DROP DATABASE IF EXISTS "publishing-api"
+govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -c 'DROP DATABASE IF EXISTS "publishing-api"'
 govuk-docker run postgres /usr/bin/createdb -h postgres -U postgres publishing-api
 ```
 
