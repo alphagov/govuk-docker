@@ -20,9 +20,9 @@ truncate () {
 }
 
 catch_errors () {
-  local out=$(mktemp -t update-git.XXXXXX)
-  # shellcheck disable=SC2064
-  trap "rm -f '$out'" EXIT
+  local out
+  out=$(mktemp -t update-git.XXXXXX)
+  trap 'rm -f "$out"' EXIT
 
   if ! "$@" >"$out" 2>&1; then
     error "FAILED, with output:"
