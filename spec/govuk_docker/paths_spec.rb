@@ -1,5 +1,4 @@
 require "spec_helper"
-require_relative "../lib/govuk_docker/paths"
 
 describe GovukDocker::Paths do
   describe "govuk_root_dir" do

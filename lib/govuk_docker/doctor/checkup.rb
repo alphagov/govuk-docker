@@ -1,5 +1,3 @@
-require_relative "../paths"
-
 module GovukDocker::Doctor
   class Checkup
     def initialize(service_name:, checkups:, messages:)

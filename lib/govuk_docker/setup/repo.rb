@@ -1,6 +1,3 @@
-require_relative "./base"
-require_relative "../paths"
-
 class GovukDocker::Setup::Repo < GovukDocker::Setup::Base
   def call
     unless should_clone_or_pull?

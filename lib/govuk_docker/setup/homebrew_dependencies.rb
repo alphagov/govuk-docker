@@ -1,6 +1,3 @@
-require_relative "./base"
-require_relative "../doctor/checkup"
-
 class GovukDocker::Setup::HomebrewDependencies < GovukDocker::Setup::Base
   def call
     puts "Installing dependencies via Homebrew..."

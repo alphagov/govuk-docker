@@ -1,5 +1,4 @@
 require "spec_helper"
-require "./lib/govuk_docker/doctor/checkup"
 
 describe GovukDocker::Doctor::Checkup do
   let(:service_name) { "fake_service" }

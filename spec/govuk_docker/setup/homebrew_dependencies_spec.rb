@@ -1,5 +1,4 @@
 require "spec_helper"
-require_relative "../../lib/govuk_docker/setup/homebrew_dependencies"
 
 describe GovukDocker::Setup::HomebrewDependencies do
   let(:shell_double) { double }
