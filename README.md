@@ -103,7 +103,7 @@ Sometimes a service just doesn't work as expected, and the easiest thing to do i
 govuk-docker rm -sv
 ```
 
-You should then be able to `govuk-docker build` your service and have confidence you're not suffering from configuration drift.
+You should then be able to `make` your service and have confidence you're not suffering from configuration drift.
 
 ### How to: work with local gems
 
