@@ -42,7 +42,7 @@ bundle-%: clone-%
 	$(GOVUK_DOCKER) run $*-lite bundle
 
 clone-%:
-	@if [ ! -d "${GOVUK_ROOT_DIR}/$*" ]; then \
+	@if [ ! -d "${GOVUK_ROOT_DIR}/$*/.git" ]; then \
 		echo "$*" && git clone "git@github.com:alphagov/$*.git" "${GOVUK_ROOT_DIR}/$*"; \
 	fi
 
