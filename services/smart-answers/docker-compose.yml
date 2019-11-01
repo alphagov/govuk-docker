@@ -20,7 +20,6 @@ services:
     depends_on:
       - nginx-proxy-app
       - publishing-api-app
-      - asset-manager-app
       - static-app
       - content-store-app
     environment:

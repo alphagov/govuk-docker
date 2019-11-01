@@ -1,1 +1,1 @@
-smart-answers: bundle-smart-answers asset-manager publishing-api static
+smart-answers: bundle-smart-answers publishing-api content-store static

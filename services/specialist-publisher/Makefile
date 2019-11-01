@@ -1,2 +1,2 @@
-specialist-publisher: bundle-specialist-publisher asset-manager publishing-api
+specialist-publisher: bundle-specialist-publisher asset-manager publishing-api email-alert-api
 	$(GOVUK_DOCKER) run $@-lite sh -c 'bin/rake db:migrate 2>/dev/null || bin/rake db:setup'
