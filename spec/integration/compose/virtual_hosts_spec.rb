@@ -1,6 +1,6 @@
-require "yaml"
+require "spec_helper"
 
-RSpec.describe "Docker compose files" do
+RSpec.describe "Compose virtual hosts" do
   compose_files = Dir.glob("services/**/docker-compose.yml")
 
   compose_app_services = compose_files.flat_map do |filename|

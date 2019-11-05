@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe "Docker make files" do
+RSpec.describe "Make dependencies" do
   Dir.glob("*", base: "services").each do |service_name|
     it "mirrors docker-compose.yml for #{service_name}" do
       expect(compose_dependencies(service_name))
