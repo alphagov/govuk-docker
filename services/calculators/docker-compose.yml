@@ -22,6 +22,7 @@ services:
       - router-app
       - content-store-app
       - static-app
+      - nginx-proxy-app
     environment:
       GOVUK_ASSET_ROOT: calculators.dev.gov.uk
       VIRTUAL_HOST: calculators.dev.gov.uk
@@ -36,6 +37,7 @@ services:
       - router-app-draft
       - content-store-app-draft
       - static-app-draft
+      - nginx-proxy-app
     environment:
       GOVUK_ASSET_ROOT: draft-calculators.dev.gov.uk
       VIRTUAL_HOST: draft-calculators.dev.gov.uk

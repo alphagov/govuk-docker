@@ -24,6 +24,7 @@ services:
     depends_on:
       - mongo
       - router-app
+      - nginx-proxy-app
     environment:
       ROUTER_NODES: router-app:3055
       MONGODB_URI: "mongodb://mongo/router"
@@ -38,6 +39,7 @@ services:
     depends_on:
       - mongo
       - router-app-draft
+      - nginx-proxy-app
     environment:
       ROUTER_NODES: router-app-draft:3055
       MONGODB_URI: "mongodb://mongo/draft-router"

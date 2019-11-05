@@ -21,6 +21,7 @@ services:
       - content-store-app
       - router-app
       - static-app
+      - nginx-proxy-app
     environment:
       GOVUK_ASSET_ROOT: frontend.dev.gov.uk
       VIRTUAL_HOST: frontend.dev.gov.uk
@@ -40,6 +41,7 @@ services:
       - content-store-app-draft
       - router-app-draft
       - static-app-draft
+      - nginx-proxy-app
     environment:
       GOVUK_ASSET_ROOT: draft-frontend.dev.gov.uk
       VIRTUAL_HOST: draft-frontend.dev.gov.uk

@@ -27,6 +27,7 @@ services:
       - static-app
       - search-api-app
       - memcached
+      - nginx-proxy-app
     environment:
       GOVUK_ASSET_ROOT: finder-frontend.dev.gov.uk
       VIRTUAL_HOST: finder-frontend.dev.gov.uk

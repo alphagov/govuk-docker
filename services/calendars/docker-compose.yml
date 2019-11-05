@@ -20,6 +20,7 @@ services:
       - router-app
       - content-store-app
       - static-app
+      - nginx-proxy-app
     environment:
       GOVUK_ASSET_ROOT: calendars.dev.gov.uk
       VIRTUAL_HOST: calendars.dev.gov.uk
@@ -34,6 +35,7 @@ services:
       - router-app-draft
       - content-store-app-draft
       - static-app-draft
+      - nginx-proxy-app
     environment:
       GOVUK_ASSET_ROOT: draft-calendars.dev.gov.uk
       VIRTUAL_HOST: draft-calendars.dev.gov.uk

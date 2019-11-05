@@ -20,6 +20,7 @@ services:
       - router-app
       - content-store-app
       - static-app
+      - nginx-proxy-app
     environment:
       GOVUK_ASSET_ROOT: info-frontend.dev.gov.uk
       VIRTUAL_HOST: info-frontend.dev.gov.uk
