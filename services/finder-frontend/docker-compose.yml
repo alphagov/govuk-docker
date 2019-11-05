@@ -25,7 +25,7 @@ services:
       - router-app
       - content-store-app
       - static-app
-      - search-api-app-e2e
+      - search-api-app
       - memcached
     environment:
       GOVUK_ASSET_ROOT: finder-frontend.dev.gov.uk

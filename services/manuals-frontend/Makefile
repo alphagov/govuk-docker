@@ -1,1 +1,1 @@
-manuals-frontend: bundle-manuals-frontend content-store router static govuk-content-schemas
+manuals-frontend: bundle-manuals-frontend content-store router static
