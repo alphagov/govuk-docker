@@ -23,9 +23,8 @@ services:
     depends_on:
       - mapit-pg
       - nginx-proxy-app
-    working_dir: /mapit
     environment:
-      MAPIT_DB_PASS: ''
+      GOVUK_ENV: development
       DJANGO_SECRET_KEY: 'secret'
       MAPIT_DB_HOST: 'mapit-pg'
       PGHOST: "mapit-pg"

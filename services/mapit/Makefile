@@ -1,4 +1,3 @@
-
 mapit: 
 	- $(GOVUK_DOCKER) run $@ sh -c 'createuser -U postgres mapit'
 	- $(GOVUK_DOCKER) run $@ sh -c 'createdb -U postgres --owner mapit mapit'
