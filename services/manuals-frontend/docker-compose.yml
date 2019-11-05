@@ -21,7 +21,7 @@ services:
       - router-app
       - content-store-app
       - static-app
-      - nginx-proxy-app
+      - nginx-proxy
     environment:
       GOVUK_ASSET_ROOT: manuals-frontend.dev.gov.uk
       VIRTUAL_HOST: manuals-frontend.dev.gov.uk
@@ -36,7 +36,7 @@ services:
       - router-app-draft
       - content-store-app-draft
       - static-app-draft
-      - nginx-proxy-app
+      - nginx-proxy
     environment:
       GOVUK_ASSET_ROOT: draft-manuals-frontend.dev.gov.uk
       VIRTUAL_HOST: draft-manuals-frontend.dev.gov.uk
@@ -46,7 +46,7 @@ services:
   manuals-frontend-app-live:
     <<: *manuals-frontend-app
     depends_on:
-      - nginx-proxy-app
+      - nginx-proxy
     environment:
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api

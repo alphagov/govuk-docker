@@ -24,7 +24,7 @@ services:
     <<: *authenticating-proxy
     depends_on:
       - mongo
-      - nginx-proxy-app
+      - nginx-proxy
       - router-app-draft
     environment:
       GOVUK_UPSTREAM_URI: http://draft-origin.dev.gov.uk

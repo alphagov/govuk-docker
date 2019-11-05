@@ -30,7 +30,7 @@ services:
       - publishing-api-app
       - asset-manager-app
       - content-store-app
-      - nginx-proxy-app
+      - nginx-proxy
     environment:
       MONGODB_URI: "mongodb://mongo/travel-advice-publisher"
       REDIS_URL: redis://redis

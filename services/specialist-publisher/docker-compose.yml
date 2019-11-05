@@ -27,7 +27,7 @@ services:
     depends_on:
       - mongo
       - redis
-      - nginx-proxy-app
+      - nginx-proxy
       - publishing-api-app
       - asset-manager-app
       - email-alert-api-app
@@ -49,7 +49,7 @@ services:
       - publishing-api-app-e2e
       - asset-manager-app-e2e
       - email-alert-api-app
-      - nginx-proxy-app
+      - nginx-proxy
 
   specialist-publisher-worker:
     <<: *specialist-publisher

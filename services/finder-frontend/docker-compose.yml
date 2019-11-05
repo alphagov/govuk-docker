@@ -27,7 +27,7 @@ services:
       - static-app
       - search-api-app
       - memcached
-      - nginx-proxy-app
+      - nginx-proxy
     environment:
       GOVUK_ASSET_ROOT: finder-frontend.dev.gov.uk
       VIRTUAL_HOST: finder-frontend.dev.gov.uk
@@ -40,7 +40,7 @@ services:
   finder-frontend-app-live:
     <<: *finder-frontend-app
     depends_on:
-      - nginx-proxy-app
+      - nginx-proxy
     environment:
       PLEK_SERVICE_SEARCH_URI: https://www.gov.uk/api
       PLEK_SERVICE_WHITEHALL_ADMIN_URI: https://www.gov.uk

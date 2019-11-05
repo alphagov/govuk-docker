@@ -27,7 +27,7 @@ services:
     <<: *search-admin-base
     depends_on:
       - mysql
-      - nginx-proxy-app
+      - nginx-proxy
       - publishing-api-app
       - search-api-app
     environment:

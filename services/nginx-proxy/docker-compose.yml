@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  nginx-proxy-app:
+  nginx-proxy:
     image: jwilder/nginx-proxy:latest
     ports:
       - "80:80"

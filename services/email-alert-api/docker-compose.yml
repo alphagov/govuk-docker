@@ -24,7 +24,7 @@ services:
   email-alert-api-app: &email-alert-api-app
     <<: *email-alert-api
     depends_on:
-      - nginx-proxy-app
+      - nginx-proxy
       - postgres
       - redis
     environment:

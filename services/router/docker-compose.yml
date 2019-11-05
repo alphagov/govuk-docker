@@ -25,7 +25,7 @@ services:
     <<: *router
     depends_on:
       - mongo
-      - nginx-proxy-app
+      - nginx-proxy
     expose:
       - "8080"
       - "3055"

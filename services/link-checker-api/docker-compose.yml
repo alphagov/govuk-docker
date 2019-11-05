@@ -26,7 +26,7 @@ services:
     <<: *link-checker-api
     depends_on:
       - link-checker-api-worker
-      - nginx-proxy-app
+      - nginx-proxy
       - postgres
       - redis
     environment:
@@ -43,7 +43,7 @@ services:
     depends_on:
       - postgres
       - redis
-      - nginx-proxy-app
+      - nginx-proxy
     environment:
       DATABASE_URL: "postgresql://postgres@postgres/link-checker-api"
       REDIS_URL: redis://redis

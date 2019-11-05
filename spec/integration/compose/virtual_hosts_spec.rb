@@ -5,14 +5,13 @@ RSpec.describe "Compose virtual hosts" do
 
   compose_app_services = compose_files.flat_map do |filename|
     YAML.load_file(filename)["services"].to_a.select do |service_name, _service|
-      next false if service_name == "nginx-proxy-app"
       service_name =~ /app(-\w+)?$/
     end
   end
 
   compose_app_services.each do |service_name, service|
     it "configures #{service_name} to depend on nginx-proxy" do
-      expect(service["depends_on"]).to include("nginx-proxy-app")
+      expect(service["depends_on"]).to include("nginx-proxy")
     end
 
     it "configures #{service_name} to define a VIRTUAL_HOST" do
@@ -39,6 +38,6 @@ RSpec.describe "Compose virtual hosts" do
     filename = "services/nginx-proxy/docker-compose.yml"
 
     @compose_nginx_domains ||= YAML.load_file(filename)
-      .dig("services", "nginx-proxy-app", "networks", "default", "aliases")
+      .dig("services", "nginx-proxy", "networks", "default", "aliases")
   end
 end

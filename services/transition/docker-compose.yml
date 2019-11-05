@@ -24,7 +24,7 @@ services:
   transition-app: &transition-app
     <<: *transition
     depends_on:
-      - nginx-proxy-app
+      - nginx-proxy
       - postgres
       - redis
     environment:

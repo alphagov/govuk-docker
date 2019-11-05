@@ -26,7 +26,7 @@ services:
     <<: *signon
     depends_on:
       - mysql
-      - nginx-proxy-app
+      - nginx-proxy
       - redis
     environment:
       DATABASE_URL: "mysql2://root:root@mysql/signon_development"

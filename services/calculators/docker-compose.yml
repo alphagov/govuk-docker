@@ -22,7 +22,7 @@ services:
       - router-app
       - content-store-app
       - static-app
-      - nginx-proxy-app
+      - nginx-proxy
     environment:
       GOVUK_ASSET_ROOT: calculators.dev.gov.uk
       VIRTUAL_HOST: calculators.dev.gov.uk
@@ -37,7 +37,7 @@ services:
       - router-app-draft
       - content-store-app-draft
       - static-app-draft
-      - nginx-proxy-app
+      - nginx-proxy
     environment:
       GOVUK_ASSET_ROOT: draft-calculators.dev.gov.uk
       VIRTUAL_HOST: draft-calculators.dev.gov.uk
@@ -47,7 +47,7 @@ services:
   calculators-app-live:
     <<: *calculators-app
     depends_on:
-      - nginx-proxy-app
+      - nginx-proxy
     environment:
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
