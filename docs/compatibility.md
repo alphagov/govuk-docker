@@ -42,7 +42,7 @@ The following apps are supported by govuk-docker to some extent.
    - ❌ hmrc-manuals-api
    - ❌ imminence
    - ✅ info-frontend
-   - ❌ licence-finder
+   - ✅ licence-finder
    - ⚠ link-checker-api
       * Works in isolation but not in other services' `e2e` stacks, so must be run in a separate process.
         See https://github.com/alphagov/govuk-docker/issues/174 for details.
