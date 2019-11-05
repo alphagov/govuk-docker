@@ -18,7 +18,7 @@ services:
       - mongo
       - elasticsearch6
     environment:
-      MONGODB_URI: "mongodb://mongo/licence-finder_development"
+      MONGODB_URI: "mongodb://mongo/licence-finder_test"
       ELASTICSEARCH_URI: http://elasticsearch6:9200
 
   licence-finder-app:
