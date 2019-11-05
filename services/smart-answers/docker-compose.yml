@@ -22,6 +22,7 @@ services:
       - publishing-api-app
       - static-app
       - content-store-app
+      - whitehall-app
     environment:
       VIRTUAL_HOST: smart-answers.dev.gov.uk
       HOST: 0.0.0.0
