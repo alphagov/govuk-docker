@@ -1,23 +1,44 @@
 require "yaml"
 
 RSpec.describe "Docker compose files" do
-  it "has correctly configured the domains" do
-    expect(configured_service_domains).to match_array(configured_nginx_domains)
+  compose_files = Dir.glob("services/**/docker-compose.yml")
+
+  compose_app_services = compose_files.flat_map do |filename|
+    YAML.load_file(filename)["services"].to_a.select do |service_name, _service|
+      next false if service_name == "nginx-proxy-app"
+      service_name =~ /app(-\w+)?$/
+    end
   end
 
-  def configured_service_domains
-    domains = Dir.glob("services/**/docker-compose.yml").map do |filename|
-      services = YAML.load_file(filename)["services"]
-      services.map do |_service_name, opts|
-        opts.dig("environment", "VIRTUAL_HOST").to_s.gsub(/\s+/, "").split(",")
+  compose_app_services.each do |service_name, service|
+    it "configures #{service_name} to depend on nginx-proxy" do
+      expect(service["depends_on"]).to include("nginx-proxy-app")
+    end
+
+    it "configures #{service_name} to define a VIRTUAL_HOST" do
+      expect(service["environment"].keys).to include("VIRTUAL_HOST")
+    end
+
+    it "configures #{service_name} to expose a default port" do
+      expect(service["expose"].to_a.count).to be > 0
+
+      if service["expose"].count > 1
+        expect(service["environment"].keys).to include("VIRTUAL_PORT")
       end
     end
 
-    domains.compact.flatten.uniq
+    it "configures nginx-proxy for #{service_name} domains" do
+      domains = service.dig("environment", "VIRTUAL_HOST")
+        .to_s.gsub(/\s+/, "").split(",")
+
+      expect(compose_nginx_domains).to include(*domains)
+    end
   end
 
-  def configured_nginx_domains
-    nginx_config = YAML.load_file("services/nginx-proxy/docker-compose.yml")
-    nginx_config["services"]["nginx-proxy-app"]["networks"]["default"]["aliases"]
+  def compose_nginx_domains
+    filename = "services/nginx-proxy/docker-compose.yml"
+
+    @compose_nginx_domains ||= YAML.load_file(filename)
+      .dig("services", "nginx-proxy-app", "networks", "default", "aliases")
   end
 end
