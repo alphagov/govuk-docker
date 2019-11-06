@@ -115,78 +115,16 @@ gem 'govuk_publishing_components', path: '../govuk_publishing_components'
 
 ### How to: replicate data locally
 
-There may be times when a full database is required locally.  The following sections give examples of how to replicate this data from integration.  All examples require pv, which can be installed on a Mac using Brew (`brew install pv`).
+There may be times when a full database is required locally.  The following scripts in the `bin` directory allow replicating data from integration:
 
-#### MySQL
+- `replicate-elasticsearch.sh`
+- `replicate-mongodb.sh APP-NAME`
+- `replicate-mysql.sh APP-NAME`
+- `replicate-postgresql.sh APP-NAME`
 
-1. Download the relevant database dump from the [AWS S3 Bucket](https://s3.console.aws.amazon.com/s3/buckets/govuk-integration-database-backups/mysql/?region=eu-west-1&tab=overview)
+All the scripts, other than `replicate-elasticsearch.sh`, take the name of the app to replicate data for.
 
-2. Drop and recreate any existing database, e.g. for Whitehall:
-
-```
-govuk-docker up -d mysql
-govuk-docker run mysql mysql -h mysql -u root --password=root -e "DROP DATABASE IF EXISTS whitehall_development"
-govuk-docker run mysql mysql -h mysql -u root --password=root -e "CREATE DATABASE whitehall_development"
-```
-
-3. Import the file into the local MySQL database, e.g. for Whitehall:
-
-```
-pv whitehall_production.dump.gz | gunzip | govuk-docker run mysql mysql -h mysql -u root --password=root whitehall_development
-```
-
-#### PostgreSQL
-
-1. Download the relevant database dump from the [AWS S3 Bucket](https://s3.console.aws.amazon.com/s3/buckets/govuk-integration-database-backups/postgres/?region=eu-west-1&tab=overview)
-
-2. Drop and recreate any existing database, e.g. for Publishing API:
-
-```
-govuk-docker up -d postgres
-govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -c 'DROP DATABASE IF EXISTS "publishing-api"'
-govuk-docker run postgres /usr/bin/createdb -h postgres -U postgres publishing-api
-```
-
-3. Import the file into the local Postgres database, e.g. for Publishing API:
-
-```
-pv publishing_api_production.dump.gz  | gunzip | govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -qAt -d publishing-api
-```
-
-#### MongoDB
-
-1.  Download the relevant database dump from the [AWS S3 Bucket](https://s3.console.aws.amazon.com/s3/buckets/govuk-integration-database-backups/mongodb/daily/mongo/?region=eu-west-1&tab=overview)
-
-2. Unzip the archive, e.g. for Content Store:
-
-```
-gunzip mongodump-2019-08-12_0023.tgz
-```
-
-Or if it's a TAR file, you can extract a specific file or directory.  Using the Content Store as an example:
-```
-tar -xvzf mongodump-2019-08-12_0023.tar var/lib/mongodb/backup/mongodump/content_store_production -C directory_for_download
-```
-
-3. Update the `docker-compose.yml` file to mount your local directory into the VM, e.g.
-
-```
-  mongo:
-    image: mongo:2.4
-    volumes:
-      - mongo:/data/db
-      - /Path/To/Downloads/directory_for_download:/import
-    ports:
-      - "27017:27017"
-      - "27018:27018"
-```
-
-4. Import the backup files into the local Mongo database, e.g. for Content Store:
-
-```
-govuk-docker up -d mongo
-govuk-docker run mongo mongorestore --drop --db content-store /import/var/lib/mongodb/backup/mongodump/content_store_production/
-```
+Draft data can be replicated with `replicate-mongodb.sh draft-content-store` and `replicate-mongodb.sh draft-router`.
 
 ### How to: set environment variables
 
