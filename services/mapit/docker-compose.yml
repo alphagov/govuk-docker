@@ -8,6 +8,9 @@ x-mapit: &mapit
     context: .
     dockerfile: services/mapit/Dockerfile
   image: mapit
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
   working_dir: /mapit
 
 services:
@@ -16,13 +19,11 @@ services:
     volumes:
       - mapit-pg:/var/lib/postgresql/data
 
-  mapit:
+  mapit-app: &mapit-app
     <<: *mapit
-    volumes:
-        - ~/govuk/mapit:/mapit
     depends_on:
       - mapit-pg
-      - nginx-proxy-app
+      - nginx-proxy
     environment:
       GOVUK_ENV: development
       DJANGO_SECRET_KEY: 'secret'
@@ -30,6 +31,6 @@ services:
       PGHOST: "mapit-pg"
       VIRTUAL_HOST: mapit.dev.gov.uk
       HOST: 0.0.0.0
-    ports:
-      - "3108:3108"
-    command: bash -c "python ./manage.py runserver 0.0.0.0:3108"
+    expose:
+      - "3108"
+    command: bash -c "python ./manage.py runserver"
