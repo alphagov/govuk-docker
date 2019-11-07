@@ -1,8 +1,6 @@
 inherit_gem:
-  govuk-lint: "configs/rubocop/all.yml"
-
-Rails:
-  Enabled: false
+  rubocop-govuk: 
+    - "config/default.yml"
 
 AllCops:
   Exclude:
