@@ -5,6 +5,8 @@ x-travel-advice-publisher: &travel-advice-publisher
     context: .
     dockerfile: services/travel-advice-publisher/Dockerfile
   image: travel-advice-publisher
+  stdin_open: true
+  tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - home:/home/build

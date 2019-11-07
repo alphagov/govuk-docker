@@ -5,6 +5,8 @@ x-frontend: &frontend
     context: .
     dockerfile: Dockerfile.govuk-base
   image: frontend
+  stdin_open: true
+  tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - home:/home/build

@@ -5,6 +5,8 @@ x-govuk_publishing_components: &govuk_publishing_components
     context: .
     dockerfile: Dockerfile.govuk-base
   image: govuk_publishing_components
+  stdin_open: true
+  tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - home:/home/build

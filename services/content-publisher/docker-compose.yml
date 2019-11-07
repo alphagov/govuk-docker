@@ -5,6 +5,8 @@ x-content-publisher: &content-publisher
     context: .
     dockerfile: Dockerfile.govuk-base
   image: content-publisher
+  stdin_open: true
+  tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - home:/home/build

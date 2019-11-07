@@ -5,6 +5,8 @@ x-static: &static
     context: .
     dockerfile: Dockerfile.govuk-base
   image: static
+  stdin_open: true
+  tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - home:/home/build

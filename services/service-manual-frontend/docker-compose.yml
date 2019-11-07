@@ -5,6 +5,8 @@ x-service-manual-frontend: &service-manual-frontend
     context: .
     dockerfile: Dockerfile.govuk-base
   image: service-manual-frontend
+  stdin_open: true
+  tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - home:/home/build

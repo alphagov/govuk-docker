@@ -5,6 +5,8 @@ x-smart-answers: &smart-answers
     context: .
     dockerfile: Dockerfile.govuk-base
   image: smart-answers
+  stdin_open: true
+  tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - home:/home/build
