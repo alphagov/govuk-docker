@@ -75,16 +75,13 @@ Sometimes things go wrong or some investigation is needed. As govuk-docker is ju
 git pull
 
 # make sure the service is built OK
-make -f <service>
+make <service>
 
 # tail logs for running services
 govuk-docker logs -f
 
 # get all the running containers
 docker ps -a
-
-# get a terminal inside a service
-govuk-docker run <service>-lite bash
 ```
 
 ### How to: update everything!
