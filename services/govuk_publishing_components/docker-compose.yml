@@ -21,6 +21,6 @@ services:
       - nginx-proxy-app
     environment:
       VIRTUAL_HOST: govuk-publishing-components.dev.gov.uk
-    ports:
+    expose:
       - "9292"
     command: bundle exec rackup spec/dummy/config.ru --host 0.0.0.0

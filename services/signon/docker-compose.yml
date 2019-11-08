@@ -33,6 +33,6 @@ services:
       VIRTUAL_HOST: signon.dev.gov.uk
       HOST: 0.0.0.0
       REDIS_HOST: redis
-    ports:
+    expose:
       - "3000"
     command: bin/rails s --restart

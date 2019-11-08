@@ -38,6 +38,6 @@ services:
       ELASTICSEARCH_URI: http://elasticsearch6:9200
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       HOST: 0.0.0.0
-    ports:
+    expose:
       - "3000"
     command: bin/rails s --restart

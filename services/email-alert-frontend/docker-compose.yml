@@ -32,7 +32,7 @@ services:
       GOVUK_ASSET_ROOT: email-alert-frontend.dev.gov.uk
       VIRTUAL_HOST: email-alert-frontend.dev.gov.uk
       HOST: 0.0.0.0
-    ports:
+    expose:
       - "3000"
     command: bin/rails s --restart
 

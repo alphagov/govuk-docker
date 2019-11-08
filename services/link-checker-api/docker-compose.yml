@@ -34,7 +34,7 @@ services:
       REDIS_URL: redis://redis
       VIRTUAL_HOST: link-checker-api.dev.gov.uk
       HOST: 0.0.0.0
-    ports:
+    expose:
       - "3000"
     command: bin/rails s --restart
 
