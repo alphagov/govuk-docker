@@ -30,7 +30,7 @@ services:
       - static-app
       - elasticsearch6
       - content-store-app
-      - nginx-proxy-app
+      - nginx-proxy
     environment:
       REDIS_URL: redis://redis
       VIRTUAL_HOST: licence-finder.dev.gov.uk

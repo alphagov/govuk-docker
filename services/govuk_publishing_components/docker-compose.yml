@@ -18,7 +18,7 @@ services:
   govuk_publishing_components-app:
     <<: *govuk_publishing_components
     depends_on:
-      - nginx-proxy-app
+      - nginx-proxy
     environment:
       VIRTUAL_HOST: govuk-publishing-components.dev.gov.uk
     expose:

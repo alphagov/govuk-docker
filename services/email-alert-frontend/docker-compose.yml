@@ -18,7 +18,7 @@ services:
     <<: *email-alert-frontend
     depends_on:
       - publishing-api-app-e2e
-      - nginx-proxy-app
+      - nginx-proxy
 
   email-alert-frontend-app: &email-alert-frontend-app
     <<: *email-alert-frontend
@@ -27,7 +27,7 @@ services:
       - content-store-app
       - static-app
       - email-alert-api-app
-      - nginx-proxy-app
+      - nginx-proxy
     environment:
       GOVUK_ASSET_ROOT: email-alert-frontend.dev.gov.uk
       VIRTUAL_HOST: email-alert-frontend.dev.gov.uk
@@ -40,7 +40,7 @@ services:
     <<: *email-alert-frontend-app
     depends_on:
       - email-alert-api-app
-      - nginx-proxy-app
+      - nginx-proxy
     environment:
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api

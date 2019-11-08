@@ -28,7 +28,7 @@ services:
   search-api-app: &search-api-app
     <<: *search-api
     depends_on:
-      - nginx-proxy-app
+      - nginx-proxy
       - redis
       - elasticsearch6
     environment:
@@ -74,7 +74,7 @@ services:
   search-api-app-e2e:
     <<: *search-api-app
     depends_on:
-      - nginx-proxy-app
+      - nginx-proxy
       - redis
       - elasticsearch6
       - search-api-worker

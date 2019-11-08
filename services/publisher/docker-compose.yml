@@ -27,7 +27,7 @@ services:
     depends_on:
       - redis
       - mongo
-      - nginx-proxy-app
+      - nginx-proxy
       - publishing-api-app
       - calendars-app
       - link-checker-api-app
@@ -46,7 +46,7 @@ services:
       - redis
       - mongo
       - publisher-worker
-      - nginx-proxy-app
+      - nginx-proxy
       - publishing-api-app-e2e
       - calendars-app
       - link-checker-api-app
@@ -56,7 +56,7 @@ services:
     depends_on:
       - redis
       - mongo
-      - nginx-proxy-app
+      - nginx-proxy
       - publishing-api-app-e2e
     environment:
       MONGODB_URI: "mongodb://mongo/publisher"

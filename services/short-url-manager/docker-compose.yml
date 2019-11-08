@@ -27,7 +27,7 @@ services:
     depends_on:
       - redis
       - mongo
-      - nginx-proxy-app
+      - nginx-proxy
       - publishing-api-app
     environment:
       MONGODB_URI: "mongodb://mongo/short-url-manager"
