@@ -1,5 +1,7 @@
 require "spec_helper"
 
+include ComposeHelper
+
 RSpec.describe "Make dependencies" do
   Dir.glob("*", base: "services").each do |service_name|
     it "mirrors docker-compose.yml for #{service_name}" do
@@ -9,8 +11,7 @@ RSpec.describe "Make dependencies" do
   end
 
   def compose_dependencies(service_name)
-    filename = compose_file(service_name)
-    service_stacks = YAML.load_file(filename)["services"].values
+    service_stacks = compose_services(service_name).values
     dependencies = service_stacks.flat_map { |s| s["depends_on"].to_a }
     dependencies = compose_remove_stack_from_service_name(dependencies)
     (dependencies & makeable_app_services) - [service_name]
@@ -31,16 +32,12 @@ RSpec.describe "Make dependencies" do
   def makeable_app_services
     @makeable_app_services ||= service_names.select do |service_name|
       File.exist?(make_file(service_name)) &&
-        File.read(compose_file(service_name)) =~ /#{service_name}-app/
+        compose_services(service_name).keys.any?(/#{service_name}-app/)
     end
   end
 
   def service_names
     @service_names ||= Dir.glob("*", base: "services")
-  end
-
-  def compose_file(service_name)
-    File.join("services", service_name, "docker-compose.yml")
   end
 
   def make_file(service_name)

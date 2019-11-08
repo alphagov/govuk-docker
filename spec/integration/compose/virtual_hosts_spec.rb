@@ -1,14 +1,8 @@
 require "spec_helper"
 
+include ComposeHelper
+
 RSpec.describe "Compose virtual hosts" do
-  compose_files = Dir.glob("services/**/docker-compose.yml")
-
-  compose_app_services = compose_files.flat_map do |filename|
-    YAML.load_file(filename)["services"].to_a.select do |service_name, _service|
-      service_name =~ /app(-\w+)?$/
-    end
-  end
-
   compose_app_services.each do |service_name, service|
     it "configures #{service_name} to depend on nginx-proxy" do
       expect(service["depends_on"]).to include("nginx-proxy")
@@ -35,9 +29,7 @@ RSpec.describe "Compose virtual hosts" do
   end
 
   def compose_nginx_domains
-    filename = "services/nginx-proxy/docker-compose.yml"
-
-    @compose_nginx_domains ||= YAML.load_file(filename)
-      .dig("services", "nginx-proxy", "networks", "default", "aliases")
+    @compose_nginx_domains ||= compose_services("nginx-proxy")
+      .dig("nginx-proxy", "networks", "default", "aliases")
   end
 end
