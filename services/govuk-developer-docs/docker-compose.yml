@@ -22,6 +22,6 @@ services:
       - nginx-proxy-app
     environment:
       VIRTUAL_HOST: govuk-developer-docs.dev.gov.uk
-    ports:
+    expose:
       - "4567"
     command: bundle exec middleman server --bind-address 0.0.0.0

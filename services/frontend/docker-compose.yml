@@ -25,7 +25,7 @@ services:
       GOVUK_ASSET_ROOT: frontend.dev.gov.uk
       VIRTUAL_HOST: frontend.dev.gov.uk
       HOST: 0.0.0.0
-    ports:
+    expose:
       - "3000"
     command: bin/rails s --restart
 

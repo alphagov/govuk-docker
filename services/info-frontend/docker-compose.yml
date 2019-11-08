@@ -24,7 +24,7 @@ services:
       GOVUK_ASSET_ROOT: info-frontend.dev.gov.uk
       VIRTUAL_HOST: info-frontend.dev.gov.uk
       HOST: 0.0.0.0
-    ports:
+    expose:
       - "3000"
     command: bin/rails s -P /tmp/rails.pid
 

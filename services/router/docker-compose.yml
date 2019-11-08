@@ -25,7 +25,7 @@ services:
     <<: *router
     depends_on:
       - mongo
-    ports:
+    expose:
       - "8080"
       - "3055"
     environment:

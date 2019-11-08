@@ -36,7 +36,7 @@ services:
       REDIS_URL: redis://redis
       VIRTUAL_HOST: travel-advice-publisher.dev.gov.uk
       HOST: 0.0.0.0
-    ports:
+    expose:
       - "3000"
     command: bin/rails s --restart
 

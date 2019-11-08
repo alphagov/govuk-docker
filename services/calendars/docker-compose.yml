@@ -24,7 +24,7 @@ services:
       GOVUK_ASSET_ROOT: calendars.dev.gov.uk
       VIRTUAL_HOST: calendars.dev.gov.uk
       HOST: 0.0.0.0
-    ports:
+    expose:
       - "3000"
     command: bin/rails s --restart
 

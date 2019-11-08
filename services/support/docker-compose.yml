@@ -28,6 +28,6 @@ services:
       VIRTUAL_HOST: support.dev.gov.uk
       REDIS_URL: redis://redis
       HOST: 0.0.0.0
-    ports:
+    expose:
       - "3000"
     command: bin/rails s --restart

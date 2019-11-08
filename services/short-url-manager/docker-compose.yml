@@ -34,6 +34,6 @@ services:
       REDIS_URL: redis
       VIRTUAL_HOST: short-url-manager.dev.gov.uk
       HOST: 0.0.0.0
-    ports:
+    expose:
       - "3000"
     command: bin/rails s --restart
