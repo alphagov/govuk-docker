@@ -5,6 +5,8 @@ x-govuk-developer-docs: &govuk-developer-docs
     context: .
     dockerfile: Dockerfile.govuk-base
   image: govuk-developer-docs
+  stdin_open: true
+  tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - home:/home/build

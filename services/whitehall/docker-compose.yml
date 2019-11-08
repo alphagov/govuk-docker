@@ -5,6 +5,8 @@ x-whitehall: &whitehall
     context: .
     dockerfile: Dockerfile.govuk-base
   image: whitehall
+  stdin_open: true
+  tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - home:/home/build

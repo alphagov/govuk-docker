@@ -5,6 +5,8 @@ x-authenticating-proxy: &authenticating-proxy
     context: .
     dockerfile: Dockerfile.govuk-base
   image: authenticating-proxy
+  stdin_open: true
+  tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - home:/home/build

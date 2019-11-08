@@ -134,6 +134,24 @@ While most environment variables should be set in the config for a service, some
 govuk-docker run content-publisher-lite env MY_VAR=my_val bundle exec rake my_task
 ```
 
+### How to: debug a running Rails app
+
+Normally it's enough to run a Rails app using `govuk-docker up`. To get a `debugger` console for a specific app or one of its dependencies, we need to attach an interactive terminal to the running container.
+
+```
+# find the container name
+govuk-docker ps
+
+# attach to the container
+docker attach govuk-docker_content-publisher-app_1
+
+# awesome debugging stuff
+...
+
+# detach from the container
+CTRL-P CTRL-Q
+```
+
 ### How to: install a new release of Ruby
 
 Many of our services use a `.ruby-version` file in conjunction with `rbenv`. When a new version of Ruby is released and we start upgrading our services, you may start seeing the following error when you run commands.

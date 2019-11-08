@@ -5,6 +5,8 @@ x-support-api: &support-api
     context: .
     dockerfile: services/support-api/Dockerfile
   image: support-api
+  stdin_open: true
+  tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - home:/home/build

@@ -5,6 +5,8 @@ x-router-api: &router-api
     context: .
     dockerfile: Dockerfile.govuk-base
   image: router-api
+  stdin_open: true
+  tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - home:/home/build

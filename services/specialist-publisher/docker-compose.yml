@@ -5,6 +5,8 @@ x-specialist-publisher: &specialist-publisher
     context: .
     dockerfile: services/specialist-publisher/Dockerfile
   image: specialist-publisher
+  stdin_open: true
+  tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - home:/home/build

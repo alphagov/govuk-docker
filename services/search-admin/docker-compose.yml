@@ -5,6 +5,8 @@ x-search-admin: &search-admin-base
     context: .
     dockerfile: Dockerfile.govuk-base
   image: search-admin
+  stdin_open: true
+  tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - home:/home/build

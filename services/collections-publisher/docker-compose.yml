@@ -5,6 +5,8 @@ x-collections-publisher: &collections-publisher
     context: .
     dockerfile: Dockerfile.govuk-base
   image: collections-publisher
+  stdin_open: true
+  tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - home:/home/build

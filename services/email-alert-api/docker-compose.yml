@@ -5,6 +5,8 @@ x-email-alert-api: &email-alert-api
     context: .
     dockerfile: Dockerfile.govuk-base
   image: email-alert-api
+  stdin_open: true
+  tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - home:/home/build
