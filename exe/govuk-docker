@@ -17,5 +17,9 @@ for file in $COMPOSE_FILES; do
   COMPOSE_FLAGS+=("-f" "$file")
 done
 
+if ! govuk-docker-version >/dev/null; then
+  read -rp "Press enter to continue..."
+fi
+
 echo "docker-compose -f [...] $*"
 docker-compose "${COMPOSE_FLAGS[@]}" "$@"
