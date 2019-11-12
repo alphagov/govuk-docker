@@ -1,0 +1,36 @@
+version: '3.7'
+  
+volumes:
+  mapit-pg:
+
+x-mapit: &mapit
+  build:
+    context: .
+    dockerfile: services/mapit/Dockerfile
+  image: mapit
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /mapit
+
+services:
+  mapit-pg:
+    image: mdillon/postgis:9.6-alpine
+    volumes:
+      - mapit-pg:/var/lib/postgresql/data
+
+  mapit-app: &mapit-app
+    <<: *mapit
+    depends_on:
+      - mapit-pg
+      - nginx-proxy
+    environment:
+      GOVUK_ENV: development
+      DJANGO_SECRET_KEY: 'secret'
+      MAPIT_DB_HOST: 'mapit-pg'
+      PGHOST: "mapit-pg"
+      VIRTUAL_HOST: mapit.dev.gov.uk
+      HOST: 0.0.0.0
+    expose:
+      - "3108"
+    command: bash -c "python ./manage.py runserver"

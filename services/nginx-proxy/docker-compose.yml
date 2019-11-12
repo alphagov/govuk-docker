@@ -43,6 +43,7 @@ services:
           - licence-finder.dev.gov.uk
           - link-checker-api.dev.gov.uk
           - manuals-frontend.dev.gov.uk
+          - mapit.dev.gov.uk
           - publisher.dev.gov.uk
           - publishing-api.dev.gov.uk
           - router-api.dev.gov.uk

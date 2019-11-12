@@ -2,6 +2,7 @@ require "spec_helper"
 
 RSpec.describe "Compose rails debugger" do
   compose_files = Dir.glob("services/**/docker-compose.yml")
+  compose_files.delete_if { |app| app.include? "mapit" }
 
   compose_app_services = compose_files.flat_map do |filename|
     YAML.load_file(filename)["services"].to_a.select do |service_name, _service|
