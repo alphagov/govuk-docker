@@ -38,7 +38,6 @@ The following apps are supported by govuk-docker to some extent.
    - ❓ govuk-content-schemas
       * Service exists in govuk-docker but is untested
    - ✅ govuk-developer-docs
-   - ✅ govuk-lint
    - ❌ hmrc-manuals-api
    - ❌ imminence
    - ✅ info-frontend
