@@ -1,3 +1,4 @@
 replication
 stderr.log
 .version
+Brewfile.lock.json
