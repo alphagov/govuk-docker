@@ -16,7 +16,7 @@ else
   aws --profile govuk-integration s3 sync "s3://${bucket}/" "${archive_path}/"
 fi
 
-if [[ -n "$SKIP_IMPORT" ]]; then
+if [[ -n "${SKIP_IMPORT:-}" ]]; then
   echo "Skipping import as \$SKIP_IMPORT is set"
   exit 0
 fi
