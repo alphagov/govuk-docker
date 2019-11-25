@@ -50,6 +50,11 @@ else
   aws --profile govuk-integration s3 cp "s3://${bucket}/mongodb/daily/${hostname}/${remote_file_name}" "$archive_path"
 fi
 
+if [[ -n "$SKIP_IMPORT" ]]; then
+  echo "Skipping import as \$SKIP_IMPORT is set"
+  exit 0
+fi
+
 extract_path="${archive_path}-${app}"
 
 if [[ -d "$extract_path" ]]; then
