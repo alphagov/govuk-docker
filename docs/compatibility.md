@@ -30,6 +30,7 @@ The following apps are supported by govuk-docker to some extent.
    - ❌ feedback
    - ✅ finder-frontend
    - ❓ frontend
+   - ✅ gds-api-adapters
    - ✅ government-frontend
    - ✅ govspeak
    - ✅ govuk_app_config
