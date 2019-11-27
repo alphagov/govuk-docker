@@ -1,14 +1,21 @@
-#!/usr/bin/env ruby
+#!/bin/bash
 
-$LOAD_PATH.unshift(File.expand_path("../../lib", __FILE__))
+echo -e "✅ Installing dependencies via Homebrew...\n"
+brew bundle --file="$(dirname $0)/../Brewfile"
+echo
 
-require 'bundler/setup'
-require "thor"
-require "govuk_docker"
+echo "✅ Configuring dnsmasq [/etc/resolver/dev/gov.uk]"
+echo -e "You may need to enter your root password...\n"
+echo -e "nameserver 127.0.0.1\nport 53" | sudo tee /etc/resolver/dev.gov.uk >/dev/null
 
-shell = Thor::Base.shell.new
-GovukDocker::Setup::Repo.new(shell).call
-puts
-GovukDocker::Setup::HomebrewDependencies.new(shell).call
-puts
-GovukDocker::Setup::Dnsmasq.new(shell).call
+echo -e "✅ Configuring dnsmasq [/usr/local/etc/dnsmasq.conf]\n"
+echo "conf-dir=/usr/local/etc/dnsmasq.d,*.conf" > /usr/local/etc/dnsmasq.conf
+
+echo -e "✅ Configuring dnsmasq [/usr/local/etc/dnsmasq.d/development.conf]\n"
+mkdir -p /usr/local/etc/dnsmasq.d
+echo "address=/dev.gov.uk/127.0.0.1" > /usr/local/etc/dnsmasq.d/development.conf
+
+echo "✅ Restarting dnsmasq"
+echo -e "You may need to enter your root password...\n"
+sudo killall -HUP mDNSResponder
+sudo brew services restart dnsmasq
