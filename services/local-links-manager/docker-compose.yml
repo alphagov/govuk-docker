@@ -1,0 +1,21 @@
+version: '3.7'
+
+x-local-links-manager: &local-links-manager
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: local-links-manager
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/local-links-manager
+
+services:
+  local-links-manager-lite:
+    <<: *local-links-manager
+    privileged: true
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres/local-links-manager"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres/local-links-manager-test"
