@@ -68,4 +68,4 @@ done
 database="$app"
 govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -c "DROP DATABASE IF EXISTS \"${database}\""
 govuk-docker run postgres /usr/bin/createdb -h postgres -U postgres "$database"
-pv "$archive_path"  | gunzip | grep -v 'ALTER \(.*\) OWNER TO \(.*\);' | govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -qAt -d "$database"
+pv "$archive_path" | govuk-docker run postgres /usr/bin/pg_restore -h postgres -U postgres -d "$database" --no-owner
