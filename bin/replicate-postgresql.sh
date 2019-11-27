@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+function try_find_file {
+  set +e
+  out="$(aws --profile govuk-integration s3 ls "s3://${bucket}/postgresql-backend/" | grep "${1}_production.gz" | sed 's/.* //' | sort | tail -n1)"
+  set -e
+  echo "$out"
+}
+
 set -eu
 
 if [[ "$#" == "0" ]]; then
@@ -31,7 +38,15 @@ if [[ -e "$archive_path" ]]; then
   echo "Skipping download - remove ${archive_path} to force"
 else
   mkdir -p "$archive_dir"
-  aws --profile govuk-integration s3 cp "s3://${bucket}/postgres/$(date '+%Y-%m-%d')/${archive_file}" "${archive_path}"
+  s3_file=$(try_find_file "$app")
+  if [[ -z "$s3_file" ]]; then
+    s3_file=$(try_find_file "${app//-/_}")
+  fi
+  if [[ -z "$s3_file" ]]; then
+    echo "couldn't figure out backup filename in S3 - this is a bug (or the app doesn't use postgres)."
+    exit 1
+  fi
+  aws --profile govuk-integration s3 cp "s3://${bucket}/postgresql-backend/${s3_file}" "${archive_path}"
 fi
 
 if [[ -n "${SKIP_IMPORT:-}" ]]; then
