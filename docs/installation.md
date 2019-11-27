@@ -137,46 +137,30 @@ Error: It seems there is already an App at '/Applications/Docker.app'.
 
 This isn't a problem if you already have Docker/Compose installed, and the setup script will continue to run. If you like, you can remove your existing Docker/Compose and run `bin/setup` again.
 
-### How to: set up Dnsmasq manually
+### How to: troubleshoot dnsmasq
 
-If the [installation instructions](#setup) above didn't work for you, you may need to do some things manually as outlined below.
+Sometimes dnsmasq doesn't install correctly. Here are some checks you can do.
 
-If you have been using the vagrant based dev vm, take a backup
-of  `/etc/resolver/dev.gov.uk`.
-
-```
-cp /etc/resolver/dev.gov.uk ~/dev.gov.uk
-```
-
-Then create or update `/etc/resolver/dev.gov.uk`; you can create a copy directly from [dnsmasq.conf](https://github.com/alphagov/govuk-docker/blob/master/config/dnsmasq.conf). If you've been using the vagrant based dev VM, you'll need to replace `/etc/resolver/dev.gov.uk`.
+* Check if `dev.gov.uk` works end-to-end
 
 ```
-sudo cp ~/govuk/govuk-docker/config/dnsmasq.conf /etc/resolver/dev.gov.uk
+dig app.dev.gov.uk @127.0.0.1
+
+# output should contain...
+# app.dev.gov.uk.		0	IN	A	127.0.0.1
 ```
 
-To check if the new config has been applied, you can run `scutil --dns` to check that `dev.gov.uk` appears in the list.
-
-Then append the following to the bottom of `/usr/local/etc/dnsmasq.conf`:
+* Check your `/etc/resolver` config is working
 
 ```
-conf-dir=/usr/local/etc/dnsmasq.d,*.conf
+scutil --dns
+
+# output should contain...
+# domain   : intro-to-docker.gov.uk
+# nameserver[0] : 127.0.0.1
+# port     : 53
+# flags    : Request A records, Request AAAA records
+# reach    : 0x00030002 (Reachable,Local Address,Directly Reachable Address)
 ```
 
-Then create or append to `/usr/local/etc/dnsmasq.d/development.conf`:
-
-```
-address=/dev.gov.uk/127.0.0.1
-```
-
-Once you've updated those files, restart dnsmasq:
-
-```
-sudo brew services restart dnsmasq
-```
-
-To check whether dnsmasq name server at 127.0.0.1 can resolve subdomains of dev.gov.uk run `dig app.dev.gov.uk @127.0.0.1`. The response has to include the following answer section:
-
-```
-;; ANSWER SECTION:
-app.dev.gov.uk.		0	IN	A	127.0.0.1
-```
+You can also look at the command in `bin/setup` to see what's changing.
