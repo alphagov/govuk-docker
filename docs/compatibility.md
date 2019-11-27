@@ -46,7 +46,8 @@ The following apps are supported by govuk-docker to some extent.
    - ⚠ link-checker-api
       * Works in isolation but not in other services' `e2e` stacks, so must be run in a separate process.
         See https://github.com/alphagov/govuk-docker/issues/174 for details.
-   - ❌ local-links-manager
+   - ⚠  local-links-manager
+      * Only the `lite` stack is available, since that was all that was required at the point of adding.
    - ✅ manuals-frontend
    - ❌ manuals-publisher
    - ❌ mapit
