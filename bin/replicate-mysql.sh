@@ -34,7 +34,7 @@ echo "stopping running govuk-docker containers..."
 govuk-docker down
 
 govuk-docker up -d mysql
-trap 'govuk-docker compose stop mysql' EXIT
+trap 'govuk-docker stop mysql' EXIT
 
 echo "waiting for mysql..."
 until govuk-docker run mysql mysql -h mysql -u root --password=root -e 'SELECT 1' &>/dev/null; do

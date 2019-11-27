@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+function try_find_file {
+  set +e
+  out="$(aws --profile govuk-integration s3 ls "s3://${bucket}/postgresql-backend/" | grep "${1}_production.gz" | sed 's/.* //' | sort | tail -n1)"
+  set -e
+  echo "$out"
+}
+
 set -eu
 
 if [[ "$#" == "0" ]]; then
@@ -31,7 +38,15 @@ if [[ -e "$archive_path" ]]; then
   echo "Skipping download - remove ${archive_path} to force"
 else
   mkdir -p "$archive_dir"
-  aws --profile govuk-integration s3 cp "s3://${bucket}/postgres/$(date '+%Y-%m-%d')/${archive_file}" "${archive_path}"
+  s3_file=$(try_find_file "$app")
+  if [[ -z "$s3_file" ]]; then
+    s3_file=$(try_find_file "${app//-/_}")
+  fi
+  if [[ -z "$s3_file" ]]; then
+    echo "couldn't figure out backup filename in S3 - if you're sure the app uses PostgreSQL, file an issue in alphagov/govuk-docker."
+    exit 1
+  fi
+  aws --profile govuk-integration s3 cp "s3://${bucket}/postgresql-backend/${s3_file}" "${archive_path}"
 fi
 
 if [[ -n "${SKIP_IMPORT:-}" ]]; then
@@ -43,7 +58,7 @@ echo "stopping running govuk-docker containers..."
 govuk-docker down
 
 govuk-docker up -d postgres
-trap 'govuk-docker compose stop postgres' EXIT
+trap 'govuk-docker stop postgres' EXIT
 
 echo "waiting for postgres..."
 until govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -c 'SELECT 1' &>/dev/null; do
@@ -53,4 +68,4 @@ done
 database="$app"
 govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -c "DROP DATABASE IF EXISTS \"${database}\""
 govuk-docker run postgres /usr/bin/createdb -h postgres -U postgres "$database"
-pv "$archive_path"  | gunzip | grep -v 'ALTER \(.*\) OWNER TO \(.*\);' | govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -qAt -d "$database"
+pv "$archive_path" | govuk-docker run postgres /usr/bin/pg_restore -h postgres -U postgres -d "$database" --no-owner
