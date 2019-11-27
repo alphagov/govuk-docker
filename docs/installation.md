@@ -149,23 +149,6 @@ Error: It seems there is already an App at '/Applications/Docker.app'.
 
 Then uninstall your existing docker, and restart the `govuk-docker setup` process to install a new version of docker using brew.
 
-#### How to: resolve `No such file or directory` errors for `dev.gov.uk`
-
-If you get the following error during `govuk-docker setup`:
-
-```
-No such file or directory @ rb_sysopen - /etc/resolver/dev.gov.uk (Errno::ENOENT)
-```
-
-Create the `resolver` folder in `etc`.
-
-```
-sudo mkdir /etc/resolver/
-```
-
-Then follow the [instructions to set up Dnsmasq manually](#how-to-set-up-dnsmasq-manually).
-
-
 ### How to: set up Dnsmasq manually
 
 If the [installation instructions](#setup) above didn't work for you, you may need to do some things manually as outlined below.
