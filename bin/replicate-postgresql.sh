@@ -43,7 +43,7 @@ else
     s3_file=$(try_find_file "${app//-/_}")
   fi
   if [[ -z "$s3_file" ]]; then
-    echo "couldn't figure out backup filename in S3 - this is a bug (or the app doesn't use postgres)."
+    echo "couldn't figure out backup filename in S3 - if you're sure the app uses PostgreSQL, file an issue in alphagov/govuk-docker."
     exit 1
   fi
   aws --profile govuk-integration s3 cp "s3://${bucket}/postgresql-backend/${s3_file}" "${archive_path}"
