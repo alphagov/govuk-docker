@@ -58,7 +58,7 @@ echo "stopping running govuk-docker containers..."
 govuk-docker down
 
 govuk-docker up -d postgres
-trap 'govuk-docker compose stop postgres' EXIT
+trap 'govuk-docker stop postgres' EXIT
 
 echo "waiting for postgres..."
 until govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -c 'SELECT 1' &>/dev/null; do
