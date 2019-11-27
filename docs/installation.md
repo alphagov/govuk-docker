@@ -121,33 +121,21 @@ gem install bundler:X.Y.Z
 
 ### How to: resolve issues caused by an existing docker install
 
-During `govuk-docker setup`, if you get the following errors when pouring `docker-compose`:
+You may get one of the following errors when running `bin/setup`.
 
 ```
 Error: The `brew link` step did not complete successfully
 The formula built, but is not symlinked into /usr/local
 Could not symlink bin/docker-compose
 Target /usr/local/bin/docker-compose
-already exists. You may want to remove it:
-  rm '/usr/local/bin/docker-compose'
-
-To force the link and overwrite all conflicting files:
-  brew link --overwrite docker-compose
-
-To list all files that would be deleted:
-  brew link --overwrite --dry-run docker-compose
-
-Possible conflicting files are:
-/usr/local/bin/docker-compose -> /Applications/Docker.app/Contents/Resources/bin/docker-compose
+...
 ```
-
-and when pouring `docker`:
 
 ```
 Error: It seems there is already an App at '/Applications/Docker.app'.
 ```
 
-Then uninstall your existing docker, and restart the `govuk-docker setup` process to install a new version of docker using brew.
+This isn't a problem if you already have Docker/Compose installed, and the setup script will continue to run. If you like, you can remove your existing Docker/Compose and run `bin/setup` again.
 
 ### How to: set up Dnsmasq manually
 
