@@ -97,23 +97,7 @@ Then install the correct version of Ruby listed in [.ruby-version](https://githu
 ```
 cd ~/govuk/govuk-docker
 rbenv install
-```
-
-Now, when you are in the `~/govuk/govuk-docker` folder, rbenv will automatically switch to the correct version of Ruby - check this by running `ruby -v`.
-
-### How to: install bundler
-
-To install [bundler](https://bundler.io/), first find out the required version (in X.Y.Z format) from [Gemfile.lock](https://github.com/alphagov/govuk-docker/blob/master/Gemfile.lock) - it will be listed as:
-
-```
-BUNDLED WITH
-    X.Y.Z
-```
-
-Install the correct version of bundler; you may have to overwrite existing bundle and bundler executable conflicts.
-
-```
-gem install bundler:X.Y.Z
+gem install bundler
 ```
 
 ### How to: resolve issues caused by an existing docker install
