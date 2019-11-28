@@ -62,7 +62,7 @@ alias gdu="govuk-docker-up"
 alias gdbe="govuk-docker-run bundle exec"
 ```
 
-## Environment variables
+### Environment variables
 
 Both govuk-docker and the Makefile respect the following environment variables:
 
