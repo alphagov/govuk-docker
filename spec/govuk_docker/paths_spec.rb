@@ -41,14 +41,4 @@ describe GovukDocker::Paths do
       end
     end
   end
-
-  describe "dnsmasq_conf" do
-    subject { described_class.dnsmasq_conf }
-
-    it "it provides path to conf file relative to `govuk_docker_dir`" do
-      expect(described_class).to receive(:govuk_docker_dir).and_return("/home/test/govuk")
-
-      expect(subject).to eq("/home/test/govuk/config/dnsmasq.conf")
-    end
-  end
 end

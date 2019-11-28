@@ -121,91 +121,46 @@ gem install bundler:X.Y.Z
 
 ### How to: resolve issues caused by an existing docker install
 
-During `govuk-docker setup`, if you get the following errors when pouring `docker-compose`:
+You may get one of the following errors when running `bin/setup`.
 
 ```
 Error: The `brew link` step did not complete successfully
 The formula built, but is not symlinked into /usr/local
 Could not symlink bin/docker-compose
 Target /usr/local/bin/docker-compose
-already exists. You may want to remove it:
-  rm '/usr/local/bin/docker-compose'
-
-To force the link and overwrite all conflicting files:
-  brew link --overwrite docker-compose
-
-To list all files that would be deleted:
-  brew link --overwrite --dry-run docker-compose
-
-Possible conflicting files are:
-/usr/local/bin/docker-compose -> /Applications/Docker.app/Contents/Resources/bin/docker-compose
+...
 ```
-
-and when pouring `docker`:
 
 ```
 Error: It seems there is already an App at '/Applications/Docker.app'.
 ```
 
-Then uninstall your existing docker, and restart the `govuk-docker setup` process to install a new version of docker using brew.
+This isn't a problem if you already have Docker/Compose installed, and the setup script will continue to run. If you like, you can remove your existing Docker/Compose and run `bin/setup` again.
 
-#### How to: resolve `No such file or directory` errors for `dev.gov.uk`
+### How to: troubleshoot dnsmasq
 
-If you get the following error during `govuk-docker setup`:
+Sometimes dnsmasq doesn't install correctly. Here are some checks you can do.
 
-```
-No such file or directory @ rb_sysopen - /etc/resolver/dev.gov.uk (Errno::ENOENT)
-```
-
-Create the `resolver` folder in `etc`.
+* Check if `dev.gov.uk` works end-to-end
 
 ```
-sudo mkdir /etc/resolver/
+dig app.dev.gov.uk @127.0.0.1
+
+# output should contain...
+# app.dev.gov.uk.		0	IN	A	127.0.0.1
 ```
 
-Then follow the [instructions to set up Dnsmasq manually](#how-to-set-up-dnsmasq-manually).
-
-
-### How to: set up Dnsmasq manually
-
-If the [installation instructions](#setup) above didn't work for you, you may need to do some things manually as outlined below.
-
-If you have been using the vagrant based dev vm, take a backup
-of  `/etc/resolver/dev.gov.uk`.
+* Check your `/etc/resolver` config is working
 
 ```
-cp /etc/resolver/dev.gov.uk ~/dev.gov.uk
+scutil --dns
+
+# output should contain...
+# domain   : intro-to-docker.gov.uk
+# nameserver[0] : 127.0.0.1
+# port     : 53
+# flags    : Request A records, Request AAAA records
+# reach    : 0x00030002 (Reachable,Local Address,Directly Reachable Address)
 ```
 
-Then create or update `/etc/resolver/dev.gov.uk`; you can create a copy directly from [dnsmasq.conf](https://github.com/alphagov/govuk-docker/blob/master/config/dnsmasq.conf). If you've been using the vagrant based dev VM, you'll need to replace `/etc/resolver/dev.gov.uk`.
-
-```
-sudo cp ~/govuk/govuk-docker/config/dnsmasq.conf /etc/resolver/dev.gov.uk
-```
-
-To check if the new config has been applied, you can run `scutil --dns` to check that `dev.gov.uk` appears in the list.
-
-Then append the following to the bottom of `/usr/local/etc/dnsmasq.conf`:
-
-```
-conf-dir=/usr/local/etc/dnsmasq.d,*.conf
-```
-
-Then create or append to `/usr/local/etc/dnsmasq.d/development.conf`:
-
-```
-address=/dev.gov.uk/127.0.0.1
-```
-
-Once you've updated those files, restart dnsmasq:
-
-```
-sudo brew services restart dnsmasq
-```
-
-To check whether dnsmasq name server at 127.0.0.1 can resolve subdomains of dev.gov.uk run `dig app.dev.gov.uk @127.0.0.1`. The response has to include the following answer section:
-
-```
-;; ANSWER SECTION:
-app.dev.gov.uk.		0	IN	A	127.0.0.1
-```
+You can also look at the command in `bin/setup` to see what's changing.
