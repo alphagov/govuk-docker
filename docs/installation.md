@@ -4,15 +4,15 @@
 
 govuk-docker has the following dependencies:
 
-- [brew](https://brew.sh/). (If you don't use a Mac, you'll need to dig into the `govuk-docker setup` command and manually install the things referenced).
+- [brew](https://brew.sh/)
 - [git](https://git-scm.com)
-- Ruby (whatever version is specified in [.ruby-version](https://github.com/alphagov/govuk-docker/blob/master/.ruby-version))
-  - Follow these [instructions to update Ruby using brew](#how-to-install-or-update-ruby)
+- [Ruby](#how-to-install-or-update-ruby)
 - A directory `~/govuk` in your home directory
 
 All other dependencies will be installed for you automatically.
 
 ### Docker settings
+
 Running GOV.UK applications can be resource intensive and will easily exceed the default configuration of Docker for Mac. To change settings open the Docker dropdown via the Docker whale icon in the macOS menu bar, and select the preferences option.
 
 In `Advanced` settings you should update CPU and RAM resources. These should be at least:
@@ -95,7 +95,7 @@ This will test whether or not your system meets the following requirements:
 
 Follow the instructions to install [rbenv](https://github.com/rbenv/rbenv#installation) using [brew](https://brew.sh/).
 
-Then install the correct version of Ruby listed in [.ruby-version](https://github.com/alphagov/govuk-docker/blob/master/.ruby-version) - *note* you need to clone this repository (govuk-docker) into `~/govuk` first!
+Then install the correct version of Ruby listed in [.ruby-version](https://github.com/alphagov/govuk-docker/blob/master/.ruby-version).
 
 ```
 cd ~/govuk/govuk-docker
