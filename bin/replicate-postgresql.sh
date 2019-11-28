@@ -2,7 +2,7 @@
 
 function try_find_file {
   set +e
-  out="$(aws --profile govuk-integration s3 ls "s3://${bucket}/postgresql-backend/" | grep "${1}_production.gz" | sed 's/.* //' | sort | tail -n1)"
+  out="$(aws s3 ls "s3://${bucket}/postgresql-backend/" | grep "${1}_production.gz" | sed 's/.* //' | sort | tail -n1)"
   set -e
   echo "$out"
 }
@@ -46,7 +46,7 @@ else
     echo "couldn't figure out backup filename in S3 - if you're sure the app uses PostgreSQL, file an issue in alphagov/govuk-docker."
     exit 1
   fi
-  aws --profile govuk-integration s3 cp "s3://${bucket}/postgresql-backend/${s3_file}" "${archive_path}"
+  aws s3 cp "s3://${bucket}/postgresql-backend/${s3_file}" "${archive_path}"
 fi
 
 if [[ -n "${SKIP_IMPORT:-}" ]]; then

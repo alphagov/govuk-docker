@@ -119,6 +119,12 @@ There may be times when a full database is required locally.  The following scri
 - `replicate-mysql.sh APP-NAME`
 - `replicate-postgresql.sh APP-NAME`
 
+You will need to assume-role into AWS using the [gds-cli](https://docs.publishing.service.gov.uk/manual/gds-cli.html) before running the scripts. For example, to replicate data for Content Publisher as an AWS PowerUser, run:
+
+```
+gds aws govuk-integration-poweruser ./bin/replicate-postgresql.sh content-publisher
+```
+
 All the scripts, other than `replicate-elasticsearch.sh`, take the name of the app to replicate data for.
 
 Draft data can be replicated with `replicate-mongodb.sh draft-content-store` and `replicate-mongodb.sh draft-router`.

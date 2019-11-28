@@ -46,8 +46,8 @@ if [[ -e "$archive_path" ]]; then
   echo "Skipping download - remove ${archive_path} to force"
 else
   mkdir -p "$archive_dir"
-  remote_file_name=$(aws --profile govuk-integration s3 ls "s3://${bucket}/mongodb/daily/${hostname}/" | tail -n1 | sed 's/^.* .* .* //')
-  aws --profile govuk-integration s3 cp "s3://${bucket}/mongodb/daily/${hostname}/${remote_file_name}" "$archive_path"
+  remote_file_name=$(aws s3 ls "s3://${bucket}/mongodb/daily/${hostname}/" | tail -n1 | sed 's/^.* .* .* //')
+  aws s3 cp "s3://${bucket}/mongodb/daily/${hostname}/${remote_file_name}" "$archive_path"
 fi
 
 if [[ -n "${SKIP_IMPORT:-}" ]]; then

@@ -13,7 +13,7 @@ if [[ -e "$archive_path" ]]; then
   echo "Skipping download - remove ${archive_path} to force"
 else
   mkdir -p "$replication_dir"
-  aws --profile govuk-integration s3 sync "s3://${bucket}/" "${archive_path}/"
+  aws s3 sync "s3://${bucket}/" "${archive_path}/"
 fi
 
 if [[ -n "${SKIP_IMPORT:-}" ]]; then
