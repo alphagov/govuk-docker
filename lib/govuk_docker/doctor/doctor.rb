@@ -67,8 +67,8 @@ module GovukDocker::Doctor
       HEREDOC
       dnsmasq_resolver: "✅ Dnsmasq is resolving DNS requests",
       not_dnsmasq_resolver: <<~HEREDOC,
-        ❌ Your DNS resolver file (/etc/resolver/dev.gov.uk) is out of date with govuk-docker. Try:
-        `sudo cp #{GovukDocker::Paths.dnsmasq_conf} /etc/resolver/dev.gov.uk`
+        ❌ Your DNS resolver file (/etc/resolver/dev.gov.uk) has unexpected content.
+        Try running `bin/setup` again.
       HEREDOC
     }
   end
