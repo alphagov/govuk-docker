@@ -11,17 +11,6 @@ govuk-docker has the following dependencies:
 
 All other dependencies will be installed for you automatically.
 
-### Docker settings
-
-Running GOV.UK applications can be resource intensive and will easily exceed the default configuration of Docker for Mac. To change settings open the Docker dropdown via the Docker whale icon in the macOS menu bar, and select the preferences option.
-
-In `Advanced` settings you should update CPU and RAM resources. These should be at least:
-
-* 6 CPUs
-* 12 GB RAM
-
-In `Disk` you should ensure there is a high amount of disk space to allow replicating GOV.UK data. 64GB should be sufficient for most usages but you may need > 100GB to clone all GOV.UK integration data.
-
 ## Setup
 
 Start with the following in your bash config.
@@ -40,6 +29,14 @@ bin/setup
 ```
 
 You can now [clone and setup the apps you need](../README.md#Usage), after which you can do things like run tests and startup the app in your browser. If this doesn't work for whatever reason, follow the [instructions on how to resolve setup issues](#how-tos).
+
+### Docker settings
+
+Running GOV.UK applications can be resource intensive. To give Docker more resources on Mac, click the Docker whale icon in the macOS menu bar, select 'Preferences'. We suggest the following minimum resources:
+
+* 6 CPUs
+* 12 GB RAM
+* 64GB+ Disk
 
 ### Shortcuts
 
