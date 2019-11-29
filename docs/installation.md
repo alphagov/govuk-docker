@@ -4,23 +4,12 @@
 
 govuk-docker has the following dependencies:
 
-- [brew](https://brew.sh/). (If you don't use a Mac, you'll need to dig into the `govuk-docker setup` command and manually install the things referenced).
+- [brew](https://brew.sh/)
 - [git](https://git-scm.com)
-- Ruby (whatever version is specified in [.ruby-version](https://github.com/alphagov/govuk-docker/blob/master/.ruby-version))
-  - Follow these [instructions to update Ruby using brew](#how-to-install-or-update-ruby)
+- [Ruby](#how-to-install-or-update-ruby)
 - A directory `~/govuk` in your home directory
 
 All other dependencies will be installed for you automatically.
-
-### Docker settings
-Running GOV.UK applications can be resource intensive and will easily exceed the default configuration of Docker for Mac. To change settings open the Docker dropdown via the Docker whale icon in the macOS menu bar, and select the preferences option.
-
-In `Advanced` settings you should update CPU and RAM resources. These should be at least:
-
-* 6 CPUs
-* 12 GB RAM
-
-In `Disk` you should ensure there is a high amount of disk space to allow replicating GOV.UK data. 64GB should be sufficient for most usages but you may need > 100GB to clone all GOV.UK integration data.
 
 ## Setup
 
@@ -40,6 +29,14 @@ bin/setup
 ```
 
 You can now [clone and setup the apps you need](../README.md#Usage), after which you can do things like run tests and startup the app in your browser. If this doesn't work for whatever reason, follow the [instructions on how to resolve setup issues](#how-tos).
+
+### Docker settings
+
+Running GOV.UK applications can be resource intensive. To give Docker more resources on Mac, click the Docker whale icon in the macOS menu bar, select 'Preferences'. We suggest the following minimum resources:
+
+* 6 CPUs
+* 12 GB RAM
+* 64GB+ Disk
 
 ### Shortcuts
 
@@ -65,7 +62,7 @@ alias gdu="govuk-docker-up"
 alias gdbe="govuk-docker-run bundle exec"
 ```
 
-## Environment variables
+### Environment variables
 
 Both govuk-docker and the Makefile respect the following environment variables:
 
@@ -95,28 +92,12 @@ This will test whether or not your system meets the following requirements:
 
 Follow the instructions to install [rbenv](https://github.com/rbenv/rbenv#installation) using [brew](https://brew.sh/).
 
-Then install the correct version of Ruby listed in [.ruby-version](https://github.com/alphagov/govuk-docker/blob/master/.ruby-version) - *note* you need to clone this repository (govuk-docker) into `~/govuk` first!
+Then install the correct version of Ruby listed in [.ruby-version](https://github.com/alphagov/govuk-docker/blob/master/.ruby-version).
 
 ```
 cd ~/govuk/govuk-docker
 rbenv install
-```
-
-Now, when you are in the `~/govuk/govuk-docker` folder, rbenv will automatically switch to the correct version of Ruby - check this by running `ruby -v`.
-
-### How to: install bundler
-
-To install [bundler](https://bundler.io/), first find out the required version (in X.Y.Z format) from [Gemfile.lock](https://github.com/alphagov/govuk-docker/blob/master/Gemfile.lock) - it will be listed as:
-
-```
-BUNDLED WITH
-    X.Y.Z
-```
-
-Install the correct version of bundler; you may have to overwrite existing bundle and bundler executable conflicts.
-
-```
-gem install bundler:X.Y.Z
+gem install bundler
 ```
 
 ### How to: resolve issues caused by an existing docker install
