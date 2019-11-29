@@ -4,6 +4,9 @@ echo -e "✅ Installing dependencies via Homebrew...\n"
 brew bundle --file="$(dirname $0)/../Brewfile"
 echo
 
+echo -e "✅ Starting Docker...\n"
+[[ $OSTYPE == "darwin"* ]] && open "/Applications/Docker.app"
+
 echo "✅ Configuring dnsmasq [/etc/resolver/dev/gov.uk]"
 echo -e "You may need to enter your root password...\n"
 echo -e "nameserver 127.0.0.1\nport 53" | sudo tee /etc/resolver/dev.gov.uk >/dev/null
