@@ -35,7 +35,7 @@ services:
       DATABASE_URL: "postgresql://postgres@postgres/link-checker-api"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: link-checker-api.dev.gov.uk
-      HOST: 0.0.0.0
+      BINDING: 0.0.0.0
     expose:
       - "3000"
     command: bin/rails s --restart

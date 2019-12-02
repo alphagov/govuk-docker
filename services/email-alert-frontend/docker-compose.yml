@@ -33,7 +33,7 @@ services:
     environment:
       GOVUK_ASSET_ROOT: email-alert-frontend.dev.gov.uk
       VIRTUAL_HOST: email-alert-frontend.dev.gov.uk
-      HOST: 0.0.0.0
+      BINDING: 0.0.0.0
     expose:
       - "3000"
     command: bin/rails s --restart
@@ -48,4 +48,4 @@ services:
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
       VIRTUAL_HOST: email-alert-frontend.dev.gov.uk
-      HOST: 0.0.0.0
+      BINDING: 0.0.0.0
