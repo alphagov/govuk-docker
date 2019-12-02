@@ -15,6 +15,7 @@ bucket="govuk-integration-database-backups"
 archive_dir="${replication_dir}/mysql"
 archive_file="${app//-/_}_production.dump.gz"
 archive_path="${archive_dir}/${archive_file}"
+date=$(date '+%Y-%m-%d')
 
 echo "Replicating mysql for $app"
 
@@ -22,7 +23,15 @@ if [[ -e "$archive_path" ]]; then
   echo "Skipping download - remove ${archive_path} to force"
 else
   mkdir -p "$archive_dir"
-  aws s3 cp "s3://${bucket}/mysql/$(date '+%Y-%m-%d')/${archive_file}" "${archive_path}"
+
+  # Get a list of all of the MySQL database dump files, exclude them all,
+  # include only the files that have the date and the app name in it.
+  # https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters
+  aws s3 cp "s3://${bucket}/mysql-backend/" "$archive_dir" --recursive --exclude "*" --include "$date*-${app//-/_}_production.gz"
+
+  # List the archive directory, find a file with the date and the app name in
+  # it, and rename that to a file that doesn't have a timestamp in its name.
+  mv "$(find "$archive_dir" -name "$date*${app//-/_}*.gz")" "$archive_path"
 fi
 
 if [[ -n "${SKIP_IMPORT:-}" ]]; then
