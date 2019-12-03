@@ -37,14 +37,14 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ govuk_publishing_components
    - ✅ govuk-cdn-config
    - ❓ govuk-content-schemas
-      * Service exists in govuk-docker but is untested
+      * Project exists in govuk-docker but is untested
    - ✅ govuk-developer-docs
    - ❌ hmrc-manuals-api
    - ❌ imminence
    - ✅ info-frontend
    - ✅ licence-finder
    - ⚠ link-checker-api
-      * Works in isolation but not in other services' `e2e` stacks, so must be run in a separate process.
+      * Works in isolation but not in other projects' `e2e` stacks, so must be run in a separate process.
         See https://github.com/alphagov/govuk-docker/issues/174 for details.
    - ⚠  local-links-manager
       * Only the `lite` stack is available, since that was all that was required at the point of adding.

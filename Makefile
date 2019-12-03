@@ -3,7 +3,7 @@ GOVUK_DOCKER_DIR ?= $(GOVUK_ROOT_DIR)/govuk-docker
 GOVUK_DOCKER     ?= $(GOVUK_DOCKER_DIR)/exe/govuk-docker
 SHELLCHECK       ?= shellcheck
 
-APPS ?= $(shell ls ${GOVUK_DOCKER_DIR}/services/*/Makefile | xargs -L 1 dirname | xargs -L 1 basename)
+APPS ?= $(shell ls ${GOVUK_DOCKER_DIR}/projects/*/Makefile | xargs -L 1 dirname | xargs -L 1 basename)
 
 # Best practice to ensure these targets always execute, even if a
 # file like 'clone' exists in the current directory.
@@ -46,4 +46,4 @@ clone-%:
 		echo "$*" && git clone "git@github.com:alphagov/$*.git" "${GOVUK_ROOT_DIR}/$*"; \
 	fi
 
-include $(shell ls ${GOVUK_DOCKER_DIR}/services/*/Makefile)
+include $(shell ls ${GOVUK_DOCKER_DIR}/projects/*/Makefile)

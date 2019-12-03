@@ -1,22 +1,22 @@
 require "spec_helper"
 
 RSpec.describe "Make dependencies" do
-  ServicesHelper.names.each do |service_name|
-    it "mirrors docker-compose.yml for #{service_name}" do
-      expect(compose_dependencies(service_name))
-        .to match_array(makefile_dependencies(service_name))
+  ProjectsHelper.all_projects.each do |project_name|
+    it "mirrors docker-compose.yml for #{project_name}" do
+      expect(compose_dependencies(project_name))
+        .to match_array(makefile_dependencies(project_name))
     end
   end
 
-  def compose_dependencies(service_name)
-    service_stacks = ComposeHelper.services(service_name).values
-    dependencies = service_stacks.flat_map { |s| s["depends_on"].to_a }
+  def compose_dependencies(project_name)
+    project_stacks = ComposeHelper.services(project_name).values
+    dependencies = project_stacks.flat_map { |s| s["depends_on"].to_a }
     dependencies = compose_remove_stack_from_service_name(dependencies)
-    (dependencies & ServicesHelper.names) - [service_name]
+    (dependencies & ProjectsHelper.all_projects) - [project_name]
   end
 
-  def makefile_dependencies(service_name)
-    MakefileHelper.dependencies(service_name) &
+  def makefile_dependencies(project_name)
+    MakefileHelper.dependencies(project_name) &
       compose_remove_stack_from_service_name(ComposeHelper.app_services.keys)
   end
 

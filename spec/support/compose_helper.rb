@@ -19,14 +19,14 @@ module ComposeHelper
 
   def self.all_services
     @all_services ||= begin
-                        ServicesHelper.names
-                          .map { |service_name| services(service_name) }
+                        ProjectsHelper.all_projects
+                          .map { |project_name| services(project_name) }
                           .reduce({}) { |memo, config| memo.merge(config) }
                       end
   end
 
   def self.services(name)
-    filename = File.join("services", name, "docker-compose.yml")
+    filename = File.join("projects", name, "docker-compose.yml")
     YAML.load_file(filename)["services"]
   end
 end
