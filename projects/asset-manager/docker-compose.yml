@@ -3,7 +3,7 @@ version: '3.7'
 x-asset-manager: &asset-manager
   build:
     context: .
-    dockerfile: services/asset-manager/Dockerfile
+    dockerfile: projects/asset-manager/Dockerfile
   image: asset-manager
   tty: true
   stdin_open: true

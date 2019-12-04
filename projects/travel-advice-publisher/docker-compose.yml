@@ -3,7 +3,7 @@ version: '3.7'
 x-travel-advice-publisher: &travel-advice-publisher
   build:
     context: .
-    dockerfile: services/travel-advice-publisher/Dockerfile
+    dockerfile: projects/travel-advice-publisher/Dockerfile
   image: travel-advice-publisher
   stdin_open: true
   tty: true
