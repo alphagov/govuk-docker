@@ -1,11 +1,11 @@
 require "spec_helper"
 
-RSpec.describe "Compose service stacks" do
-  ServicesHelper.names.each do |service_name|
-    it "configures #{service_name} with a lite or app stack" do
-      service_stacks = ComposeHelper.services(service_name)
+RSpec.describe "Compose project stacks" do
+  ProjectsHelper.all_projects.each do |project_name|
+    it "configures #{project_name} with a lite or app stack" do
+      project_stacks = ComposeHelper.services(project_name)
 
-      expect(service_stacks.keys).to include(/lite/)
+      expect(project_stacks.keys).to include(/lite/)
         .or include(/app(-\w+)?$/)
     end
   end
