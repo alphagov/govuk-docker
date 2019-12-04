@@ -3,7 +3,7 @@ version: '3.7'
 x-router: &router
   build:
     context: .
-    dockerfile: services/router/Dockerfile
+    dockerfile: projects/router/Dockerfile
   image: router
   volumes:
     - go:/go

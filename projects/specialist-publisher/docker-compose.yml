@@ -3,7 +3,7 @@ version: '3.7'
 x-specialist-publisher: &specialist-publisher
   build:
     context: .
-    dockerfile: services/specialist-publisher/Dockerfile
+    dockerfile: projects/specialist-publisher/Dockerfile
   image: specialist-publisher
   stdin_open: true
   tty: true

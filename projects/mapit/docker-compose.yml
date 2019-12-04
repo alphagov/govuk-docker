@@ -6,7 +6,7 @@ volumes:
 x-mapit: &mapit
   build:
     context: .
-    dockerfile: services/mapit/Dockerfile
+    dockerfile: projects/mapit/Dockerfile
   image: mapit
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
