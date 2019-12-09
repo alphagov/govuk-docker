@@ -1,4 +1,5 @@
 brew "dnsmasq"
+brew "rbenv"
 brew "pv"
 brew "shellcheck"
 
