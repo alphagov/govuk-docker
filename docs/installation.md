@@ -96,6 +96,7 @@ Then install the correct version of Ruby listed in [.ruby-version](https://githu
 
 ```
 cd ~/govuk/govuk-docker
+brew install rbenv
 rbenv install
 gem install bundler
 ```
