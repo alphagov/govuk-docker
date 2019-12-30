@@ -1,0 +1,35 @@
+version: '3.7'
+
+x-release: &release
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: release
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/release
+
+services:
+  release-lite:
+    <<: *release
+    depends_on:
+      - mysql
+    environment:
+      DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
+      DATABASE_URL: "mysql2://root:root@mysql/release_development"
+
+  release-app:
+    <<: *release
+    depends_on:
+      - mysql
+      - nginx-proxy
+    environment:
+      DATABASE_URL: "mysql2://root:root@mysql/release_development"
+      HOST: 0.0.0.0
+      VIRTUAL_HOST: release.dev.gov.uk
+    expose:
+      - 3000
+    command: bin/rails s --restart
