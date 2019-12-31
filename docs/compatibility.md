@@ -56,7 +56,7 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ plek
    - ✅ publisher
    - ✅ publishing-api
-   - ❌ release
+   - ✅ release
    - ✅ router
    - ✅ router-api
    - ✅ search-admin
