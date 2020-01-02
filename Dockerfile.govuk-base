@@ -24,6 +24,10 @@ RUN export VERSION=2.1.1 && \
     cp -v phantomjs-$VERSION-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs && \
     rm -vr phantomjs-$VERSION-linux-x86_64
 
+# Workaround for phantomjs openssl issue
+# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=918727
+ENV OPENSSL_CONF=/dev/null
+
 # Install rbenv to manage ruby versions
 RUN git clone https://github.com/sstephenson/rbenv.git /rbenv
 RUN git clone https://github.com/sstephenson/ruby-build.git /rbenv/plugins/ruby-build
