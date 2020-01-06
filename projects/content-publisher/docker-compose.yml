@@ -29,6 +29,7 @@ services:
     depends_on:
       - postgres
       - redis
+      - content-publisher-worker
       - publishing-api-app
       - asset-manager-app
       - nginx-proxy
