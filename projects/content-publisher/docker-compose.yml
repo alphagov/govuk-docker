@@ -29,6 +29,7 @@ services:
     depends_on:
       - postgres
       - redis
+      - content-publisher-worker
       - publishing-api-app
       - asset-manager-app
       - nginx-proxy
@@ -42,23 +43,13 @@ services:
       - "3000"
     command: bin/rails s --restart
 
-  content-publisher-app-e2e:
-    <<: *content-publisher-app
-    depends_on:
-      - postgres
-      - redis
-      - content-publisher-worker
-      - publishing-api-app-e2e
-      - asset-manager-app-e2e
-      - nginx-proxy
-
   content-publisher-worker:
     <<: *content-publisher
     depends_on:
       - postgres
       - redis
-      - publishing-api-app-e2e
-      - asset-manager-app-e2e
+      - publishing-api-app
+      - asset-manager-app
     environment:
       DATABASE_URL: "postgresql://postgres@postgres/content-publisher"
       REDIS_URL: redis://redis
