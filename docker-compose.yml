@@ -14,6 +14,8 @@ services:
     image: postgres:9.6
     volumes:
       - postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
 
   memcached:
     image: memcached
