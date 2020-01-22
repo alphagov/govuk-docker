@@ -10,4 +10,4 @@
 # on top of docker and docker-compose.
 # **************************************************************
 
-govuk-docker run "$(basename "$(pwd)")-lite" "$@"
+"$(dirname "$0")"/govuk-docker run "$(basename "$(pwd)")-lite" "$@"
