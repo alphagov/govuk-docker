@@ -3,7 +3,7 @@ version: '3.7'
 x-whitehall: &whitehall
   build:
     context: .
-    dockerfile: Dockerfile.govuk-base
+    dockerfile: projects/whitehall/Dockerfile
   image: whitehall
   stdin_open: true
   tty: true
