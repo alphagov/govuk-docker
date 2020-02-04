@@ -17,7 +17,7 @@ for file in $COMPOSE_FILES; do
   COMPOSE_FLAGS+=("-f" "$file")
 done
 
-if ! govuk-docker-version >/dev/null; then
+if ! "$(dirname "$0")"/govuk-docker-version >/dev/null; then
   read -rp "Press enter to continue..."
 fi
 
