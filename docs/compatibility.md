@@ -11,6 +11,7 @@ The following apps are supported by govuk-docker to some extent.
       * Web UI doesn't work without the content item being present in the content-store.
    - ✅ calendars
    - ❌ ckan
+      * Has a [separate](https://github.com/alphagov/docker-ckan) Docker project.
    - ⚠  collections
       * You will need to [populate the Content Store database](#mongodb) or run the live stack in order for it to work locally.
       * To view topic pages locally you still need to use the live stack as they rely on Elasticsearch data which we are yet to be able to import.
@@ -50,7 +51,8 @@ The following apps are supported by govuk-docker to some extent.
       * Only the `lite` stack is available, since that was all that was required at the point of adding.
    - ✅ manuals-frontend
    - ❌ manuals-publisher
-   - ❌ mapit
+   - ✅ mapit
+      * TODO: Data replication.
    - ❌ maslow
    - ✅ miller-columns-element
    - ✅ plek
