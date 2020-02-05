@@ -53,7 +53,7 @@ The following apps are supported by govuk-docker to some extent.
    - ❌ manuals-publisher
    - ✅ mapit
       * TODO: Data replication.
-   - ❌ maslow
+   - ✅ maslow
    - ✅ miller-columns-element
    - ✅ plek
    - ✅ publisher
