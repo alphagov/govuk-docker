@@ -1,0 +1,37 @@
+version: '3.7'
+
+x-maslow: &maslow
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: maslow
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/maslow
+
+services:
+  maslow-lite:
+    <<: *maslow
+    privileged: true
+    depends_on:
+      - mongo
+    environment:
+      MONGODB_URI: "mongodb://mongo/maslow"
+      TEST_MONGODB_URI: "mongodb://mongo/maslow-test"
+
+  maslow-app: &maslow-app
+    <<: *maslow
+    depends_on:
+      - mongo
+      - nginx-proxy
+      - publishing-api-app
+    environment:
+      MONGODB_URI: "mongodb://mongo/maslow"
+      VIRTUAL_HOST: maslow.dev.gov.uk
+      HOST: 0.0.0.0
+    expose:
+      - "3000"
+    command: bin/rails s --restart

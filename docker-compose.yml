@@ -95,6 +95,7 @@ services:
           - link-checker-api.dev.gov.uk
           - manuals-frontend.dev.gov.uk
           - mapit.dev.gov.uk
+          - maslow.dev.gov.uk
           - publisher.dev.gov.uk
           - publishing-api.dev.gov.uk
           - release.dev.gov.uk
