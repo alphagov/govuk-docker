@@ -31,7 +31,7 @@ RUN /rbenv/plugins/ruby-build/install.sh
 ENV PATH /rbenv/bin:$PATH
 
 # Install Whitehall specific dependencies
-RUN apt-get update -qq && apt-get install -y mysql-client ghostscript
+RUN apt-get update -qq && apt-get install -y default-mysql-client ghostscript
 
 RUN useradd -m build
 ENV PATH /home/build/.rbenv/shims:${PATH}
