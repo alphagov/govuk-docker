@@ -12,6 +12,8 @@ volumes:
 services:
   postgres:
     image: postgres:9.6
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
       - postgres:/var/lib/postgresql/data
 
