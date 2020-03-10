@@ -27,7 +27,7 @@ services:
     environment:
       GOVUK_ASSET_ROOT: frontend.dev.gov.uk
       VIRTUAL_HOST: frontend.dev.gov.uk
-      HOST: 0.0.0.0
+      BINDING: 0.0.0.0
     expose:
       - "3000"
     command: bin/rails s --restart
@@ -48,7 +48,7 @@ services:
       GOVUK_ASSET_ROOT: draft-frontend.dev.gov.uk
       VIRTUAL_HOST: draft-frontend.dev.gov.uk
       PLEK_HOSTNAME_PREFIX: "draft-"
-      HOST: 0.0.0.0
+      BINDING: 0.0.0.0
 
   frontend-app-live:
     <<: *frontend-app
