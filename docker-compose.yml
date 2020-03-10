@@ -27,6 +27,7 @@ services:
     ports:
       - "27017:27017"
       - "28017:28017"
+    command: --smallfiles
 
   mysql:
     image: mysql:5.5.58
