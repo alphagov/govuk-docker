@@ -21,5 +21,5 @@ if ! "$(dirname "$0")"/govuk-docker-version >/dev/null; then
   read -rp "Press enter to continue..."
 fi
 
-echo "docker-compose -f [...] $*"
+>&2 echo "docker-compose -f [...] $*"
 docker-compose "${COMPOSE_FLAGS[@]}" "$@"
