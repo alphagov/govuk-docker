@@ -8,9 +8,7 @@ node {
     rubyLintDiff: false,
     overrideTestTask: {
       stage("Run tests") {
-        govuk.withStatsdTiming("test_task") {
-          sh "GOVUK_DOCKER_DIR=. make test"
-        }
+        sh "GOVUK_DOCKER_DIR=. make test"
       }
     }
   )
