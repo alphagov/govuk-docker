@@ -70,6 +70,7 @@ services:
           - calendars.dev.gov.uk
           - collections-publisher.dev.gov.uk
           - collections.dev.gov.uk
+          - contacts-admin.dev.gov.uk
           - content-publisher.dev.gov.uk
           - content-store.dev.gov.uk
           - content-tagger.dev.gov.uk
