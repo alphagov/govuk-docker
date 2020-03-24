@@ -107,7 +107,7 @@ You should then be able to `make` your project and have confidence you're not su
 Provide a local gem path relative to the location of the Gemfile you're editing:
 
 ```ruby
-gem 'govuk_publishing_components', path: '../govuk_publishing_components'
+gem "govuk_publishing_components", path: "../govuk_publishing_components"
 ```
 
 ### How to: replicate data locally
