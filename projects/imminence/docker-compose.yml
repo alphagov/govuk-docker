@@ -1,0 +1,22 @@
+version: '3.7'
+
+x-imminence: &imminence
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: imminence
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/imminence
+
+services:
+  imminence-lite:
+    <<: *imminence
+    depends_on:
+      - mongo
+    environment:
+      MONGODB_URI: "mongodb://mongo/imminence"
+      TEST_MONGODB_URI: "mongodb://mongo/imminence-test"

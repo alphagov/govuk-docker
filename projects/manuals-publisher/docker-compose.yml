@@ -1,0 +1,24 @@
+version: '3.7'
+
+x-manuals-publisher: &manuals-publisher
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: manuals-publisher
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/manuals-publisher
+
+services:
+  manuals-publisher-lite:
+    <<: *manuals-publisher
+    privileged: true
+    depends_on:
+      - mongo
+    environment:
+      MONGODB_URI: "mongodb://mongo/manuals-publisher"
+      TEST_MONGODB_URI: "mongodb://mongo/manuals-publisher-test"
+
