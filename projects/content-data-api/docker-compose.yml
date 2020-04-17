@@ -1,0 +1,24 @@
+version: '3.7'
+
+x-content-data-api: &content-data-api
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: content-data-api
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/content-data-api
+
+services:
+  content-data-api-lite:
+    <<: *content-data-api
+    privileged: true
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres/content-data-api"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres/content-data-api-test"
+      DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"

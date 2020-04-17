@@ -1,0 +1,26 @@
+version: '3.7'
+
+x-contacts-admin: &contacts-admin
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: contacts-admin
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/contacts-admin
+
+services:
+  contacts-admin-lite:
+    <<: *contacts-admin
+    privileged: true
+    depends_on:
+      - mysql
+      - redis
+    environment:
+      DATABASE_URL: "mysql2://root:root@mysql/contacts_development"
+      TEST_DATABASE_URL: "mysql2://root:root@mysql/contacts_test"
+      REDIS_HOST: redis
+
