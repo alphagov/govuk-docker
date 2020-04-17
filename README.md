@@ -77,11 +77,14 @@ git pull
 # make sure the project is built OK
 make <project>
 
-# tail logs for running services
-govuk-docker logs -f
-
-# get all the running containers
+# check if any dependencies have exited
 docker ps -a
+
+# tail logs for running services/dependencies
+govuk-docker logs -f publishing-api-app
+
+# try clearing all containers / volumes
+govuk-docker rm -sv
 ```
 
 ### How to: update everything!
@@ -91,16 +94,6 @@ Sometimes it's useful to get all changes for all repos e.g. to support finding t
 ```
 make pull
 ```
-
-### How to: clear your Docker containers
-
-Sometimes things don't work as expected, and the easiest thing to do is to start over and stop/remove all GOV.UK Docker containers.
-
-```
-govuk-docker rm -sv
-```
-
-You should then be able to `make` your project and have confidence you're not suffering from configuration drift.
 
 ### How to: work with local gems
 
@@ -159,22 +152,6 @@ docker attach govuk-docker_content-publisher-app_1
 
 # detach from the container
 CTRL-P CTRL-Q
-```
-
-### How to: install a new release of Ruby
-
-Many of our projects use a `.ruby-version` file in conjunction with `rbenv`. When a new version of Ruby is released and we start upgrading our projects, you may start seeing the following error when you run commands.
-
-```
-ruby-build: definition not found: x.y.z
-```
-
-Most of our projects share a common Docker image, which needs rebuilding to be aware of the new Ruby version. To fix the error, run the following commands, replacing '<project>' with the name of the project, e.g. 'collections-publisher'.
-```
-govuk-docker build --no-cache <project>-lite
-
-# in the govuk-docker directory
-make <project>
 ```
 
 ## Licence
