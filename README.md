@@ -77,11 +77,14 @@ git pull
 # make sure the project is built OK
 make <project>
 
-# tail logs for running services
-govuk-docker logs -f
-
-# get all the running containers
+# check if any dependencies have exited
 docker ps -a
+
+# tail logs for running services/dependencies
+govuk-docker logs -f publishing-api-app
+
+# try clearing all containers / volumes
+govuk-docker rm -sv
 ```
 
 ### How to: update everything!
@@ -91,16 +94,6 @@ Sometimes it's useful to get all changes for all repos e.g. to support finding t
 ```
 make pull
 ```
-
-### How to: clear your Docker containers
-
-Sometimes things don't work as expected, and the easiest thing to do is to start over and stop/remove all GOV.UK Docker containers.
-
-```
-govuk-docker rm -sv
-```
-
-You should then be able to `make` your project and have confidence you're not suffering from configuration drift.
 
 ### How to: work with local gems
 
