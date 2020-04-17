@@ -161,22 +161,6 @@ docker attach govuk-docker_content-publisher-app_1
 CTRL-P CTRL-Q
 ```
 
-### How to: install a new release of Ruby
-
-Many of our projects use a `.ruby-version` file in conjunction with `rbenv`. When a new version of Ruby is released and we start upgrading our projects, you may start seeing the following error when you run commands.
-
-```
-ruby-build: definition not found: x.y.z
-```
-
-Most of our projects share a common Docker image, which needs rebuilding to be aware of the new Ruby version. To fix the error, run the following commands, replacing '<project>' with the name of the project, e.g. 'collections-publisher'.
-```
-govuk-docker build --no-cache <project>-lite
-
-# in the govuk-docker directory
-make <project>
-```
-
 ## Licence
 
 [MIT License](LICENCE)
