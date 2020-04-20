@@ -30,7 +30,7 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ email-alert-api
    - ✅ email-alert-frontend
    - ❌ email-alert-service
-   - ❌ feedback
+   - ✅ feedback
    - ✅ finder-frontend
    - ❓ frontend
    - ✅ gds-api-adapters
