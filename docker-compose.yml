@@ -87,6 +87,7 @@ services:
           - draft-static.dev.gov.uk
           - email-alert-api.dev.gov.uk
           - email-alert-frontend.dev.gov.uk
+          - feedback.dev.gov.uk
           - frontend.dev.gov.uk
           - finder-frontend.dev.gov.uk
           - government-frontend.dev.gov.uk

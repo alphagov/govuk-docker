@@ -1,0 +1,45 @@
+version: '3.7'
+
+x-feedback: &feedback
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: feedback
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/feedback
+
+services:
+  feedback-lite:
+    <<: *feedback
+    privileged: true
+
+  feedback-app: &feedback-app
+    <<: *feedback
+    depends_on:
+      - router-app
+      - static-app
+      - nginx-proxy
+      - support-api-app
+      - support-app
+    environment:
+      GOVUK_ASSET_ROOT: feedback.dev.gov.uk
+      VIRTUAL_HOST: feedback.dev.gov.uk
+      HOST: 0.0.0.0
+    expose:
+      - "3000"
+    command: bin/rails s --restart
+
+  feedback-app-live:
+    <<: *feedback-app
+    depends_on:
+      - nginx-proxy
+    environment:
+      GOVUK_WEBSITE_ROOT: https://www.gov.uk
+      PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
+      PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
+      VIRTUAL_HOST: feedback.dev.gov.uk
+      HOST: 0.0.0.0
