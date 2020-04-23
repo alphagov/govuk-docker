@@ -68,7 +68,8 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ search-admin
    - ✅ search-api
    - ✅ service-manual-frontend
-   - ❌ service-manual-publisher
+   - ⚠ service-manual-publisher
+      * **TODO: Missing support for a webserver stack**
    - ✅ short-url-manager
    - ✅ signon
    - ✅ smart-answers
