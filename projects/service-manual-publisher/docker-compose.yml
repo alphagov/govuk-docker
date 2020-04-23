@@ -1,0 +1,24 @@
+version: '3.7'
+
+x-service-manual-publisher: &service-manual-publisher
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: service-manual-publisher
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/service-manual-publisher
+
+services:
+  service-manual-publisher-lite:
+    <<: *service-manual-publisher
+    privileged: true
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres/service-manual-publisher"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres/service-manual-publisher-test"
+      DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
