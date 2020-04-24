@@ -26,7 +26,8 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ content-store
    - ✅ content-tagger
    - ❌ datagovuk_find
-   - ❌ datagovuk_publish
+   - ⚠ datagovuk_publish
+      * **TODO: Missing support for a webserver stack**
    - ✅ email-alert-api
    - ✅ email-alert-frontend
    - ❌ email-alert-service
