@@ -1,4 +1,4 @@
-# GOV.UK Docker
+# GOV.UK Docker is a thing
 
 GOV.UK development environment using Docker.
 
