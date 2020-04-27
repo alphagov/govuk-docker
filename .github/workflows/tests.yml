@@ -1,0 +1,13 @@
+name: govuk-docker
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+
+    - run: bundle install --jobs 4 --retry 3
+    - run: GOVUK_DOCKER_DIR=. make test
