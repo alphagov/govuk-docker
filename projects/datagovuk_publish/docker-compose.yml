@@ -1,0 +1,25 @@
+version: '3.7'
+
+x-datagovuk_publish: &datagovuk_publish
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: datagovuk_publish
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/datagovuk_publish
+
+services:
+  datagovuk_publish-lite:
+    <<: *datagovuk_publish
+    depends_on:
+      - postgres
+      - elasticsearch6
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres/datagovuk_publish"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres/datagovuk_publish-test"
+      ES_HOST: "http://elasticsearch6:9200"
+      DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
