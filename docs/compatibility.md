@@ -30,7 +30,8 @@ The following apps are supported by govuk-docker to some extent.
       * **TODO: Missing support for a webserver stack**
    - ✅ email-alert-api
    - ✅ email-alert-frontend
-   - ❌ email-alert-service
+   - ⚠ email-alert-service
+      * **TODO: Missing support for message queues**
    - ✅ feedback
    - ✅ finder-frontend
    - ❓ frontend

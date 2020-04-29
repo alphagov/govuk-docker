@@ -1,0 +1,21 @@
+version: '3.7'
+
+x-email-alert-service: &email-alert-service
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: email-alert-service
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/email-alert-service
+
+services:
+  email-alert-service-lite:
+    <<: *email-alert-service
+    depends_on:
+      - redis
+    environment:
+      REDIS_HOST: redis
