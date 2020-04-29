@@ -29,7 +29,8 @@ The following apps are supported by govuk-docker to some extent.
    - ❌ datagovuk_publish
    - ✅ email-alert-api
    - ✅ email-alert-frontend
-   - ❌ email-alert-service
+   - ⚠ email-alert-service
+      * **TODO: Missing support for message queues**
    - ✅ feedback
    - ✅ finder-frontend
    - ❓ frontend
