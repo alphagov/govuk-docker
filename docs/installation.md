@@ -28,7 +28,7 @@ bundle install
 bin/setup
 ```
 
-You can now [clone and setup the apps you need](../README.md#Usage), after which you can do things like run tests and startup the app in your browser. If this doesn't work for whatever reason, follow the [instructions on how to resolve setup issues](#how-tos).
+You can now [setup and run the apps you need](../README.md#Usage), after which you can do things like run tests and startup the app in your browser. If this doesn't work for whatever reason, follow the [instructions on how to resolve setup issues](#how-tos).
 
 ### Docker settings
 
