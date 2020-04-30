@@ -12,7 +12,11 @@ The aim of govuk-docker is to make it easy to develop any GOV.UK app. It achieve
 
 ## Installation
 
+👇👇👇👇👇👇👇👇👇👇👇
+
 [Instructions for how to install and setup govuk-docker are here.](docs/installation.md)
+
+☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️ ☝️
 
 ## Usage
 
