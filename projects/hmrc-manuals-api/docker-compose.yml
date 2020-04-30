@@ -1,0 +1,17 @@
+version: '3.7'
+
+x-hmrc-manuals-api: &hmrc-manuals-api
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: hmrc-manuals-api
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/hmrc-manuals-api
+
+services:
+  hmrc-manuals-api-lite:
+    <<: *hmrc-manuals-api

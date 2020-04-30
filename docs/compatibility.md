@@ -43,7 +43,8 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ govuk-cdn-config
    - ✅ govuk-content-schemas
    - ✅ govuk-developer-docs
-   - ❌ hmrc-manuals-api
+   - ⚠ hmrc-manuals-api
+      * **TODO: Missing support for a webserver stack**
    - ⚠ imminence
       * **TODO: Missing support for a webserver stack**
    - ✅ info-frontend
@@ -74,6 +75,7 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ short-url-manager
    - ✅ signon
    - ✅ smart-answers
+   - ✅ special-route-publisher
    - ✅ specialist-publisher
    - ⚠ static
       * JavaScript 404 errors when previewing pages, possibly [related to analytics](https://github.com/alphagov/static/blob/master/app/assets/javascripts/analytics/init.js.erb#L28)

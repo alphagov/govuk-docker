@@ -1,0 +1,17 @@
+version: '3.7'
+
+x-special-route-publisher: &special-route-publisher
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: special-route-publisher
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/special-route-publisher
+
+services:
+  special-route-publisher-lite:
+    <<: *special-route-publisher
