@@ -9,7 +9,6 @@ The following apps are supported by govuk-docker to some extent.
       * Queues are not set-up, so cache-clearing-service can't be run locally
    - ⚠ calculators
       * Web UI doesn't work without the content item being present in the content-store.
-   - ✅ calendars
    - ❌ ckan
       * Has a [separate](https://github.com/alphagov/docker-ckan) Docker project.
    - ⚠  collections

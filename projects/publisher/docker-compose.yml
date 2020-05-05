@@ -31,7 +31,7 @@ services:
       - mongo
       - nginx-proxy
       - publishing-api-app
-      - calendars-app
+      - frontend-app
       - link-checker-api-app
     environment:
       MONGODB_URI: "mongodb://mongo/publisher"
@@ -50,7 +50,7 @@ services:
       - publisher-worker
       - nginx-proxy
       - publishing-api-app-e2e
-      - calendars-app
+      - frontend-app
       - link-checker-api-app
 
   publisher-worker:
