@@ -12,3 +12,6 @@ jobs:
         restore-keys: bundle
     - run: bundle install --jobs 4 --retry 3 --deployment
     - run: GOVUK_DOCKER_DIR=. make test
+    - run: |
+        brew install hadolint
+        hadolint Dockerfile.govuk-base
