@@ -12,6 +12,7 @@ RUN curl -O https://dl.google.com/linux/direct/google-chrome-stable_current_amd6
    apt-get install -y ./google-chrome*.deb --no-install-recommends && rm ./google-chrome*.deb
 
 # Install node / yarn
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
