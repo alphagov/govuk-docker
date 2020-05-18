@@ -26,6 +26,7 @@ services:
       - static-app
       - nginx-proxy
     environment:
+      ASSET_HOST: collections.dev.gov.uk
       GOVUK_ASSET_ROOT: collections.dev.gov.uk
       VIRTUAL_HOST: collections.dev.gov.uk
       HOST: 0.0.0.0
@@ -42,6 +43,7 @@ services:
       - static-app-draft
       - nginx-proxy
     environment:
+      ASSET_HOST: draft-collections.dev.gov.uk
       GOVUK_ASSET_ROOT: draft-collections.dev.gov.uk
       VIRTUAL_HOST: draft-collections.dev.gov.uk
       PLEK_HOSTNAME_PREFIX: "draft-"
