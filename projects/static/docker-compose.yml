@@ -22,6 +22,7 @@ services:
       - redis
       - nginx-proxy
     environment:
+      ASSET_HOST: static.dev.gov.uk
       REDIS_URL: redis://redis
       GOVUK_ASSET_ROOT: static.dev.gov.uk
       VIRTUAL_HOST: static.dev.gov.uk
@@ -36,6 +37,7 @@ services:
       - redis
       - nginx-proxy
     environment:
+      ASSET_HOST: draft-static.dev.gov.uk
       REDIS_URL: redis://redis
       GOVUK_ASSET_ROOT: draft-static.dev.gov.uk
       VIRTUAL_HOST: draft-static.dev.gov.uk

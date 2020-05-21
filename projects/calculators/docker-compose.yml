@@ -26,6 +26,7 @@ services:
       - static-app
       - nginx-proxy
     environment:
+      ASSET_HOST: calculators.dev.gov.uk
       GOVUK_ASSET_ROOT: calculators.dev.gov.uk
       VIRTUAL_HOST: calculators.dev.gov.uk
       HOST: 0.0.0.0
@@ -41,6 +42,7 @@ services:
       - static-app-draft
       - nginx-proxy
     environment:
+      ASSET_HOST: draft-calculators.dev.gov.uk
       GOVUK_ASSET_ROOT: draft-calculators.dev.gov.uk
       VIRTUAL_HOST: draft-calculators.dev.gov.uk
       PLEK_HOSTNAME_PREFIX: "draft-"
