@@ -21,7 +21,7 @@ services:
     image: memcached
 
   mongo:
-    image: mongo:2.4
+    image: mongo:3.6
     volumes:
       - mongo:/data/db
     ports:
