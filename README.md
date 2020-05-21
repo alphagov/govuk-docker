@@ -54,7 +54,7 @@ To provide consistency we have a convention for these names:
   - **app-draft**: if the application uses the content-store, this stack will
     point to the [draft content-store](https://docs.publishing.service.gov.uk/manual/content-preview.html).
   - **app-live**: if the app is a read-only frontend app, the live stack will
-    point the production versions of content-store and search-api.
+    point the production versions of content-store, search-api and static.
   - **app-e2e**: to run the app with all the other apps necessary to provide
     full end to end user journeys.
 
