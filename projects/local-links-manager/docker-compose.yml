@@ -5,6 +5,8 @@ x-local-links-manager: &local-links-manager
     context: .
     dockerfile: Dockerfile.govuk-base
   image: local-links-manager
+  stdin_open: true
+  tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - home:/home/build
