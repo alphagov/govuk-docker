@@ -94,6 +94,7 @@ services:
           - info-frontend.dev.gov.uk
           - licence-finder.dev.gov.uk
           - link-checker-api.dev.gov.uk
+          - local-links-manager.dev.gov.uk
           - manuals-frontend.dev.gov.uk
           - mapit.dev.gov.uk
           - maslow.dev.gov.uk
