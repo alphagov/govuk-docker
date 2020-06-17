@@ -27,7 +27,6 @@ services:
       - support-app
     environment:
       ASSET_HOST: feedback.dev.gov.uk
-      GOVUK_ASSET_ROOT: feedback.dev.gov.uk
       VIRTUAL_HOST: feedback.dev.gov.uk
       HOST: 0.0.0.0
     expose:

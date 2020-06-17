@@ -32,7 +32,6 @@ services:
       - nginx-proxy
     environment:
       ASSET_HOST: finder-frontend.dev.gov.uk
-      GOVUK_ASSET_ROOT: finder-frontend.dev.gov.uk
       VIRTUAL_HOST: finder-frontend.dev.gov.uk
       BINDING: 0.0.0.0
       MEMCACHE_SERVERS: memcached

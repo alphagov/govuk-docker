@@ -26,7 +26,6 @@ services:
       - nginx-proxy
     environment:
       ASSET_HOST: frontend.dev.gov.uk
-      GOVUK_ASSET_ROOT: frontend.dev.gov.uk
       VIRTUAL_HOST: frontend.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
@@ -47,7 +46,6 @@ services:
       - nginx-proxy
     environment:
       ASSET_HOST: draft-frontend.dev.gov.uk
-      GOVUK_ASSET_ROOT: draft-frontend.dev.gov.uk
       VIRTUAL_HOST: draft-frontend.dev.gov.uk
       PLEK_HOSTNAME_PREFIX: "draft-"
       BINDING: 0.0.0.0
