@@ -32,7 +32,6 @@ services:
       - nginx-proxy
     environment:
       ASSET_HOST: email-alert-frontend.dev.gov.uk
-      GOVUK_ASSET_ROOT: email-alert-frontend.dev.gov.uk
       VIRTUAL_HOST: email-alert-frontend.dev.gov.uk
       BINDING: 0.0.0.0
     expose:

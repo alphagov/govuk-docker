@@ -25,7 +25,6 @@ services:
       - nginx-proxy
     environment:
       ASSET_HOST: info-frontend.dev.gov.uk
-      GOVUK_ASSET_ROOT: info-frontend.dev.gov.uk
       VIRTUAL_HOST: info-frontend.dev.gov.uk
       HOST: 0.0.0.0
     expose:

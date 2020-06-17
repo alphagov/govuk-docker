@@ -26,7 +26,6 @@ services:
       - nginx-proxy
     environment:
       ASSET_HOST: manuals-frontend.dev.gov.uk
-      GOVUK_ASSET_ROOT: manuals-frontend.dev.gov.uk
       VIRTUAL_HOST: manuals-frontend.dev.gov.uk
       HOST: 0.0.0.0
     expose:
@@ -42,7 +41,6 @@ services:
       - nginx-proxy
     environment:
       ASSET_HOST: draft-manuals-frontend.dev.gov.uk
-      GOVUK_ASSET_ROOT: draft-manuals-frontend.dev.gov.uk
       VIRTUAL_HOST: draft-manuals-frontend.dev.gov.uk
       PLEK_HOSTNAME_PREFIX: "draft-"
       HOST: 0.0.0.0
