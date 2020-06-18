@@ -82,6 +82,6 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ transition
    - ✅ travel-advice-publisher
    - ⚠ whitehall
-      * Who knows, really - several tests are failing, lots pass ;-)
+      * Most tests pass, but several tests fail consistently due to issues with govuk-docker
       * Rake task to [create a test taxon](https://github.com/alphagov/whitehall/blob/master/lib/tasks/taxonomy.rake#L11) for publishing is not idempotent
       * Placeholder images don't work as missing proxy for [/government/assets](https://github.com/alphagov/whitehall/blob/master/app/presenters/publishing_api/news_article_presenter.rb#L133)
