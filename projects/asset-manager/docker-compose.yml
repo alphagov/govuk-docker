@@ -29,6 +29,7 @@ services:
       - mongo
       - redis
       - nginx-proxy
+      - asset-manager-worker
     environment:
       MONGODB_URI: "mongodb://mongo/asset-manager"
       REDIS_URL: redis://redis
@@ -37,14 +38,6 @@ services:
     expose:
       - "3000"
     command: bin/rails s --restart
-
-  asset-manager-app-e2e:
-    <<: *asset-manager-app
-    depends_on:
-      - mongo
-      - redis
-      - nginx-proxy
-      - asset-manager-worker
 
   asset-manager-worker:
     <<: *asset-manager

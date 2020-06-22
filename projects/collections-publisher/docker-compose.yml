@@ -34,6 +34,7 @@ services:
       - link-checker-api-app
       - nginx-proxy
       - publishing-api-app
+      - collections-publisher-worker
     environment:
       DATABASE_URL: "mysql2://root:root@mysql/collections_publisher_development"
       REDIS_URL: redis://redis
@@ -48,18 +49,8 @@ services:
     depends_on:
       - redis
       - mysql
-      - publishing-api-app-e2e
+      - publishing-api-app
     environment:
       DATABASE_URL: "mysql2://root:root@mysql/collections_publisher_development"
       REDIS_URL: redis://redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
-
-  collections-publisher-app-e2e:
-    <<: *collections-publisher-app
-    depends_on:
-      - redis
-      - mysql
-      - content-store-app
-      - link-checker-api-app
-      - nginx-proxy
-      - collections-publisher-worker

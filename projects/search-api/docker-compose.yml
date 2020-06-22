@@ -45,7 +45,7 @@ services:
   search-api-setup:
     <<: *search-api
     depends_on:
-      - publishing-api-app-e2e
+      - publishing-api-app
 
   search-api-worker:
     <<: *search-api
