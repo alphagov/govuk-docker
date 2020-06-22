@@ -31,7 +31,6 @@ services:
       - mongo
       - nginx-proxy
       - publishing-api-app
-      - frontend-app
       - link-checker-api-app
       - publisher-worker
     environment:
