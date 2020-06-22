@@ -31,8 +31,8 @@ services:
       - mongo
       - nginx-proxy
       - publishing-api-app
-      - frontend-app
       - link-checker-api-app
+      - publisher-worker
     environment:
       MONGODB_URI: "mongodb://mongo/publisher"
       REDIS_URL: redis://redis
@@ -42,24 +42,13 @@ services:
       - "3000"
     command: bin/rails s --restart
 
-  publisher-app-e2e:
-    <<: *publisher-app
-    depends_on:
-      - redis
-      - mongo
-      - publisher-worker
-      - nginx-proxy
-      - publishing-api-app-e2e
-      - frontend-app
-      - link-checker-api-app
-
   publisher-worker:
     <<: *publisher
     depends_on:
       - redis
       - mongo
       - nginx-proxy
-      - publishing-api-app-e2e
+      - publishing-api-app
     environment:
       MONGODB_URI: "mongodb://mongo/publisher"
       REDIS_URL: redis://redis

@@ -16,12 +16,6 @@ services:
   email-alert-frontend-lite:
     <<: *email-alert-frontend
 
-  email-alert-frontend-setup:
-    <<: *email-alert-frontend
-    depends_on:
-      - publishing-api-app-e2e
-      - nginx-proxy
-
   email-alert-frontend-app: &email-alert-frontend-app
     <<: *email-alert-frontend
     depends_on:

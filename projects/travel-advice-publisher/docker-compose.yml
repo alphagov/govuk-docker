@@ -47,8 +47,8 @@ services:
     depends_on:
       - mongo
       - redis
-      - publishing-api-app-e2e
-      - asset-manager-app-e2e
+      - publishing-api-app
+      - asset-manager-app
     environment:
       DATABASE_URL: "postgresql://postgres@postgres/travel-advice-publisher"
       REDIS_URL: redis://redis

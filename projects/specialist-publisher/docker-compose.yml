@@ -33,6 +33,7 @@ services:
       - publishing-api-app
       - asset-manager-app
       - email-alert-api-app
+      - specialist-publisher-worker
     environment:
       MONGODB_URI: "mongodb://mongo/specialist-publisher"
       REDIS_URL: redis://redis
@@ -42,24 +43,13 @@ services:
       - "3000"
     command: bin/rails s --restart
 
-  specialist-publisher-app-e2e:
-    <<: *specialist-publisher-app
-    depends_on:
-      - mongo
-      - redis
-      - specialist-publisher-worker
-      - publishing-api-app-e2e
-      - asset-manager-app-e2e
-      - email-alert-api-app
-      - nginx-proxy
-
   specialist-publisher-worker:
     <<: *specialist-publisher
     depends_on:
       - mongo
       - redis
-      - publishing-api-app-e2e
-      - asset-manager-app-e2e
+      - publishing-api-app
+      - asset-manager-app
     environment:
       MONGODB_URI: "mongodb://mongo/specialist-publisher"
       REDIS_URL: redis://redis
