@@ -32,11 +32,6 @@ services:
       - "3000"
     command: bin/rails s --restart
 
-  frontend-setup:
-    <<: *frontend
-    depends_on:
-      - publishing-api-app-e2e
-
   frontend-app-draft:
     <<: *frontend-app
     depends_on:
