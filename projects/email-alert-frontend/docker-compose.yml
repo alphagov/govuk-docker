@@ -15,16 +15,22 @@ x-email-alert-frontend: &email-alert-frontend
 services:
   email-alert-frontend-lite:
     <<: *email-alert-frontend
+    depends_on:
+      - redis
+    environment:
+      REDIS_URL: redis://redis
 
   email-alert-frontend-app: &email-alert-frontend-app
     <<: *email-alert-frontend
     depends_on:
+      - redis
       - router-app
       - content-store-app
       - static-app
       - email-alert-api-app
       - nginx-proxy
     environment:
+      REDIS_URL: redis://redis
       ASSET_HOST: email-alert-frontend.dev.gov.uk
       VIRTUAL_HOST: email-alert-frontend.dev.gov.uk
       BINDING: 0.0.0.0
@@ -35,9 +41,11 @@ services:
   email-alert-frontend-app-live:
     <<: *email-alert-frontend-app
     depends_on:
+      - redis
       - email-alert-api-app
       - nginx-proxy
     environment:
+      REDIS_URL: redis://redis
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
