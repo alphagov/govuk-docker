@@ -23,6 +23,8 @@ services:
       DATABASE_URL: "postgresql://postgres@postgres/content-publisher"
       TEST_DATABASE_URL: "postgresql://postgres@postgres/content-publisher-test"
       REDIS_URL: redis://redis
+      SPRING_SOCKET: tmp/spring.sock
+    command: sleep 600
 
   content-publisher-app: &content-publisher-app
     <<: *content-publisher
