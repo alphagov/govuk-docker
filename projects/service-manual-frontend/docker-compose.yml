@@ -15,6 +15,7 @@ x-service-manual-frontend: &service-manual-frontend
 services:
   service-manual-frontend-lite:
     <<: *service-manual-frontend
+    privileged: true
 
   service-manual-frontend-app: &service-manual-frontend-app
     <<: *service-manual-frontend
@@ -26,7 +27,7 @@ services:
     environment:
       ASSET_HOST: service-manual-frontend.dev.gov.uk
       VIRTUAL_HOST: service-manual-frontend.dev.gov.uk
-      HOST: 0.0.0.0
+      BINDING: 0.0.0.0
     expose:
       - "3000"
     command: bin/rails s --restart
@@ -42,7 +43,7 @@ services:
       ASSET_HOST: draft-service-manual-frontend.dev.gov.uk
       VIRTUAL_HOST: draft-service-manual-frontend.dev.gov.uk
       PLEK_HOSTNAME_PREFIX: "draft-"
-      HOST: 0.0.0.0
+      BINDING: 0.0.0.0
 
   service-manual-frontend-app-live:
     <<: *service-manual-frontend-app
@@ -53,4 +54,4 @@ services:
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
       VIRTUAL_HOST: service-manual-frontend.dev.gov.uk
-      HOST: 0.0.0.0
+      BINDING: 0.0.0.0
