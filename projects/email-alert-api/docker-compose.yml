@@ -13,15 +13,22 @@ x-email-alert-api: &email-alert-api
   working_dir: /govuk/email-alert-api
 
 services:
-  email-alert-api-lite:
+  email-alert-api-lite: &email-alert-api-lite
     <<: *email-alert-api
     depends_on:
       - postgres
       - redis
+      - email-alert-api-spring
     environment:
       DATABASE_URL: "postgresql://postgres@postgres/email-alert-api"
       TEST_DATABASE_URL: "postgresql://postgres@postgres/email-alert-api-test"
       REDIS_URL: redis://redis
+      SPRING_SOCKET: tmp/spring.socket
+
+  email-alert-api-spring:
+    <<: *email-alert-api-lite
+    depends_on: []
+    command: spring server
 
   email-alert-api-app: &email-alert-api-app
     <<: *email-alert-api
