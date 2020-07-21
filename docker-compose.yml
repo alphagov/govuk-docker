@@ -8,6 +8,7 @@ volumes:
   mongo-3.6:
   go:
   elasticsearch-6:
+  elasticsearch-7:
 
 services:
   postgres-9.6:
@@ -53,6 +54,16 @@ services:
       - ES_JAVA_OPTS=-Xms1g -Xmx1g
     volumes:
       - elasticsearch-6:/usr/share/elasticsearch/data
+
+  elasticsearch-7:
+    image: elasticsearch:7.9.3
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=127.0.0.1
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+    volumes:
+      - elasticsearch-7:/usr/share/elasticsearch/data
 
   nginx-proxy:
     image: jwilder/nginx-proxy:latest

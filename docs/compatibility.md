@@ -33,7 +33,8 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ content-publisher
    - ✅ content-store
    - ✅ content-tagger
-   - ❌ datagovuk_find
+   - ⚠ datagovuk_find
+      * **TODO: Missing support for a webserver stack**
    - ⚠ datagovuk_publish
       * **TODO: Missing support for a webserver stack**
    - ✅ email-alert-api
