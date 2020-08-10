@@ -7,6 +7,9 @@ RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
    apt install -y ./google-chrome*.deb && \
     rm ./google-chrome*.deb
 
+# Enable no-sandbox for chrome so that it can run as a root user
+ENV GOVUK_TEST_CHROME_NO_SANDBOX 1
+
 # Install node / yarn
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
@@ -24,11 +27,7 @@ RUN export VERSION=2.1.1 && \
 RUN git clone https://github.com/sstephenson/rbenv.git /rbenv
 RUN git clone https://github.com/sstephenson/ruby-build.git /rbenv/plugins/ruby-build
 RUN /rbenv/plugins/ruby-build/install.sh
-ENV PATH /rbenv/bin:$PATH
+ENV PATH /root/.rbenv/shims:/rbenv/bin:$PATH
+ENV BUNDLE_SILENCE_ROOT_WARNING 1
 
-# Dependencies required for Capybara Webkit
 RUN apt-get update -qq && apt-get install -y qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
-
-RUN useradd -m build
-ENV PATH /home/build/.rbenv/shims:${PATH}
-USER build

@@ -9,13 +9,12 @@ x-publisher: &publisher
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/publisher
 
 services:
   publisher-lite:
     <<: *publisher
-    privileged: true
     depends_on:
       - redis
       - mongo

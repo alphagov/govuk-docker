@@ -7,13 +7,12 @@ x-govuk_publishing_components: &govuk_publishing_components
   image: govuk_publishing_components
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/govuk_publishing_components
 
 services:
   govuk_publishing_components-lite:
     <<: *govuk_publishing_components
-    privileged: true
 
   govuk_publishing_components-app:
     <<: *govuk_publishing_components

@@ -9,13 +9,12 @@ x-travel-advice-publisher: &travel-advice-publisher
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/travel-advice-publisher
 
 services:
   travel-advice-publisher-lite:
     <<: *travel-advice-publisher
-    privileged: true
     depends_on:
       - mongo
       - redis

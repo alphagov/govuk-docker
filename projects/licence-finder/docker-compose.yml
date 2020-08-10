@@ -9,13 +9,12 @@ x-licence-finder: &licence-finder
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/licence-finder
 
 services:
   licence-finder-lite: &licence-finder-lite
     <<: *licence-finder
-    privileged: true
     depends_on:
       - mongo
       - elasticsearch6

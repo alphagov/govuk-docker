@@ -9,13 +9,12 @@ x-specialist-publisher: &specialist-publisher
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/specialist-publisher
 
 services:
   specialist-publisher-lite:
     <<: *specialist-publisher
-    privileged: true
     depends_on:
       - mongo
       - redis

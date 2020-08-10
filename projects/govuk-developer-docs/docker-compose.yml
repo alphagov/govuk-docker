@@ -7,7 +7,7 @@ x-govuk-developer-docs: &govuk-developer-docs
   image: govuk-developer-docs
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/govuk-developer-docs
 
 services:

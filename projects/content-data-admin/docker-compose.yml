@@ -9,13 +9,12 @@ x-content-data-admin: &content-data-admin
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/content-data-admin
 
 services:
   content-data-admin-lite:
     <<: *content-data-admin
-    privileged: true
     depends_on:
       - postgres
     environment:

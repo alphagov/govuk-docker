@@ -9,13 +9,12 @@ x-content-tagger: &content-tagger
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/content-tagger
 
 services:
   content-tagger-lite:
     <<: *content-tagger
-    privileged: true
     depends_on:
       - postgres
     environment:

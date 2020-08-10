@@ -9,13 +9,12 @@ x-frontend: &frontend
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/frontend
 
 services:
   frontend-lite:
     <<: *frontend
-    privileged: true
 
   frontend-app: &frontend-app
     <<: *frontend

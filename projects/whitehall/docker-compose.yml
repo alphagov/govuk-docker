@@ -9,13 +9,12 @@ x-whitehall: &whitehall
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/whitehall
 
 services:
   whitehall-lite:
     <<: *whitehall
-    privileged: true
     depends_on:
       - mysql
       - redis

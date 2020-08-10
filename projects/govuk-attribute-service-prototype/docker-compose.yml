@@ -9,13 +9,12 @@ x-govuk-attribute-service-prototype: &govuk-attribute-service-prototype
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/govuk-attribute-service-prototype
 
 services:
   govuk-attribute-service-prototype-lite:
     <<: *govuk-attribute-service-prototype
-    privileged: true
     depends_on:
       - memcached
       - postgres

@@ -9,7 +9,7 @@ x-search-api: &search-api
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/search-api
   environment:
     RABBITMQ_HOSTS: rabbitmq

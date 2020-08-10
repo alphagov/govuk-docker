@@ -9,13 +9,12 @@ x-finder-frontend: &finder-frontend
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/finder-frontend
 
 services:
   finder-frontend-lite:
     <<: *finder-frontend
-    privileged: true
     depends_on:
       - memcached
     environment:

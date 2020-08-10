@@ -9,13 +9,12 @@ x-maslow: &maslow
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/maslow
 
 services:
   maslow-lite:
     <<: *maslow
-    privileged: true
     depends_on:
       - mongo
     environment:

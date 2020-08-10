@@ -9,13 +9,12 @@ x-collections-publisher: &collections-publisher
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/collections-publisher
 
 services:
   collections-publisher-lite:
     <<: *collections-publisher
-    privileged: true
     depends_on:
       - mysql
       - redis

@@ -9,13 +9,12 @@ x-smart-answers: &smart-answers
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/smart-answers
 
 services:
   smart-answers-lite:
     <<: *smart-answers
-    privileged: true
 
   smart-answers-app:
     <<: *smart-answers

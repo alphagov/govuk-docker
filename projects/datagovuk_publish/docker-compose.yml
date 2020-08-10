@@ -9,7 +9,7 @@ x-datagovuk_publish: &datagovuk_publish
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/datagovuk_publish
 
 services:

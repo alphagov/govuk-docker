@@ -9,13 +9,12 @@ x-short-url-manager: &short-url-manager
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/short-url-manager
 
 services:
   short-url-manager-lite:
     <<: *short-url-manager
-    privileged: true
     depends_on:
       - redis
       - mongo

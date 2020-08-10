@@ -9,13 +9,12 @@ x-govuk-account-manager-prototype: &govuk-account-manager-prototype
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/govuk-account-manager-prototype
 
 services:
   govuk-account-manager-prototype-lite:
     <<: *govuk-account-manager-prototype
-    privileged: true
     depends_on:
       - postgres
       - memcached

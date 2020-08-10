@@ -10,7 +10,6 @@ x-mapit: &mapit
   image: mapit
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
   working_dir: /govuk/mapit
 
 services:

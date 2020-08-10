@@ -9,13 +9,12 @@ x-search-admin: &search-admin-base
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/search-admin
 
 services:
   search-admin-lite:
     <<: *search-admin-base
-    privileged: true
     depends_on:
       - mysql
     environment:

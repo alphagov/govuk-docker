@@ -9,13 +9,12 @@ x-link-checker-api: &link-checker-api
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/link-checker-api
 
 services:
   link-checker-api-lite:
     <<: *link-checker-api
-    privileged: true
     depends_on:
       - postgres
       - redis

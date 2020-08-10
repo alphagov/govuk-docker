@@ -7,7 +7,7 @@ x-generic-ruby-library: &generic-ruby-library
   image: generic-ruby-library
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
 
 services:
   gds-api-adapters-lite:

@@ -9,13 +9,12 @@ x-manuals-publisher: &manuals-publisher
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/manuals-publisher
 
 services:
   manuals-publisher-lite:
     <<: *manuals-publisher
-    privileged: true
     depends_on:
       - mongo
     environment:

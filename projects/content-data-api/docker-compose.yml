@@ -9,13 +9,12 @@ x-content-data-api: &content-data-api
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/content-data-api
 
 services:
   content-data-api-lite:
     <<: *content-data-api
-    privileged: true
     depends_on:
       - postgres
     environment:

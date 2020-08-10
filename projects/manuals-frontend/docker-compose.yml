@@ -9,13 +9,12 @@ x-manuals-frontend: &manuals-frontend
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/manuals-frontend
 
 services:
   manuals-frontend-lite:
     <<: *manuals-frontend
-    privileged: true
 
   manuals-frontend-app: &manuals-frontend-app
     <<: *manuals-frontend
