@@ -55,14 +55,6 @@ To provide consistency we have a convention for these names:
     point to the [draft content-store](https://docs.publishing.service.gov.uk/manual/content-preview.html).
   - **app-live**: if the app is a read-only frontend app, the live stack will
     point the production versions of content-store, search-api and static.
-  - **app-e2e**: to run the app with all the other apps necessary to provide
-    full end to end user journeys.
-
-### Interoperability of stacks
-
-Even if an e2e stack is started, functionality won't necessarily work as expected "end to end" as govuk-docker doesn't mimick the routing we have on GOV.UK. For example, publishing apps that link to draft-origin.dev.gov.uk frontends will see a server error, as draft-origin isn't a project in govuk-docker.
-
-In these cases, you can swap out the URL for the relevant frontend (such as draft-collections.dev.gov.uk). It's also worth noting that this frontend will need to be started separately, as publishing apps don't define frontend apps in their dependencies; a publishing app doesn't need its corresponding frontend in order to be able to publish.
 
 ## How to's
 
