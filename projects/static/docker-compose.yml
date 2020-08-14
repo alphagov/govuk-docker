@@ -29,14 +29,3 @@ services:
     expose:
       - "3000"
     command: bin/rails s --restart
-
-  static-app-draft:
-    <<: *static-app
-    depends_on:
-      - redis
-      - nginx-proxy
-    environment:
-      ASSET_HOST: draft-static.dev.gov.uk
-      REDIS_URL: redis://redis
-      VIRTUAL_HOST: draft-static.dev.gov.uk
-      HOST: 0.0.0.0

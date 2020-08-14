@@ -32,19 +32,6 @@ services:
       - "3000"
     command: bin/rails s --restart
 
-  frontend-app-draft:
-    <<: *frontend-app
-    depends_on:
-      - content-store-app-draft
-      - router-app-draft
-      - static-app-draft
-      - nginx-proxy
-    environment:
-      ASSET_HOST: draft-frontend.dev.gov.uk
-      VIRTUAL_HOST: draft-frontend.dev.gov.uk
-      PLEK_HOSTNAME_PREFIX: "draft-"
-      BINDING: 0.0.0.0
-
   frontend-app-live:
     <<: *frontend-app
     depends_on:

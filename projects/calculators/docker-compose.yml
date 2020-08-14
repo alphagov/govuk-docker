@@ -33,19 +33,6 @@ services:
       - "3000"
     command: bin/rails s --restart
 
-  calculators-app-draft:
-    <<: *calculators-app
-    depends_on:
-      - router-app-draft
-      - content-store-app-draft
-      - static-app-draft
-      - nginx-proxy
-    environment:
-      ASSET_HOST: draft-calculators.dev.gov.uk
-      VIRTUAL_HOST: draft-calculators.dev.gov.uk
-      PLEK_HOSTNAME_PREFIX: "draft-"
-      HOST: 0.0.0.0
-
   calculators-app-live:
     <<: *calculators-app
     depends_on:
