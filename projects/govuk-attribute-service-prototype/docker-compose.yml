@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  govuk-attribute-service-prototype-tmp:
+
 x-govuk-attribute-service-prototype: &govuk-attribute-service-prototype
   build:
     context: .
@@ -10,6 +13,7 @@ x-govuk-attribute-service-prototype: &govuk-attribute-service-prototype
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - govuk-attribute-service-prototype-tmp:/govuk/govuk-attribute-service-prototype/tmp
   working_dir: /govuk/govuk-attribute-service-prototype
 
 services:

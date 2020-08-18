@@ -1,5 +1,9 @@
 version: '3.7'
 
+volumes:
+  content-data-admin-tmp:
+  content-data-admin-node-modules:
+
 x-content-data-admin: &content-data-admin
   build:
     context: .
@@ -10,6 +14,8 @@ x-content-data-admin: &content-data-admin
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - content-data-admin-tmp:/govuk/content-data-admin/tmp
+    - content-data-admin-node-modules:/govuk/content-data-admin/node_modules
   working_dir: /govuk/content-data-admin
 
 services:

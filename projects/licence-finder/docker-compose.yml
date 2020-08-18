@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  licence-finder-tmp:
+
 x-licence-finder: &licence-finder
   build:
     context: .
@@ -10,6 +13,7 @@ x-licence-finder: &licence-finder
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - licence-finder-tmp:/govuk/licence-finder/tmp
   working_dir: /govuk/licence-finder
 
 services:

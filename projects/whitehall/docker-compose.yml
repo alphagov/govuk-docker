@@ -1,5 +1,9 @@
 version: '3.7'
 
+volumes:
+  whitehall-tmp:
+  whitehall-node-modules:
+
 x-whitehall: &whitehall
   build:
     context: .
@@ -10,6 +14,8 @@ x-whitehall: &whitehall
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - whitehall-tmp:/govuk/whitehall/tmp
+    - whitehall-node-modules:/govuk/whitehall/node_modules
   working_dir: /govuk/whitehall
 
 services:

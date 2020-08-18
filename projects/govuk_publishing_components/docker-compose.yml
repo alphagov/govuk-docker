@@ -1,5 +1,9 @@
 version: '3.7'
 
+volumes:
+  govuk_publishing_components-tmp:
+  govuk_publishing_components-node-modules:
+
 x-govuk_publishing_components: &govuk_publishing_components
   build:
     context: .
@@ -8,6 +12,8 @@ x-govuk_publishing_components: &govuk_publishing_components
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - govuk_publishing_components-tmp:/govuk/govuk_publishing_components/spec/dummy/tmp
+    - govuk_publishing_components-node-modules:/govuk/govuk_publishing_components/node_modules
   working_dir: /govuk/govuk_publishing_components
 
 services:

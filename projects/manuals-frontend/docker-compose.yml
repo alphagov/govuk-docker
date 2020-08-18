@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  manuals-frontend-tmp:
+
 x-manuals-frontend: &manuals-frontend
   build:
     context: .
@@ -10,6 +13,7 @@ x-manuals-frontend: &manuals-frontend
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - manuals-frontend-tmp:/govuk/manuals-frontend/tmp
   working_dir: /govuk/manuals-frontend
 
 services:

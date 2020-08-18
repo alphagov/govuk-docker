@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  manuals-publisher-tmp:
+
 x-manuals-publisher: &manuals-publisher
   build:
     context: .
@@ -10,6 +13,7 @@ x-manuals-publisher: &manuals-publisher
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - manuals-publisher-tmp:/govuk/manuals-publisher/tmp
   working_dir: /govuk/manuals-publisher
 
 services:

@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  router-api-tmp:
+
 x-router-api: &router-api
   build:
     context: .
@@ -10,6 +13,7 @@ x-router-api: &router-api
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - router-api-tmp:/govuk/router-api/tmp
   working_dir: /govuk/router-api
 
 services:

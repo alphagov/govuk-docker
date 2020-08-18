@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  short-url-manager-tmp:
+
 x-short-url-manager: &short-url-manager
   build:
     context: .
@@ -10,6 +13,7 @@ x-short-url-manager: &short-url-manager
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - short-url-manager-tmp:/govuk/short-url-manager/tmp
   working_dir: /govuk/short-url-manager
 
 services:

@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  specialist-publisher-tmp:
+
 x-specialist-publisher: &specialist-publisher
   build:
     context: .
@@ -10,6 +13,7 @@ x-specialist-publisher: &specialist-publisher
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - specialist-publisher-tmp:/govuk/specialist-publisher/tmp
   working_dir: /govuk/specialist-publisher
 
 services:

@@ -1,5 +1,9 @@
 version: '3.7'
 
+volumes:
+  email-alert-frontend-tmp:
+  email-alert-frontend-node-modules:
+
 x-email-alert-frontend: &email-alert-frontend
   build:
     context: .
@@ -10,6 +14,8 @@ x-email-alert-frontend: &email-alert-frontend
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - email-alert-frontend-tmp:/govuk/email-alert-frontend/tmp
+    - email-alert-frontend-node-modules:/govuk/email-alert-frontend/node_modules
   working_dir: /govuk/email-alert-frontend
 
 services:

@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  content-data-api-tmp:
+
 x-content-data-api: &content-data-api
   build:
     context: .
@@ -10,6 +13,7 @@ x-content-data-api: &content-data-api
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - content-data-admin-tmp:/govuk/content-data-admin/tmp
   working_dir: /govuk/content-data-api
 
 services:

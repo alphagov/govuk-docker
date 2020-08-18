@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  email-alert-api-tmp:
+
 x-email-alert-api: &email-alert-api
   build:
     context: .
@@ -10,6 +13,7 @@ x-email-alert-api: &email-alert-api
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - email-alert-api-tmp:/govuk/email-alert-api/tmp
   working_dir: /govuk/email-alert-api
 
 services:

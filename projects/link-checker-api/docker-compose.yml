@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  link-checker-api-tmp:
+
 x-link-checker-api: &link-checker-api
   build:
     context: .
@@ -10,6 +13,7 @@ x-link-checker-api: &link-checker-api
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - link-checker-api-tmp:/govuk/link-checker-api/tmp
   working_dir: /govuk/link-checker-api
 
 services:

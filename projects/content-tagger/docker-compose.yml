@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  content-tagger-tmp:
+
 x-content-tagger: &content-tagger
   build:
     context: .
@@ -10,6 +13,7 @@ x-content-tagger: &content-tagger
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - content-tagger-tmp:/govuk/content-tagger/tmp
   working_dir: /govuk/content-tagger
 
 services:

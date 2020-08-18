@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  publisher-tmp:
+
 x-publisher: &publisher
   build:
     context: .
@@ -10,6 +13,7 @@ x-publisher: &publisher
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - publisher-tmp:/govuk/publisher/tmp
   working_dir: /govuk/publisher
 
 services:

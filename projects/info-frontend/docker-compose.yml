@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  info-frontend-tmp:
+
 x-tmp: &info-frontend
   build:
     context: .
@@ -10,6 +13,7 @@ x-tmp: &info-frontend
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - info-frontend-tmp:/govuk/info-frontend/tmp
   working_dir: /govuk/info-frontend
 
 services:

@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  contacts-admin-tmp:
+
 x-contacts-admin: &contacts-admin
   build:
     context: .
@@ -10,6 +13,7 @@ x-contacts-admin: &contacts-admin
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - contacts-admin-tmp:/govuk/contacts-admin/tmp
   working_dir: /govuk/contacts-admin
 
 services:

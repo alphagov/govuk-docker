@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  feedback-tmp:
+
 x-feedback: &feedback
   build:
     context: .
@@ -10,6 +13,7 @@ x-feedback: &feedback
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - feedback-tmp:/govuk/feedback/tmp
   working_dir: /govuk/feedback
 
 services:

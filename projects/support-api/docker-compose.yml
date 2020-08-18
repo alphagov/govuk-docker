@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  support-api-tmp:
+
 x-support-api: &support-api
   build:
     context: .
@@ -10,6 +13,7 @@ x-support-api: &support-api
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - support-api-tmp:/govuk/support-api/tmp
   working_dir: /govuk/support-api
 
 services:

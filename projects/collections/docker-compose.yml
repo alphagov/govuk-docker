@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  collections-tmp:
+
 x-collections: &collections
   build:
     context: .
@@ -10,6 +13,7 @@ x-collections: &collections
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - collections-tmp:/govuk/collections/tmp
   working_dir: /govuk/collections
 
 services:

@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  asset-manager-tmp:
+
 x-asset-manager: &asset-manager
   build:
     context: .
@@ -10,6 +13,7 @@ x-asset-manager: &asset-manager
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - asset-manager-tmp:/govuk/asset-manager/tmp
   working_dir: /govuk/asset-manager
 
 services:

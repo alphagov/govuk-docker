@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  govuk-account-manager-prototype-tmp:
+
 x-govuk-account-manager-prototype: &govuk-account-manager-prototype
   build:
     context: .
@@ -10,6 +13,7 @@ x-govuk-account-manager-prototype: &govuk-account-manager-prototype
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - govuk-account-manager-prototype-tmp:/govuk/govuk-account-manager-prototype/tmp
   working_dir: /govuk/govuk-account-manager-prototype
 
 services:

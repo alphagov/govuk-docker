@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  authenticating-proxy-tmp:
+
 x-authenticating-proxy: &authenticating-proxy
   build:
     context: .
@@ -10,6 +13,7 @@ x-authenticating-proxy: &authenticating-proxy
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - authenticating-proxy-tmp:/govuk/authenticating-proxy/tmp
   working_dir: /govuk/authenticating-proxy
 
 services:

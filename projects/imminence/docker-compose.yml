@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  imminence-tmp:
+
 x-imminence: &imminence
   build:
     context: .
@@ -10,6 +13,7 @@ x-imminence: &imminence
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - imminence-tmp:/govuk/imminence/tmp
   working_dir: /govuk/imminence
 
 services:

@@ -1,5 +1,9 @@
 version: '3.7'
 
+volumes:
+  collections-publisher-tmp:
+  collections-publisher-node-modules:
+
 x-collections-publisher: &collections-publisher
   build:
     context: .
@@ -10,6 +14,8 @@ x-collections-publisher: &collections-publisher
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - collections-publisher-tmp:/govuk/collections-publisher/tmp
+    - collections-publisher-node-modules:/govuk/collections-publisher/node_modules
   working_dir: /govuk/collections-publisher
 
 services:

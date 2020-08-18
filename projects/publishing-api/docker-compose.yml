@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  publishing-api-tmp:
+
 x-publishing-api: &publishing-api
   build:
     context: .
@@ -10,6 +13,7 @@ x-publishing-api: &publishing-api
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - publishing-api-tmp:/govuk/publishing-api/tmp
   working_dir: /govuk/publishing-api
 
 services:

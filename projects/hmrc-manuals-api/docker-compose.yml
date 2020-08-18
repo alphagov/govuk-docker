@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  hmrc-manuals-api-tmp:
+
 x-hmrc-manuals-api: &hmrc-manuals-api
   build:
     context: .
@@ -10,6 +13,7 @@ x-hmrc-manuals-api: &hmrc-manuals-api
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - hmrc-manuals-api-tmp:/govuk/hmrc-manuals-api/tmp
   working_dir: /govuk/hmrc-manuals-api
 
 services:

@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  transition-tmp:
+
 x-transition: &transition
   build:
     context: .
@@ -10,6 +13,7 @@ x-transition: &transition
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - transition-tmp:/govuk/transition/tmp
   working_dir: /govuk/transition
 
 services:

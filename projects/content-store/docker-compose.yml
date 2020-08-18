@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  content-store-tmp:
+
 x-content-store: &content-store
   build:
     context: .
@@ -10,6 +13,7 @@ x-content-store: &content-store
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - content-store-tmp:/govuk/content-store/tmp
   working_dir: /govuk/content-store
 
 services:

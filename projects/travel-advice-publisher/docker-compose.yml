@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  travel-advice-publisher-tmp:
+
 x-travel-advice-publisher: &travel-advice-publisher
   build:
     context: .
@@ -10,6 +13,7 @@ x-travel-advice-publisher: &travel-advice-publisher
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - travel-advice-publisher-tmp:/govuk/travel-advice-publisher/tmp
   working_dir: /govuk/travel-advice-publisher
 
 services:

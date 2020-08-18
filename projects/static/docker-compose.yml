@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  static-tmp:
+
 x-static: &static
   build:
     context: .
@@ -10,6 +13,7 @@ x-static: &static
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - static-tmp:/govuk/static/tmp
   working_dir: /govuk/static
 
 services:

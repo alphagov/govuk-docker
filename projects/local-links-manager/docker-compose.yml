@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  local-links-manager-tmp:
+
 x-local-links-manager: &local-links-manager
   build:
     context: .
@@ -10,6 +13,7 @@ x-local-links-manager: &local-links-manager
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - local-links-manager-tmp:/govuk/local-links-manager/tmp
   working_dir: /govuk/local-links-manager
 
 services:

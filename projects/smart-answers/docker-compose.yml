@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  smart-answers-tmp:
+
 x-smart-answers: &smart-answers
   build:
     context: .
@@ -10,6 +13,7 @@ x-smart-answers: &smart-answers
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - smart-answers-tmp:/govuk/smart-answers/tmp
   working_dir: /govuk/smart-answers
 
 services:

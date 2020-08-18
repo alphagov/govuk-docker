@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  datagovuk_publish-tmp:
+
 x-datagovuk_publish: &datagovuk_publish
   build:
     context: .
@@ -10,6 +13,7 @@ x-datagovuk_publish: &datagovuk_publish
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - datagovuk_publish-tmp:/govuk/datagovuk_publish/tmp
   working_dir: /govuk/datagovuk_publish
 
 services:
