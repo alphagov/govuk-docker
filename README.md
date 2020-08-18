@@ -51,8 +51,7 @@ To provide consistency we have a convention for these names:
   console, for example. It won't be useful for opening the app in a browser.
 - **app**: This stack provides the dependencies necessary to run the app in the
   browser. Variations on this are allowed where necessary such as:
-  - **app-draft**: if the application uses the content-store, this stack will
-    point to the [draft content-store](https://docs.publishing.service.gov.uk/manual/content-preview.html).
+  - **app-draft**: used for testing the [authenticating-proxy](https://github.com/alphagov/govuk-docker/tree/master/projects/authenticating-proxy) against a draft version of the [router](https://github.com/alphagov/govuk-docker/tree/master/projects/router) app
   - **app-live**: if the app is a read-only frontend app, the live stack will
     point the production versions of content-store, search-api and static.
   - **app-e2e**: to run the app with all the other apps necessary to provide

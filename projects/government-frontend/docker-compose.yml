@@ -32,19 +32,6 @@ services:
       - "3000"
     command: bin/rails s --restart
 
-  government-frontend-app-draft:
-    <<: *government-frontend-app
-    depends_on:
-      - router-app-draft
-      - content-store-app-draft
-      - static-app-draft
-      - nginx-proxy
-    environment:
-      ASSET_HOST: draft-government-frontend.dev.gov.uk
-      VIRTUAL_HOST: draft-government-frontend.dev.gov.uk
-      PLEK_HOSTNAME_PREFIX: "draft-"
-      HOST: 0.0.0.0
-
   government-frontend-app-live:
     <<: *government-frontend-app
     depends_on:
