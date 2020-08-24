@@ -35,6 +35,9 @@ services:
       VIRTUAL_HOST: finder-frontend.dev.gov.uk
       BINDING: 0.0.0.0
       MEMCACHE_SERVERS: memcached
+      ACCOUNT_MANAGER_URL: http://www.login.service.dev.gov.uk
+      OIDC_CLIENT_ID: transition-checker-id
+      OIDC_CLIENT_SECRET: transition-checker-secret
     expose:
       - "3000"
     command: bin/rails s --restart
