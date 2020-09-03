@@ -33,6 +33,10 @@ services:
       - nginx-proxy
       - redis
       - elasticsearch6
+      - search-api-worker
+      - search-api-listener-publishing-queue
+      - search-api-listener-insert-data
+      - search-api-listener-bulk-insert-data
     environment:
       REDIS_HOST: redis
       ELASTICSEARCH_URI: http://elasticsearch6:9200
@@ -67,14 +71,3 @@ services:
     depends_on:
       - rabbitmq
     command: bundle exec rake message_queue:bulk_insert_data_into_govuk
-
-  search-api-app-e2e:
-    <<: *search-api-app
-    depends_on:
-      - nginx-proxy
-      - redis
-      - elasticsearch6
-      - search-api-worker
-      - search-api-listener-publishing-queue
-      - search-api-listener-insert-data
-      - search-api-listener-bulk-insert-data
