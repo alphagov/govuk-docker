@@ -1,5 +1,3 @@
-FROM ruby:2.6.3
-
 # Install packages for building ruby
 FROM buildpack-deps
 
