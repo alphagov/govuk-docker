@@ -1,0 +1,21 @@
+version: '3.7'
+
+x-govuk_crawler_worker: &govuk_crawler_worker
+  build:
+    context: .
+    dockerfile: projects/govuk_crawler_worker/Dockerfile
+  image: govuk_crawler_worker
+  volumes:
+    - go:/go
+    - ${GOVUK_ROOT_DIR:-~/govuk}/govuk_crawler_worker:/go/src/github.com/alphagov/govuk_crawler_worker:delegated
+  working_dir: /go/src/github.com/alphagov/govuk_crawler_worker
+
+services:
+  govuk_crawler_worker-lite:
+    <<: *govuk_crawler_worker
+    depends_on:
+      - rabbitmq
+      - redis
+    environment:
+      AMQP_ADDRESS: amqp://guest:guest@rabbitmq:5672
+      REDIS_ADDRESS: redis:6379
