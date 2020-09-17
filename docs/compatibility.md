@@ -3,7 +3,8 @@
 The following apps are supported by govuk-docker to some extent.
 
    - ✅ asset-manager
-   - ❌ bouncer
+   - ⚠ bouncer
+      * **TODO: Missing support for a webserver stack**
    - ⚠ cache-clearing-service
       * Tests pass
       * Queues are not set-up, so cache-clearing-service can't be run locally

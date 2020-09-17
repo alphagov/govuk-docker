@@ -1,0 +1,22 @@
+version: '3.7'
+
+x-bouncer: &bouncer
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: bouncer
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/bouncer
+
+services:
+  bouncer-lite:
+    <<: *bouncer
+    depends_on:
+      - postgres
+    environment:
+      TEST_DATABASE_URL: "postgresql://postgres@postgres/transition_test"
+      DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
