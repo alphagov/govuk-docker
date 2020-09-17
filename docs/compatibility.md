@@ -39,6 +39,8 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ government-frontend
    - ✅ govspeak
    - ✅ govuk_app_config
+   - ⚠ govuk_crawler_worker
+      * **TODO: Missing support for running the worker**
    - ✅ govuk_publishing_components
    - ✅ govuk-cdn-config
    - ✅ govuk-content-schemas
