@@ -36,13 +36,18 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ finder-frontend
    - ❓ frontend
    - ✅ gds-api-adapters
+   - ❌ gds-sso
    - ✅ government-frontend
    - ✅ govspeak
    - ✅ govuk_app_config
    - ⚠ govuk_crawler_worker
       * **TODO: Missing support for running the worker**
+   - ❌ govuk_schemas
+   - ❌ govuk_document_types
+   - ❌ govuk_message_queue_consumer
    - ✅ govuk_publishing_components
-   - ✅ govuk-cdn-config
+   - ❌ govuk_sidekiq
+   - ❌ govuk_taxonomy_helpers
    - ✅ govuk-content-schemas
    - ✅ govuk-developer-docs
    - ⚠ hmrc-manuals-api
@@ -59,7 +64,7 @@ The following apps are supported by govuk-docker to some extent.
    - ⚠ manuals-publisher
       * **TODO: Missing support for a webserver stack**
    - ✅ mapit
-      * TODO: Data replication.
+      * **TODO: Data replication**
    - ✅ maslow
    - ✅ miller-columns-element
    - ✅ plek
@@ -74,7 +79,9 @@ The following apps are supported by govuk-docker to some extent.
    - ⚠ service-manual-publisher
       * **TODO: Missing support for a webserver stack**
    - ✅ short-url-manager
+   - ❌ sidekiq-monitoring
    - ✅ signon
+   - ❌ slimmer
    - ✅ smart-answers
    - ✅ special-route-publisher
    - ✅ specialist-publisher
@@ -83,6 +90,7 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ support
    - ✅ support-api
    - ✅ transition
+   - ❌ transition-config
    - ✅ travel-advice-publisher
    - ⚠ whitehall
       * Who knows, really - several tests are failing, lots pass ;-)
