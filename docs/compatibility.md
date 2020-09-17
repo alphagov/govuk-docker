@@ -56,9 +56,7 @@ The following apps are supported by govuk-docker to some extent.
       * **TODO: Missing support for a webserver stack**
    - ✅ info-frontend
    - ✅ licence-finder
-   - ⚠ link-checker-api
-      * Works in isolation but not in other projects' `e2e` stacks, so must be run in a separate process.
-        See https://github.com/alphagov/govuk-docker/issues/174 for details.
+   - ✅ link-checker-api
    - ✅ local-links-manager
    - ✅ manuals-frontend
    - ⚠ manuals-publisher
