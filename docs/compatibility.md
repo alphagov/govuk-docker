@@ -56,6 +56,8 @@ The following apps are supported by govuk-docker to some extent.
       * **TODO: Missing support for a webserver stack**
    - ✅ info-frontend
    - ✅ licence-finder
+   - ❌ licensify
+      * Has a [separate](https://github.com/alphagov/licensify/blob/master/DOCKER.md) Docker project.
    - ✅ link-checker-api
    - ✅ local-links-manager
    - ✅ manuals-frontend
