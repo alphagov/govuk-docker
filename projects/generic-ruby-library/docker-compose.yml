@@ -1,0 +1,31 @@
+version: '3.7'
+
+x-generic-ruby-library: &generic-ruby-library
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: gds-api-adapters
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+
+services:
+  gds-api-adapters-lite:
+    <<: *generic-ruby-library
+    working_dir: /govuk/gds-api-adapters
+
+  govspeak-lite:
+    <<: *generic-ruby-library
+    working_dir: /govuk/govspeak
+
+  govuk-content-schemas-lite:
+    <<: *generic-ruby-library
+    working_dir: /govuk/govuk-content-schemas
+
+  govuk_app_config-lite:
+    <<: *generic-ruby-library
+    working_dir: /govuk/govuk_app_config
+
+  plek-lite:
+    <<: *generic-ruby-library
+    working_dir: /govuk/plek

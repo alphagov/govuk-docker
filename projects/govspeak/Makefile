@@ -1,1 +1,0 @@
-govspeak: bundle-govspeak

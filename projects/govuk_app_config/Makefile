@@ -1,1 +1,0 @@
-govuk_app_config: bundle-govuk_app_config
