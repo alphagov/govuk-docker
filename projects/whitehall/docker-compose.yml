@@ -37,7 +37,7 @@ services:
     environment:
       DATABASE_URL: "mysql2://root:root@mysql/whitehall_development"
       REDIS_URL: redis://redis
-      VIRTUAL_HOST: whitehall-admin.dev.gov.uk
+      VIRTUAL_HOST: whitehall-admin.dev.gov.uk, whitehall-frontend.dev.gov.uk
       HOST: 0.0.0.0
     expose:
       - "3000"

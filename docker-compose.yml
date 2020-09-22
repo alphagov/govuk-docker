@@ -107,6 +107,7 @@ services:
           - support.dev.gov.uk
           - transition.dev.gov.uk
           - travel-advice-publisher.dev.gov.uk
+          - whitehall-frontend.dev.gov.uk
           - whitehall-admin.dev.gov.uk
           - www-origin.dev.gov.uk
           - www.dev.gov.uk
