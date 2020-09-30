@@ -1,6 +1,14 @@
 # Compatibility
 
-The following apps are supported by govuk-docker to some extent.
+The following lists indicates the support status of a repo in GOV.UK Docker.
+
+- ✅ - can successfully run tests; can successfully start and interact with the app (if applicable).
+- ⚠  - partially supported; the comments should explain what does/not work.
+- ❌ - not supported; it should be possible to add support, unless the comments say otherwise.
+
+## Executable "apps"
+
+These are repos that can be started as a some kind of process, such as a web app or worker.
 
    - ✅ asset-manager
    - ⚠ bouncer
@@ -35,15 +43,10 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ feedback
    - ✅ finder-frontend
    - ❓ frontend
-   - ✅ gds-api-adapters
    - ✅ government-frontend
-   - ✅ govspeak
-   - ✅ govuk_app_config
    - ⚠ govuk_crawler_worker
       * **TODO: Missing support for running the worker**
    - ✅ govuk_publishing_components
-   - ✅ govuk-cdn-config
-   - ✅ govuk-content-schemas
    - ✅ govuk-developer-docs
    - ⚠ hmrc-manuals-api
       * **TODO: Missing support for a webserver stack**
@@ -51,18 +54,17 @@ The following apps are supported by govuk-docker to some extent.
       * **TODO: Missing support for a webserver stack**
    - ✅ info-frontend
    - ✅ licence-finder
-   - ⚠ link-checker-api
-      * Works in isolation but not in other projects' `e2e` stacks, so must be run in a separate process.
-        See https://github.com/alphagov/govuk-docker/issues/174 for details.
+   - ❌ licensify
+      * Has a [separate](https://github.com/alphagov/licensify/blob/master/DOCKER.md) Docker project.
+   - ✅ link-checker-api
    - ✅ local-links-manager
    - ✅ manuals-frontend
    - ⚠ manuals-publisher
       * **TODO: Missing support for a webserver stack**
    - ✅ mapit
-      * TODO: Data replication.
+      * **TODO: Data replication**
    - ✅ maslow
    - ✅ miller-columns-element
-   - ✅ plek
    - ✅ publisher
    - ✅ publishing-api
    - ✅ release
@@ -74,7 +76,9 @@ The following apps are supported by govuk-docker to some extent.
    - ⚠ service-manual-publisher
       * **TODO: Missing support for a webserver stack**
    - ✅ short-url-manager
+   - ❌ sidekiq-monitoring
    - ✅ signon
+   - ❌ slimmer
    - ✅ smart-answers
    - ✅ special-route-publisher
    - ✅ specialist-publisher
@@ -83,8 +87,25 @@ The following apps are supported by govuk-docker to some extent.
    - ✅ support
    - ✅ support-api
    - ✅ transition
+   - ❌ transition-config
    - ✅ travel-advice-publisher
    - ⚠ whitehall
       * Who knows, really - several tests are failing, lots pass ;-)
       * Rake task to [create a test taxon](https://github.com/alphagov/whitehall/blob/master/lib/tasks/taxonomy.rake#L11) for publishing is not idempotent
       * Placeholder images don't work as missing proxy for [/government/assets](https://github.com/alphagov/whitehall/blob/master/app/presenters/publishing_api/news_article_presenter.rb#L133)
+
+## Generic Ruby libraries
+
+These repos are used as part of running the live GOV.UK site. Since all of them have the same config and "lite" stack, they are bundled together in a single "generic-ruby-library" project.
+
+   - ✅ gds-api-adapters
+   - ❌ gds-sso
+   - ✅ govspeak
+   - ✅ govuk_app_config
+   - ❌ govuk_document_types
+   - ❌ govuk_message_queue_consumer
+   - ❌ govuk_schemas
+   - ❌ govuk_sidekiq
+   - ❌ govuk_taxonomy_helpers
+   - ✅ govuk-content-schemas
+   - ✅ plek
