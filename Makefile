@@ -38,7 +38,7 @@ all-apps: $(APPS)
 bundle-%: clone-%
 	$(GOVUK_DOCKER) build $*-lite
 	$(GOVUK_DOCKER) run $*-lite rbenv install -s || ($(GOVUK_DOCKER) build --no-cache $*-lite; $(GOVUK_DOCKER) run $*-lite rbenv install -s)
-	$(GOVUK_DOCKER) run $*-lite sh -c 'gem install --conservative --no-document bundler -v $$(grep -A1 "BUNDLED WITH" Gemfile.lock | tail -1)'
+	if [ -f Gemfile.lock ]; then $(GOVUK_DOCKER) run $*-lite sh -c 'gem install --conservative --no-document bundler -v $$(grep -A1 "BUNDLED WITH" Gemfile.lock | tail -1)'; fi
 	$(GOVUK_DOCKER) run $*-lite bundle
 
 clone-%:
