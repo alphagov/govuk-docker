@@ -111,3 +111,4 @@ services:
           - whitehall-admin.dev.gov.uk
           - www-origin.dev.gov.uk
           - www.dev.gov.uk
+          - attributes.login.service.dev.gov.uk

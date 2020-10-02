@@ -93,6 +93,8 @@ These are repos that can be started as a some kind of process, such as a web app
       * Who knows, really - several tests are failing, lots pass ;-)
       * Rake task to [create a test taxon](https://github.com/alphagov/whitehall/blob/master/lib/tasks/taxonomy.rake#L11) for publishing is not idempotent
       * Placeholder images don't work as missing proxy for [/government/assets](https://github.com/alphagov/whitehall/blob/master/app/presenters/publishing_api/news_article_presenter.rb#L133)
+   - ⚠ govuk-attribute-service-prototype
+      * **No support for a webserver stack**
 
 ## Generic Ruby libraries
 
