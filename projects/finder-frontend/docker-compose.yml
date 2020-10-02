@@ -30,9 +30,17 @@ services:
       - search-api-app
       - memcached
       - nginx-proxy
+      - govuk-account-manager-prototype-app
     environment:
       ASSET_HOST: finder-frontend.dev.gov.uk
       VIRTUAL_HOST: finder-frontend.dev.gov.uk
+      FEATURE_FLAG_ACCOUNTS: "enabled"
+      GOVUK_ACCOUNT_OAUTH_CLIENT_ID: transition-checker-id
+      GOVUK_ACCOUNT_OAUTH_CLIENT_KEY: "-----BEGIN EC PRIVATE KEY-----\nMHcCAQEEID+UE4jB5QtUFOtekHJliaSB8K2xQU2AS4xczOLAqvCUoAoGCCqGSM49\nAwEHoUQDQgAEjMgE/d6Bdu1K17BTjNycDvIXKSmUgZ5YYoayU3gGqTLhgefuK2qb\no99Wx+SuvdW/GRvIlUIW1ooNRdQ3QFwwCw==\n-----END EC PRIVATE KEY-----\n"
+      GOVUK_ACCOUNT_OAUTH_CLIENT_KEY_UUID: "898d62b7-eed9-464a-a4ae-9d9e08bd9bee"
+      OIDC_CLIENT_ID: transition-checker-id
+      OIDC_CLIENT_SECRET: transition-checker-secret
+      PLEK_SERVICE_ACCOUNT_MANAGER_URI: "http://www.login.service.dev.gov.uk"
       BINDING: 0.0.0.0
       MEMCACHE_SERVERS: memcached
       GOVUK_ACCOUNT_OAUTH_CLIENT_ID: transition-checker-id
