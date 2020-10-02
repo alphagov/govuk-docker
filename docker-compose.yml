@@ -112,3 +112,4 @@ services:
           - www-origin.dev.gov.uk
           - www.dev.gov.uk
           - attributes.login.service.dev.gov.uk
+          - www.login.service.dev.gov.uk
