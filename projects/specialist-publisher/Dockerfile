@@ -27,7 +27,7 @@ RUN /rbenv/plugins/ruby-build/install.sh
 ENV PATH /rbenv/bin:$PATH
 
 # Dependencies required for Capybara Webkit
-RUN apt-get install -y qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+RUN apt-get update -qq && apt-get install -y qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
 
 RUN useradd -m build
 ENV PATH /home/build/.rbenv/shims:${PATH}
