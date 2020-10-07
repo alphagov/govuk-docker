@@ -20,18 +20,18 @@ services:
   release-lite:
     <<: *release
     depends_on:
-      - mysql
+      - mysql-5.5
     environment:
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
-      DATABASE_URL: "mysql2://root:root@mysql/release_development"
+      DATABASE_URL: "mysql2://root:root@mysql-5.5/release_development"
 
   release-app:
     <<: *release
     depends_on:
-      - mysql
+      - mysql-5.5
       - nginx-proxy
     environment:
-      DATABASE_URL: "mysql2://root:root@mysql/release_development"
+      DATABASE_URL: "mysql2://root:root@mysql-5.5/release_development"
       HOST: 0.0.0.0
       VIRTUAL_HOST: release.dev.gov.uk
     expose:

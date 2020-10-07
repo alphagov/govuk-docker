@@ -20,22 +20,22 @@ services:
   asset-manager-lite:
     <<: *asset-manager
     depends_on:
-      - mongo
+      - mongo-3.6
       - redis
     environment:
-      MONGODB_URI: "mongodb://mongo/asset-manager"
-      TEST_MONGODB_URI: "mongodb://mongo/asset-manager-test"
+      MONGODB_URI: "mongodb://mongo-3.6/asset-manager"
+      TEST_MONGODB_URI: "mongodb://mongo-3.6/asset-manager-test"
       REDIS_URL: redis://redis
 
   asset-manager-app: &asset-manager-app
     <<: *asset-manager
     depends_on:
-      - mongo
+      - mongo-3.6
       - redis
       - nginx-proxy
       - asset-manager-worker
     environment:
-      MONGODB_URI: "mongodb://mongo/asset-manager"
+      MONGODB_URI: "mongodb://mongo-3.6/asset-manager"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: asset-manager.dev.gov.uk
       HOST: 0.0.0.0
@@ -46,10 +46,10 @@ services:
   asset-manager-worker:
     <<: *asset-manager
     depends_on:
-      - mongo
+      - mongo-3.6
       - redis
     environment:
-      MONGODB_URI: "mongodb://mongo/asset-manager"
+      MONGODB_URI: "mongodb://mongo-3.6/asset-manager"
       REDIS_URL: redis://redis
       ASSET_MANAGER_CLAMSCAN_PATH: /bin/true
       FAKE_S3_HOST: http://127.0.0.1

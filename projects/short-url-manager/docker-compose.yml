@@ -21,21 +21,21 @@ services:
     <<: *short-url-manager
     depends_on:
       - redis
-      - mongo
+      - mongo-3.6
     environment:
-      MONGODB_URI: "mongodb://mongo/short-url-manager"
-      TEST_MONGODB_URI: "mongodb://mongo/short-url-manager-test"
+      MONGODB_URI: "mongodb://mongo-3.6/short-url-manager"
+      TEST_MONGODB_URI: "mongodb://mongo-3.6/short-url-manager-test"
       REDIS_HOST: redis
 
   short-url-manager-app: &short-url-manager-app
     <<: *short-url-manager
     depends_on:
       - redis
-      - mongo
+      - mongo-3.6
       - nginx-proxy
       - publishing-api-app
     environment:
-      MONGODB_URI: "mongodb://mongo/short-url-manager"
+      MONGODB_URI: "mongodb://mongo-3.6/short-url-manager"
       REDIS_URL: redis
       VIRTUAL_HOST: short-url-manager.dev.gov.uk
       HOST: 0.0.0.0

@@ -20,27 +20,27 @@ services:
   licence-finder-lite: &licence-finder-lite
     <<: *licence-finder
     depends_on:
-      - mongo
-      - elasticsearch6
+      - mongo-3.6
+      - elasticsearch-6
     environment:
-      MONGODB_URI: "mongodb://mongo/licence-finder_development"
-      TEST_MONGODB_URI: "mongodb://mongo/licence-finder_test"
-      ELASTICSEARCH_URI: http://elasticsearch6:9200
+      MONGODB_URI: "mongodb://mongo-3.6/licence-finder_development"
+      TEST_MONGODB_URI: "mongodb://mongo-3.6/licence-finder_test"
+      ELASTICSEARCH_URI: http://elasticsearch-6:9200
 
   licence-finder-app: &licence-finder-app
     <<: *licence-finder
     depends_on:
-      - mongo
+      - mongo-3.6
       - redis
       - static-app
-      - elasticsearch6
+      - elasticsearch-6
       - content-store-app
       - nginx-proxy
     environment:
       REDIS_URL: redis://redis
       VIRTUAL_HOST: licence-finder.dev.gov.uk
-      MONGODB_URI: "mongodb://mongo/licence-finder_development"
-      ELASTICSEARCH_URI: http://elasticsearch6:9200
+      MONGODB_URI: "mongodb://mongo-3.6/licence-finder_development"
+      ELASTICSEARCH_URI: http://elasticsearch-6:9200
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       HOST: 0.0.0.0
     expose:
@@ -50,10 +50,10 @@ services:
   licence-finder-app-live:
     <<: *licence-finder-app
     depends_on:
-      - mongo
+      - mongo-3.6
       - nginx-proxy
     environment:
-      MONGODB_URI: "mongodb://mongo/licence-finder_development"
+      MONGODB_URI: "mongodb://mongo-3.6/licence-finder_development"
       PLEK_SERVICE_SEARCH_URI: https://www.gov.uk/api
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api

@@ -17,7 +17,7 @@ x-search-api: &search-api
     RABBITMQ_USER: guest
     RABBITMQ_PASSWORD: guest
     REDIS_HOST: redis
-    ELASTICSEARCH_URI: http://elasticsearch6:9200
+    ELASTICSEARCH_URI: http://elasticsearch-6:9200
 
 services:
   search-api-lite:
@@ -25,21 +25,21 @@ services:
     depends_on:
       - redis
       - rabbitmq
-      - elasticsearch6
+      - elasticsearch-6
 
   search-api-app: &search-api-app
     <<: *search-api
     depends_on:
       - nginx-proxy
       - redis
-      - elasticsearch6
+      - elasticsearch-6
       - search-api-worker
       - search-api-listener-publishing-queue
       - search-api-listener-insert-data
       - search-api-listener-bulk-insert-data
     environment:
       REDIS_HOST: redis
-      ELASTICSEARCH_URI: http://elasticsearch6:9200
+      ELASTICSEARCH_URI: http://elasticsearch-6:9200
       VIRTUAL_HOST: search-api.dev.gov.uk, search.dev.gov.uk
       HOST: 0.0.0.0
     expose:
@@ -51,7 +51,7 @@ services:
     depends_on:
       - redis
       - rabbitmq
-      - elasticsearch6
+      - elasticsearch-6
     command: bundle exec sidekiq -C ./config/sidekiq.yml
 
   search-api-listener-publishing-queue:

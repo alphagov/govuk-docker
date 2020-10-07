@@ -20,7 +20,7 @@ services:
   imminence-lite:
     <<: *imminence
     depends_on:
-      - mongo
+      - mongo-3.6
     environment:
-      MONGODB_URI: "mongodb://mongo/imminence"
-      TEST_MONGODB_URI: "mongodb://mongo/imminence-test"
+      MONGODB_URI: "mongodb://mongo-3.6/imminence"
+      TEST_MONGODB_URI: "mongodb://mongo-3.6/imminence-test"

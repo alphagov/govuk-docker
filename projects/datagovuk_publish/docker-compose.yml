@@ -20,10 +20,10 @@ services:
   datagovuk_publish-lite:
     <<: *datagovuk_publish
     depends_on:
-      - postgres
-      - elasticsearch6
+      - postgres-9.6
+      - elasticsearch-6
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres/datagovuk_publish"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres/datagovuk_publish-test"
-      ES_HOST: "http://elasticsearch6:9200"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/datagovuk_publish"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/datagovuk_publish-test"
+      ES_HOST: "http://elasticsearch-6:9200"
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"

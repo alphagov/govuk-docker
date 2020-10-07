@@ -20,19 +20,19 @@ services:
   content-store-lite:
     <<: *content-store
     depends_on:
-      - mongo
+      - mongo-3.6
     environment:
-      MONGODB_URI: "mongodb://mongo/content-store"
-      TEST_MONGODB_URI: "mongodb://mongo/content-store-test"
+      MONGODB_URI: "mongodb://mongo-3.6/content-store"
+      TEST_MONGODB_URI: "mongodb://mongo-3.6/content-store-test"
 
   content-store-app: &content-store-app
     <<: *content-store
     depends_on:
-      - mongo
+      - mongo-3.6
       - router-api-app
       - nginx-proxy
     environment:
-      MONGODB_URI: "mongodb://mongo/content-store"
+      MONGODB_URI: "mongodb://mongo-3.6/content-store"
       VIRTUAL_HOST: content-store.dev.gov.uk
       HOST: 0.0.0.0
     expose:

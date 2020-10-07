@@ -20,10 +20,10 @@ services:
   contacts-admin-lite:
     <<: *contacts-admin
     depends_on:
-      - mysql
+      - mysql-5.5
       - redis
     environment:
-      DATABASE_URL: "mysql2://root:root@mysql/contacts_development"
-      TEST_DATABASE_URL: "mysql2://root:root@mysql/contacts_test"
+      DATABASE_URL: "mysql2://root:root@mysql-5.5/contacts_development"
+      TEST_DATABASE_URL: "mysql2://root:root@mysql-5.5/contacts_test"
       REDIS_HOST: redis
 

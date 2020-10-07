@@ -20,21 +20,21 @@ services:
   signon-lite:
     <<: *signon
     depends_on:
-      - mysql
+      - mysql-5.5
       - redis
     environment:
-      DATABASE_URL: "mysql2://root:root@mysql/signon_development"
-      TEST_DATABASE_URL: "mysql2://root:root@mysql/signon_test"
+      DATABASE_URL: "mysql2://root:root@mysql-5.5/signon_development"
+      TEST_DATABASE_URL: "mysql2://root:root@mysql-5.5/signon_test"
       REDIS_HOST: redis
 
   signon-app:
     <<: *signon
     depends_on:
-      - mysql
+      - mysql-5.5
       - nginx-proxy
       - redis
     environment:
-      DATABASE_URL: "mysql2://root:root@mysql/signon_development"
+      DATABASE_URL: "mysql2://root:root@mysql-5.5/signon_development"
       VIRTUAL_HOST: signon.dev.gov.uk
       HOST: 0.0.0.0
       REDIS_HOST: redis

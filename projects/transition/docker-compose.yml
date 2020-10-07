@@ -20,21 +20,21 @@ services:
   transition-lite:
     <<: *transition
     depends_on:
-      - postgres
+      - postgres-9.6
       - redis
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres/transition"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres/transition-test"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/transition"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/transition-test"
       REDIS_URL: redis://redis
 
   transition-app: &transition-app
     <<: *transition
     depends_on:
       - nginx-proxy
-      - postgres
+      - postgres-9.6
       - redis
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres/transition"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/transition"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: transition.dev.gov.uk
       HOST: 0.0.0.0

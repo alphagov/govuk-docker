@@ -20,17 +20,17 @@ services:
   specialist-publisher-lite:
     <<: *specialist-publisher
     depends_on:
-      - mongo
+      - mongo-3.6
       - redis
     environment:
-      MONGODB_URI: "mongodb://mongo/specialist-publisher"
-      TEST_MONGODB_URI: "mongodb://mongo/specialist-publisher-test"
+      MONGODB_URI: "mongodb://mongo-3.6/specialist-publisher"
+      TEST_MONGODB_URI: "mongodb://mongo-3.6/specialist-publisher-test"
       REDIS_URL: redis://redis
 
   specialist-publisher-app: &specialist-publisher-app
     <<: *specialist-publisher
     depends_on:
-      - mongo
+      - mongo-3.6
       - redis
       - nginx-proxy
       - publishing-api-app
@@ -38,7 +38,7 @@ services:
       - email-alert-api-app
       - specialist-publisher-worker
     environment:
-      MONGODB_URI: "mongodb://mongo/specialist-publisher"
+      MONGODB_URI: "mongodb://mongo-3.6/specialist-publisher"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: specialist-publisher.dev.gov.uk
       HOST: 0.0.0.0
@@ -49,11 +49,11 @@ services:
   specialist-publisher-worker:
     <<: *specialist-publisher
     depends_on:
-      - mongo
+      - mongo-3.6
       - redis
       - publishing-api-app
       - asset-manager-app
     environment:
-      MONGODB_URI: "mongodb://mongo/specialist-publisher"
+      MONGODB_URI: "mongodb://mongo-3.6/specialist-publisher"
       REDIS_URL: redis://redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml

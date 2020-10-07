@@ -20,19 +20,19 @@ services:
   maslow-lite:
     <<: *maslow
     depends_on:
-      - mongo
+      - mongo-3.6
     environment:
-      MONGODB_URI: "mongodb://mongo/maslow"
-      TEST_MONGODB_URI: "mongodb://mongo/maslow-test"
+      MONGODB_URI: "mongodb://mongo-3.6/maslow"
+      TEST_MONGODB_URI: "mongodb://mongo-3.6/maslow-test"
 
   maslow-app: &maslow-app
     <<: *maslow
     depends_on:
-      - mongo
+      - mongo-3.6
       - nginx-proxy
       - publishing-api-app
     environment:
-      MONGODB_URI: "mongodb://mongo/maslow"
+      MONGODB_URI: "mongodb://mongo-3.6/maslow"
       VIRTUAL_HOST: maslow.dev.gov.uk
       HOST: 0.0.0.0
     expose:

@@ -22,25 +22,25 @@ services:
   whitehall-lite:
     <<: *whitehall
     depends_on:
-      - mysql
+      - mysql-5.5
       - redis
     environment:
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
-      DATABASE_URL: "mysql2://root:root@mysql/whitehall_development"
-      TEST_DATABASE_URL: "mysql2://root:root@mysql/whitehall_test"
+      DATABASE_URL: "mysql2://root:root@mysql-5.5/whitehall_development"
+      TEST_DATABASE_URL: "mysql2://root:root@mysql-5.5/whitehall_test"
       REDIS_URL: redis://redis
 
   whitehall-app: &whitehall-app
     <<: *whitehall
     depends_on:
-      - mysql
+      - mysql-5.5
       - redis
       - static-app
       - nginx-proxy
       - asset-manager-app
       - publishing-api-app
     environment:
-      DATABASE_URL: "mysql2://root:root@mysql/whitehall_development"
+      DATABASE_URL: "mysql2://root:root@mysql-5.5/whitehall_development"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: whitehall-admin.dev.gov.uk, whitehall-frontend.dev.gov.uk
       HOST: 0.0.0.0

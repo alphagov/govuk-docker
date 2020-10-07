@@ -20,21 +20,21 @@ services:
   email-alert-api-lite:
     <<: *email-alert-api
     depends_on:
-      - postgres
+      - postgres-9.6
       - redis
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres/email-alert-api"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres/email-alert-api-test"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/email-alert-api"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/email-alert-api-test"
       REDIS_URL: redis://redis
 
   email-alert-api-app: &email-alert-api-app
     <<: *email-alert-api
     depends_on:
       - nginx-proxy
-      - postgres
+      - postgres-9.6
       - redis
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres/email-alert-api"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/email-alert-api"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: email-alert-api.dev.gov.uk
       HOST: 0.0.0.0
@@ -45,9 +45,9 @@ services:
   email-alert-api-worker:
     <<: *email-alert-api
     depends_on:
-      - postgres
+      - postgres-9.6
       - redis
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres/email-alert-api"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/email-alert-api"
       REDIS_URL: redis://redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml

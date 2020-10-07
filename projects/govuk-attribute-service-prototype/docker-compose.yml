@@ -21,19 +21,19 @@ services:
     <<: *govuk-attribute-service-prototype
     depends_on:
       - memcached
-      - postgres
+      - postgres-9.6
     environment:
       MEMCACHE_SERVERS: memcached
-      DATABASE_URL: "postgresql://postgres@postgres/govuk-attribute-service-prototype"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/govuk-attribute-service-prototype"
       ACCOUNT_MANAGER_URL: http://www.login.service.dev.gov.uk
       ACCOUNT_MANAGER_TOKEN: attribute-service-token
-      TEST_DATABASE_URL: "postgresql://postgres@postgres/govuk-attribute-service-prototype-test"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/govuk-attribute-service-prototype-test"
 
   govuk-attribute-service-prototype-app: &govuk-attribute-service-prototype-app
     <<: *govuk-attribute-service-prototype
     depends_on:
       - nginx-proxy
-      - postgres
+      - postgres-9.6
     environment:
       ASSET_HOST: attributes.login.service.dev.gov.uk
       VIRTUAL_HOST: attributes.login.service.dev.gov.uk
@@ -41,7 +41,7 @@ services:
       ACCOUNT_MANAGER_TOKEN: attribute-service-token
       BINDING: 0.0.0.0
       MEMCACHE_SERVERS: memcached
-      DATABASE_URL: "postgresql://postgres@postgres/govuk-attribute-service-prototype"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/govuk-attribute-service-prototype"
     expose:
       - "3000"
     command: bin/rails s --restart

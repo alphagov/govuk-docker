@@ -20,24 +20,24 @@ services:
   travel-advice-publisher-lite:
     <<: *travel-advice-publisher
     depends_on:
-      - mongo
+      - mongo-3.6
       - redis
     environment:
-      MONGODB_URI: "mongodb://mongo/travel-advice-publisher"
-      TEST_MONGODB_URI: "mongodb://mongo/travel-advice-publisher-test"
+      MONGODB_URI: "mongodb://mongo-3.6/travel-advice-publisher"
+      TEST_MONGODB_URI: "mongodb://mongo-3.6/travel-advice-publisher-test"
       REDIS_URL: redis://redis
 
   travel-advice-publisher-app: &travel-advice-publisher-app
     <<: *travel-advice-publisher
     depends_on:
-      - mongo
+      - mongo-3.6
       - redis
       - publishing-api-app
       - asset-manager-app
       - content-store-app
       - nginx-proxy
     environment:
-      MONGODB_URI: "mongodb://mongo/travel-advice-publisher"
+      MONGODB_URI: "mongodb://mongo-3.6/travel-advice-publisher"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: travel-advice-publisher.dev.gov.uk
       HOST: 0.0.0.0
@@ -48,11 +48,11 @@ services:
   travel-advice-publisher-worker:
     <<: *travel-advice-publisher
     depends_on:
-      - mongo
+      - mongo-3.6
       - redis
       - publishing-api-app
       - asset-manager-app
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres/travel-advice-publisher"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/travel-advice-publisher"
       REDIS_URL: redis://redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml

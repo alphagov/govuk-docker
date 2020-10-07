@@ -20,8 +20,8 @@ services:
   content-data-api-lite:
     <<: *content-data-api
     depends_on:
-      - postgres
+      - postgres-9.6
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres/content-data-api"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres/content-data-api-test"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/content-data-api"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/content-data-api-test"
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"

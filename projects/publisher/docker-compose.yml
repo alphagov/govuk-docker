@@ -21,23 +21,23 @@ services:
     <<: *publisher
     depends_on:
       - redis
-      - mongo
+      - mongo-3.6
     environment:
-      MONGODB_URI: "mongodb://mongo/publisher"
-      TEST_MONGODB_URI: "mongodb://mongo/publisher-test"
+      MONGODB_URI: "mongodb://mongo-3.6/publisher"
+      TEST_MONGODB_URI: "mongodb://mongo-3.6/publisher-test"
       REDIS_URL: redis://redis
 
   publisher-app: &publisher-app
     <<: *publisher
     depends_on:
       - redis
-      - mongo
+      - mongo-3.6
       - nginx-proxy
       - publishing-api-app
       - link-checker-api-app
       - publisher-worker
     environment:
-      MONGODB_URI: "mongodb://mongo/publisher"
+      MONGODB_URI: "mongodb://mongo-3.6/publisher"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: publisher.dev.gov.uk
       HOST: 0.0.0.0
@@ -49,10 +49,10 @@ services:
     <<: *publisher
     depends_on:
       - redis
-      - mongo
+      - mongo-3.6
       - nginx-proxy
       - publishing-api-app
     environment:
-      MONGODB_URI: "mongodb://mongo/publisher"
+      MONGODB_URI: "mongodb://mongo-3.6/publisher"
       REDIS_URL: redis://redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml

@@ -20,21 +20,21 @@ services:
   content-tagger-lite:
     <<: *content-tagger
     depends_on:
-      - postgres
+      - postgres-9.6
     environment:
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
-      DATABASE_URL: "postgresql://postgres@postgres/content-tagger"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres/content-tagger-test"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/content-tagger"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/content-tagger-test"
 
   content-tagger-app: &content-tagger-app
     <<: *content-tagger
     depends_on:
-      - postgres
+      - postgres-9.6
       - publishing-api-app
       - nginx-proxy
       - redis
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres/content-tagger"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/content-tagger"
       VIRTUAL_HOST: content-tagger.dev.gov.uk
       REDIS_URL: redis://redis
       BINDING: 0.0.0.0

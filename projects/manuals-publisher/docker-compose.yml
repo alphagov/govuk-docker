@@ -20,8 +20,8 @@ services:
   manuals-publisher-lite:
     <<: *manuals-publisher
     depends_on:
-      - mongo
+      - mongo-3.6
     environment:
-      MONGODB_URI: "mongodb://mongo/manuals-publisher"
-      TEST_MONGODB_URI: "mongodb://mongo/manuals-publisher-test"
+      MONGODB_URI: "mongodb://mongo-3.6/manuals-publisher"
+      TEST_MONGODB_URI: "mongodb://mongo-3.6/manuals-publisher-test"
 

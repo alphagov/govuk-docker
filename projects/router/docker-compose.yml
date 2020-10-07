@@ -15,7 +15,7 @@ services:
   router-lite:
     <<: *router
     depends_on:
-      - mongo
+      - mongo-3.6
     environment:
       DEBUG: "true"
       ROUTER_MONGO_URL: mongo
@@ -24,7 +24,7 @@ services:
   router-app: &router-app
     <<: *router
     depends_on:
-      - mongo
+      - mongo-3.6
       - nginx-proxy
     expose:
       - "8080"

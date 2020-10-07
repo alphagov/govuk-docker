@@ -20,25 +20,25 @@ services:
   publishing-api-lite:
     <<: *publishing-api
     depends_on:
-      - postgres
+      - postgres-9.6
       - redis
       - rabbitmq
     environment:
       RABBITMQ_EXCHANGE: published_documents
       RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
-      DATABASE_URL: "postgresql://postgres@postgres/publishing-api"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres/publishing-api-test"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/publishing-api"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/publishing-api-test"
       REDIS_URL: redis://redis
 
   publishing-api-app: &publishing-api-app
     <<: *publishing-api
     depends_on:
-      - postgres
+      - postgres-9.6
       - redis
       - nginx-proxy
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres/publishing-api"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/publishing-api"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: publishing-api.dev.gov.uk
       HOST: 0.0.0.0

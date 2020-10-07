@@ -20,21 +20,21 @@ services:
   authenticating-proxy-lite:
     <<: *authenticating-proxy
     depends_on:
-      - mongo
+      - mongo-3.6
     environment:
       GOVUK_UPSTREAM_URI: http://draft-origin.dev.gov.uk
-      MONGODB_URI: "mongodb://mongo/authenticating-proxy"
-      TEST_MONGODB_URI: "mongodb://mongo/authenticating-proxy-test"
+      MONGODB_URI: "mongodb://mongo-3.6/authenticating-proxy"
+      TEST_MONGODB_URI: "mongodb://mongo-3.6/authenticating-proxy-test"
 
   authenticating-proxy-app: &authenticating-proxy-app
     <<: *authenticating-proxy
     depends_on:
-      - mongo
+      - mongo-3.6
       - nginx-proxy
       - router-app-draft
     environment:
       GOVUK_UPSTREAM_URI: http://draft-origin.dev.gov.uk
-      MONGODB_URI: "mongodb://mongo/authenticating-proxy"
+      MONGODB_URI: "mongodb://mongo-3.6/authenticating-proxy"
       VIRTUAL_HOST: authenticating-proxy.dev.gov.uk
       HOST: 0.0.0.0
     expose:

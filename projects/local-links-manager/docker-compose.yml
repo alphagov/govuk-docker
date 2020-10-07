@@ -20,18 +20,18 @@ services:
   local-links-manager-lite:
     <<: *local-links-manager
     depends_on:
-      - postgres
+      - postgres-9.6
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres/local-links-manager"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres/local-links-manager-test"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/local-links-manager"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/local-links-manager-test"
 
   local-links-manager-app:
     <<: *local-links-manager
     depends_on:
-      - postgres
+      - postgres-9.6
       - nginx-proxy
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres/local-links-manager"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/local-links-manager"
       VIRTUAL_HOST: local-links-manager.dev.gov.uk
       HOST: 0.0.0.0
     expose:

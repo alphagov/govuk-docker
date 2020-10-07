@@ -20,13 +20,13 @@ services:
   govuk-account-manager-prototype-lite:
     <<: *govuk-account-manager-prototype
     depends_on:
-      - postgres
+      - postgres-9.6
       - memcached
       - govuk-attribute-service-prototype-app
     environment:
       MEMCACHE_SERVERS: memcached
-      DATABASE_URL: "postgresql://postgres@postgres/govuk-account-manager-prototype"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres/govuk-account-manager-prototype-test"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/govuk-account-manager-prototype"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/govuk-account-manager-prototype-test"
       REDIRECT_BASE_URL: http://www.login.service.dev.gov.uk
       FINDER_FRONTEND_OAUTH_CLIENT_ID: transition-checker-id
       FINDER_FRONTEND_OAUTH_CLIENT_PUBLIC_KEY_UUID: 898d62b7-eed9-464a-a4ae-9d9e08bd9bee
@@ -36,7 +36,7 @@ services:
     <<: *govuk-account-manager-prototype
     depends_on:
       - nginx-proxy
-      - postgres
+      - postgres-9.6
       - redis
       - govuk-attribute-service-prototype-app
       - govuk-account-manager-prototype-worker
@@ -45,7 +45,7 @@ services:
       VIRTUAL_HOST: www.login.service.dev.gov.uk
       BINDING: 0.0.0.0
       MEMCACHE_SERVERS: memcached
-      DATABASE_URL: "postgresql://postgres@postgres/govuk-account-manager-prototype"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/govuk-account-manager-prototype"
       ATTRIBUTE_SERVICE_URL: http://attributes.login.service.dev.gov.uk
       REDIRECT_BASE_URL: http://www.login.service.dev.gov.uk
       REDIS_URL: redis://redis:6379/0
@@ -65,5 +65,5 @@ services:
       ATTRIBUTE_SERVICE_URL: http://attributes.login.service.dev.gov.uk
       REDIS_URL: redis://redis:6379/0
       REDIRECT_BASE_URL: http://www.login.service.dev.gov.uk
-      DATABASE_URL: "postgresql://postgres@postgres/govuk-account-manager-prototype"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/govuk-account-manager-prototype"
     command: bundle exec sidekiq -C ./config/sidekiq.yml

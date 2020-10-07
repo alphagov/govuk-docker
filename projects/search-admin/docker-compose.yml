@@ -20,23 +20,23 @@ services:
   search-admin-lite:
     <<: *search-admin-base
     depends_on:
-      - mysql
+      - mysql-5.5
     environment:
       # the app uses this URL to generate a test database URL
-      DATABASE_URL: "mysql2://root:root@mysql/search_admin_development"
-      TEST_DATABASE_URL: "mysql2://root:root@mysql/search_admin_test"
+      DATABASE_URL: "mysql2://root:root@mysql-5.5/search_admin_development"
+      TEST_DATABASE_URL: "mysql2://root:root@mysql-5.5/search_admin_test"
       REDIS_URL: redis://redis
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
 
   search-admin-app: &search-admin-app
     <<: *search-admin-base
     depends_on:
-      - mysql
+      - mysql-5.5
       - nginx-proxy
       - publishing-api-app
       - search-api-app
     environment:
-      DATABASE_URL: "mysql2://root:root@mysql/search_admin_development"
+      DATABASE_URL: "mysql2://root:root@mysql-5.5/search_admin_development"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: search-admin.dev.gov.uk
       BINDING: 0.0.0.0

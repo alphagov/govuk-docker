@@ -3,35 +3,35 @@ version: '3.7'
 volumes:
   root-home:
   rabbitmq:
-  postgres:
-  mysql:
-  mongo:
+  postgres-9.6:
+  mysql-5.5:
+  mongo-3.6:
   go:
-  elasticsearch6:
+  elasticsearch-6:
 
 services:
-  postgres:
+  postgres-9.6:
     image: postgres:9.6
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - postgres-9.6:/var/lib/postgresql/data
 
   memcached:
     image: memcached
 
-  mongo:
+  mongo-3.6:
     image: mongo:3.6
     volumes:
-      - mongo:/data/db
+      - mongo-3.6:/data/db
     ports:
       - "27017:27017"
       - "28017:28017"
 
-  mysql:
+  mysql-5.5:
     image: mysql:5.5.58
     volumes:
-      - mysql:/var/lib/mysql
+      - mysql-5.5:/var/lib/mysql
     command: --max_allowed_packet=1073741824
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -44,7 +44,7 @@ services:
     volumes:
       - rabbitmq:/var/lib/rabbitmq
 
-  elasticsearch6:
+  elasticsearch-6:
     image: elasticsearch:6.7.0
     environment:
       - http.host=0.0.0.0
@@ -52,7 +52,7 @@ services:
       - xpack.security.enabled=false
       - ES_JAVA_OPTS=-Xms1g -Xmx1g
     volumes:
-      - elasticsearch6:/usr/share/elasticsearch/data
+      - elasticsearch-6:/usr/share/elasticsearch/data
 
   nginx-proxy:
     image: jwilder/nginx-proxy:latest
