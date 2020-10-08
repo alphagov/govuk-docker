@@ -29,6 +29,7 @@ services:
       - static-app
       - search-api-app
       - memcached
+      - govuk-account-manager-prototype-app
       - nginx-proxy
     environment:
       ASSET_HOST: finder-frontend.dev.gov.uk
@@ -40,6 +41,7 @@ services:
       GOVUK_ACCOUNT_JWT_KEY_UUID: "898d62b7-eed9-464a-a4ae-9d9e08bd9bee"
       GOVUK_ACCOUNT_OAUTH_CLIENT_SECRET: transition-checker-secret
       PLEK_SERVICE_ACCOUNT_MANAGER_URI: "http://www.login.service.dev.gov.uk"
+      FEATURE_FLAG_ACCOUNTS: "enabled"
     expose:
       - "3000"
     command: bin/rails s --restart
@@ -47,6 +49,7 @@ services:
   finder-frontend-app-live:
     <<: *finder-frontend-app
     depends_on:
+      - govuk-account-manager-prototype-app
       - nginx-proxy
     environment:
       PLEK_SERVICE_SEARCH_URI: https://www.gov.uk/api
@@ -61,3 +64,4 @@ services:
       GOVUK_ACCOUNT_JWT_KEY_UUID: "898d62b7-eed9-464a-a4ae-9d9e08bd9bee"
       GOVUK_ACCOUNT_OAUTH_CLIENT_SECRET: transition-checker-secret
       PLEK_SERVICE_ACCOUNT_MANAGER_URI: "http://www.login.service.dev.gov.uk"
+      FEATURE_FLAG_ACCOUNTS: "enabled"
