@@ -1,0 +1,66 @@
+version: '3.7'
+
+x-govuk-account-manager-prototype: &govuk-account-manager-prototype
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: govuk-account-manager-prototype
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - home:/home/build
+  working_dir: /govuk/govuk-account-manager-prototype
+
+services:
+  govuk-account-manager-prototype-lite:
+    <<: *govuk-account-manager-prototype
+    privileged: true
+    depends_on:
+      - postgres
+      - memcached
+      - govuk-attribute-service-prototype-app
+    environment:
+      MEMCACHE_SERVERS: memcached
+      DATABASE_URL: "postgresql://postgres@postgres/govuk-account-manager-prototype"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres/govuk-account-manager-prototype-test"
+      REDIRECT_BASE_URL: http://www.login.service.dev.gov.uk
+      FINDER_FRONTEND_OAUTH_CLIENT_ID: transition-checker-id
+      FINDER_FRONTEND_OAUTH_CLIENT_PUBLIC_KEY_UUID: 898d62b7-eed9-464a-a4ae-9d9e08bd9bee
+      FINDER_FRONTEND_OAUTH_CLIENT_PUBLIC_KEY: "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEjMgE/d6Bdu1K17BTjNycDvIXKSmU\ngZ5YYoayU3gGqTLhgefuK2qbo99Wx+SuvdW/GRvIlUIW1ooNRdQ3QFwwCw==\n-----END PUBLIC KEY-----\n"
+
+  govuk-account-manager-prototype-app: &govuk-account-manager-prototype-app
+    <<: *govuk-account-manager-prototype
+    depends_on:
+      - nginx-proxy
+      - postgres
+      - redis
+      - govuk-attribute-service-prototype-app
+      - govuk-account-manager-prototype-worker
+    environment:
+      ASSET_HOST: www.login.service.dev.gov.uk
+      VIRTUAL_HOST: www.login.service.dev.gov.uk
+      BINDING: 0.0.0.0
+      MEMCACHE_SERVERS: memcached
+      DATABASE_URL: "postgresql://postgres@postgres/govuk-account-manager-prototype"
+      ATTRIBUTE_SERVICE_URL: http://attributes.login.service.dev.gov.uk
+      REDIRECT_BASE_URL: http://www.login.service.dev.gov.uk
+      REDIS_URL: redis://redis:6379/0
+      FINDER_FRONTEND_OAUTH_CLIENT_ID: transition-checker-id
+      FINDER_FRONTEND_OAUTH_CLIENT_PUBLIC_KEY_UUID: 898d62b7-eed9-464a-a4ae-9d9e08bd9bee
+      FINDER_FRONTEND_OAUTH_CLIENT_PUBLIC_KEY: "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEjMgE/d6Bdu1K17BTjNycDvIXKSmU\ngZ5YYoayU3gGqTLhgefuK2qbo99Wx+SuvdW/GRvIlUIW1ooNRdQ3QFwwCw==\n-----END PUBLIC KEY-----\n"
+    expose:
+      - "3000"
+    command: bin/rails s --restart
+
+  govuk-account-manager-prototype-worker:
+    <<: *govuk-account-manager-prototype
+    depends_on:
+      - redis
+      - govuk-attribute-service-prototype-app
+    environment:
+      ATTRIBUTE_SERVICE_URL: http://attributes.login.service.dev.gov.uk
+      REDIS_URL: redis://redis:6379/0
+      REDIRECT_BASE_URL: http://www.login.service.dev.gov.uk
+      DATABASE_URL: "postgresql://postgres@postgres/govuk-account-manager-prototype"
+    command: bundle exec sidekiq -C ./config/sidekiq.yml
