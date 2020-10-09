@@ -32,7 +32,7 @@ services:
       - nginx-proxy
     environment:
       ASSET_HOST: finder-frontend.dev.gov.uk
-      VIRTUAL_HOST: finder-frontend.dev.gov.uk
+      VIRTUAL_HOST: http://finder-frontend.dev.gov.uk
       BINDING: 0.0.0.0
       MEMCACHE_SERVERS: memcached
       GOVUK_ACCOUNT_OAUTH_CLIENT_ID: transition-checker-id
