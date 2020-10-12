@@ -7,7 +7,7 @@ APPS ?= $(shell ls ${GOVUK_DOCKER_DIR}/projects/*/Makefile | xargs -L 1 dirname 
 
 # Best practice to ensure these targets always execute, even if a
 # file like 'clone' exists in the current directory.
-.PHONY: clone pull test all-apps
+.PHONY: clone pull test
 
 default:
 	@echo "Run 'make APP-NAME' to set up an app and its dependencies."
@@ -30,10 +30,6 @@ test:
 
 	# Validate shell scripts
 	$(SHELLCHECK) $(shell ls ${GOVUK_DOCKER_DIR}/bin/*.sh ${GOVUK_DOCKER_DIR}/exe/*)
-
-# This will be slow and may repeat work, so generally you don't want
-# to run this.
-all-apps: $(APPS)
 
 bundle-%: clone-%
 	$(GOVUK_DOCKER) build $*-lite
