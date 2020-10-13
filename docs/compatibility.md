@@ -64,7 +64,6 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ mapit
       * **TODO: Data replication**
    - ✅ maslow
-   - ✅ miller-columns-element
    - ✅ publisher
    - ✅ publishing-api
    - ✅ release
@@ -78,7 +77,6 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ short-url-manager
    - ❌ sidekiq-monitoring
    - ✅ signon
-   - ❌ slimmer
    - ✅ smart-answers
    - ✅ special-route-publisher
    - ✅ specialist-publisher
@@ -113,3 +111,4 @@ These repos are used as part of running the live GOV.UK site. Since all of them 
    - ❌ govuk_taxonomy_helpers
    - ✅ govuk-content-schemas
    - ✅ plek
+   - ❌ slimmer
