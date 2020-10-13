@@ -64,7 +64,6 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ mapit
       * **TODO: Data replication**
    - ✅ maslow
-   - ✅ miller-columns-element
    - ✅ publisher
    - ✅ publishing-api
    - ✅ release
