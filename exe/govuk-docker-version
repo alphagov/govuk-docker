@@ -3,7 +3,7 @@
 VERSION_FILE="$(dirname "$0")/../.version"
 CHANGELOG_FILE="$(dirname "$0")/../CHANGELOG.md"
 
-VERSION=1.0.0
+VERSION=2.0.0
 LOCAL_VERSION=$(cat "$VERSION_FILE" 2>/dev/null)
 
 if grep -xsq $VERSION "$VERSION_FILE"; then
