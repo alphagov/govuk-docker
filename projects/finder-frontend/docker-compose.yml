@@ -24,6 +24,7 @@ services:
   finder-frontend-app: &finder-frontend-app
     <<: *finder-frontend
     depends_on:
+      - email-alert-api-app
       - router-app
       - content-store-app
       - static-app
