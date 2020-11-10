@@ -3,22 +3,15 @@ GOVUK_DOCKER_DIR ?= $(GOVUK_ROOT_DIR)/govuk-docker
 GOVUK_DOCKER     ?= $(GOVUK_DOCKER_DIR)/exe/govuk-docker
 SHELLCHECK       ?= shellcheck
 
-APPS ?= $(shell ls ${GOVUK_DOCKER_DIR}/projects/*/Makefile | xargs -L 1 dirname | xargs -L 1 basename)
-
 # Best practice to ensure these targets always execute, even if a
 # file like 'clone' exists in the current directory.
-.PHONY: clone pull test
+.PHONY: test
 
 default:
 	@echo "Run 'make APP-NAME' to set up an app and its dependencies."
 	@echo
 	@echo "For example:"
 	@echo "    make content-publisher"
-
-clone: $(addprefix clone-,$(APPS))
-
-pull:
-	echo $(APPS) | cut -d/ -f3 | xargs -P8 -n1 ./bin/update-git-repo.sh
 
 test:
 	# Run the tests for the govuk-docker CLI

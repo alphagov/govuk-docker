@@ -78,14 +78,6 @@ govuk-docker logs -f publishing-api-app
 govuk-docker rm -sv
 ```
 
-### How to: update everything!
-
-Sometimes it's useful to get all changes for all repos e.g. to support finding things with a govuk-wide grep. This can be done by running:
-
-```
-make pull
-```
-
 ### How to: work with local gems
 
 Provide a local gem path relative to the location of the Gemfile you're editing:
