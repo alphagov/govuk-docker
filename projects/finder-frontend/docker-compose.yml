@@ -35,11 +35,6 @@ services:
       VIRTUAL_HOST: finder-frontend.dev.gov.uk
       BINDING: 0.0.0.0
       MEMCACHE_SERVERS: memcached
-      GOVUK_ACCOUNT_OAUTH_CLIENT_ID: transition-checker-id
-      GOVUK_ACCOUNT_JWT_KEY_PEM: "-----BEGIN EC PRIVATE KEY-----\nMHcCAQEEID+UE4jB5QtUFOtekHJliaSB8K2xQU2AS4xczOLAqvCUoAoGCCqGSM49\nAwEHoUQDQgAEjMgE/d6Bdu1K17BTjNycDvIXKSmUgZ5YYoayU3gGqTLhgefuK2qb\no99Wx+SuvdW/GRvIlUIW1ooNRdQ3QFwwCw==\n-----END EC PRIVATE KEY-----\n"
-      GOVUK_ACCOUNT_JWT_KEY_UUID: "898d62b7-eed9-464a-a4ae-9d9e08bd9bee"
-      GOVUK_ACCOUNT_OAUTH_CLIENT_SECRET: transition-checker-secret
-      PLEK_SERVICE_ACCOUNT_MANAGER_URI: "http://www.login.service.dev.gov.uk"
     expose:
       - "3000"
     command: bin/rails s --restart
@@ -56,8 +51,24 @@ services:
       PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
       VIRTUAL_HOST: finder-frontend.dev.gov.uk
       BINDING: 0.0.0.0
+
+  finder-frontend-app-account:
+    <<: *finder-frontend-app
+    depends_on:
+      - router-app
+      - nginx-proxy
+      - email-alert-api-app
+      - static-app
+      - memcached
+      - govuk-account-manager-prototype-app
+    environment:
+      ASSET_HOST: finder-frontend.dev.gov.uk
+      VIRTUAL_HOST: finder-frontend.dev.gov.uk
+      BINDING: 0.0.0.0
+      MEMCACHE_SERVERS: memcached
       GOVUK_ACCOUNT_OAUTH_CLIENT_ID: transition-checker-id
       GOVUK_ACCOUNT_JWT_KEY_PEM: "-----BEGIN EC PRIVATE KEY-----\nMHcCAQEEID+UE4jB5QtUFOtekHJliaSB8K2xQU2AS4xczOLAqvCUoAoGCCqGSM49\nAwEHoUQDQgAEjMgE/d6Bdu1K17BTjNycDvIXKSmUgZ5YYoayU3gGqTLhgefuK2qb\no99Wx+SuvdW/GRvIlUIW1ooNRdQ3QFwwCw==\n-----END EC PRIVATE KEY-----\n"
       GOVUK_ACCOUNT_JWT_KEY_UUID: "898d62b7-eed9-464a-a4ae-9d9e08bd9bee"
       GOVUK_ACCOUNT_OAUTH_CLIENT_SECRET: transition-checker-secret
       PLEK_SERVICE_ACCOUNT_MANAGER_URI: "http://www.login.service.dev.gov.uk"
+      FEATURE_FLAG_ACCOUNTS: "enabled"
