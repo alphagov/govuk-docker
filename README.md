@@ -6,7 +6,7 @@ GOV.UK development environment using Docker.
 
 The GOV.UK website uses a microservice architecture. Developing in this ecosystem is a challenge, due to the range of environments to maintain, both for the app being developed and its dependencies.
 
-The aim of govuk-docker is to make it easy to develop any GOV.UK app. It achieves this by providing a variety of environments or _stacks_ for each app, in which you can run tests, start a debugger, publish a document end-to-end.
+The aim of govuk-docker is to make it easy to develop any GOV.UK app. It achieves this by providing a variety of environments or _stacks_ for each app, in which you can run commands, and the app itself.
 
 [RFC 106: Use Docker for local development](https://github.com/alphagov/govuk-rfcs/blob/master/rfc-106-docker-for-local-development.md) describes the background for choosing Docker. See the [list of projects which work with govuk-docker](docs/compatibility.md).
 
@@ -16,44 +16,42 @@ The aim of govuk-docker is to make it easy to develop any GOV.UK app. It achieve
 
 ## Usage
 
-Do this to run the tests for a project:
+Do this the first time you work on a project:
 
 ```sh
 make collections-publisher
+```
 
-cd ~/govuk/collections-publisher
+Each project provides a number of 'stacks' for different use cases. You can see the stacks for a project in its [config file](projects/content-publisher/docker-compose.yml). To provide consistency, all projects should follow these conventions for stacks:
 
+### The `lite` stack
+
+This stack provides only the minimum number of dependencies to run the project code. This is useful for running the tests, or a Rails console, for example.
+
+Do this to run the tests for a project:
+
+```sh
 govuk-docker run collections-publisher-lite bundle exec rake
 ```
+
+### The `app` stack
+
+This stack provides the dependencies necessary to run an app e.g. in a browser. If the app is a web app, you will then be able to visit it in your browser at `my-app.dev.gov.uk`.
 
 Do this to start a GOV.UK web app:
 
 ```sh
-make collections-publisher
-
-cd ~/govuk/collections-publisher
-
-# Start collections-publisher including dependencies.
-# Visit it at collections-publisher.dev.gov.uk
 govuk-docker up collections-publisher-app
 ```
 
-For a full list of govuk-docker commands, run `govuk-docker help`.
+### The `app-*` stacks
 
-## Stacks
+Variations on the `app` stack are allowed where necessary such as:
 
-Each project provides a number of 'stacks' for different use cases.
-You can see the stacks for a project in its [config file](projects/content-publisher/docker-compose.yml).
-To provide consistency we have a convention for these names:
+  - **app-draft**: used for testing the [authenticating-proxy](https://github.com/alphagov/govuk-docker/tree/master/projects/authenticating-proxy) against a draft version of the [router](https://github.com/alphagov/govuk-docker/tree/master/projects/router) app.
+  - **app-live**: used to test a read-only frontend app against live GOV.UK APIs (avoids having to replicate data locally).
 
-- **lite**: This stack provides only the minimum number of dependencies to run
-  the application code. This is useful for running the tests, or a Rails
-  console, for example. It won't be useful for opening the app in a browser.
-- **app**: This stack provides the dependencies necessary to run the app in the
-  browser. Variations on this are allowed where necessary such as:
-  - **app-draft**: used for testing the [authenticating-proxy](https://github.com/alphagov/govuk-docker/tree/master/projects/authenticating-proxy) against a draft version of the [router](https://github.com/alphagov/govuk-docker/tree/master/projects/router) app
-  - **app-live**: if the app is a read-only frontend app, the live stack will
-    point the production versions of content-store, search-api and static.
+Some `app` stacks also depend on a `worker` stack, to run asynchronous tasks [[example](https://github.com/alphagov/govuk-docker/blob/d286748e0300df8f0d1ed618086d4f8f951e752a/projects/content-publisher/docker-compose.yml#L46)].
 
 ## How to's
 
