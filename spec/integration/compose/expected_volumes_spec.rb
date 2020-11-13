@@ -10,6 +10,13 @@ RSpec.describe "Expected volumes" do
     end
   end
 
+  def self.node_projects
+    ProjectsHelper.all_projects.select do |project_name|
+      makefile = File.read("projects/#{project_name}/Makefile")
+      makefile.match(/yarn|npm/)
+    end
+  end
+
   rails_projects.each do |project_name|
     ComposeHelper.services(project_name).each_pair do |service_name, service|
       it "configures #{service_name} with a govuk delegated volume" do
@@ -24,6 +31,15 @@ RSpec.describe "Expected volumes" do
       it "configures #{service_name} with a tmp volume" do
         expect(service.fetch("volumes", []))
           .to include("#{project_name}-tmp:/govuk/#{project_name}/tmp")
+      end
+    end
+  end
+
+  node_projects.each do |project_name|
+    ComposeHelper.services(project_name).each_pair do |service_name, service|
+      it "configures #{service_name} with a node modules volume" do
+        expect(service.fetch("volumes", []))
+          .to include("#{project_name}-node-modules:/govuk/#{project_name}/node_modules")
       end
     end
   end
