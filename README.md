@@ -22,6 +22,8 @@ Do this the first time you work on a project:
 make collections-publisher
 ```
 
+👉 [Check the troubleshooting guide if you have a problem.](docs/troubleshooting.md)
+
 Each project provides a number of 'stacks' for different use cases. You can see the stacks for a project in its [config file](projects/content-publisher/docker-compose.yml). To provide consistency, all projects should follow these conventions for stacks:
 
 ### The `lite` stack
@@ -34,6 +36,8 @@ Do this to run the tests for a project:
 govuk-docker run collections-publisher-lite bundle exec rake
 ```
 
+👉 [Check the troubleshooting guide if you have a problem.](docs/troubleshooting.md)
+
 ### The `app` stack
 
 This stack provides the dependencies necessary to run an app e.g. in a browser. If the app is a web app, you will then be able to visit it in your browser at `my-app.dev.gov.uk`.
@@ -43,6 +47,8 @@ Do this to start a GOV.UK web app:
 ```sh
 govuk-docker up collections-publisher-app
 ```
+
+👉 [Check the troubleshooting guide if you have a problem.](docs/troubleshooting.md)
 
 ### The `app-*` stacks
 
@@ -54,27 +60,6 @@ Variations on the `app` stack are allowed where necessary such as:
 Some `app` stacks also depend on a `worker` stack, to run asynchronous tasks [[example](https://github.com/alphagov/govuk-docker/blob/d286748e0300df8f0d1ed618086d4f8f951e752a/projects/content-publisher/docker-compose.yml#L46)].
 
 ## How to's
-
-### How to: diagnose and troubleshoot
-
-Sometimes things go wrong or some investigation is needed. As govuk-docker is just a bunch of docker config and a CLI wrapper, it's still possible to use all the standard docker commands to help fix issues and get more info e.g.
-
-```
-# make sure govuk-docker is up-to-date
-git pull
-
-# make sure the project is built OK
-make <project>
-
-# check if any dependencies have exited
-docker ps -a
-
-# tail logs for running services/dependencies
-govuk-docker logs -f publishing-api-app
-
-# try clearing all containers / volumes
-govuk-docker rm -sv
-```
 
 ### How to: work with local gems
 
@@ -134,6 +119,10 @@ docker attach govuk-docker_content-publisher-app_1
 # detach from the container
 CTRL-P CTRL-Q
 ```
+
+## Contributing
+
+Check out the [CONTRIBUTING](CONTRIBUTING.md) guide.
 
 ## Licence
 
