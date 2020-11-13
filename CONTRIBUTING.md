@@ -8,22 +8,14 @@ Contributions welcome - just raise a PR and make sure the tests pass!
 
 - [rbenv](https://github.com/rbenv/rbenv#installation)
 
-**Next install Ruby and the gems required for testing.**
+**Next install Ruby / dependencies and run all the tests.**
 
 ```sh
 rbenv install
-gem install bundler
+
 bundle install
-```
 
-**Now use one of the following commands to run tests.**
-
-```sh
-# runs all the tests (see Makefile)
 make test
-
-# runs just the Ruby tests in spec/
-bundle exec rspec
 ```
 
 ## Versioning
