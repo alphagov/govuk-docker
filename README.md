@@ -12,7 +12,46 @@ The aim of govuk-docker is to make it easy to develop any GOV.UK app. It achieve
 
 ## Installation
 
-[Instructions for how to install and setup govuk-docker are here.](docs/installation.md)
+**First make sure you have the following dependencies.**
+
+- [brew](https://brew.sh/)
+- [git](https://git-scm.com)
+- A `govuk` directory in your home directory
+
+**Next, add the following line to your bash/zsh config.**
+
+
+```
+# in ~/.bashrc or ~/.zshrc
+export PATH=$PATH:~/govuk/govuk-docker/exe
+```
+
+Run `echo $SHELL` if you're not sure which shell you use. After saving, you will need to run `source ~/.bashrc` or `source ~/.zshrc` to apply this change to your current terminal session.
+
+**Now in `~/govuk` , run the following setup commands.**
+
+```
+git clone git@github.com:alphagov/govuk-docker.git
+cd govuk-docker
+bundle install
+bin/setup
+```
+
+👉 [Check the troubleshooting guide if you have a problem.](docs/troubleshooting.md#installation)
+
+**Then make sure you give Docker enough resources.**
+
+Running GOV.UK applications can be resource intensive. To give Docker more resources on Mac, click the Docker whale icon in the macOS menu bar, select 'Preferences'. We suggest the following minimum resources:
+
+* 6 CPUs
+* 12 GB RAM
+* 64GB+ Disk
+
+**Check out the how-to guide to customise your setup.**
+
+- [Replicate data locally](docs/how-tos.md#how-to-replicate-data-locally)
+
+- [Setup shortcuts to reduce typing](docs/how-tos.md#how-to-reduce-typing-with-shortcuts)
 
 ## Usage
 
@@ -21,6 +60,8 @@ Do this the first time you work on a project:
 ```sh
 make collections-publisher
 ```
+
+👉 [Check the troubleshooting guide if you have a problem.](docs/troubleshooting.md)
 
 Each project provides a number of 'stacks' for different use cases. You can see the stacks for a project in its [config file](projects/content-publisher/docker-compose.yml). To provide consistency, all projects should follow these conventions for stacks:
 
@@ -34,6 +75,8 @@ Do this to run the tests for a project:
 govuk-docker run collections-publisher-lite bundle exec rake
 ```
 
+👉 [Check the troubleshooting guide if you have a problem.](docs/troubleshooting.md)
+
 ### The `app` stack
 
 This stack provides the dependencies necessary to run an app e.g. in a browser. If the app is a web app, you will then be able to visit it in your browser at `my-app.dev.gov.uk`.
@@ -44,6 +87,8 @@ Do this to start a GOV.UK web app:
 govuk-docker up collections-publisher-app
 ```
 
+👉 [Check the troubleshooting guide if you have a problem.](docs/troubleshooting.md)
+
 ### The `app-*` stacks
 
 Variations on the `app` stack are allowed where necessary such as:
@@ -53,87 +98,15 @@ Variations on the `app` stack are allowed where necessary such as:
 
 Some `app` stacks also depend on a `worker` stack, to run asynchronous tasks [[example](https://github.com/alphagov/govuk-docker/blob/d286748e0300df8f0d1ed618086d4f8f951e752a/projects/content-publisher/docker-compose.yml#L46)].
 
-## How to's
+## Resources
 
-### How to: diagnose and troubleshoot
+- [Troubleshooting guidance](docs/troubleshooting.md)
+- [How-to guidance](docs/how-tos.md)
+- [Learning GOV.UK Docker](https://docs.publishing.service.gov.uk/manual/intro-to-docker.html)
 
-Sometimes things go wrong or some investigation is needed. As govuk-docker is just a bunch of docker config and a CLI wrapper, it's still possible to use all the standard docker commands to help fix issues and get more info e.g.
+## Contributing
 
-```
-# make sure govuk-docker is up-to-date
-git pull
-
-# make sure the project is built OK
-make <project>
-
-# check if any dependencies have exited
-docker ps -a
-
-# tail logs for running services/dependencies
-govuk-docker logs -f publishing-api-app
-
-# try clearing all containers / volumes
-govuk-docker rm -sv
-```
-
-### How to: work with local gems
-
-Provide a local gem path relative to the location of the Gemfile you're editing:
-
-```ruby
-gem "govuk_publishing_components", path: "../govuk_publishing_components"
-```
-
-### How to: replicate data locally
-
-There may be times when a full database is required locally.  The following scripts in the `bin` directory allow replicating data from integration:
-
-- `replicate-elasticsearch.sh`
-- `replicate-mongodb.sh APP-NAME`
-- `replicate-mysql.sh APP-NAME`
-- `replicate-postgresql.sh APP-NAME`
-
-You will need to assume-role into AWS using the [gds-cli](https://docs.publishing.service.gov.uk/manual/access-aws-console.html) before running the scripts. For example, to replicate data for Content Publisher, run:
-
-```
-# as an AWS PowerUser...
-gds aws govuk-integration-poweruser ./bin/replicate-postgresql.sh content-publisher
-
-# as an AWS User...
-gds aws govuk-integration-readonly ./bin/replicate-postgresql.sh content-publisher
-```
-
-All the scripts, other than `replicate-elasticsearch.sh`, take the name of the app to replicate data for.
-
-Draft data can be replicated with `replicate-mongodb.sh draft-content-store` and `replicate-mongodb.sh draft-router`.
-
-If you want to download data without importing it, set the `SKIP_IMPORT` environment variable (to anything).
-
-### How to: set environment variables
-
-While most environment variables should be set in the config for a project, sometimes it's necessary to set assign one or more variables at the point of running a command, such as a Rake task. This can be done using `env` e.g.
-
-```
-govuk-docker run content-publisher-lite env MY_VAR=my_val bundle exec rake my_task
-```
-
-### How to: debug a running Rails app
-
-Normally it's enough to run a Rails app using `govuk-docker up`. To get a `debugger` console for a specific app or one of its dependencies, we need to attach an interactive terminal to the running container.
-
-```
-# find the container name
-govuk-docker ps
-
-# attach to the container
-docker attach govuk-docker_content-publisher-app_1
-
-# awesome debugging stuff
-...
-
-# detach from the container
-CTRL-P CTRL-Q
-```
+Check out the [CONTRIBUTING](CONTRIBUTING.md) guide.
 
 ## Licence
 
