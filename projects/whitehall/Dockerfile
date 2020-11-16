@@ -10,23 +10,11 @@ RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
 # Enable no-sandbox for chrome so that it can run as a root user
 ENV GOVUK_TEST_CHROME_NO_SANDBOX 1
 
-
 # Install node / yarn
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN apt-get update -qq && apt-get install -y yarn nodejs
-
-# Install phantomjs for some projects
-RUN export VERSION=2.1.1 && \
-    wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$VERSION-linux-x86_64.tar.bz2 2>&1 && \
-    tar -vxf phantomjs-$VERSION-linux-x86_64.tar.bz2 && \
-    cp -v phantomjs-$VERSION-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs && \
-    rm -vr phantomjs-$VERSION-linux-x86_64
-
-# Workaround for phantomjs openssl issue
-# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=918727
-ENV OPENSSL_CONF=/dev/null
 
 # Install rbenv to manage ruby versions
 RUN git clone https://github.com/sstephenson/rbenv.git /rbenv
