@@ -6,7 +6,7 @@ volumes:
 x-specialist-publisher: &specialist-publisher
   build:
     context: .
-    dockerfile: projects/specialist-publisher/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: specialist-publisher
   stdin_open: true
   tty: true

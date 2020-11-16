@@ -6,7 +6,7 @@ volumes:
 x-support-api: &support-api
   build:
     context: .
-    dockerfile: projects/support-api/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: support-api
   stdin_open: true
   tty: true

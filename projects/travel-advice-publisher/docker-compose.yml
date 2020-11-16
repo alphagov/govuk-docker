@@ -6,7 +6,7 @@ volumes:
 x-travel-advice-publisher: &travel-advice-publisher
   build:
     context: .
-    dockerfile: projects/travel-advice-publisher/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: travel-advice-publisher
   stdin_open: true
   tty: true
