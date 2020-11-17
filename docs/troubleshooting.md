@@ -12,21 +12,33 @@ bin/doctor
 
 ### Diagnose general issues with a project/app not working
 
+* Make sure you run all commands via GOV.UK Docker.
+
 ```
-# make sure GOV.UK Docker is up-to-date
-git pull
+govuk-docker-run bundle install
+govuk-docker-run rake db:migrate
+```
 
-# make sure the project is built OK
-make <project>
+* Check if one of the dependencies is the problem.
 
+> A common problem for dependencies is when you've previously `git pull`ed the repo, but haven't run `bundle install` or `rake db:migrate`. The logs for the dependency will show if this is the problem.
+
+```
 # check if any dependencies have exited
 docker ps -a
 
-# tail logs for running services/dependencies
+# check logs for an exited dependency
 govuk-docker logs -f publishing-api-app
+```
 
-# try clearing all containers / volumes
-govuk-docker rm -sv
+* Try cleaning up and running your command again.
+
+```
+# stop all apps and their dependencies
+govuk-docker down
+
+# make sure GOV.UK Docker is up-to-date
+git pull
 ```
 
 ### Diagnose issues with `dev.gov.uk` domains not resolving
