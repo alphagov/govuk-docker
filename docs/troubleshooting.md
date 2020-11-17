@@ -65,7 +65,11 @@ scutil --dns
 # reach    : 0x00030002 (Reachable,Local Address,Directly Reachable Address)
 ```
 
-You can also look at the command in `bin/setup` to see what's changing.
+* Re-run the setup script and look for errors
+
+```
+bin/setup
+```
 
 ## Troubleshoot: Installation
 
