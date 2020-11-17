@@ -1,8 +1,6 @@
 # Troubleshooting
 
-## Troubleshoot: Usage
-
-### Diagnose common issues when setting up GOV.UK Docker
+## Diagnose common issues when setting up GOV.UK Docker
 
 Run the following command in `~/govuk/govuk-docker`. Since this script makes use of Ruby Gems, you will need to [install some additional dependencies](../CONTRIBUTING.md#testing) in order to do this.
 
@@ -10,7 +8,7 @@ Run the following command in `~/govuk/govuk-docker`. Since this script makes use
 bin/doctor
 ```
 
-### Diagnose general issues with a project/app not working
+## Diagnose general issues with a project/app not working
 
 * Make sure you run all commands via GOV.UK Docker.
 
@@ -41,7 +39,7 @@ govuk-docker down
 git pull
 ```
 
-### Diagnose issues with `dev.gov.uk` domains not resolving
+## Diagnose issues with `dev.gov.uk` domains not resolving
 
 * Check if `dev.gov.uk` works end-to-end
 
@@ -71,17 +69,7 @@ scutil --dns
 bin/setup
 ```
 
-## Troubleshoot: Installation
-
-### Diagnose common issues when setting up GOV.UK Docker
-
-Run the following command in `~/govuk/govuk-docker`. Since this script makes use of Ruby Gems, you will need to [install some additional dependencies](../CONTRIBUTING.md#testing) in order to do this.
-
-```
-bin/doctor
-```
-
-### Resolve issues caused by an existing Docker installation
+## Resolve issues caused by an existing Docker installation
 
 You may get one of the following errors when running `bin/setup`.
 
