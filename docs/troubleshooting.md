@@ -58,7 +58,7 @@ dig app.dev.gov.uk @127.0.0.1
 scutil --dns
 
 # output should contain...
-# domain   : intro-to-docker.gov.uk
+# domain   : dev.gov.uk
 # nameserver[0] : 127.0.0.1
 # port     : 53
 # flags    : Request A records, Request AAAA records
