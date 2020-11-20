@@ -95,6 +95,7 @@ Variations on the `app` stack are allowed where necessary such as:
 
   - **app-draft**: used for testing the [authenticating-proxy](https://github.com/alphagov/govuk-docker/tree/master/projects/authenticating-proxy) against a draft version of the [router](https://github.com/alphagov/govuk-docker/tree/master/projects/router) app.
   - **app-live**: used to test a read-only frontend app against live GOV.UK APIs (avoids having to replicate data locally).
+  - **app-account**: used to enable integrations with a local [account manager app prototype](https://github.com/alphagov/govuk-account-manager-prototype) and [attribute store](https://github.com/alphagov/govuk-attribute-service-prototype/). Currently a part of the [GOV Accounts trial](https://gds.blog.gov.uk/2020/09/22/introducing-gov-uk-accounts/)
 
 Some `app` stacks also depend on a `worker` stack, to run asynchronous tasks [[example](https://github.com/alphagov/govuk-docker/blob/d286748e0300df8f0d1ed618086d4f8f951e752a/projects/content-publisher/docker-compose.yml#L46)].
 
