@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  manuals-publisher-tmp:
+
 x-manuals-publisher: &manuals-publisher
   build:
     context: .
@@ -9,16 +12,16 @@ x-manuals-publisher: &manuals-publisher
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
+    - manuals-publisher-tmp:/govuk/manuals-publisher/tmp
   working_dir: /govuk/manuals-publisher
 
 services:
   manuals-publisher-lite:
     <<: *manuals-publisher
-    privileged: true
     depends_on:
-      - mongo
+      - mongo-3.6
     environment:
-      MONGODB_URI: "mongodb://mongo/manuals-publisher"
-      TEST_MONGODB_URI: "mongodb://mongo/manuals-publisher-test"
+      MONGODB_URI: "mongodb://mongo-3.6/manuals-publisher"
+      TEST_MONGODB_URI: "mongodb://mongo-3.6/manuals-publisher-test"
 

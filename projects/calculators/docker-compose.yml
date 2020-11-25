@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  calculators-tmp:
+
 x-calculators: &calculators
   build:
     context: .
@@ -9,14 +12,13 @@ x-calculators: &calculators
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
+    - calculators-tmp:/govuk/calculators/tmp
   working_dir: /govuk/calculators
 
 services:
   calculators-lite:
     <<: *calculators
-    # Tests need the privileged flag
-    privileged: true
 
   calculators-app: &calculators-app
     <<: *calculators

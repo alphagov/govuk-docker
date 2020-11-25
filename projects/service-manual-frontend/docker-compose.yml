@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  service-manual-frontend-tmp:
+
 x-service-manual-frontend: &service-manual-frontend
   build:
     context: .
@@ -9,13 +12,13 @@ x-service-manual-frontend: &service-manual-frontend
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
+    - service-manual-frontend-tmp:/govuk/service-manual-frontend/tmp
   working_dir: /govuk/service-manual-frontend
 
 services:
   service-manual-frontend-lite:
     <<: *service-manual-frontend
-    privileged: true
 
   service-manual-frontend-app: &service-manual-frontend-app
     <<: *service-manual-frontend

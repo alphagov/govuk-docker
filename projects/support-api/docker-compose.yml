@@ -1,36 +1,40 @@
 version: '3.7'
 
+volumes:
+  support-api-tmp:
+
 x-support-api: &support-api
   build:
     context: .
-    dockerfile: projects/support-api/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: support-api
   stdin_open: true
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
+    - support-api-tmp:/govuk/support-api/tmp
   working_dir: /govuk/support-api
 
 services:
   support-api-lite:
     <<: *support-api
     depends_on:
-      - postgres
+      - postgres-9.6
       - redis
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres/support-api"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres/support-api-test"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/support-api"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/support-api-test"
       REDIS_URL: redis://redis
 
   support-api-app: &support-api-app
     <<: *support-api
     depends_on:
-      - postgres
+      - postgres-9.6
       - redis
       - nginx-proxy
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres/support-api"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/support-api"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: support-api.dev.gov.uk
       BINDING: 0.0.0.0

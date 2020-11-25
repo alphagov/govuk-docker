@@ -9,7 +9,7 @@ x-special-route-publisher: &special-route-publisher
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
   working_dir: /govuk/special-route-publisher
 
 services:

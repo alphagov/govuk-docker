@@ -8,13 +8,14 @@ x-router: &router
   volumes:
     - go:/go
     - ${GOVUK_ROOT_DIR:-~/govuk}/router:/go/src/github.com/alphagov/router:delegated
+    - root-home:/root
   working_dir: /go/src/github.com/alphagov/router
 
 services:
   router-lite:
     <<: *router
     depends_on:
-      - mongo
+      - mongo-3.6
     environment:
       DEBUG: "true"
       ROUTER_MONGO_URL: mongo
@@ -23,7 +24,7 @@ services:
   router-app: &router-app
     <<: *router
     depends_on:
-      - mongo
+      - mongo-3.6
       - nginx-proxy
     expose:
       - "8080"

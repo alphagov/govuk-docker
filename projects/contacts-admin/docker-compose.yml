@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  contacts-admin-tmp:
+
 x-contacts-admin: &contacts-admin
   build:
     context: .
@@ -9,18 +12,18 @@ x-contacts-admin: &contacts-admin
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
+    - contacts-admin-tmp:/govuk/contacts-admin/tmp
   working_dir: /govuk/contacts-admin
 
 services:
   contacts-admin-lite:
     <<: *contacts-admin
-    privileged: true
     depends_on:
-      - mysql
+      - mysql-5.5
       - redis
     environment:
-      DATABASE_URL: "mysql2://root:root@mysql/contacts_development"
-      TEST_DATABASE_URL: "mysql2://root:root@mysql/contacts_test"
+      DATABASE_URL: "mysql2://root:root@mysql-5.5/contacts_development"
+      TEST_DATABASE_URL: "mysql2://root:root@mysql-5.5/contacts_test"
       REDIS_HOST: redis
 

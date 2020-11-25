@@ -1,5 +1,9 @@
 version: '3.7'
 
+volumes:
+  finder-frontend-tmp:
+  finder-frontend-node-modules:
+
 x-finder-frontend: &finder-frontend
   build:
     context: .
@@ -9,13 +13,14 @@ x-finder-frontend: &finder-frontend
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
+    - finder-frontend-tmp:/govuk/finder-frontend/tmp
+    - finder-frontend-node-modules:/govuk/finder-frontend/node_modules
   working_dir: /govuk/finder-frontend
 
 services:
   finder-frontend-lite:
     <<: *finder-frontend
-    privileged: true
     depends_on:
       - memcached
     environment:

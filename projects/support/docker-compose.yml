@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  support-tmp:
+
 x-support: &support
   build:
     context: .
@@ -9,7 +12,8 @@ x-support: &support
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
+    - support-tmp:/govuk/support/tmp
   working_dir: /govuk/support
 
 services:

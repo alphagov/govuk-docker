@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  service-manual-publisher-tmp:
+
 x-service-manual-publisher: &service-manual-publisher
   build:
     context: .
@@ -9,16 +12,16 @@ x-service-manual-publisher: &service-manual-publisher
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
+    - service-manual-publisher-tmp:/govuk/service-manual-publisher/tmp
   working_dir: /govuk/service-manual-publisher
 
 services:
   service-manual-publisher-lite:
     <<: *service-manual-publisher
-    privileged: true
     depends_on:
-      - postgres
+      - postgres-9.6
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres/service-manual-publisher"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres/service-manual-publisher-test"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/service-manual-publisher"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/service-manual-publisher-test"
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"

@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  content-store-tmp:
+
 x-content-store: &content-store
   build:
     context: .
@@ -9,26 +12,27 @@ x-content-store: &content-store
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
+    - content-store-tmp:/govuk/content-store/tmp
   working_dir: /govuk/content-store
 
 services:
   content-store-lite:
     <<: *content-store
     depends_on:
-      - mongo
+      - mongo-3.6
     environment:
-      MONGODB_URI: "mongodb://mongo/content-store"
-      TEST_MONGODB_URI: "mongodb://mongo/content-store-test"
+      MONGODB_URI: "mongodb://mongo-3.6/content-store"
+      TEST_MONGODB_URI: "mongodb://mongo-3.6/content-store-test"
 
   content-store-app: &content-store-app
     <<: *content-store
     depends_on:
-      - mongo
+      - mongo-3.6
       - router-api-app
       - nginx-proxy
     environment:
-      MONGODB_URI: "mongodb://mongo/content-store"
+      MONGODB_URI: "mongodb://mongo-3.6/content-store"
       VIRTUAL_HOST: content-store.dev.gov.uk
       HOST: 0.0.0.0
     expose:

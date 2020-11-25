@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  collections-tmp:
+
 x-collections: &collections
   build:
     context: .
@@ -9,13 +12,13 @@ x-collections: &collections
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
+    - collections-tmp:/govuk/collections/tmp
   working_dir: /govuk/collections
 
 services:
   collections-lite:
     <<: *collections
-    privileged: true
 
   # TODO: doesn't work yet because collections also relies on search-api
   collections-app: &collections-app

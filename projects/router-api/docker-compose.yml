@@ -1,5 +1,8 @@
 version: '3.7'
 
+volumes:
+  router-api-tmp:
+
 x-router-api: &router-api
   build:
     context: .
@@ -9,27 +12,28 @@ x-router-api: &router-api
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
+    - router-api-tmp:/govuk/router-api/tmp
   working_dir: /govuk/router-api
 
 services:
   router-api-lite:
     <<: *router-api
     depends_on:
-      - mongo
+      - mongo-3.6
     environment:
-      MONGODB_URI: "mongodb://mongo/router"
-      TEST_MONGODB_URI: "mongodb://mongo/router-test"
+      MONGODB_URI: "mongodb://mongo-3.6/router"
+      TEST_MONGODB_URI: "mongodb://mongo-3.6/router-test"
 
   router-api-app: &router-api-app
     <<: *router-api
     depends_on:
-      - mongo
+      - mongo-3.6
       - router-app
       - nginx-proxy
     environment:
       ROUTER_NODES: router-app:3055
-      MONGODB_URI: "mongodb://mongo/router"
+      MONGODB_URI: "mongodb://mongo-3.6/router"
       VIRTUAL_HOST: router-api.dev.gov.uk
       BINDING: 0.0.0.0
     expose:

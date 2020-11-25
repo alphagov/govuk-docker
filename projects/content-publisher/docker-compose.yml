@@ -1,5 +1,9 @@
 version: '3.7'
 
+volumes:
+  content-publisher-tmp:
+  content-publisher-node-modules:
+
 x-content-publisher: &content-publisher
   build:
     context: .
@@ -9,25 +13,26 @@ x-content-publisher: &content-publisher
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
-    - home:/home/build
+    - root-home:/root
+    - content-publisher-tmp:/govuk/content-publisher/tmp
+    - content-publisher-node-modules:/govuk/content-publisher/node_modules
   working_dir: /govuk/content-publisher
 
 services:
   content-publisher-lite:
     <<: *content-publisher
-    privileged: true
     depends_on:
-      - postgres
+      - postgres-9.6
       - redis
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres/content-publisher"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres/content-publisher-test"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/content-publisher"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/content-publisher-test"
       REDIS_URL: redis://redis
 
   content-publisher-app: &content-publisher-app
     <<: *content-publisher
     depends_on:
-      - postgres
+      - postgres-9.6
       - redis
       - content-publisher-worker
       - publishing-api-app
@@ -35,7 +40,7 @@ services:
       - nginx-proxy
       - content-store-app
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres/content-publisher"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/content-publisher"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: content-publisher.dev.gov.uk
       BINDING: 0.0.0.0
@@ -46,11 +51,11 @@ services:
   content-publisher-worker:
     <<: *content-publisher
     depends_on:
-      - postgres
+      - postgres-9.6
       - redis
       - publishing-api-app
       - asset-manager-app
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres/content-publisher"
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/content-publisher"
       REDIS_URL: redis://redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
