@@ -67,7 +67,7 @@ pv "$archive_path" | gunzip | tar -zx -f - -C "$extract_path" "var/lib/mongodb/b
 echo "stopping running govuk-docker containers..."
 govuk-docker down
 
-container=$(govuk-docker run -d --rm -v "${extract_path}:/replication" mongo | tail -n1)
+container=$(govuk-docker run -d --rm -v "${extract_path}:/replication" mongo-3.6 | tail -n1)
 # we want $container to be expanded now
 # shellcheck disable=SC2064
 trap "docker stop '$container'" EXIT
