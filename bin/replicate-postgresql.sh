@@ -57,15 +57,15 @@ fi
 echo "stopping running govuk-docker containers..."
 govuk-docker down
 
-govuk-docker up -d postgres
-trap 'govuk-docker stop postgres' EXIT
+govuk-docker up -d postgres-9.6
+trap 'govuk-docker stop postgres-9.6' EXIT
 
 echo "waiting for postgres..."
-until govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -c 'SELECT 1' &>/dev/null; do
+until govuk-docker run postgres-9.6 /usr/bin/psql -h postgres-9.6 -U postgres -c 'SELECT 1' &>/dev/null; do
   sleep 1
 done
 
 database="$app"
-govuk-docker run postgres /usr/bin/psql -h postgres -U postgres -c "DROP DATABASE IF EXISTS \"${database}\""
-govuk-docker run postgres /usr/bin/createdb -h postgres -U postgres "$database"
-pv "$archive_path" | govuk-docker run postgres /usr/bin/pg_restore -h postgres -U postgres -d "$database" --no-owner
+govuk-docker run postgres-9.6 /usr/bin/psql -h postgres-9.6 -U postgres -c "DROP DATABASE IF EXISTS \"${database}\""
+govuk-docker run postgres-9.6 /usr/bin/createdb -h postgres-9.6 -U postgres "$database"
+pv "$archive_path" | govuk-docker run postgres-9.6 /usr/bin/pg_restore -h postgres-9.6 -U postgres -d "$database" --no-owner

@@ -34,7 +34,7 @@ echo "
 echo "stopping running govuk-docker containers..."
 govuk-docker down
 
-container=$(govuk-docker run -d --rm -v "$archive_path:/replication" -v "$cfg_path:/usr/share/elasticsearch/config/elasticsearch.yml" -p 9200:9200 elasticsearch6 | tail -n1)
+container=$(govuk-docker run -d --rm -v "$archive_path:/replication" -v "$cfg_path:/usr/share/elasticsearch/config/elasticsearch.yml" -p 9200:9200 elasticsearch-6 | tail -n1)
 # we want $container and $cfg_path to be expanded now
 # shellcheck disable=SC2064
 trap "docker stop '$container'; rm '$cfg_path'" EXIT
