@@ -1,0 +1,27 @@
+version: '3.7'
+
+volumes:
+  datagovuk_find-node-modules:
+  datagovuk_find-tmp:
+
+x-datagovuk_find: &datagovuk_find
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: datagovuk_find
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - root-home:/root
+    - datagovuk_find-node-modules:/govuk/datagovuk_find/node_modules
+    - datagovuk_find-tmp:/govuk/datagovuk_find/tmp
+  working_dir: /govuk/datagovuk_find
+
+services:
+  datagovuk_find-lite:
+    <<: *datagovuk_find
+    depends_on:
+      - elasticsearch-7
+    environment:
+      ES_HOST: "http://elasticsearch-7:9200"
