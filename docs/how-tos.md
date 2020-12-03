@@ -1,6 +1,6 @@
 # How To's
 
-👉 [Check the troubleshooting guide if you have a problem.](docs/troubleshooting.md#installation)
+👉 [Check the troubleshooting guide if you have a problem.](troubleshooting.md#installation)
 
 ## How to: reduce typing with shortcuts
 
