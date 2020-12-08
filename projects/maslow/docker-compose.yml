@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   maslow-tmp:
+  maslow-node-modules:
 
 x-maslow: &maslow
   build:
@@ -14,6 +15,7 @@ x-maslow: &maslow
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - maslow-tmp:/govuk/maslow/tmp
+    - maslow-node-modules:/govuk/maslow/node_modules
   working_dir: /govuk/maslow
 
 services:

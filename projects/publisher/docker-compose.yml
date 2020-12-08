@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   publisher-tmp:
+  publisher-node-modules:
 
 x-publisher: &publisher
   build:
@@ -14,6 +15,7 @@ x-publisher: &publisher
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - publisher-tmp:/govuk/publisher/tmp
+    - publisher-node-modules:/govuk/publisher/node_modules
   working_dir: /govuk/publisher
 
 services:

@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   signon-tmp:
+  signon-node-modules:
 
 x-signon: &signon
   build:
@@ -14,6 +15,7 @@ x-signon: &signon
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - signon-tmp:/govuk/signon/tmp
+    - signon-node-modules:/govuk/signon/node_modules
   working_dir: /govuk/signon
 
 services:

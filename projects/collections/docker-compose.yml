@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   collections-tmp:
+  collections-node-modules:
 
 x-collections: &collections
   build:
@@ -14,6 +15,7 @@ x-collections: &collections
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - collections-tmp:/govuk/collections/tmp
+    - collections-node-modules:/govuk/collections/node_modules
   working_dir: /govuk/collections
 
 services:

@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   search-admin-tmp:
+  search-admin-node-modules:
 
 x-search-admin: &search-admin-base
   build:
@@ -14,6 +15,7 @@ x-search-admin: &search-admin-base
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - search-admin-tmp:/govuk/search-admin/tmp
+    - search-admin-node-modules:/govuk/search-admin/node_modules
   working_dir: /govuk/search-admin
 
 services:
