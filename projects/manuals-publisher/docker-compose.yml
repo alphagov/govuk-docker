@@ -20,8 +20,10 @@ services:
   manuals-publisher-lite:
     <<: *manuals-publisher
     depends_on:
+      - redis
       - mongo-3.6
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/manuals-publisher"
       TEST_MONGODB_URI: "mongodb://mongo-3.6/manuals-publisher-test"
+      REDIS_URL: redis://redis
 
