@@ -22,7 +22,6 @@ services:
     depends_on:
       - postgres-9.6
       - memcached
-      - govuk-attribute-service-prototype-app
     environment:
       MEMCACHE_SERVERS: memcached
       DATABASE_URL: "postgresql://postgres@postgres-9.6/govuk-account-manager-prototype"
