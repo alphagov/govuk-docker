@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   manuals-publisher-tmp:
+  manuals-publisher-node-modules:
 
 x-manuals-publisher: &manuals-publisher
   build:
@@ -14,6 +15,7 @@ x-manuals-publisher: &manuals-publisher
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - manuals-publisher-tmp:/govuk/manuals-publisher/tmp
+    - manuals-publisher-node-modules:/govuk/manuals-publisher/node_modules
   working_dir: /govuk/manuals-publisher
 
 services:

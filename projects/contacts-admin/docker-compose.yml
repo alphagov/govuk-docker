@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   contacts-admin-tmp:
+  contacts-admin-node-modules:
 
 x-contacts-admin: &contacts-admin
   build:
@@ -14,6 +15,7 @@ x-contacts-admin: &contacts-admin
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - contacts-admin-tmp:/govuk/contacts-admin/tmp
+    - contacts-admin-node-modules:/govuk/contacts-admin/node_modules
   working_dir: /govuk/contacts-admin
 
 services:

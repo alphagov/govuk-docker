@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   calculators-tmp:
+  calculators-node-modules:
 
 x-calculators: &calculators
   build:
@@ -14,6 +15,7 @@ x-calculators: &calculators
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - calculators-tmp:/govuk/calculators/tmp
+    - calculators-node-modules:/govuk/calculators/node_modules
   working_dir: /govuk/calculators
 
 services:

@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   content-tagger-tmp:
+  content-tagger-node-modules:
 
 x-content-tagger: &content-tagger
   build:
@@ -14,6 +15,7 @@ x-content-tagger: &content-tagger
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - content-tagger-tmp:/govuk/content-tagger/tmp
+    - content-tagger-node-modules:/govuk/content-tagger/node_modules
   working_dir: /govuk/content-tagger
 
 services:

@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   support-tmp:
+  support-node-modules:
 
 x-support: &support
   build:
@@ -14,6 +15,7 @@ x-support: &support
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - support-tmp:/govuk/support/tmp
+    - support-node-modules:/govuk/support/node_modules
   working_dir: /govuk/support
 
 services:

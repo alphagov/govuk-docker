@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   service-manual-publisher-tmp:
+  service-manual-publisher-node-modules:
 
 x-service-manual-publisher: &service-manual-publisher
   build:
@@ -14,6 +15,7 @@ x-service-manual-publisher: &service-manual-publisher
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - service-manual-publisher-tmp:/govuk/service-manual-publisher/tmp
+    - service-manual-publisher-node-modules:/govuk/service-manual-publisher/node_modules
   working_dir: /govuk/service-manual-publisher
 
 services:

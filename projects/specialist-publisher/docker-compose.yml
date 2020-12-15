@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   specialist-publisher-tmp:
+  specialist-publisher-node-modules:
 
 x-specialist-publisher: &specialist-publisher
   build:
@@ -14,6 +15,7 @@ x-specialist-publisher: &specialist-publisher
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - specialist-publisher-tmp:/govuk/specialist-publisher/tmp
+    - specialist-publisher-node-modules:/govuk/specialist-publisher/node_modules
   working_dir: /govuk/specialist-publisher
 
 services:

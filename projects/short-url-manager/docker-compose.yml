@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   short-url-manager-tmp:
+  short-url-manager-node-modules:
 
 x-short-url-manager: &short-url-manager
   build:
@@ -14,6 +15,7 @@ x-short-url-manager: &short-url-manager
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - short-url-manager-tmp:/govuk/short-url-manager/tmp
+    - short-url-manager-node-modules:/govuk/short-url-manager/node_modules
   working_dir: /govuk/short-url-manager
 
 services:

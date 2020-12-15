@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   travel-advice-publisher-tmp:
+  travel-advice-publisher-node-modules:
 
 x-travel-advice-publisher: &travel-advice-publisher
   build:
@@ -14,6 +15,7 @@ x-travel-advice-publisher: &travel-advice-publisher
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - travel-advice-publisher-tmp:/govuk/travel-advice-publisher/tmp
+    - travel-advice-publisher-node-modules:/govuk/travel-advice-publisher/node_modules
   working_dir: /govuk/travel-advice-publisher
 
 services:

@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   release-tmp:
+  release-node-modules:
 
 x-release: &release
   build:
@@ -14,6 +15,7 @@ x-release: &release
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - release-tmp:/govuk/release/tmp
+    - release-node-modules:/govuk/release/node_modules
   working_dir: /govuk/release
 
 services:
