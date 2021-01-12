@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   feedback-tmp:
+  feedback-node-modules:
 
 x-feedback: &feedback
   build:
@@ -14,6 +15,7 @@ x-feedback: &feedback
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - feedback-tmp:/govuk/feedback/tmp
+    - feedback-node-modules:/govuk/feedback/node_modules
   working_dir: /govuk/feedback
 
 services:
