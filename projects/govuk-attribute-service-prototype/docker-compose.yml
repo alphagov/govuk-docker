@@ -32,8 +32,10 @@ services:
   govuk-attribute-service-prototype-app: &govuk-attribute-service-prototype-app
     <<: *govuk-attribute-service-prototype
     depends_on:
+      - govuk-attribute-service-prototype-worker
       - nginx-proxy
       - postgres-9.6
+      - redis
     environment:
       ASSET_HOST: attributes.login.service.dev.gov.uk
       VIRTUAL_HOST: attributes.login.service.dev.gov.uk
@@ -42,6 +44,17 @@ services:
       BINDING: 0.0.0.0
       MEMCACHE_SERVERS: memcached
       DATABASE_URL: "postgresql://postgres@postgres-9.6/govuk-attribute-service-prototype"
+      REDIS_URL: redis://redis:6379/0
     expose:
       - "3000"
     command: bin/rails s --restart
+
+  govuk-attribute-service-prototype-worker:
+    <<: *govuk-attribute-service-prototype
+    depends_on:
+      - postgres-9.6
+      - redis
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/govuk-attribute-service-prototype"
+      REDIS_URL: redis://redis:6379/0
+    command: bundle exec sidekiq -C ./config/sidekiq.yml
