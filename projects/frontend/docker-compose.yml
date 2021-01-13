@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   frontend-tmp:
+  frontend-node-modules:
 
 x-frontend: &frontend
   build:
@@ -14,6 +15,7 @@ x-frontend: &frontend
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - frontend-tmp:/govuk/frontend/tmp
+    - frontend-node-modules:/govuk/frontend/node_modules
   working_dir: /govuk/frontend
 
 services:
