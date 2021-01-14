@@ -28,4 +28,5 @@ services:
       DATABASE_URL: "mysql2://root:root@mysql-5.5/contacts_development"
       TEST_DATABASE_URL: "mysql2://root:root@mysql-5.5/contacts_test"
       REDIS_HOST: redis
+      REDIS_URL: redis://redis
 

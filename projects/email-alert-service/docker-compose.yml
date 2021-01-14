@@ -19,3 +19,4 @@ services:
       - redis
     environment:
       REDIS_HOST: redis
+      REDIS_URL: redis://redis
