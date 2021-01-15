@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   static-tmp:
+  static-node-modules:
 
 x-static: &static
   build:
@@ -14,6 +15,7 @@ x-static: &static
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - static-tmp:/govuk/static/tmp
+    - static-node-modules:/govuk/static/node_modules
   working_dir: /govuk/static
 
 services:

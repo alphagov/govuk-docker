@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   service-manual-frontend-tmp:
+  service-manual-frontend-node-modules:
 
 x-service-manual-frontend: &service-manual-frontend
   build:
@@ -14,6 +15,7 @@ x-service-manual-frontend: &service-manual-frontend
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - service-manual-frontend-tmp:/govuk/service-manual-frontend/tmp
+    - service-manual-frontend-node-modules:/govuk/service-manual-frontend/node_modules
   working_dir: /govuk/service-manual-frontend
 
 services:

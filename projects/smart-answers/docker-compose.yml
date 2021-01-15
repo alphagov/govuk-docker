@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   smart-answers-tmp:
+  smart-answers-node-modules:
 
 x-smart-answers: &smart-answers
   build:
@@ -14,6 +15,7 @@ x-smart-answers: &smart-answers
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
     - smart-answers-tmp:/govuk/smart-answers/tmp
+    - smart-answers-node-modules:/govuk/smart-answers/node_modules
   working_dir: /govuk/smart-answers
 
 services:
