@@ -17,6 +17,7 @@ x-search-api: &search-api
     RABBITMQ_USER: guest
     RABBITMQ_PASSWORD: guest
     REDIS_HOST: redis
+    REDIS_URL: redis://redis
     ELASTICSEARCH_URI: http://elasticsearch-6:9200
 
 services:
@@ -39,6 +40,7 @@ services:
       - search-api-listener-bulk-insert-data
     environment:
       REDIS_HOST: redis
+      REDIS_URL: redis://redis
       ELASTICSEARCH_URI: http://elasticsearch-6:9200
       VIRTUAL_HOST: search-api.dev.gov.uk, search.dev.gov.uk
       HOST: 0.0.0.0
