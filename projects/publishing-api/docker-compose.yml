@@ -41,7 +41,7 @@ services:
       DATABASE_URL: "postgresql://postgres@postgres-9.6/publishing-api"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: publishing-api.dev.gov.uk
-      HOST: 0.0.0.0
+      BINDING: 0.0.0.0
     expose:
       - "3000"
     command: bin/rails s --restart

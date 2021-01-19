@@ -34,8 +34,8 @@ services:
       - nginx-proxy
     environment:
       DATABASE_URL: "mysql2://root:root@mysql-5.5/release_development"
-      HOST: 0.0.0.0
+      BINDING: 0.0.0.0
       VIRTUAL_HOST: release.dev.gov.uk
     expose:
-      - 3000
+      - "3000"
     command: bin/rails s --restart
