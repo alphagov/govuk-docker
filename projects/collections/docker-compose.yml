@@ -33,7 +33,7 @@ services:
     environment:
       ASSET_HOST: collections.dev.gov.uk
       VIRTUAL_HOST: collections.dev.gov.uk
-      HOST: 0.0.0.0
+      BINDING: 0.0.0.0
     expose:
       - "3000"
     command: bin/rails s --restart
@@ -48,7 +48,7 @@ services:
       PLEK_SERVICE_SEARCH_URI: https://www.gov.uk/api
       PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
       VIRTUAL_HOST: collections.dev.gov.uk
-      HOST: 0.0.0.0
+      BINDING: 0.0.0.0
 
   collections-app-account:
     <<: *collections-app
@@ -59,4 +59,4 @@ services:
       FEATURE_FLAG_ACCOUNTS: "enabled"
       ASSET_HOST: collections.dev.gov.uk
       VIRTUAL_HOST: collections.dev.gov.uk
-      HOST: 0.0.0.0
+      BINDING: 0.0.0.0

@@ -42,7 +42,7 @@ services:
       MONGODB_URI: "mongodb://mongo-3.6/travel-advice-publisher"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: travel-advice-publisher.dev.gov.uk
-      HOST: 0.0.0.0
+      BINDING: 0.0.0.0
     expose:
       - "3000"
     command: bin/rails s --restart

@@ -38,7 +38,7 @@ services:
       MONGODB_URI: "mongodb://mongo-3.6/asset-manager"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: asset-manager.dev.gov.uk
-      HOST: 0.0.0.0
+      BINDING: 0.0.0.0
     expose:
       - "3000"
     command: bin/rails s --restart

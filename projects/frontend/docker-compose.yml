@@ -46,4 +46,4 @@ services:
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
       VIRTUAL_HOST: frontend.dev.gov.uk
-      HOST: 0.0.0.0
+      BINDING: 0.0.0.0
