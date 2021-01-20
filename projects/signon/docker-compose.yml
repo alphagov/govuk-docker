@@ -27,7 +27,6 @@ services:
     environment:
       DATABASE_URL: "mysql2://root:root@mysql-5.5/signon_development"
       TEST_DATABASE_URL: "mysql2://root:root@mysql-5.5/signon_test"
-      REDIS_HOST: redis
       REDIS_URL: redis://redis
 
   signon-app:
@@ -40,7 +39,6 @@ services:
       DATABASE_URL: "mysql2://root:root@mysql-5.5/signon_development"
       VIRTUAL_HOST: signon.dev.gov.uk
       BINDING: 0.0.0.0
-      REDIS_HOST: redis
       REDIS_URL: redis://redis
     expose:
       - "3000"
