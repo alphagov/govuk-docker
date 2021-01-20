@@ -27,7 +27,6 @@ services:
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/short-url-manager"
       TEST_MONGODB_URI: "mongodb://mongo-3.6/short-url-manager-test"
-      REDIS_HOST: redis
       REDIS_URL: redis://redis
 
   short-url-manager-app: &short-url-manager-app
@@ -39,7 +38,6 @@ services:
       - publishing-api-app
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/short-url-manager"
-      REDIS_HOST: redis
       REDIS_URL: redis://redis
       VIRTUAL_HOST: short-url-manager.dev.gov.uk
       BINDING: 0.0.0.0
