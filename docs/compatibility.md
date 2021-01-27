@@ -13,9 +13,7 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ asset-manager
    - ⚠ bouncer
       * **TODO: Missing support for a webserver stack**
-   - ⚠ cache-clearing-service
-      * Tests pass
-      * Queues are not set-up, so cache-clearing-service can't be run locally
+   - ✅ cache-clearing-service
    - ⚠ calculators
       * Web UI doesn't work without the content item being present in the content-store.
    - ❌ ckan
@@ -39,8 +37,7 @@ These are repos that can be started as a some kind of process, such as a web app
       * **TODO: Missing support for a webserver stack**
    - ✅ email-alert-api
    - ✅ email-alert-frontend
-   - ⚠ email-alert-service
-      * **TODO: Missing support for message queues**
+   - ✅ email-alert-service
    - ✅ feedback
    - ✅ finder-frontend
    - ❓ frontend
