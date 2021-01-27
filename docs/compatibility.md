@@ -40,7 +40,7 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ email-alert-service
    - ✅ feedback
    - ✅ finder-frontend
-   - ❓ frontend
+   - ✅ frontend
    - ✅ government-frontend
    - ⚠ govuk_crawler_worker
       * **TODO: Missing support for running the worker**
