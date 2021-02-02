@@ -76,8 +76,7 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ smart-answers
    - ✅ special-route-publisher
    - ✅ specialist-publisher
-   - ⚠ static
-      * JavaScript 404 errors when previewing pages, possibly [related to analytics](https://github.com/alphagov/static/blob/master/app/assets/javascripts/analytics/init.js.erb#L28)
+   - ✅ static
    - ✅ support
    - ✅ support-api
    - ✅ transition
