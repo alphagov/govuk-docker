@@ -18,9 +18,7 @@ These are repos that can be started as a some kind of process, such as a web app
       * Web UI doesn't work without the content item being present in the content-store.
    - ❌ ckan
       * Has a [separate](https://github.com/alphagov/docker-ckan) Docker project.
-   - ⚠  collections
-      * You will need to [populate the Content Store database](#mongodb) or run the live stack in order for it to work locally.
-      * To view topic pages locally you still need to use the live stack as they rely on Elasticsearch data which we are yet to be able to import.
+   - ✅  collections
    - ✅ collections-publisher
    - ⚠ contacts-admin
       * **TODO: Missing support for a webserver stack**
