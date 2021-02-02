@@ -14,8 +14,7 @@ These are repos that can be started as a some kind of process, such as a web app
    - ⚠ bouncer
       * **TODO: Missing support for a webserver stack**
    - ✅ cache-clearing-service
-   - ⚠ calculators
-      * Web UI doesn't work without the content item being present in the content-store.
+   - ✅ calculators
    - ❌ ckan
       * Has a [separate](https://github.com/alphagov/docker-ckan) Docker project.
    - ✅  collections
