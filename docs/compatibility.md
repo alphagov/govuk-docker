@@ -82,9 +82,7 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ transition
    - ❌ transition-config
    - ✅ travel-advice-publisher
-   - ⚠ whitehall
-      * Who knows, really - several tests are failing, lots pass ;-)
-      * Placeholder images don't work as missing proxy for [/government/assets](https://github.com/alphagov/whitehall/blob/master/app/presenters/publishing_api/news_article_presenter.rb#L133)
+   - ✅ whitehall
 
 ## Generic Ruby libraries
 
