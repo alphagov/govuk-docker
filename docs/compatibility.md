@@ -24,8 +24,7 @@ These are repos that can be started as a some kind of process, such as a web app
       * You will need to [populate the Content Store database](#mongodb) or run the live stack in order for it to work locally.
       * To view topic pages locally you still need to use the live stack as they rely on Elasticsearch data which we are yet to be able to import.
    - ✅ collections-publisher
-   - ⚠ contacts-admin
-      * **TODO: Missing support for a webserver stack**
+   - ✅ contacts-admin
    - ⚠ content-data-admin
       * **TODO: Missing support for a webserver stack**
    - ⚠ content-data-api
