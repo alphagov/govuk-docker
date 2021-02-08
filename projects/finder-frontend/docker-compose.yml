@@ -75,5 +75,5 @@ services:
       GOVUK_ACCOUNT_JWT_KEY_PEM: "-----BEGIN EC PRIVATE KEY-----\nMHcCAQEEID+UE4jB5QtUFOtekHJliaSB8K2xQU2AS4xczOLAqvCUoAoGCCqGSM49\nAwEHoUQDQgAEjMgE/d6Bdu1K17BTjNycDvIXKSmUgZ5YYoayU3gGqTLhgefuK2qb\no99Wx+SuvdW/GRvIlUIW1ooNRdQ3QFwwCw==\n-----END EC PRIVATE KEY-----\n"
       GOVUK_ACCOUNT_JWT_KEY_UUID: "898d62b7-eed9-464a-a4ae-9d9e08bd9bee"
       GOVUK_ACCOUNT_OAUTH_CLIENT_SECRET: transition-checker-secret
-      PLEK_SERVICE_ACCOUNT_MANAGER_URI: "http://www.login.service.dev.gov.uk"
+      PLEK_SERVICE_ACCOUNT_MANAGER_URI: "http://www.login.service.localhost"
       FEATURE_FLAG_ACCOUNTS: "enabled"

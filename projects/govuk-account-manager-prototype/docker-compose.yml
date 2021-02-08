@@ -26,7 +26,7 @@ services:
       MEMCACHE_SERVERS: memcached
       DATABASE_URL: "postgresql://postgres@postgres-9.6/govuk-account-manager-prototype"
       TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/govuk-account-manager-prototype-test"
-      REDIRECT_BASE_URL: http://www.login.service.dev.gov.uk
+      REDIRECT_BASE_URL: http://www.login.service.localhost
       FINDER_FRONTEND_OAUTH_CLIENT_ID: transition-checker-id
       FINDER_FRONTEND_OAUTH_CLIENT_PUBLIC_KEY_UUID: 898d62b7-eed9-464a-a4ae-9d9e08bd9bee
       FINDER_FRONTEND_OAUTH_CLIENT_PUBLIC_KEY: "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEjMgE/d6Bdu1K17BTjNycDvIXKSmU\ngZ5YYoayU3gGqTLhgefuK2qbo99Wx+SuvdW/GRvIlUIW1ooNRdQ3QFwwCw==\n-----END PUBLIC KEY-----\n"
@@ -40,13 +40,13 @@ services:
       - govuk-attribute-service-prototype-app
       - govuk-account-manager-prototype-worker
     environment:
-      ASSET_HOST: www.login.service.dev.gov.uk
-      VIRTUAL_HOST: www.login.service.dev.gov.uk
+      ASSET_HOST: www.login.service.localhost
+      VIRTUAL_HOST: www.login.service.localhost
       BINDING: 0.0.0.0
       MEMCACHE_SERVERS: memcached
       DATABASE_URL: "postgresql://postgres@postgres-9.6/govuk-account-manager-prototype"
       ATTRIBUTE_SERVICE_URL: http://attributes.login.service.dev.gov.uk
-      REDIRECT_BASE_URL: http://www.login.service.dev.gov.uk
+      REDIRECT_BASE_URL: http://www.login.service.localhost
       REDIS_URL: redis://redis:6379/0
       FINDER_FRONTEND_OAUTH_CLIENT_ID: transition-checker-id
       FINDER_FRONTEND_OAUTH_CLIENT_PUBLIC_KEY_UUID: 898d62b7-eed9-464a-a4ae-9d9e08bd9bee
@@ -63,6 +63,6 @@ services:
     environment:
       ATTRIBUTE_SERVICE_URL: http://attributes.login.service.dev.gov.uk
       REDIS_URL: redis://redis:6379/0
-      REDIRECT_BASE_URL: http://www.login.service.dev.gov.uk
+      REDIRECT_BASE_URL: http://www.login.service.localhost
       DATABASE_URL: "postgresql://postgres@postgres-9.6/govuk-account-manager-prototype"
     command: bundle exec sidekiq -C ./config/sidekiq.yml
