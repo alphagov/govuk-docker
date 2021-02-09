@@ -87,6 +87,8 @@ Do this to start a GOV.UK web app:
 govuk-docker up collections-publisher-app
 ```
 
+👉 [Replicate data locally](docs/how-tos.md#how-to-replicate-data-locally) (or use the [`app-live` stack](#the-app--stacks)).
+
 👉 [Check the troubleshooting guide if you have a problem.](docs/troubleshooting.md)
 
 ### The `app-*` stacks
