@@ -1,4 +1,4 @@
-FROM python:3.5-buster
+FROM python:3.6-buster
 
 RUN apt-get update -qq && apt-get install -y gettext \
         postgresql-client libgdal-dev libgeos-dev musl-dev ruby-dev
