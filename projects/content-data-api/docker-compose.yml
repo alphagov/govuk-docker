@@ -13,11 +13,11 @@ x-content-data-api: &content-data-api
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
-    - content-data-admin-tmp:/govuk/content-data-admin/tmp
+    - content-data-api-tmp:/govuk/content-data-api/tmp
   working_dir: /govuk/content-data-api
 
 services:
-  content-data-api-lite:
+  content-data-api-lite: &content-data-api-lite
     <<: *content-data-api
     depends_on:
       - postgres-9.6
@@ -25,3 +25,16 @@ services:
       DATABASE_URL: "postgresql://postgres@postgres-9.6/content-data-api"
       TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/content-data-api-test"
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
+
+  content-data-api-app: &content-data-api-app
+    <<: *content-data-api-lite
+    expose:
+      - "3000"
+    depends_on:
+      - nginx-proxy
+      - postgres-9.6
+    command: bin/rails s --restart
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/content-data-api"
+      VIRTUAL_HOST: content-data-api.dev.gov.uk
+      BINDING: 0.0.0.0

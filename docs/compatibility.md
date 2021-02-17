@@ -20,10 +20,8 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅  collections
    - ✅ collections-publisher
    - ✅ contacts-admin
-   - ⚠ content-data-admin
-      * **TODO: Missing support for a webserver stack**
-   - ⚠ content-data-api
-      * **TODO: Missing support for a webserver stack**
+   - ✅ content-data-admin
+   - ✅ content-data-api
    - ✅ content-publisher
    - ✅ content-store
    - ✅ content-tagger
