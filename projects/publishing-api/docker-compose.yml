@@ -35,6 +35,7 @@ services:
     <<: *publishing-api
     depends_on:
       - postgres-9.6
+      - publishing-api-worker
       - redis
       - nginx-proxy
     environment:
@@ -45,3 +46,13 @@ services:
     expose:
       - "3000"
     command: bin/rails s --restart
+
+  publishing-api-worker:
+    <<: *publishing-api
+    depends_on:
+      - postgres-9.6
+      - redis
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/publishing-api"
+      REDIS_URL: redis://redis
+    command: bundle exec sidekiq -C ./config/sidekiq.yml
