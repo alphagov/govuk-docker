@@ -17,6 +17,8 @@ govuk-docker-run bundle install
 govuk-docker-run rake db:migrate
 ```
 
+* Try repeating the action. If you got a `GdsApi::HTTPUnavailable` or `GdsApi::TimedOutException` the first time around, it could mean that Publishing API wasn't ready in time, as unfortunately there's no way for govuk-docker to know when each dependency is ready.
+
 * Check if one of the dependencies is the problem.
 
 > A common problem for dependencies is when you've previously `git pull`ed the repo, but haven't run `bundle install` or `rake db:migrate`. The logs for the dependency will show if this is the problem.
