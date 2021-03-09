@@ -77,7 +77,6 @@ services:
         aliases:
           - asset-manager.dev.gov.uk
           - authenticating-proxy.dev.gov.uk
-          - calculators.dev.gov.uk
           - collections-publisher.dev.gov.uk
           - collections.dev.gov.uk
           - contacts-admin.dev.gov.uk
