@@ -1,0 +1,42 @@
+version: '3.7'
+
+volumes:
+  account-api-tmp:
+
+x-account-api: &account-api
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: account-api
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - root-home:/root
+    - account-api-tmp:/govuk/account-api/tmp
+  working_dir: /govuk/account-api
+
+services:
+  account-api-lite:
+    <<: *account-api
+    depends_on:
+      - postgres-9.6
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/account-api"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/account-api-test"
+
+  account-api-app:
+    <<: *account-api
+    depends_on:
+      - nginx-proxy
+      - postgres-9.6
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/account-api"
+      VIRTUAL_HOST: account-api.dev.gov.uk
+      BINDING: 0.0.0.0
+      GOVUK_ACCOUNT_OAUTH_CLIENT_ID: client-id
+      GOVUK_ACCOUNT_OAUTH_CLIENT_SECRET: client-secret
+      PLEK_SERVICE_ACCOUNT_MANAGER_URI: "http://www.login.service.dev.gov.uk"
+    expose:
+      - "3000"
+    command: bin/rails s --restart

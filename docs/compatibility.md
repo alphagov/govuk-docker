@@ -10,6 +10,7 @@ The following lists indicates the support status of a repo in GOV.UK Docker.
 
 These are repos that can be started as a some kind of process, such as a web app or worker.
 
+   - ✅ account-api
    - ✅ asset-manager
    - ⚠ bouncer
       * **TODO: Missing support for a webserver stack**
