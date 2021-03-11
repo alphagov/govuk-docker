@@ -30,6 +30,7 @@ services:
     depends_on:
       - nginx-proxy
       - postgres-9.6
+      - govuk-account-manager-prototype-app
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-9.6/account-api"
       VIRTUAL_HOST: account-api.dev.gov.uk
