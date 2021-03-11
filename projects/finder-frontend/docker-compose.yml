@@ -62,6 +62,7 @@ services:
     depends_on:
       - router-app
       - nginx-proxy
+      - account-api-app
       - email-alert-api-app
       - static-app
       - memcached
