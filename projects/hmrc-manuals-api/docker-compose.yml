@@ -19,3 +19,15 @@ x-hmrc-manuals-api: &hmrc-manuals-api
 services:
   hmrc-manuals-api-lite:
     <<: *hmrc-manuals-api
+
+  hmrc-manuals-api-app: &hmrc-manuals-api-app
+    <<: *hmrc-manuals-api
+    depends_on:
+      - publishing-api-app
+      - nginx-proxy
+    environment:
+      VIRTUAL_HOST: hmrc-manuals-api.dev.gov.uk
+      BINDING: 0.0.0.0
+    expose:
+      - "3000"
+    command: bin/rails s -P /tmp/rails.pid
