@@ -1,2 +1,2 @@
-frontend: bundle-frontend content-store router static
+frontend: bundle-frontend account-api content-store router static
 	$(GOVUK_DOCKER) run $@-lite yarn
