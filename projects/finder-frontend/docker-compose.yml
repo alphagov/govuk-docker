@@ -62,17 +62,13 @@ services:
     depends_on:
       - router-app
       - nginx-proxy
+      - frontend-app-account
       - account-api-app
       - email-alert-api-app
       - static-app
       - memcached
-      - govuk-account-manager-prototype-app
     environment:
       ASSET_HOST: finder-frontend.dev.gov.uk
       VIRTUAL_HOST: finder-frontend.dev.gov.uk
       BINDING: 0.0.0.0
       MEMCACHE_SERVERS: memcached
-      GOVUK_ACCOUNT_OAUTH_CLIENT_ID: transition-checker-id
-      GOVUK_ACCOUNT_OAUTH_CLIENT_SECRET: transition-checker-secret
-      PLEK_SERVICE_ACCOUNT_MANAGER_URI: "http://www.login.service.dev.gov.uk"
-      FEATURE_FLAG_ACCOUNTS: "enabled"
