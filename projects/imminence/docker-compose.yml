@@ -24,3 +24,17 @@ services:
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/imminence"
       TEST_MONGODB_URI: "mongodb://mongo-3.6/imminence-test"
+
+  imminence-app:
+    <<: *imminence
+    depends_on:
+      - mongo-3.6
+      - mapit-app
+      - nginx-proxy
+    environment:
+      MONGODB_URI: "mongodb://mongo-3.6/imminence"
+      VIRTUAL_HOST: imminence.dev.gov.uk
+      BINDING: 0.0.0.0
+    expose:
+      - "3000"
+    command: bin/rails s --restart

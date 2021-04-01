@@ -43,8 +43,7 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ govuk-account-manager-prototype
    - ✅ govuk-developer-docs
    - ✅ hmrc-manuals-api
-   - ⚠ imminence
-      * **TODO: Missing support for a webserver stack**
+   - ✅ imminence
    - ✅ info-frontend
    - ✅ licence-finder
    - ❌ licensify

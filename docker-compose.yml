@@ -97,6 +97,7 @@ services:
           - govuk-developer-docs.dev.gov.uk
           - govuk-publishing-components.dev.gov.uk
           - hmrc-manuals-api.dev.gov.uk
+          - imminence.dev.gov.uk
           - info-frontend.dev.gov.uk
           - licence-finder.dev.gov.uk
           - link-checker-api.dev.gov.uk
