@@ -23,6 +23,7 @@ services:
       - postgres-9.6
       - redis
     environment:
+      GOVUK_WEBSITE_ROOT: https://www.gov.uk
       DATABASE_URL: "postgresql://postgres@postgres-9.6/transition"
       TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/transition-test"
       REDIS_URL: redis://redis
