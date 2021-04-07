@@ -29,3 +29,34 @@ services:
       TEST_MONGODB_URI: "mongodb://mongo-3.6/manuals-publisher-test"
       REDIS_URL: redis://redis
 
+  manuals-publisher-app: &manuals-publisher-app
+    <<: *manuals-publisher
+    depends_on:
+      - redis
+      - mongo-3.6
+      - asset-manager-app
+      - publishing-api-app
+      - link-checker-api-app
+      - manuals-publisher-worker
+      - nginx-proxy
+    environment:
+      MONGODB_URI: "mongodb://mongo-3.6/manuals-publisher"
+      GOVUK_WEBSITE_ROOT: https://www.gov.uk
+      REDIS_URL: redis://redis
+      VIRTUAL_HOST: manuals-publisher.dev.gov.uk
+      BINDING: 0.0.0.0
+    expose:
+      - "3000"
+    command: bin/rails s --restart
+
+  manuals-publisher-worker:
+    <<: *manuals-publisher
+    depends_on:
+      - redis
+      - mongo-3.6
+      - asset-manager-app
+      - publishing-api-app
+    environment:
+      MONGODB_URI: "mongodb://mongo-3.6/manuals-publisher"
+      REDIS_URL: redis://redis
+    command: bundle exec sidekiq -C ./config/sidekiq.yml
