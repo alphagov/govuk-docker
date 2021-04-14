@@ -30,9 +30,9 @@ services:
     depends_on:
       - mongo-3.6
       - nginx-proxy
-      - router-app-draft
+      - government-frontend-app
     environment:
-      GOVUK_UPSTREAM_URI: http://draft-origin.dev.gov.uk
+      GOVUK_UPSTREAM_URI: http://government-frontend.dev.gov.uk
       MONGODB_URI: "mongodb://mongo-3.6/authenticating-proxy"
       VIRTUAL_HOST: authenticating-proxy.dev.gov.uk
       BINDING: 0.0.0.0
