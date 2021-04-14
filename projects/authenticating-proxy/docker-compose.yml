@@ -22,7 +22,6 @@ services:
     depends_on:
       - mongo-3.6
     environment:
-      GOVUK_UPSTREAM_URI: http://draft-origin.dev.gov.uk
       MONGODB_URI: "mongodb://mongo-3.6/authenticating-proxy"
       TEST_MONGODB_URI: "mongodb://mongo-3.6/authenticating-proxy-test"
 
