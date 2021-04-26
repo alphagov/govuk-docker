@@ -13,8 +13,7 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ account-api
    - ✅ asset-manager
    - ✅ authenticating-proxy
-   - ⚠ bouncer
-      * **TODO: Missing support for a webserver stack**
+   - ✅ bouncer
    - ✅ cache-clearing-service
    - ❌ ckan
       * Has a [separate](https://github.com/alphagov/docker-ckan) Docker project.

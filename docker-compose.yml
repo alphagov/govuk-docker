@@ -78,6 +78,8 @@ services:
           - account-api.dev.gov.uk
           - asset-manager.dev.gov.uk
           - authenticating-proxy.dev.gov.uk
+          - bouncer.dev.gov.uk
+          - bouncer-redirect.dev.gov.uk
           - collections-publisher.dev.gov.uk
           - collections.dev.gov.uk
           - contacts-admin.dev.gov.uk
