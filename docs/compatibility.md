@@ -74,7 +74,6 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ support
    - ✅ support-api
    - ✅ transition
-   - ❌ transition-config
    - ✅ travel-advice-publisher
    - ✅ whitehall
 
@@ -94,3 +93,4 @@ These repos are used as part of running the live GOV.UK site. Since all of them 
    - ✅ govuk-content-schemas
    - ✅ plek
    - ❌ slimmer
+   - ❌ transition-config
