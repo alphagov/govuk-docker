@@ -18,6 +18,14 @@ services:
     volumes:
       - mapit-pg:/var/lib/postgresql/data
 
+  mapit-lite:
+    <<: *mapit
+    depends_on:
+      - mapit-pg
+    environment:
+      DJANGO_SECRET_KEY: 'secret'
+      MAPIT_DB_HOST: 'mapit-pg'
+
   mapit-app:
     <<: *mapit
     depends_on:
@@ -26,7 +34,6 @@ services:
     environment:
       DJANGO_SECRET_KEY: 'secret'
       MAPIT_DB_HOST: 'mapit-pg'
-      PGHOST: "mapit-pg"
       VIRTUAL_HOST: mapit.dev.gov.uk
     expose:
       - "8000"
