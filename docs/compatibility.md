@@ -14,7 +14,8 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ asset-manager
    - ✅ authenticating-proxy
    - ✅ bouncer
-   - ✅ cache-clearing-service
+   - ⚠ cache-clearing-service
+      * **TODO: Missing support for running the app**
    - ❌ ckan
       * Has a [separate](https://github.com/alphagov/docker-ckan) Docker project.
    - ✅  collections
