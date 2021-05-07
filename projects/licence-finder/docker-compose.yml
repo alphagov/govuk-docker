@@ -50,9 +50,11 @@ services:
   licence-finder-app-live:
     <<: *licence-finder-app
     depends_on:
+      - elasticsearch-6
       - mongo-3.6
       - nginx-proxy
     environment:
+      ELASTICSEARCH_URI: http://elasticsearch-6:9200
       MONGODB_URI: "mongodb://mongo-3.6/licence-finder_development"
       PLEK_SERVICE_SEARCH_URI: https://www.gov.uk/api
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
