@@ -31,13 +31,11 @@ services:
     <<: *licence-finder
     depends_on:
       - mongo-3.6
-      - redis
       - static-app
       - elasticsearch-6
       - content-store-app
       - nginx-proxy
     environment:
-      REDIS_URL: redis://redis
       VIRTUAL_HOST: licence-finder.dev.gov.uk
       MONGODB_URI: "mongodb://mongo-3.6/licence-finder_development"
       ELASTICSEARCH_URI: http://elasticsearch-6:9200
