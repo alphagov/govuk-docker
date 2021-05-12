@@ -17,6 +17,7 @@ services:
     depends_on:
       - mongo-3.6
     environment:
+      BINARY: router
       DEBUG: "true"
       ROUTER_MONGO_URL: mongo-3.6
       ROUTER_MONGO_DB: router
