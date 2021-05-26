@@ -29,12 +29,15 @@ services:
   finder-frontend-app: &finder-frontend-app
     <<: *finder-frontend
     depends_on:
-      - router-app
+      - account-api-app
       - content-store-app
-      - static-app
-      - search-api-app
+      - email-alert-api-app
+      - frontend-app
       - memcached
       - nginx-proxy
+      - router-app
+      - search-api-app
+      - static-app
     environment:
       ASSET_HOST: finder-frontend.dev.gov.uk
       VIRTUAL_HOST: finder-frontend.dev.gov.uk
@@ -47,6 +50,7 @@ services:
   finder-frontend-app-live:
     <<: *finder-frontend-app
     depends_on:
+      - account-api-app-live
       - nginx-proxy
     environment:
       PLEK_SERVICE_SEARCH_URI: https://www.gov.uk/api
@@ -56,19 +60,3 @@ services:
       PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
       VIRTUAL_HOST: finder-frontend.dev.gov.uk
       BINDING: 0.0.0.0
-
-  finder-frontend-app-account:
-    <<: *finder-frontend-app
-    depends_on:
-      - router-app
-      - nginx-proxy
-      - frontend-app-account
-      - account-api-app
-      - email-alert-api-app
-      - static-app
-      - memcached
-    environment:
-      ASSET_HOST: finder-frontend.dev.gov.uk
-      VIRTUAL_HOST: finder-frontend.dev.gov.uk
-      BINDING: 0.0.0.0
-      MEMCACHE_SERVERS: memcached

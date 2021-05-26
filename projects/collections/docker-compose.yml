@@ -49,14 +49,3 @@ services:
       PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
       VIRTUAL_HOST: collections.dev.gov.uk
       BINDING: 0.0.0.0
-
-  collections-app-account:
-    <<: *collections-app
-    depends_on:
-      - nginx-proxy
-      - govuk-account-manager-prototype-app
-    environment:
-      FEATURE_FLAG_ACCOUNTS: "enabled"
-      ASSET_HOST: collections.dev.gov.uk
-      VIRTUAL_HOST: collections.dev.gov.uk
-      BINDING: 0.0.0.0
