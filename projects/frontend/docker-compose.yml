@@ -25,12 +25,15 @@ services:
   frontend-app: &frontend-app
     <<: *frontend
     depends_on:
+      - account-api-app
       - content-store-app
+      - govuk-account-manager-prototype-app
+      - nginx-proxy
       - router-app
       - static-app
-      - nginx-proxy
     environment:
       ASSET_HOST: frontend.dev.gov.uk
+      PLEK_SERVICE_ACCOUNT_MANAGER_URI: "http://www.login.service.dev.gov.uk"
       VIRTUAL_HOST: frontend.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
@@ -45,19 +48,5 @@ services:
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
-      VIRTUAL_HOST: frontend.dev.gov.uk
-      BINDING: 0.0.0.0
-
-  frontend-app-account:
-    <<: *frontend-app
-    depends_on:
-      - account-api-app
-      - content-store-app
-      - router-app
-      - static-app
-      - nginx-proxy
-    environment:
-      ASSET_HOST: frontend.dev.gov.uk
-      PLEK_SERVICE_ACCOUNT_MANAGER_URI: "http://www.login.service.dev.gov.uk"
       VIRTUAL_HOST: frontend.dev.gov.uk
       BINDING: 0.0.0.0
