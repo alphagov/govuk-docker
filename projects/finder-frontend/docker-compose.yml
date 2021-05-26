@@ -50,6 +50,7 @@ services:
   finder-frontend-app-live:
     <<: *finder-frontend-app
     depends_on:
+      - account-api-app-live
       - nginx-proxy
     environment:
       PLEK_SERVICE_SEARCH_URI: https://www.gov.uk/api

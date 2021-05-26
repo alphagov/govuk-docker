@@ -43,9 +43,12 @@ services:
   frontend-app-live:
     <<: *frontend-app
     depends_on:
+      - account-api-app-live
+      - govuk-account-manager-prototype-app
       - nginx-proxy
     environment:
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
+      PLEK_SERVICE_ACCOUNT_MANAGER_URI: "http://www.login.service.dev.gov.uk"
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
       VIRTUAL_HOST: frontend.dev.gov.uk
