@@ -25,6 +25,7 @@ services:
     environment:
       DJANGO_SECRET_KEY: 'secret'
       MAPIT_DB_HOST: 'mapit-pg'
+      PGHOST: 'mapit-pg'
 
   mapit-app:
     <<: *mapit
@@ -34,6 +35,7 @@ services:
     environment:
       DJANGO_SECRET_KEY: 'secret'
       MAPIT_DB_HOST: 'mapit-pg'
+      PGHOST: 'mapit-pg'
       VIRTUAL_HOST: mapit.dev.gov.uk
     expose:
       - "8000"
