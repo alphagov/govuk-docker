@@ -6,6 +6,7 @@ volumes:
   postgres-9.6:
   mysql-5.5:
   mongo-3.6:
+  mongo-2.6:
   go:
   elasticsearch-6:
   elasticsearch-7:
@@ -28,6 +29,12 @@ services:
     ports:
       - "27017:27017"
       - "28017:28017"
+
+  mongo-2.6:
+    image: mongo:2.6
+    volumes:
+      - mongo-2.6:/data/db
+    command: ["--replSet", "mongo-replica-set"]
 
   mysql-5.5:
     image: mysql:5.5.58
