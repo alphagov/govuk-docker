@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe GovukDocker::Doctor::Checkup do
+RSpec.describe GovukDocker::Doctor::Checkup do
   let(:service_name) { "fake_service" }
   let(:messages) do
     {

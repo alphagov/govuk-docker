@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe GovukDocker::Paths do
+RSpec.describe GovukDocker::Paths do
   describe "govuk_root_dir" do
     subject { described_class.govuk_root_dir }
 
