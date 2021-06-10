@@ -44,4 +44,3 @@ RSpec.describe "Expected volumes" do
     end
   end
 end
-

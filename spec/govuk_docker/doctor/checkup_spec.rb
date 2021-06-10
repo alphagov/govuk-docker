@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe GovukDocker::Doctor::Checkup do
   let(:service_name) { "fake_service" }
-  let(:messages) {
+  let(:messages) do
     {
       up_to_date: "fake_service is up-to-date",
       outdated: "fake_service is outdated",
@@ -15,13 +15,13 @@ describe GovukDocker::Doctor::Checkup do
       dnsmasq_resolver: "fake_service is resolving your dns",
       not_dnsmasq_resolver: "A different service is resolving your dns",
     }
-  }
+  end
 
   context "when the repository is up-to-date" do
     it "should report that it is up-to-date" do
       subject = described_class.new(
         service_name: service_name,
-        checkups: %i(up_to_date),
+        checkups: %i[up_to_date],
         messages: messages,
       )
 
@@ -40,7 +40,7 @@ describe GovukDocker::Doctor::Checkup do
     it "should report that it is outdated" do
       subject = described_class.new(
         service_name: service_name,
-        checkups: %i(up_to_date),
+        checkups: %i[up_to_date],
         messages: messages,
       )
 
@@ -59,7 +59,7 @@ describe GovukDocker::Doctor::Checkup do
     it "should report that it is installed" do
       subject = described_class.new(
         service_name: service_name,
-        checkups: %i(installed),
+        checkups: %i[installed],
         messages: messages,
       )
 
@@ -73,7 +73,7 @@ describe GovukDocker::Doctor::Checkup do
     subject do
       described_class.new(
         service_name: service_name,
-        checkups: %i(installed),
+        checkups: %i[installed],
         messages: messages,
       )
     end
@@ -92,7 +92,7 @@ describe GovukDocker::Doctor::Checkup do
     it "should report that it needs to be installed" do
       subject = described_class.new(
         service_name: service_name,
-        checkups: %i(installed),
+        checkups: %i[installed],
         messages: messages,
       )
 
@@ -106,7 +106,7 @@ describe GovukDocker::Doctor::Checkup do
     it "should report that it is running" do
       subject = described_class.new(
         service_name: service_name,
-        checkups: %i(running),
+        checkups: %i[running],
         messages: messages,
       )
 
@@ -120,7 +120,7 @@ describe GovukDocker::Doctor::Checkup do
     it "should report that it needs to be running" do
       subject = described_class.new(
         service_name: service_name,
-        checkups: %i(running),
+        checkups: %i[running],
         messages: messages,
       )
 
@@ -134,7 +134,7 @@ describe GovukDocker::Doctor::Checkup do
     it "should report that it is installed and running" do
       subject = described_class.new(
         service_name: service_name,
-        checkups: %i(installed running),
+        checkups: %i[installed running],
         messages: messages,
       )
 
@@ -149,7 +149,7 @@ describe GovukDocker::Doctor::Checkup do
     it "should report when running as a different user" do
       subject = described_class.new(
         service_name: service_name,
-        checkups: %i(running_as_different_user),
+        checkups: %i[running_as_different_user],
         messages: messages,
       )
 
@@ -161,7 +161,7 @@ describe GovukDocker::Doctor::Checkup do
     it "should report when running as the incorrect user" do
       subject = described_class.new(
         service_name: service_name,
-        checkups: %i(running_as_different_user),
+        checkups: %i[running_as_different_user],
         messages: messages,
       )
 
@@ -172,13 +172,13 @@ describe GovukDocker::Doctor::Checkup do
   end
 
   context "when checking dnsmasq resolver file" do
-    subject {
+    subject do
       described_class.new(
         service_name: service_name,
-        checkups: %i(dnsmasq_resolver),
+        checkups: %i[dnsmasq_resolver],
         messages: messages,
       )
-    }
+    end
 
     it "should report success if dnsmasq conf matches the one in govuk-docker" do
       dns_config = "nameserver 127.0.0.1\nport 53"

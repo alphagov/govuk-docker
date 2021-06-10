@@ -21,6 +21,6 @@ RSpec.describe "Make dependencies" do
   end
 
   def compose_remove_stack_from_service_name(dependencies)
-    dependencies.map { |d| d.sub(/\-\w+$/, "").sub(/-app$/, "") }
+    dependencies.map { |d| d.sub(/-\w+$/, "").sub(/-app$/, "") }
   end
 end
