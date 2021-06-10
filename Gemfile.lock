@@ -81,7 +81,7 @@ DEPENDENCIES
   colorize
   pry
   rspec
-  rubocop-govuk (~> 4)
+  rubocop-govuk
   thor
 
 BUNDLED WITH
