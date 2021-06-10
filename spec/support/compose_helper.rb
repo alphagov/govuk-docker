@@ -18,11 +18,9 @@ module ComposeHelper
   end
 
   def self.all_services
-    @all_services ||= begin
-                        ProjectsHelper.all_projects
+    @all_services ||= ProjectsHelper.all_projects
                           .map { |project_name| services(project_name) }
                           .reduce({}) { |memo, config| memo.merge(config) }
-                      end
   end
 
   def self.services(name)

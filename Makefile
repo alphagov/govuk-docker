@@ -4,14 +4,18 @@ GOVUK_DOCKER     ?= $(GOVUK_DOCKER_DIR)/exe/govuk-docker
 SHELLCHECK       ?= shellcheck
 
 # Best practice to ensure these targets always execute, even if a
-# file like 'clone' exists in the current directory.
-.PHONY: test
+# file like 'test' exists in the current directory.
+.PHONY: lint test
 
 default:
 	@echo "Run 'make APP-NAME' to set up an app and its dependencies."
 	@echo
 	@echo "For example:"
 	@echo "    make content-publisher"
+
+lint:
+	# Lint the ruby code
+	bundle exec rubocop
 
 test:
 	# Run the tests for the govuk-docker CLI
