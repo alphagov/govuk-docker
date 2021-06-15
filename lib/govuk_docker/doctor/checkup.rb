@@ -22,7 +22,7 @@ module GovukDocker::Doctor
     end
 
     def up_to_date?
-      @up_to_date ||= system "git -C #{GovukDocker::Paths.govuk_docker_dir} diff master origin/master --exit-code --quiet"
+      @up_to_date ||= system "git -C #{GovukDocker::Paths.govuk_docker_dir} diff main origin/main --exit-code --quiet"
     end
 
     def installed?

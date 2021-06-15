@@ -28,7 +28,7 @@ RSpec.describe GovukDocker::Doctor::Checkup do
       ClimateControl.modify GOVUK_DOCKER_DIR: "/some/directory" do
         allow(subject)
           .to receive(:system)
-          .with("git -C /some/directory diff master origin/master --exit-code --quiet")
+          .with("git -C /some/directory diff main origin/main --exit-code --quiet")
           .and_return(true)
 
         expect(subject.call).to eq("fake_service is up-to-date")
@@ -47,7 +47,7 @@ RSpec.describe GovukDocker::Doctor::Checkup do
       ClimateControl.modify GOVUK_DOCKER_DIR: "/some/directory" do
         allow(subject)
           .to receive(:system)
-          .with("git -C /some/directory diff master origin/master --exit-code --quiet")
+          .with("git -C /some/directory diff main origin/main --exit-code --quiet")
           .and_return(false)
 
         expect(subject.call).to eq("fake_service is outdated")
