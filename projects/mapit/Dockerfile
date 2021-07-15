@@ -7,6 +7,6 @@ RUN git clone https://github.com/alphagov/mapit.git
 
 WORKDIR /mapit
 
-RUN pip install shapely
+RUN pip install shapely six
 RUN pip install --upgrade pip wheel setuptools
 RUN pip install -r requirements.txt
