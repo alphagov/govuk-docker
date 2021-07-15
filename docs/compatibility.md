@@ -42,6 +42,7 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ govuk_publishing_components
    - ✅ govuk-attribute-service-prototype
    - ✅ govuk-account-manager-prototype
+   - ✅ govuk-content-schemas
    - ✅ govuk-developer-docs
    - ✅ hmrc-manuals-api
    - ✅ imminence
@@ -91,7 +92,6 @@ These repos are used as part of running the live GOV.UK site. Since all of them 
    - ❌ govuk_schemas
    - ❌ govuk_sidekiq
    - ❌ govuk_taxonomy_helpers
-   - ✅ govuk-content-schemas
    - ✅ plek
    - ❌ slimmer
    - ❌ transition-config
