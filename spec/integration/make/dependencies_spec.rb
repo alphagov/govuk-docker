@@ -1,10 +1,13 @@
 require "spec_helper"
 
 RSpec.describe "Make dependencies" do
+  # Some dependencies are only needed by the dependant app for their static files.
+  dependencies_that_do_not_need_to_be_running = %w[govuk-content-schemas]
+
   ProjectsHelper.all_projects.each do |project_name|
     it "mirrors docker-compose.yml for #{project_name}" do
-      expect(app_dependencies_in_compose_file(project_name))
-        .to match_array(app_dependencies_in_makefile(project_name))
+      expect(app_dependencies_in_compose_file(project_name) - dependencies_that_do_not_need_to_be_running)
+        .to match_array(app_dependencies_in_makefile(project_name) - dependencies_that_do_not_need_to_be_running)
     end
   end
 
