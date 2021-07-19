@@ -11,6 +11,14 @@ RSpec.describe "Make dependencies" do
       expect(app_dependencies_in_compose_file(project_name))
         .to match_array(app_dependencies_in_makefile(project_name))
     end
+
+    it "has only valid dependencies in the #{project_name} Makefile" do
+      app_dependencies = MakefileHelper.dependencies(project_name)
+        .reject { |dep| dep =~ /^(bundle|clone)/ }
+        .map { |dep| "#{dep}-app" }
+
+      expect((app_dependencies - ComposeHelper.all_services.keys)).to eq([])
+    end
   end
 
   def app_dependencies_in_compose_file(project_name)
