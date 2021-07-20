@@ -18,10 +18,6 @@ services:
     <<: *generic-ruby-library
     working_dir: /govuk/govspeak
 
-  govuk-content-schemas-lite:
-    <<: *generic-ruby-library
-    working_dir: /govuk/govuk-content-schemas
-
   govuk_app_config-lite:
     <<: *generic-ruby-library
     working_dir: /govuk/govuk_app_config
