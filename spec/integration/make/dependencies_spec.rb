@@ -1,10 +1,8 @@
 require "spec_helper"
 
 RSpec.describe "Make dependencies" do
-  # rubocop:disable Lint/ConstantDefinitionInBlock
   # Some dependencies are only needed by the dependant app for their static files.
-  DEPENDENCIES_THAT_DO_NOT_NEED_TO_BE_RUNNING = %w[govuk-content-schemas].freeze
-  # rubocop:enable Lint/ConstantDefinitionInBlock
+  let(:dependencies_that_do_not_need_to_be_running) { %w[govuk-content-schemas] }
 
   ProjectsHelper.all_projects.each do |project_name|
     it "mirrors docker-compose.yml for #{project_name}" do
@@ -15,9 +13,8 @@ RSpec.describe "Make dependencies" do
     it "has only valid dependencies in the #{project_name} Makefile" do
       app_dependencies = MakefileHelper.dependencies(project_name)
         .reject { |dep| dep =~ /^(bundle|clone)/ }
-        .map { |dep| "#{dep}-app" }
 
-      expect((app_dependencies - ComposeHelper.all_services.keys)).to eq([])
+      expect((app_dependencies - ProjectsHelper.all_projects)).to eq([])
     end
   end
 
@@ -26,13 +23,13 @@ RSpec.describe "Make dependencies" do
     dependencies = project_stacks.flat_map { |s| s["depends_on"].to_a }
     dependencies = compose_remove_stack_from_service_name(dependencies)
     app_dependencies = (dependencies & ProjectsHelper.all_projects) - [project_name]
-    app_dependencies - DEPENDENCIES_THAT_DO_NOT_NEED_TO_BE_RUNNING
+    app_dependencies - dependencies_that_do_not_need_to_be_running
   end
 
   def app_dependencies_in_makefile(project_name)
     app_dependencies = MakefileHelper.dependencies(project_name) &
       compose_remove_stack_from_service_name(ComposeHelper.app_services.keys)
-    app_dependencies - DEPENDENCIES_THAT_DO_NOT_NEED_TO_BE_RUNNING
+    app_dependencies - dependencies_that_do_not_need_to_be_running
   end
 
   def compose_remove_stack_from_service_name(dependencies)
