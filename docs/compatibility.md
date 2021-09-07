@@ -52,6 +52,7 @@ These are repos that can be started as a some kind of process, such as a web app
       * Has a [separate](https://github.com/alphagov/licensify/blob/master/DOCKER.md) Docker project.
    - ✅ link-checker-api
    - ✅ local-links-manager
+   - ✅ locations-api
    - ✅ manuals-frontend
    - ✅ manuals-publisher
    - ✅ mapit
