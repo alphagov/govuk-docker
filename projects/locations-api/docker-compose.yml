@@ -1,0 +1,39 @@
+version: '3.7'
+
+volumes:
+  locations-api-tmp:
+
+x-locations-api: &locations-api
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: locations-api
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - root-home:/root
+    - locations-api-tmp:/govuk/locations-api/tmp
+  working_dir: /govuk/locations-api
+
+services:
+  locations-api-lite: &locations-api-lite
+    <<: *locations-api
+    depends_on:
+      - postgres-9.6
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/locations-api"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/locations-api-test"
+
+  locations-api-app: &locations-api-app
+    <<: *locations-api
+    depends_on:
+      - postgres-9.6
+      - nginx-proxy
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/locations-api"
+      VIRTUAL_HOST: locations-api.dev.gov.uk
+      BINDING: 0.0.0.0
+    expose:
+      - "3000"
+    command: bin/rails s --restart
