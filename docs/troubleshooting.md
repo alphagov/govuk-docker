@@ -8,6 +8,19 @@ Run the following command in `~/govuk/govuk-docker`. Since this script makes use
 bin/doctor
 ```
 
+## Diagnose database issues with a project/app not making
+
+If you run `make` on an app inside govuk-docker and face any of the following database issues:
+
+- `ActiveRecord::Migration` is not supported
+- duplicate key error
+
+...then it is likely that there is a conflict between the app and one of your existing volumes. This is because database contents are stored in a volume that the container uses, so when the container is recreated, it picks up the same data again.
+
+The easiest resolution is to drop the database, e.g. `govuk-docker run content-store-lite bundle exec rails db:mongoid:drop`, and then try to `make` again.
+
+A blunter solution would be to drop the volume altogether, by running `docker volume rm VOLUME_NAME`, where `VOLUME_NAME` can be derived from `docker volume ls`.
+
 ## Diagnose general issues with a project/app not working
 
 * Make sure you run all commands via GOV.UK Docker.
