@@ -23,7 +23,7 @@ The aim of govuk-docker is to make it easy to develop any GOV.UK app. It achieve
 
 ```
 # in ~/.bashrc or ~/.zshrc
-export PATH=$PATH:~/govuk/govuk-docker/exe
+export PATH=$PATH:${HOME}/govuk/govuk-docker/exe
 ```
 
 Run `echo $SHELL` if you're not sure which shell you use. After saving, you will need to run `source ~/.bashrc` or `source ~/.zshrc` to apply this change to your current terminal session.
