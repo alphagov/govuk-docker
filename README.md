@@ -58,6 +58,12 @@ Running GOV.UK applications can be resource intensive. To give Docker more resou
 Do this the first time you work on a project:
 
 ```sh
+make [app-name]
+```
+
+...where `app-name` is the name of the app you want to build. For example, if you want to make `collections-publisher` you would run:
+
+```sh
 make collections-publisher
 ```
 
@@ -72,19 +78,19 @@ This stack provides only the minimum number of dependencies to run the project c
 Do this to run the tests for a project:
 
 ```sh
-govuk-docker run collections-publisher-lite bundle exec rake
+govuk-docker run [app-name]-lite bundle exec rake
 ```
 
 👉 [Check the troubleshooting guide if you have a problem.](docs/troubleshooting.md)
 
 ### The `app` stack
 
-This stack provides the dependencies necessary to run an app e.g. in a browser. If the app is a web app, you will then be able to visit it in your browser at `my-app.dev.gov.uk`.
+This stack provides the dependencies necessary to run an app e.g. in a browser. If the app is a web app, you will then be able to visit it in your browser at `app-name.dev.gov.uk`.
 
 Do this to start a GOV.UK web app:
 
 ```sh
-govuk-docker up collections-publisher-app
+govuk-docker up [app-name]-app
 ```
 
 👉 [Replicate data locally](docs/how-tos.md#how-to-replicate-data-locally) (or use the [`app-live` stack](#the-app--stacks)).
