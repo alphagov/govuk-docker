@@ -40,8 +40,6 @@ These are repos that can be started as a some kind of process, such as a web app
    - ⚠ govuk_crawler_worker
       * **TODO: Missing support for running the worker**
    - ✅ govuk_publishing_components
-   - ✅ govuk-attribute-service-prototype
-   - ✅ govuk-account-manager-prototype
    - ✅ govuk-content-schemas
    - ✅ govuk-developer-docs
    - ✅ hmrc-manuals-api

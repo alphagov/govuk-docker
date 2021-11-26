@@ -31,7 +31,6 @@ services:
     <<: *account-api
     depends_on:
       - content-store-app
-      - govuk-account-manager-prototype-app
       - memcached
       - nginx-proxy
       - postgres-9.6
@@ -42,7 +41,6 @@ services:
       BINDING: 0.0.0.0
       GOVUK_ACCOUNT_OAUTH_CLIENT_ID: client-id
       GOVUK_ACCOUNT_OAUTH_CLIENT_SECRET: client-secret
-      PLEK_SERVICE_ACCOUNT_MANAGER_URI: "http://www.login.service.dev.gov.uk"
     expose:
       - "3000"
     command: bin/rails s --restart
@@ -50,7 +48,6 @@ services:
   account-api-app-live:
     <<: *account-api
     depends_on:
-      - govuk-account-manager-prototype-app
       - memcached
       - nginx-proxy
       - postgres-9.6
@@ -61,7 +58,6 @@ services:
       GOVUK_ACCOUNT_OAUTH_CLIENT_SECRET: client-secret
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       MEMCACHE_SERVERS: memcached
-      PLEK_SERVICE_ACCOUNT_MANAGER_URI: "http://www.login.service.dev.gov.uk"
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
       VIRTUAL_HOST: account-api.dev.gov.uk
