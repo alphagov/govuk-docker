@@ -63,8 +63,7 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ search-admin
    - ✅ search-api
    - ✅ service-manual-frontend
-   - ⚠ service-manual-publisher
-      * **TODO: Missing support for a webserver stack**
+   - ✅ service-manual-publisher
    - ✅ short-url-manager
    - ❌ sidekiq-monitoring
    - ✅ signon

@@ -27,3 +27,17 @@ services:
       DATABASE_URL: "postgresql://postgres@postgres-9.6/service-manual-publisher"
       TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/service-manual-publisher-test"
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
+
+  service-manual-publisher-app: &service-manual-publisher-app
+    <<: *service-manual-publisher
+    depends_on:
+      - postgres-9.6
+      - publishing-api-app
+      - nginx-proxy
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres-9.6/service-manual-publisher"
+      VIRTUAL_HOST: service-manual-publisher.dev.gov.uk
+      BINDING: 0.0.0.0
+    expose:
+      - "3000"
+    command: bin/rails s --restart
