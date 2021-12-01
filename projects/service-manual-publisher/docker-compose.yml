@@ -22,20 +22,21 @@ services:
   service-manual-publisher-lite:
     <<: *service-manual-publisher
     depends_on:
-      - postgres-9.6
+      # The version of PostgreSQL temporarily does not match production, as an upgrade in production is being worked on (tracked in https://trello.com/c/9PayaOSK)
+      - postgres-13
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-9.6/service-manual-publisher"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/service-manual-publisher-test"
+      DATABASE_URL: "postgresql://postgres@postgres-13/service-manual-publisher"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-13/service-manual-publisher-test"
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
 
   service-manual-publisher-app: &service-manual-publisher-app
     <<: *service-manual-publisher
     depends_on:
-      - postgres-9.6
+      - postgres-13
       - publishing-api-app
       - nginx-proxy
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-9.6/service-manual-publisher"
+      DATABASE_URL: "postgresql://postgres@postgres-13/service-manual-publisher"
       VIRTUAL_HOST: service-manual-publisher.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
