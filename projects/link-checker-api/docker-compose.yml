@@ -25,6 +25,7 @@ services:
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-9.6/link-checker-api"
       TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/link-checker-api-test"
+      DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
       REDIS_URL: redis://redis
 
   link-checker-api-app: &link-checker-api-app
