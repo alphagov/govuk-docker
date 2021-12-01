@@ -17,5 +17,10 @@ services:
     <<: *email-alert-service
     depends_on:
       - redis
+      - rabbitmq
     environment:
       REDIS_URL: redis://redis
+      RABBITMQ_HOSTS: rabbitmq
+      RABBITMQ_VHOST: /
+      RABBITMQ_USER: guest
+      RABBITMQ_PASSWORD: guest
