@@ -20,11 +20,12 @@ services:
   link-checker-api-lite:
     <<: *link-checker-api
     depends_on:
-      - postgres-9.6
+      # The version of PostgreSQL temporarily does not match production, as an upgrade in production is being worked on (tracked in https://trello.com/c/9PayaOSK)
+      - postgres-13
       - redis
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-9.6/link-checker-api"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/link-checker-api-test"
+      DATABASE_URL: "postgresql://postgres@postgres-13/link-checker-api"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-13/link-checker-api-test"
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
       REDIS_URL: redis://redis
 
@@ -33,10 +34,10 @@ services:
     depends_on:
       - link-checker-api-worker
       - nginx-proxy
-      - postgres-9.6
+      - postgres-13
       - redis
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-9.6/link-checker-api"
+      DATABASE_URL: "postgresql://postgres@postgres-13/link-checker-api"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: link-checker-api.dev.gov.uk
       BINDING: 0.0.0.0
@@ -47,10 +48,10 @@ services:
   link-checker-api-worker:
     <<: *link-checker-api
     depends_on:
-      - postgres-9.6
+      - postgres-13
       - redis
       - nginx-proxy
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-9.6/link-checker-api"
+      DATABASE_URL: "postgresql://postgres@postgres-13/link-checker-api"
       REDIS_URL: redis://redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
