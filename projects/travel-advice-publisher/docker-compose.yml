@@ -55,6 +55,7 @@ services:
       - publishing-api-app
       - asset-manager-app
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-9.6/travel-advice-publisher"
+      # The version of PostgreSQL temporarily does not match production, as an upgrade in production is being worked on (tracked in https://trello.com/c/9PayaOSK)
+      DATABASE_URL: "postgresql://postgres@postgres-13/travel-advice-publisher"
       REDIS_URL: redis://redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
