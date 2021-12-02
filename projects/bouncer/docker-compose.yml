@@ -16,18 +16,19 @@ services:
   bouncer-lite:
     <<: *bouncer
     depends_on:
-      - postgres-9.6
+      # The version of PostgreSQL temporarily does not match production, as an upgrade in production is being worked on (tracked in https://trello.com/c/9PayaOSK)
+      - postgres-13
     environment:
-      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/transition_test"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-13/transition_test"
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
 
   bouncer-app:
     <<: *bouncer
     depends_on:
-      - postgres-9.6
+      - postgres-13
       - nginx-proxy
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-9.6/transition"
+      DATABASE_URL: "postgresql://postgres@postgres-13/transition"
       VIRTUAL_HOST: bouncer.dev.gov.uk,bouncer-redirect.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
