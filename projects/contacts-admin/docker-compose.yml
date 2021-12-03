@@ -22,29 +22,28 @@ services:
   contacts-admin-lite:
     <<: *contacts-admin
     depends_on:
-      - mysql-5.5
+      - mysql-8
       - redis
     environment:
-      DATABASE_URL: "mysql2://root:root@mysql-5.5/contacts_development"
-      TEST_DATABASE_URL: "mysql2://root:root@mysql-5.5/contacts_test"
+      DATABASE_URL: "mysql2://root:root@mysql-8/contacts_development"
+      TEST_DATABASE_URL: "mysql2://root:root@mysql-8/contacts_test"
       REDIS_URL: redis://redis
 
   contacts-admin-app: &contacts-admin-app
     <<: *contacts-admin
     depends_on:
-      - mysql-5.5
+      - mysql-8
       - redis
       - publishing-api-app
       - nginx-proxy
       - content-store-app
       - whitehall-app
     environment:
-      DATABASE_URL: "mysql2://root:root@mysql-5.5/contacts_development"
-      TEST_DATABASE_URL: "mysql2://root:root@mysql-5.5/contacts_test"
+      DATABASE_URL: "mysql2://root:root@mysql-8/contacts_development"
+      TEST_DATABASE_URL: "mysql2://root:root@mysql-8/contacts_test"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: contacts-admin.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
       - "3000"
     command: bin/rails s --restart
-
