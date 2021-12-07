@@ -17,6 +17,9 @@ x-content-publisher: &content-publisher
     - content-publisher-tmp:/govuk/content-publisher/tmp
     - content-publisher-node-modules:/govuk/content-publisher/node_modules
   working_dir: /govuk/content-publisher
+  # Mount /tmp as a tmpfs volume. This is a workaround until docker/for-linux#1015 is resolved.
+  # See alphagov/govuk-docker#537 for more info.
+  tmpfs: /tmp
 
 services:
   content-publisher-lite:
