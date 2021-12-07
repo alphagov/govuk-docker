@@ -22,10 +22,10 @@ services:
   content-data-admin-lite:
     <<: *content-data-admin
     depends_on:
-      - postgres-9.6
+      - postgres-13
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-9.6/content-data-admin"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/content-data-admin-test"
+      DATABASE_URL: "postgresql://postgres@postgres-13/content-data-admin"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-13/content-data-admin-test"
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
 
   content-data-admin-app: &content-data-admin-app
@@ -33,11 +33,11 @@ services:
     depends_on:
       - content-data-api-app
       - nginx-proxy
-      - postgres-9.6
+      - postgres-13
     expose:
       - "3000"
     command: bin/rails s --restart
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-9.6/content-data-admin"
+      DATABASE_URL: "postgresql://postgres@postgres-13/content-data-admin"
       VIRTUAL_HOST: content-data-admin.dev.gov.uk
       BINDING: 0.0.0.0
