@@ -55,6 +55,5 @@ services:
       - publishing-api-app
       - asset-manager-app
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-9.6/travel-advice-publisher"
       REDIS_URL: redis://redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
