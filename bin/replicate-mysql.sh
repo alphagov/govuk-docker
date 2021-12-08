@@ -42,16 +42,17 @@ fi
 echo "stopping running govuk-docker containers..."
 govuk-docker down
 
-govuk-docker up -d mysql-5.5
-trap 'govuk-docker stop mysql-5.5' EXIT
+mysql_container="$(govuk-docker config | ruby -ryaml -e "puts YAML::load(STDIN.read).dig('services', '${app}-lite', 'depends_on').keys.select { |k| k.start_with? 'mysql-' }")"
+govuk-docker up -d "$mysql_container"
+trap 'govuk-docker stop ${mysql_container}' EXIT
 
 echo "waiting for mysql..."
-until govuk-docker run mysql-5.5 mysql -h mysql-5.5 -u root --password=root -e 'SELECT 1' &>/dev/null; do
+until govuk-docker run "$mysql_container" mysql -h "$mysql_container" -u root --password=root -e 'SELECT 1' &>/dev/null; do
   sleep 1
 done
 
 database="${app//-/_}_development"
 
-govuk-docker run mysql-5.5 mysql -h mysql-5.5 -u root --password=root -e "DROP DATABASE IF EXISTS \`${database}\`"
-govuk-docker run mysql-5.5 mysql -h mysql-5.5 -u root --password=root -e "CREATE DATABASE \`${database}\`"
-pv "$archive_path" | gunzip | govuk-docker run mysql-5.5 mysql -h mysql-5.5 -u root --password=root "$database"
+govuk-docker run "$mysql_container" mysql -h "$mysql_container" -u root --password=root -e "DROP DATABASE IF EXISTS \`${database}\`"
+govuk-docker run "$mysql_container" mysql -h "$mysql_container" -u root --password=root -e "CREATE DATABASE \`${database}\`"
+pv "$archive_path" | gunzip | govuk-docker run "$mysql_container" mysql -h "$mysql_container" -u root --password=root "$database"
