@@ -57,15 +57,25 @@ fi
 echo "stopping running govuk-docker containers..."
 govuk-docker down
 
-govuk-docker up -d postgres-9.6
-trap 'govuk-docker stop postgres-9.6' EXIT
+postgres_container="$(govuk-docker config | ruby -ryaml -e "puts YAML::load(STDIN.read).dig('services', '${app}-lite', 'depends_on').keys.select { |k| k.start_with? 'postgres-' }")"
+govuk-docker up -d "$postgres_container"
+trap 'govuk-docker stop ${postgres_container}' EXIT
 
 echo "waiting for postgres..."
-until govuk-docker run postgres-9.6 /usr/bin/psql -h postgres-9.6 -U postgres -c 'SELECT 1' &>/dev/null; do
+until govuk-docker run "$postgres_container" /usr/bin/psql -h "$postgres_container" -U postgres -c 'SELECT 1' &>/dev/null; do
   sleep 1
 done
 
 database="$app"
-govuk-docker run postgres-9.6 /usr/bin/psql -h postgres-9.6 -U postgres -c "DROP DATABASE IF EXISTS \"${database}\""
-govuk-docker run postgres-9.6 /usr/bin/createdb -h postgres-9.6 -U postgres "$database"
-pv "$archive_path" | govuk-docker run postgres-9.6 /usr/bin/pg_restore -h postgres-9.6 -U postgres -d "$database" --no-owner
+
+govuk-docker run "$postgres_container" /usr/bin/psql -h "$postgres_container" -U postgres -c "DROP DATABASE IF EXISTS \"${database}\""
+govuk-docker run "$postgres_container" /usr/bin/createdb -h "$postgres_container" -U postgres "$database"
+if [[ "$postgres_container" != "postgres-9.6" ]]; then
+  # Restoring a dump created with postgres 9.6 into postgres 13 gives
+  # an error about the "public" schema already existing.  The SQL dump
+  # includes a CREATE SCHEMA line, so I don't know why it's fine with
+  # older postgres.  We can drop this conditional and line when we're
+  # only replicating data dumped with a newer pg_dump.
+  govuk-docker run "$postgres_container" /usr/bin/psql -h "$postgres_container" -U postgres -d "$database" -c 'DROP SCHEMA IF EXISTS "public"'
+fi
+pv "$archive_path" | govuk-docker run "$postgres_container" /usr/bin/pg_restore -h "$postgres_container" -U postgres -d "$database" --no-owner
