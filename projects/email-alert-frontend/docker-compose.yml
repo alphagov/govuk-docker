@@ -40,6 +40,7 @@ services:
       ASSET_HOST: email-alert-frontend.dev.gov.uk
       VIRTUAL_HOST: email-alert-frontend.dev.gov.uk
       BINDING: 0.0.0.0
+      FEATURE_FLAG_GOVUK_ACCOUNT: enabled
     expose:
       - "3000"
     command: bin/rails s --restart
@@ -57,3 +58,4 @@ services:
       PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
       VIRTUAL_HOST: email-alert-frontend.dev.gov.uk
       BINDING: 0.0.0.0
+      FEATURE_FLAG_GOVUK_ACCOUNT: enabled
