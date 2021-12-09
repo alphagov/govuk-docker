@@ -20,18 +20,18 @@ services:
   locations-api-lite: &locations-api-lite
     <<: *locations-api
     depends_on:
-      - postgres-9.6
+      - postgres-13
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-9.6/locations-api"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres-9.6/locations-api-test"
+      DATABASE_URL: "postgresql://postgres@postgres-13/locations-api"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-13/locations-api-test"
 
   locations-api-app: &locations-api-app
     <<: *locations-api
     depends_on:
-      - postgres-9.6
+      - postgres-13
       - nginx-proxy
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-9.6/locations-api"
+      DATABASE_URL: "postgresql://postgres@postgres-13/locations-api"
       VIRTUAL_HOST: locations-api.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
