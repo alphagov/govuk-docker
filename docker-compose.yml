@@ -13,6 +13,9 @@ volumes:
   elasticsearch-6:
   elasticsearch-7:
 
+networks:
+  default:
+
 services:
   postgres-9.6:
     image: postgres:9.6
