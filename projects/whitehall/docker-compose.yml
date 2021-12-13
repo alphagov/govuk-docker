@@ -19,7 +19,7 @@ x-whitehall: &whitehall
   working_dir: /govuk/whitehall
   # Mount /tmp as a tmpfs volume. This is a workaround until docker/for-linux#1015 is resolved.
   # See alphagov/govuk-docker#537 for more info.
-  tmpfs: /tmp
+  tmpfs: /tmp:exec
 
 services:
   whitehall-lite:
