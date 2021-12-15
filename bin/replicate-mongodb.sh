@@ -13,6 +13,8 @@ replication_dir="${GOVUK_DOCKER_REPLICATION_DIR:-${GOVUK_DOCKER_DIR:-${GOVUK_ROO
 
 bucket="govuk-integration-database-backups"
 
+mongo_version=3.6
+
 case "$app" in
   "authenticating-proxy")
     hostname=router_backend
@@ -21,6 +23,8 @@ case "$app" in
   "router"|"draft-router")
     hostname=router_backend
     database="${app//-/_}"
+    mongo_version=2.6
+    wait_for_rs=1
     ;;
   "asset-manager")
     hostname=mongo
@@ -67,12 +71,18 @@ pv "$archive_path" | gunzip | tar -zx -f - -C "$extract_path" "var/lib/mongodb/b
 echo "stopping running govuk-docker containers..."
 govuk-docker down
 
-container=$(govuk-docker run -d --rm -v "${extract_path}:/replication" mongo-3.6 | tail -n1)
+container=$(govuk-docker run -d --rm -v "${extract_path}:/replication" --name "mongo-${mongo_version}" mongo-${mongo_version} | tail -n1)
 # we want $container to be expanded now
 # shellcheck disable=SC2064
 trap "docker stop '$container'" EXIT
 
 echo "waiting for mongo..."
+
+if [[ -n "${wait_for_rs:-}" ]]; then
+  echo "Sleeping for 60s to allow replica set initialisation..."
+  sleep 60
+fi
+
 until docker exec "$container" mongo --eval 1 &>/dev/null; do
   sleep 1
 done
