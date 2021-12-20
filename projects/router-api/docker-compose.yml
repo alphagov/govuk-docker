@@ -35,6 +35,7 @@ services:
       MONGODB_URI: "mongodb://mongo-2.6/router"
       VIRTUAL_HOST: router-api.dev.gov.uk
       BINDING: 0.0.0.0
+      ROUTER_NODES: ""
     expose:
       - "3000"
     command: bin/rails s --restart
