@@ -29,6 +29,7 @@ services:
       DATABASE_URL: "postgresql://postgres@postgres-13/publishing-api"
       TEST_DATABASE_URL: "postgresql://postgres@postgres-13/publishing-api-test"
       REDIS_URL: redis://redis
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
 
   publishing-api-app: &publishing-api-app
     <<: *publishing-api
