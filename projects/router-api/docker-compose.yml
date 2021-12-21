@@ -36,6 +36,7 @@ services:
       VIRTUAL_HOST: router-api.dev.gov.uk
       BINDING: 0.0.0.0
       ROUTER_NODES: ""
+      IS_DOCKER: "true"
     expose:
       - "3000"
     command: bin/rails s --restart
