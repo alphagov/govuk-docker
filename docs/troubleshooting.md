@@ -113,3 +113,19 @@ To check if you're using compose V2 and turn it off:
 - go to "Experimental Features"
 - check if the "Use Docker Compose V2 release candidate" checkbox is checked
 - uncheck it if it is checked and save
+
+## Cannot `rails db:prepare` or start console due to "Plugin caching_sha2_password could not be loaded"
+
+In MySQL 8.0 `caching_sha2_password` was made the default over the previous `mysql_native_password`.
+
+This can lead to the following error when ActiveRecord is attempting to connect to the database, for example when running `rails db:prepare` or trying to bring up a rails console.
+
+```
+ActiveRecord::ConnectionNotEstablished: Plugin caching_sha2_password could not be loaded: /usr/lib/x86_64-linux-gnu/mariadb19/plugin/caching_sha2_password.so: cannot open shared object file: No such file or directory
+```
+
+A workaround is to get MySQL to fall back to using `mysql_native_password` as follows:
+
+- Check that you can see `govuk-docker_mysql-8_1` when running `govuk-docker ps`, if not you will need to start a service that uses mysql (for example Whitehall).
+- Bring up a mysql console inside the container: `docker exec -it govuk-docker_mysql-8_1 mysql --user=root --password=root`
+- Alter the way the root user identifies itself. `ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'root';`
