@@ -102,18 +102,6 @@ Error: It seems there is already an App at '/Applications/Docker.app'.
 
 This isn't a problem if you already have Docker/Compose installed, and the setup script will continue to run. If you like, you can remove your existing Docker/Compose and run `bin/setup` again.
 
-## Check if you are using Docker Compose V2
-
-At time of writing, [docker are trialing a version 2 of the compose command](https://docs.docker.com/compose/cli-command/). It's been observed that after updating Docker, some developers are opted into using this experimental feature. Also at time of writing, using compose V2 has been observed to cause problems when using govuk-docker. Specifically it seems to not work against the nginx image we use.
-
-To check if you're using compose V2 and turn it off:
-
-- open the docker dashboard UI
-- click the settings gear icon
-- go to "Experimental Features"
-- check if the "Use Docker Compose V2 release candidate" checkbox is checked
-- uncheck it if it is checked and save
-
 ## Cannot `rails db:prepare` or start console due to "Plugin caching_sha2_password could not be loaded"
 
 In MySQL 8.0 `caching_sha2_password` was made the default over the previous `mysql_native_password`.
