@@ -81,4 +81,4 @@ database="$(govuk-docker config | ruby -ryaml -e "puts YAML::load(STDIN.read).di
 
 govuk-docker run "$postgres_container" /usr/bin/psql -h "$postgres_container" -U postgres -c "DROP DATABASE IF EXISTS \"${database}\""
 govuk-docker run "$postgres_container" /usr/bin/createdb -h "$postgres_container" -U postgres "$database"
-pv "$archive_path" | govuk-docker run "$postgres_container" /usr/bin/pg_restore -h "$postgres_container" -U postgres -d "$database" --no-owner
+pv "$archive_path" | govuk-docker run "$postgres_container" /usr/bin/pg_restore -h "$postgres_container" -U postgres -d "$database" --no-owner --no-privileges
