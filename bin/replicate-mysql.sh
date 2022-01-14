@@ -51,7 +51,8 @@ until govuk-docker run "$mysql_container" mysql -h "$mysql_container" -u root --
   sleep 1
 done
 
-database="${app//-/_}_development"
+# Extract the local database name from the app's DATABASE_URL environment variable
+database="$(govuk-docker config | ruby -ryaml -e "puts YAML::load(STDIN.read).dig('services', '${app}-app', 'environment', 'DATABASE_URL').split('/').last")"
 
 govuk-docker run "$mysql_container" mysql -h "$mysql_container" -u root --password=root -e "DROP DATABASE IF EXISTS \`${database}\`"
 govuk-docker run "$mysql_container" mysql -h "$mysql_container" -u root --password=root -e "CREATE DATABASE \`${database}\`"
