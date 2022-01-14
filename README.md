@@ -67,6 +67,14 @@ make [app-name]
 make collections-publisher
 ```
 
+You may need to clean up and run this command again after the app setup has been updated.
+
+```sh
+git pull
+govuk-docker down [app-name]
+make [app-name]
+```
+
 👉 [Check the troubleshooting guide if you have a problem.](docs/troubleshooting.md)
 
 Each project provides a number of 'stacks' for different use cases. You can see the stacks for a project in its [config file](projects/content-publisher/docker-compose.yml). To provide consistency, all projects should follow these conventions for stacks:
