@@ -4,6 +4,7 @@ volumes:
   root-home:
   rabbitmq:
   postgres-9.6:
+  postgres-12:
   postgres-13:
   mysql-5.5:
   mysql-8:
@@ -23,6 +24,13 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
       - postgres-9.6:/var/lib/postgresql/data
+
+  postgres-12:
+    image: postgres:12
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - postgres-12:/var/lib/postgresql/data
 
   postgres-13:
     image: postgres:13
