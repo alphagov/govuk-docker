@@ -1,5 +1,19 @@
 #!/usr/bin/env bash
 
+function try_find_file {
+  app="$1"
+  db_hostname="${app}-mysql"
+
+  set +e
+  # Find the most recent database dump from that host
+  out="$(aws s3 ls "s3://${bucket}/${db_hostname}/" | grep "\.gz$" | sed 's/.* //' | sort | tail -n1)"
+  set -e
+
+  if [[ -n "$out" ]]; then
+    echo "${db_hostname}/${out}"
+  fi
+}
+
 set -eu
 
 if [[ "$#" == "0" ]]; then
@@ -15,7 +29,6 @@ bucket="govuk-integration-database-backups"
 archive_dir="${replication_dir}/mysql"
 archive_file="${app//-/_}_production.dump.gz"
 archive_path="${archive_dir}/${archive_file}"
-date=$(date '+%Y-%m-%d')
 
 echo "Replicating mysql for $app"
 
@@ -24,14 +37,12 @@ if [[ -e "$archive_path" ]]; then
 else
   mkdir -p "$archive_dir"
 
-  # Get a list of all of the MySQL database dump files, exclude them all,
-  # include only the files that have the date and the app name in it.
-  # https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters
-  aws s3 cp "s3://${bucket}/mysql-backend/" "$archive_dir" --recursive --exclude "*" --include "$date*-${app//-/_}_production.gz"
-
-  # List the archive directory, find a file with the date and the app name in
-  # it, and rename that to a file that doesn't have a timestamp in its name.
-  mv "$(find "$archive_dir" -name "$date*${app//-/_}*.gz")" "$archive_path"
+  s3_file=$(try_find_file "$app")
+  if [[ -z "$s3_file" ]]; then
+    echo "couldn't figure out backup filename in S3 - if you're sure the app uses MySQL, file an issue in alphagov/govuk-docker."
+    exit 1
+  fi
+  aws s3 cp "s3://${bucket}/${s3_file}" "${archive_path}"
 fi
 
 if [[ -n "${SKIP_IMPORT:-}" ]]; then
@@ -51,7 +62,8 @@ until govuk-docker run "$mysql_container" mysql -h "$mysql_container" -u root --
   sleep 1
 done
 
-database="${app//-/_}_development"
+# Extract the local database name from the app's DATABASE_URL environment variable
+database="$(govuk-docker config | ruby -ryaml -e "puts YAML::load(STDIN.read).dig('services', '${app}-app', 'environment', 'DATABASE_URL').split('/').last")"
 
 govuk-docker run "$mysql_container" mysql -h "$mysql_container" -u root --password=root -e "DROP DATABASE IF EXISTS \`${database}\`"
 govuk-docker run "$mysql_container" mysql -h "$mysql_container" -u root --password=root -e "CREATE DATABASE \`${database}\`"
