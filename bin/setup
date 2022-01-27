@@ -1,5 +1,7 @@
 #!/bin/bash
 
+brew_root=$(brew --prefix)
+
 echo -e "✅ Installing dependencies via Homebrew...\n"
 brew bundle --file="$(dirname $0)/../Brewfile"
 echo
@@ -12,12 +14,12 @@ echo -e "You may need to enter your root password...\n"
 sudo mkdir -p /etc/resolver
 echo -e "nameserver 127.0.0.1\nport 53" | sudo tee /etc/resolver/dev.gov.uk >/dev/null
 
-echo -e "✅ Configuring dnsmasq [/usr/local/etc/dnsmasq.conf]\n"
-echo "conf-dir=/usr/local/etc/dnsmasq.d,*.conf" > /usr/local/etc/dnsmasq.conf
+echo -e "✅ Configuring dnsmasq [$brew_root/etc/dnsmasq.conf]\n"
+echo "conf-dir=$brew_root/etc/dnsmasq.d,*.conf" >> $brew_root/etc/dnsmasq.conf
 
-echo -e "✅ Configuring dnsmasq [/usr/local/etc/dnsmasq.d/development.conf]\n"
-mkdir -p /usr/local/etc/dnsmasq.d
-echo "address=/dev.gov.uk/127.0.0.1" > /usr/local/etc/dnsmasq.d/development.conf
+echo -e "✅ Configuring dnsmasq [$brew_root/etc/dnsmasq.d/development.conf]\n"
+mkdir -p $brew_root/etc/dnsmasq.d
+echo "address=/dev.gov.uk/127.0.0.1" > $brew_root/etc/dnsmasq.d/development.conf
 
 echo "✅ Restarting dnsmasq"
 echo -e "You may need to enter your root password...\n"

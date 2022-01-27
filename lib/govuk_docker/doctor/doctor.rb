@@ -65,10 +65,20 @@ module GovukDocker::Doctor
         Dnsmasq needs to run as root.
         You should start it with `sudo brew services start dnsmasq`.
       HEREDOC
-      dnsmasq_resolver: "✅ Dnsmasq is resolving DNS requests",
+      dnsmasq_config: "✅ Dnsmasq config files are set up correctly",
+      not_dnsmasq_config: <<~HEREDOC,
+        ❌ One or more dnsmasq config files is missing.
+        Try running `bin/setup` again.
+      HEREDOC
+      dnsmasq_resolver: "✅ Dnsmasq resolver file is set up correctly",
       not_dnsmasq_resolver: <<~HEREDOC,
         ❌ Your DNS resolver file (/etc/resolver/dev.gov.uk) has unexpected content.
         Try running `bin/setup` again.
+      HEREDOC
+      dnsmasq_resolving: "✅ Dnsmasq is resolving app.dev.gov.uk correctly",
+      not_dnsmasq_resolving: <<~HEREDOC,
+        ❌ Dnsmasq is not resolving app.dev.gov.uk correctly.
+        Try running `bin/setup` again, and check system logs for dnsmasq.
       HEREDOC
     }
   end
