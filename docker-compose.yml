@@ -3,10 +3,8 @@ version: '3.7'
 volumes:
   root-home:
   rabbitmq:
-  postgres-9.6:
   postgres-12:
   postgres-13:
-  mysql-5.5:
   mysql-8:
   mongo-3.6:
   mongo-2.6:
@@ -18,13 +16,6 @@ networks:
   default:
 
 services:
-  postgres-9.6:
-    image: postgres:9.6
-    environment:
-      POSTGRES_HOST_AUTH_METHOD: trust
-    volumes:
-      - postgres-9.6:/var/lib/postgresql/data
-
   postgres-12:
     image: postgres:12
     environment:
@@ -55,14 +46,6 @@ services:
     volumes:
       - mongo-2.6:/data/db
     command: ["--replSet", "mongo-replica-set"]
-
-  mysql-5.5:
-    image: mysql:5.5.58
-    volumes:
-      - mysql-5.5:/var/lib/mysql
-    command: --max_allowed_packet=1073741824
-    environment:
-      MYSQL_ROOT_PASSWORD: root
 
   mysql-8:
     image: mysql:8
