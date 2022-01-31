@@ -14,7 +14,7 @@ puts GovukDocker::Doctor::Checkup.new(
 puts "\r\nChecking dnsmasq"
 puts GovukDocker::Doctor::Checkup.new(
   service_name: "dnsmasq",
-  checkups: %i[installed running dnsmasq_resolver running_as_different_user],
+  checkups: %i[installed running dnsmasq_config dnsmasq_resolver dnsmasq_resolving running_as_different_user],
   messages: GovukDocker::Doctor.messages[:dnsmasq],
 ).call
 puts "\r\nChecking docker"
