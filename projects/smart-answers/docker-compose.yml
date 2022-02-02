@@ -9,6 +9,7 @@ x-smart-answers: &smart-answers
     context: .
     dockerfile: Dockerfile.govuk-base
   image: smart-answers
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

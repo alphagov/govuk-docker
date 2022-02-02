@@ -5,6 +5,7 @@ x-generic-ruby-library: &generic-ruby-library
     context: .
     dockerfile: Dockerfile.govuk-base
   image: generic-ruby-library
+  platform: linux/amd64
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root

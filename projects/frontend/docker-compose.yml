@@ -9,6 +9,7 @@ x-frontend: &frontend
     context: .
     dockerfile: Dockerfile.govuk-base
   image: frontend
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

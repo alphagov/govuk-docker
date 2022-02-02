@@ -9,6 +9,7 @@ x-local-links-manager: &local-links-manager
     context: .
     dockerfile: Dockerfile.govuk-base
   image: local-links-manager
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

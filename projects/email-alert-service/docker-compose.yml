@@ -5,6 +5,7 @@ x-email-alert-service: &email-alert-service
     context: .
     dockerfile: Dockerfile.govuk-base
   image: email-alert-service
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

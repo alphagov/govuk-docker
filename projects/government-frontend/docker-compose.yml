@@ -9,6 +9,7 @@ x-government-frontend: &government-frontend
     context: .
     dockerfile: Dockerfile.govuk-base
   image: government-frontend
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

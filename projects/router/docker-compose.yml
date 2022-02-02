@@ -5,6 +5,7 @@ x-router: &router
     context: .
     dockerfile: projects/router/Dockerfile
   image: router
+  platform: linux/amd64
   volumes:
     - go:/go
     - ${GOVUK_ROOT_DIR:-~/govuk}/router:/go/src/github.com/alphagov/router:delegated

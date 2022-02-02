@@ -9,6 +9,7 @@ x-manuals-frontend: &manuals-frontend
     context: .
     dockerfile: Dockerfile.govuk-base
   image: manuals-frontend
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

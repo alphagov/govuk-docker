@@ -8,6 +8,7 @@ x-asset-manager: &asset-manager
     context: .
     dockerfile: projects/asset-manager/Dockerfile
   image: asset-manager
+  platform: linux/amd64
   tty: true
   stdin_open: true
   volumes:

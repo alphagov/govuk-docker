@@ -9,6 +9,7 @@ x-service-manual-publisher: &service-manual-publisher
     context: .
     dockerfile: Dockerfile.govuk-base
   image: service-manual-publisher
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

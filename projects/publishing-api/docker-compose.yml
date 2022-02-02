@@ -8,6 +8,7 @@ x-publishing-api: &publishing-api
     context: .
     dockerfile: Dockerfile.govuk-base
   image: publishing-api
+  platform: linux/amd64
   tty: true
   stdin_open: true
   volumes:

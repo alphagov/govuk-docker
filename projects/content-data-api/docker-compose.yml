@@ -8,6 +8,7 @@ x-content-data-api: &content-data-api
     context: .
     dockerfile: Dockerfile.govuk-base
   image: content-data-api
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

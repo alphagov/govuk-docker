@@ -5,6 +5,7 @@ x-govuk_crawler_worker: &govuk_crawler_worker
     context: .
     dockerfile: projects/govuk_crawler_worker/Dockerfile
   image: govuk_crawler_worker
+  platform: linux/amd64
   volumes:
     - go:/go
     - ${GOVUK_ROOT_DIR:-~/govuk}/govuk_crawler_worker:/go/src/github.com/alphagov/govuk_crawler_worker:delegated

@@ -5,6 +5,7 @@ x-govuk-developer-docs: &govuk-developer-docs
     context: .
     dockerfile: Dockerfile.govuk-base
   image: govuk-developer-docs
+  platform: linux/amd64
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root

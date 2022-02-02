@@ -9,6 +9,7 @@ x-datagovuk_find: &datagovuk_find
     context: .
     dockerfile: Dockerfile.govuk-base
   image: datagovuk_find
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

@@ -9,6 +9,7 @@ x-govuk_publishing_components: &govuk_publishing_components
     context: .
     dockerfile: Dockerfile.govuk-base
   image: govuk_publishing_components
+  platform: linux/amd64
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root

@@ -9,6 +9,7 @@ x-content-data-admin: &content-data-admin
     context: .
     dockerfile: Dockerfile.govuk-base
   image: content-data-admin
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

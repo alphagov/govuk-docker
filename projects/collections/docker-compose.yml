@@ -9,6 +9,7 @@ x-collections: &collections
     context: .
     dockerfile: Dockerfile.govuk-base
   image: collections
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

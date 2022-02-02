@@ -8,6 +8,7 @@ x-tmp: &info-frontend
     context: .
     dockerfile: Dockerfile.govuk-base
   image: info-frontend
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

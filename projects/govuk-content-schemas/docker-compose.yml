@@ -8,6 +8,7 @@ x-govuk-content-schemas: &govuk-content-schemas
     context: .
     dockerfile: Dockerfile.govuk-base
   image: govuk-content-schemas
+  platform: linux/amd64
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root

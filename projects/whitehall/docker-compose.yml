@@ -9,6 +9,7 @@ x-whitehall: &whitehall
     context: .
     dockerfile: projects/whitehall/Dockerfile
   image: whitehall
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

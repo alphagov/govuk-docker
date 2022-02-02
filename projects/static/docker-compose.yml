@@ -9,6 +9,7 @@ x-static: &static
     context: .
     dockerfile: Dockerfile.govuk-base
   image: static
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

@@ -9,6 +9,7 @@ x-travel-advice-publisher: &travel-advice-publisher
     context: .
     dockerfile: Dockerfile.govuk-base
   image: travel-advice-publisher
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

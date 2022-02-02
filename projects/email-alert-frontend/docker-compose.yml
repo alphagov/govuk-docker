@@ -9,6 +9,7 @@ x-email-alert-frontend: &email-alert-frontend
     context: .
     dockerfile: Dockerfile.govuk-base
   image: email-alert-frontend
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

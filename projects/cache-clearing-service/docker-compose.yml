@@ -5,6 +5,7 @@ x-cache-clearing-service: &cache-clearing-service
     context: .
     dockerfile: Dockerfile.govuk-base
   image: cache-clearing-service
+  platform: linux/amd64
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root

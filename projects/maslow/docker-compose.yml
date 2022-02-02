@@ -9,6 +9,7 @@ x-maslow: &maslow
     context: .
     dockerfile: Dockerfile.govuk-base
   image: maslow
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

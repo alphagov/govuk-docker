@@ -9,6 +9,7 @@ x-collections-publisher: &collections-publisher
     context: .
     dockerfile: Dockerfile.govuk-base
   image: collections-publisher
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

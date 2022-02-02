@@ -8,6 +8,7 @@ x-content-store: &content-store
     context: .
     dockerfile: Dockerfile.govuk-base
   image: content-store
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

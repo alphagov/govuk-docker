@@ -8,6 +8,7 @@ x-support-api: &support-api
     context: .
     dockerfile: Dockerfile.govuk-base
   image: support-api
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

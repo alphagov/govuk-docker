@@ -9,6 +9,7 @@ x-short-url-manager: &short-url-manager
     context: .
     dockerfile: Dockerfile.govuk-base
   image: short-url-manager
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

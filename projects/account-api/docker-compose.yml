@@ -8,6 +8,7 @@ x-account-api: &account-api
     context: .
     dockerfile: Dockerfile.govuk-base
   image: account-api
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

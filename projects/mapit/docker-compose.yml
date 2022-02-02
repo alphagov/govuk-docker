@@ -8,6 +8,7 @@ x-mapit: &mapit
     context: .
     dockerfile: projects/mapit/Dockerfile
   image: mapit
+  platform: linux/amd64
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
   working_dir: /govuk/mapit

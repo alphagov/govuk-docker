@@ -8,6 +8,7 @@ x-hmrc-manuals-api: &hmrc-manuals-api
     context: .
     dockerfile: Dockerfile.govuk-base
   image: hmrc-manuals-api
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

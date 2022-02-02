@@ -5,6 +5,7 @@ x-search-api: &search-api
     context: .
     dockerfile: Dockerfile.govuk-base
   image: search-api
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:

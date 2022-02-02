@@ -8,6 +8,7 @@ x-transition: &transition
     context: .
     dockerfile: Dockerfile.govuk-base
   image: transition
+  platform: linux/amd64
   stdin_open: true
   tty: true
   volumes:
