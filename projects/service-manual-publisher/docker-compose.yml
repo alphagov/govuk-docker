@@ -22,7 +22,6 @@ services:
   service-manual-publisher-lite:
     <<: *service-manual-publisher
     depends_on:
-      # The version of PostgreSQL temporarily does not match production, as an upgrade in production is being worked on (tracked in https://trello.com/c/9PayaOSK)
       - postgres-13
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-13/service-manual-publisher"
