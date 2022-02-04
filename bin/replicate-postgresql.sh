@@ -69,16 +69,16 @@ govuk-docker down
 
 postgres_container="$(govuk-docker config | ruby -ryaml -e "puts YAML::load(STDIN.read).dig('services', '${app}-lite', 'depends_on').keys.select { |k| k.start_with? 'postgres-' }")"
 govuk-docker up -d "$postgres_container"
-trap 'govuk-docker stop ${postgres_container}' EXIT
+trap 'govuk-docker down' EXIT
 
 echo "waiting for postgres..."
-until govuk-docker run "$postgres_container" /usr/bin/psql -h "$postgres_container" -U postgres -c 'SELECT 1' &>/dev/null; do
+until govuk-docker run --rm -T "$postgres_container" /usr/bin/psql -h "$postgres_container" -U postgres -c 'SELECT 1' &>/dev/null; do
   sleep 1
 done
 
 # Extract the local database name from the app's DATABASE_URL environment variable
 database="$(govuk-docker config | ruby -ryaml -e "puts YAML::load(STDIN.read).dig('services', '${app}-app', 'environment', 'DATABASE_URL').split('/').last")"
 
-govuk-docker run "$postgres_container" /usr/bin/psql -h "$postgres_container" -U postgres -c "DROP DATABASE IF EXISTS \"${database}\""
-govuk-docker run "$postgres_container" /usr/bin/createdb -h "$postgres_container" -U postgres "$database"
-pv "$archive_path" | govuk-docker run "$postgres_container" /usr/bin/pg_restore -h "$postgres_container" -U postgres -d "$database" --no-owner --no-privileges
+govuk-docker run --rm -T "$postgres_container" /usr/bin/psql -h "$postgres_container" -U postgres -c "DROP DATABASE IF EXISTS \"${database}\""
+govuk-docker run --rm -T "$postgres_container" /usr/bin/createdb -h "$postgres_container" -U postgres "$database"
+pv "$archive_path" | govuk-docker run --rm -T "$postgres_container" /usr/bin/pg_restore -h "$postgres_container" -U postgres -d "$database" --no-owner --no-privileges
