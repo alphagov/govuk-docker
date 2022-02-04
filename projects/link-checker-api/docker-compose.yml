@@ -20,7 +20,6 @@ services:
   link-checker-api-lite:
     <<: *link-checker-api
     depends_on:
-      # The version of PostgreSQL temporarily does not match production, as an upgrade in production is being worked on (tracked in https://trello.com/c/9PayaOSK)
       - postgres-13
       - redis
     environment:

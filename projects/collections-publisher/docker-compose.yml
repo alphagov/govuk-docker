@@ -22,7 +22,6 @@ services:
   collections-publisher-lite:
     <<: *collections-publisher
     depends_on:
-      # The version of MySQL temporarily does not match production, as an upgrade in production is being worked on (tracked in https://trello.com/c/btcm7JyB/)
       - mysql-8
       - redis
     environment:

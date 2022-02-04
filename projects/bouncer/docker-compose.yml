@@ -16,7 +16,6 @@ services:
   bouncer-lite:
     <<: *bouncer
     depends_on:
-      # The version of PostgreSQL temporarily does not match production, as an upgrade in production is being worked on (tracked in https://trello.com/c/9PayaOSK)
       - postgres-13
     environment:
       TEST_DATABASE_URL: "postgresql://postgres@postgres-13/transition_test"
