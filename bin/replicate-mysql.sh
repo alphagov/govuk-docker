@@ -55,16 +55,16 @@ govuk-docker down
 
 mysql_container="$(govuk-docker config | ruby -ryaml -e "puts YAML::load(STDIN.read).dig('services', '${app}-lite', 'depends_on').keys.select { |k| k.start_with? 'mysql-' }")"
 govuk-docker up -d "$mysql_container"
-trap 'govuk-docker stop ${mysql_container}' EXIT
+trap 'govuk-docker down' EXIT
 
 echo "waiting for mysql..."
-until govuk-docker run "$mysql_container" mysql -h "$mysql_container" -u root --password=root -e 'SELECT 1' &>/dev/null; do
+until govuk-docker run --rm -T "$mysql_container" mysql -h "$mysql_container" -u root --password=root -e 'SELECT 1' &>/dev/null; do
   sleep 1
 done
 
 # Extract the local database name from the app's DATABASE_URL environment variable
 database="$(govuk-docker config | ruby -ryaml -e "puts YAML::load(STDIN.read).dig('services', '${app}-app', 'environment', 'DATABASE_URL').split('/').last")"
 
-govuk-docker run "$mysql_container" mysql -h "$mysql_container" -u root --password=root -e "DROP DATABASE IF EXISTS \`${database}\`"
-govuk-docker run "$mysql_container" mysql -h "$mysql_container" -u root --password=root -e "CREATE DATABASE \`${database}\`"
-pv "$archive_path" | gunzip | govuk-docker run "$mysql_container" mysql -h "$mysql_container" -u root --password=root "$database"
+govuk-docker run --rm -T "$mysql_container" mysql -h "$mysql_container" -u root --password=root -e "DROP DATABASE IF EXISTS \`${database}\`"
+govuk-docker run --rm -T "$mysql_container" mysql -h "$mysql_container" -u root --password=root -e "CREATE DATABASE \`${database}\`"
+pv "$archive_path" | gunzip | govuk-docker run --rm -T "$mysql_container" mysql -h "$mysql_container" -u root --password=root "$database"
