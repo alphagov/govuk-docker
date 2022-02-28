@@ -18,8 +18,8 @@ RUN apt-get update -qq && apt-get install -y yarn nodejs
 RUN yarn config set cache-folder /root/.yarn/
 
 # Install rbenv to manage ruby versions
-RUN git clone https://github.com/sstephenson/rbenv.git /rbenv
-RUN git clone https://github.com/sstephenson/ruby-build.git /rbenv/plugins/ruby-build
+RUN git clone https://github.com/rbenv/rbenv.git /rbenv
+RUN git clone https://github.com/rbenv/ruby-build.git /rbenv/plugins/ruby-build
 RUN /rbenv/plugins/ruby-build/install.sh
 ENV PATH /root/.rbenv/shims:/rbenv/bin:$PATH
 ENV BUNDLE_SILENCE_ROOT_WARNING 1
