@@ -20,19 +20,19 @@ services:
   router-api-lite:
     <<: *router-api
     depends_on:
-      - mongo-2.6
+      - mongo-3.6
     environment:
-      MONGODB_URI: "mongodb://mongo-2.6/router"
-      TEST_MONGODB_URI: "mongodb://mongo-2.6/router-test"
+      MONGODB_URI: "mongodb://mongo-3.6/router"
+      TEST_MONGODB_URI: "mongodb://mongo-3.6/router-test"
 
   router-api-app: &router-api-app
     <<: *router-api
     depends_on:
-      - mongo-2.6
+      - mongo-3.6
       - router-app
       - nginx-proxy
     environment:
-      MONGODB_URI: "mongodb://mongo-2.6/router"
+      MONGODB_URI: "mongodb://mongo-3.6/router"
       VIRTUAL_HOST: router-api.dev.gov.uk
       BINDING: 0.0.0.0
     expose:

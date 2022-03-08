@@ -15,17 +15,17 @@ services:
   router-lite:
     <<: *router
     depends_on:
-      - mongo-2.6
+      - mongo-3.6
     environment:
       BINARY: /go/src/github.com/alphagov/router/router
       DEBUG: "true"
-      ROUTER_MONGO_URL: mongo-2.6
+      ROUTER_MONGO_URL: mongo-3.6
       ROUTER_MONGO_DB: router
 
   router-app: &router-app
     <<: *router
     depends_on:
-      - mongo-2.6
+      - mongo-3.6
       - nginx-proxy
     expose:
       - "8080"
@@ -33,7 +33,7 @@ services:
     environment:
       VIRTUAL_HOST: router.dev.gov.uk,www.dev.gov.uk,www-origin.dev.gov.uk
       VIRTUAL_PORT: 8080
-      ROUTER_MONGO_URL: mongo-2.6
+      ROUTER_MONGO_URL: mongo-3.6
       ROUTER_MONGO_DB: router
       ROUTER_APIADDR: :3055
       ROUTER_BACKEND_HEADER_TIMEOUT: 60s
@@ -44,7 +44,7 @@ services:
     environment:
       VIRTUAL_HOST: draft-router.dev.gov.uk,draft-origin.dev.gov.uk
       VIRTUAL_PORT: 8080
-      ROUTER_MONGO_URL: mongo-2.6
+      ROUTER_MONGO_URL: mongo-3.6
       ROUTER_MONGO_DB: draft-router
       ROUTER_APIADDR: :3055
       ROUTER_BACKEND_HEADER_TIMEOUT: 60s

@@ -23,7 +23,7 @@ case "$app" in
   "router"|"draft-router")
     hostname=router_backend
     database="${app//-/_}"
-    mongo_version=2.6
+    mongo_version=3.6
     wait_for_rs=1
     ;;
   "asset-manager")
