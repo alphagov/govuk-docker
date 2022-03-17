@@ -41,7 +41,7 @@ services:
       - "28017:28017"
 
   mysql-8:
-    image: mysql:8
+    image: mysql:8-oracle
     volumes:
       - mysql-8:/var/lib/mysql
     command: --max_allowed_packet=1073741824
