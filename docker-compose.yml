@@ -58,6 +58,7 @@ services:
     ports:
       - "27017:27017"
       - "28017:28017"
+    command: ["--replSet", "mongo-replica-set"]
 
   mysql-8:
     # Using the orcale image because they are available in ARM64 and AMD64 variants
