@@ -21,6 +21,7 @@ x-feedback: &feedback
 services:
   feedback-lite:
     <<: *feedback
+    shm_size: 128m
 
   feedback-app: &feedback-app
     <<: *feedback
