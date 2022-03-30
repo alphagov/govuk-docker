@@ -116,6 +116,6 @@ Some `app` stacks also depend on a `worker` stack, to run asynchronous tasks [[e
 
 Check out the [CONTRIBUTING](CONTRIBUTING.md) guide.
 
-## Licence
+## License
 
-[MIT License](LICENCE)
+[MIT License](LICENSE)
