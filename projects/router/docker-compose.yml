@@ -15,6 +15,7 @@ services:
   router-lite:
     <<: *router
     depends_on:
+      # In production this uses Mongo 2.6, however there is not a published Mongo 2.6 image compatible with ARM64
       - mongo-3.6
     environment:
       BINARY: /go/src/github.com/alphagov/router/router

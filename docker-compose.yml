@@ -41,6 +41,7 @@ services:
       - "28017:28017"
 
   mysql-8:
+    # Using the orcale image because they are available in ARM64 and AMD64 variants
     image: mysql:8-oracle
     volumes:
       - mysql-8:/var/lib/mysql
