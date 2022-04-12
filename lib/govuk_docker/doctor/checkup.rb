@@ -77,7 +77,7 @@ module GovukDocker::Doctor
     end
 
     def running_as_different_user?
-      @running_as_different_user ||= system "ps aux | grep `pgrep #{service_name}` | grep -v `whoami` 1>/dev/null"
+      @running_as_different_user ||= system "ps aux | grep `pgrep #{service_name} || echo '#{service_name}_not_running'` | grep -v `whoami` 1>/dev/null"
     end
 
     def running_user_message
