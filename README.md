@@ -28,11 +28,23 @@ export PATH=$PATH:${HOME}/govuk/govuk-docker/exe
 
 Run `echo $SHELL` if you're not sure which shell you use. After saving, you will need to run `source ~/.bashrc` or `source ~/.zshrc` to apply this change to your current terminal session.
 
-**Now in `~/govuk` , run the following setup commands.**
+**Now in `~/govuk` , *if not on an Apple Silicon Mac*, run the following setup commands.**
 
 ```
 git clone git@github.com:alphagov/govuk-docker.git
 cd govuk-docker
+bundle install
+bin/setup
+```
+
+**If you're on an Apple Silicon Mac, run the following setup commands.**
+
+The m1-compatibility branch contains Apple Silicon specific fixes that may not be on Main.
+
+```
+git clone git@github.com:alphagov/govuk-docker.git
+cd govuk-docker
+git checkout m1-compatibility
 bundle install
 bin/setup
 ```
