@@ -20,6 +20,7 @@ services:
   authenticating-proxy-lite:
     <<: *authenticating-proxy
     depends_on:
+      # In production this uses Mongo 2.6, however there is not a published Mongo 2.6 image compatible with ARM64
       - mongo-3.6
     environment:
       GOVUK_UPSTREAM_URI: http://government-frontend.dev.gov.uk

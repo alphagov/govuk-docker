@@ -7,7 +7,6 @@ volumes:
   postgres-13:
   mysql-8:
   mongo-3.6:
-  mongo-2.6:
   go:
   elasticsearch-6:
   elasticsearch-7:
@@ -41,14 +40,9 @@ services:
       - "27017:27017"
       - "28017:28017"
 
-  mongo-2.6:
-    image: mongo:2.6
-    volumes:
-      - mongo-2.6:/data/db
-    command: ["--replSet", "mongo-replica-set"]
-
   mysql-8:
-    image: mysql:8
+    # Using the orcale image because they are available in ARM64 and AMD64 variants
+    image: mysql:8-oracle
     volumes:
       - mysql-8:/var/lib/mysql
     command: --max_allowed_packet=1073741824
