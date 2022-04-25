@@ -153,7 +153,8 @@ RSpec.describe GovukDocker::Doctor::Checkup do
         messages: messages,
       )
 
-      allow(subject).to receive(:system).with("ps aux | grep `pgrep fake_service` | grep -v `whoami` 1>/dev/null").and_return(true)
+      allow(subject).to receive(:system).with("pgrep fake_service 1>/dev/null").and_return(true)
+      allow(subject).to receive(:system).with("pgrep -u `whoami` fake_service 1>/dev/null").and_return(false)
 
       expect(subject.call).to eq("fake_service is running as correct user")
     end
@@ -165,7 +166,8 @@ RSpec.describe GovukDocker::Doctor::Checkup do
         messages: messages,
       )
 
-      allow(subject).to receive(:system).with("ps aux | grep `pgrep fake_service` | grep -v `whoami` 1>/dev/null").and_return(false)
+      allow(subject).to receive(:system).with("pgrep fake_service 1>/dev/null").and_return(true)
+      allow(subject).to receive(:system).with("pgrep -u `whoami` fake_service 1>/dev/null").and_return(true)
 
       expect(subject.call).to eq("fake_service is not running as correct user")
     end

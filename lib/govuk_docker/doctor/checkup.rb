@@ -77,7 +77,7 @@ module GovukDocker::Doctor
     end
 
     def running_as_different_user?
-      @running_as_different_user ||= system "ps aux | grep `pgrep #{service_name}` | grep -v `whoami` 1>/dev/null"
+      @running_as_different_user ||= running? && !system("pgrep -u `whoami` #{service_name} 1>/dev/null")
     end
 
     def running_user_message
@@ -115,7 +115,7 @@ module GovukDocker::Doctor
     end
 
     def dnsmasq_resolving?
-      `dig +short app.dev.gov.uk @127.0.0.1`.strip == "127.0.0.1"
+      `dig +short +time=1 +tries=1 app.dev.gov.uk @127.0.0.1`.strip == "127.0.0.1"
     end
 
     def dnsmasq_resolving_message
