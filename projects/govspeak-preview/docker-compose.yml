@@ -1,0 +1,32 @@
+version: '3.7'
+
+volumes:
+  govspeak-preview-tmp:
+
+x-govspeak-preview: &govspeak-preview
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: govspeak-preview
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - root-home:/root
+    - govspeak-preview-tmp:/govuk/govspeak-preview/tmp
+  working_dir: /govuk/govspeak-preview
+
+services:
+  govspeak-preview-lite:
+    <<: *govspeak-preview
+
+  govspeak-preview-app: &govspeak-preview-app
+    <<: *govspeak-preview
+    depends_on:
+      - nginx-proxy
+    environment:
+      VIRTUAL_HOST: govspeak-preview.dev.gov.uk
+      BINDING: 0.0.0.0
+    expose:
+      - "3000"
+    command: bin/rails s --restart

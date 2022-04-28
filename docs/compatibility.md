@@ -37,6 +37,7 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ finder-frontend
    - ✅ frontend
    - ✅ government-frontend
+   - ✅ govspeak-preview
    - ⚠ govuk_crawler_worker
       * **TODO: Missing support for running the worker**
    - ✅ govuk_publishing_components

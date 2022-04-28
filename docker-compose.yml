@@ -108,6 +108,7 @@ services:
           - frontend.dev.gov.uk
           - finder-frontend.dev.gov.uk
           - government-frontend.dev.gov.uk
+          - govspeak-preview.dev.gov.uk
           - govuk-content-schemas.dev.gov.uk
           - govuk-developer-docs.dev.gov.uk
           - govuk-publishing-components.dev.gov.uk
