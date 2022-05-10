@@ -21,19 +21,33 @@ services:
     <<: *locations-api
     depends_on:
       - postgres-13
+      - redis
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-13/locations-api"
+      REDIS_URL: redis://redis
       TEST_DATABASE_URL: "postgresql://postgres@postgres-13/locations-api-test"
 
   locations-api-app: &locations-api-app
     <<: *locations-api
     depends_on:
-      - postgres-13
       - nginx-proxy
+      - postgres-13
+      - redis
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-13/locations-api"
+      REDIS_URL: redis://redis
       VIRTUAL_HOST: locations-api.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
       - "3000"
     command: bin/rails s --restart
+
+  locations-api-worker:
+    <<: *locations-api
+    depends_on:
+      - postgres-13
+      - redis
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres-13/locations-api"
+      REDIS_URL: redis://redis
+    command: bundle exec sidekiq -C ./config/sidekiq.yml
