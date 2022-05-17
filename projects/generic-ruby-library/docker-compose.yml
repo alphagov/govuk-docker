@@ -25,3 +25,10 @@ services:
   plek-lite:
     <<: *generic-ruby-library
     working_dir: /govuk/plek
+
+  smokey-lite:
+    <<: *generic-ruby-library
+    working_dir: /govuk/smokey
+    environment:
+      NO_SANDBOX: "true"
+    shm_size: 512mb
