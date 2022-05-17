@@ -21,10 +21,12 @@ x-feedback: &feedback
 services:
   feedback-lite:
     <<: *feedback
+    shm_size: 128m
 
   feedback-app: &feedback-app
     <<: *feedback
     depends_on:
+      - redis
       - router-app
       - static-app
       - nginx-proxy
@@ -32,6 +34,7 @@ services:
       - support-app
     environment:
       ASSET_HOST: feedback.dev.gov.uk
+      REDIS_URL: redis://redis
       VIRTUAL_HOST: feedback.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
@@ -41,6 +44,7 @@ services:
   feedback-app-live:
     <<: *feedback-app
     depends_on:
+      - redis
       - nginx-proxy
     environment:
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
@@ -48,3 +52,4 @@ services:
       PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
       VIRTUAL_HOST: feedback.dev.gov.uk
       BINDING: 0.0.0.0
+      REDIS_URL: redis://redis
