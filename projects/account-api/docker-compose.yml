@@ -26,10 +26,12 @@ services:
       #
       # https://trello.com/c/ZMFOPaCl/1176-upgrade-our-app-databases
       - postgres-13
+      - redis
     environment:
       MEMCACHE_SERVERS: memcached
       DATABASE_URL: "postgresql://postgres@postgres-13/account-api"
       TEST_DATABASE_URL: "postgresql://postgres@postgres-13/account-api-test"
+      REDIS_URL: redis://redis
 
   account-api-app:
     <<: *account-api
@@ -38,6 +40,7 @@ services:
       - memcached
       - nginx-proxy
       - postgres-13
+      - redis
     environment:
       MEMCACHE_SERVERS: memcached
       DATABASE_URL: "postgresql://postgres@postgres-13/account-api"
@@ -45,6 +48,7 @@ services:
       BINDING: 0.0.0.0
       GOVUK_ACCOUNT_OAUTH_CLIENT_ID: client-id
       GOVUK_ACCOUNT_OAUTH_CLIENT_SECRET: client-secret
+      REDIS_URL: redis://redis
     expose:
       - "3000"
     command: bin/rails s --restart
@@ -55,9 +59,11 @@ services:
       - memcached
       - nginx-proxy
       - postgres-13
+      - redis
     environment:
       BINDING: 0.0.0.0
       DATABASE_URL: "postgresql://postgres@postgres-13/account-api"
+      REDIS_URL: redis://redis
       GOVUK_ACCOUNT_OAUTH_CLIENT_ID: client-id
       GOVUK_ACCOUNT_OAUTH_CLIENT_SECRET: client-secret
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
