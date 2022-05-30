@@ -34,6 +34,12 @@ fi
 
 current_branch=$(git -C "${govuk_root_dir}/${app}" branch --show-current)
 head_commit=$(git -C "${govuk_root_dir}/${app}" rev-parse HEAD)
+
+if ! git -C "${govuk_root_dir}/${app}" status -sb | grep 'origin/' -q; then
+  echo "No upstream branch, skipping up to date with upstream check"
+  exit 0
+fi
+
 origin_head_commit=$(git -C "${govuk_root_dir}/${app}" rev-parse "@{u}")
 
 if [ "$head_commit" != "$origin_head_commit" ]; then
