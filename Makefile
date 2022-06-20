@@ -13,7 +13,11 @@ default:
 	@echo "For example:"
 	@echo "    make content-publisher"
 
-test: test-scripts
+test-local: test-scripts
+	$(GOVUK_DOCKER) run govuk-docker-lite bundle exec rubocop
+	$(GOVUK_DOCKER) run govuk-docker-lite bundle exec rspec
+
+test-ci: test-scripts
 	bundle exec rubocop
 	bundle exec rspec
 
