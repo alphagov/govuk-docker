@@ -11,4 +11,4 @@ jobs:
         key: bundle-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: bundle
     - run: bundle install --jobs 4 --retry 3 --deployment
-    - run: GOVUK_DOCKER_DIR=. make lint test
+    - run: GOVUK_DOCKER_DIR=. make test
