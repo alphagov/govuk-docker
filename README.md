@@ -33,7 +33,6 @@ Run `echo $SHELL` if you're not sure which shell you use. After saving, you will
 ```
 git clone git@github.com:alphagov/govuk-docker.git
 cd govuk-docker
-bundle install
 bin/setup
 ```
 
