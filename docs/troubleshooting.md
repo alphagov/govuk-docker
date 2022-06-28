@@ -15,10 +15,25 @@ ssh_username: "yourname"
 
 ## Diagnose common issues when setting up GOV.UK Docker
 
-Run the following command in `~/govuk/govuk-docker`. Since this script makes use of Ruby Gems, you will need to [install some additional dependencies](../CONTRIBUTING.md#testing) in order to do this.
+Run the following command in `~/govuk/govuk-docker`.
 
 ```
 bin/doctor
+```
+
+Since this script makes use of Ruby Gems, you will need to install some additional dependencies in order to do this.
+
+
+First make sure you have the following dependencies:
+
+- [rbenv](https://github.com/rbenv/rbenv#installation)
+
+Next install Ruby / dependencies and run all the tests:
+
+```sh
+rbenv install
+
+bundle install
 ```
 
 ## Diagnose database issues with a project/app not making

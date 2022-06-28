@@ -13,14 +13,15 @@ default:
 	@echo "For example:"
 	@echo "    make content-publisher"
 
-lint:
-	# Lint the ruby code
-	bundle exec rubocop
+test-local: test-scripts
+	$(GOVUK_DOCKER) run govuk-docker-lite bundle exec rubocop
+	$(GOVUK_DOCKER) run govuk-docker-lite bundle exec rspec
 
-test:
-	# Run the tests for the govuk-docker CLI
+test-ci: test-scripts
+	bundle exec rubocop
 	bundle exec rspec
 
+test-scripts:
 	# Test that the docker-compose config is valid. This will error if there are errors
 	# in the YAML files, or incompatible features are used.
 	$(GOVUK_DOCKER) config > /dev/null

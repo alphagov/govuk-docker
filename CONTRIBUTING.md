@@ -4,19 +4,21 @@ Contributions welcome - just raise a PR and make sure the tests pass!
 
 ## Testing
 
-**First make sure you have the following dependencies.**
+GOV.UK Docker tests are written in Ruby / RSpec. Just like any other Ruby project, we have a `govuk-docker-lite` stack for running the tests, using GOV.UK Docker.
 
-- [rbenv](https://github.com/rbenv/rbenv#installation)
-
-**Next install Ruby / dependencies and run all the tests.**
+Do this the first time you run the tests:
 
 ```sh
-rbenv install
-
-bundle install
-
-make test
+make govuk-docker
 ```
+
+Do this to run the tests for GOV.UK Docker:
+
+```sh
+make test-local
+```
+
+This will also run checks on scripts and config files in this repo. Since these checks require access to your local machine, they are not run using GOV.UK Docker.
 
 ## Versioning
 

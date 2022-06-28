@@ -22,6 +22,10 @@ services:
     <<: *generic-ruby-library
     working_dir: /govuk/govuk_app_config
 
+  govuk-docker-lite:
+    <<: *generic-ruby-library
+    working_dir: /govuk/govuk-docker
+
   plek-lite:
     <<: *generic-ruby-library
     working_dir: /govuk/plek
