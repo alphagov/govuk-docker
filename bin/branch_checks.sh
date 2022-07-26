@@ -40,13 +40,20 @@ fi
 
 origin_head_commit=$(git -C "${govuk_root_dir}/${app}" rev-parse "@{u}")
 
+update_branch=${GOVUK_DOCKER_UPDATE_BRANCH:-ask}
+
 if [ "$head_commit" != "$origin_head_commit" ]; then
   echo "Current branch (${ul}${current_branch}${end_ul}) for ${bold}${app}${end_bold} is not up to date with the origin (or does not match it)"
-  select response in "Update" "Ignore" "Quit"; do
-    case $response in
-      Update ) git -C "${govuk_root_dir}/${app}" pull; break;;
-      Ignore ) break;;
-      Quit ) exit 1;;
-    esac
-  done
+  if [ "$update_branch" == "always" ]; then
+    echo "GOVUK_DOCKER_UPDATE_BRANCH set to always, so updating branch from origin"
+    git -C "${govuk_root_dir}/${app}" pull
+  else
+    select response in "Update" "Ignore" "Quit"; do
+      case $response in
+        Update ) git -C "${govuk_root_dir}/${app}" pull; break;;
+        Ignore ) break;;
+        Quit ) exit 1;;
+      esac
+    done
+  fi
 fi
