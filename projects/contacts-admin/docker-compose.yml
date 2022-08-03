@@ -21,6 +21,7 @@ x-contacts-admin: &contacts-admin
 services:
   contacts-admin-lite:
     <<: *contacts-admin
+    shm_size: 512mb
     depends_on:
       - mysql-8
       - redis

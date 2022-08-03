@@ -24,6 +24,7 @@ x-content-publisher: &content-publisher
 services:
   content-publisher-lite:
     <<: *content-publisher
+    shm_size: 512mb
     depends_on:
       - postgres-13
       - redis

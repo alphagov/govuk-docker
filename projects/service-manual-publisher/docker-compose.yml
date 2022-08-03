@@ -21,6 +21,7 @@ x-service-manual-publisher: &service-manual-publisher
 services:
   service-manual-publisher-lite:
     <<: *service-manual-publisher
+    shm_size: 512mb
     depends_on:
       - postgres-13
     environment:

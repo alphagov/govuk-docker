@@ -21,6 +21,7 @@ x-manuals-publisher: &manuals-publisher
 services:
   manuals-publisher-lite:
     <<: *manuals-publisher
+    shm_size: 512mb
     depends_on:
       - redis
       - mongo-3.6

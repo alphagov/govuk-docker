@@ -21,6 +21,7 @@ x-publisher: &publisher
 services:
   publisher-lite:
     <<: *publisher
+    shm_size: 512mb
     depends_on:
       - redis
       - mongo-3.6

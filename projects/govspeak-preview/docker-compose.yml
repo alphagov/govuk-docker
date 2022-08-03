@@ -19,6 +19,7 @@ x-govspeak-preview: &govspeak-preview
 services:
   govspeak-preview-lite:
     <<: *govspeak-preview
+    shm_size: 512mb
 
   govspeak-preview-app: &govspeak-preview-app
     <<: *govspeak-preview

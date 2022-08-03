@@ -21,6 +21,7 @@ x-travel-advice-publisher: &travel-advice-publisher
 services:
   travel-advice-publisher-lite:
     <<: *travel-advice-publisher
+    shm_size: 512mb
     depends_on:
       - mongo-3.6
       - redis

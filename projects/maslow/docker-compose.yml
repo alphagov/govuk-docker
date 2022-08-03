@@ -21,6 +21,7 @@ x-maslow: &maslow
 services:
   maslow-lite:
     <<: *maslow
+    shm_size: 512mb
     depends_on:
       - mongo-3.6
     environment:

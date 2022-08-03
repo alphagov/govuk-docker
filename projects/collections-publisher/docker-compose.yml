@@ -21,6 +21,7 @@ x-collections-publisher: &collections-publisher
 services:
   collections-publisher-lite:
     <<: *collections-publisher
+    shm_size: 512mb
     depends_on:
       - mysql-8
       - redis
