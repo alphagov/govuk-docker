@@ -21,6 +21,7 @@ x-specialist-publisher: &specialist-publisher
 services:
   specialist-publisher-lite:
     <<: *specialist-publisher
+    shm_size: 512mb
     depends_on:
       - mongo-3.6
       - redis

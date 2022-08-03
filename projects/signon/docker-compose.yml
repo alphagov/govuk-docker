@@ -21,6 +21,7 @@ x-signon: &signon
 services:
   signon-lite:
     <<: *signon
+    shm_size: 512mb
     depends_on:
       - mysql-8
       - redis

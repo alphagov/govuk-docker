@@ -21,6 +21,7 @@ x-short-url-manager: &short-url-manager
 services:
   short-url-manager-lite:
     <<: *short-url-manager
+    shm_size: 512mb
     depends_on:
       - redis
       - mongo-3.6

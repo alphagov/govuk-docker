@@ -21,6 +21,7 @@ x-content-tagger: &content-tagger
 services:
   content-tagger-lite:
     <<: *content-tagger
+    shm_size: 512mb
     depends_on:
       - postgres-13
     environment:

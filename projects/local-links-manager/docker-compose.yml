@@ -21,6 +21,7 @@ x-local-links-manager: &local-links-manager
 services:
   local-links-manager-lite:
     <<: *local-links-manager
+    shm_size: 512mb
     depends_on:
       - postgres-13
     environment:
