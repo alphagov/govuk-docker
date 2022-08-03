@@ -145,3 +145,56 @@ A workaround is to get MySQL to fall back to using `mysql_native_password` as fo
 - Check that you can see `govuk-docker_mysql-8_1` when running `govuk-docker ps`, if not you will need to start a service that uses mysql (for example Whitehall).
 - Bring up a mysql console inside the container: `docker exec -it govuk-docker_mysql-8_1 mysql --user=root --password=root`
 - Alter the way the root user identifies itself. `ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'root';`
+
+## Browser based tests fail with `NoSuchSessionError: invalid session id`
+
+For example: Jasmine unit tests or feature specs that use Capybara
+
+Docker allocates 64mb shared memory to containers by default, but recent versions of Chrome require more than this. Otherwise you'll start to see error messages complaining about an "invalid session id". In a previous discussion on Slack, it was informally agreed that 512mb seems to be the 'right sized' amount to allocate – but this was anecdotal, so other values may work equally well for our needs.
+
+If the `shm_size` is too small, you'll get error messages that look something like this in your terminal:
+
+```
+NoSuchSessionError: invalid session id
+    at Object.throwDecodedError (/govuk/whitehall/node_modules/selenium-webdriver/lib/error.js:522:15)
+    at parseHttpResponse (/govuk/whitehall/node_modules/selenium-webdriver/lib/http.js:548:13)
+    at Executor.execute (/govuk/whitehall/node_modules/selenium-webdriver/lib/http.js:474:28)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+    at async thenableWebDriverProxy.execute (/govuk/whitehall/node_modules/selenium-webdriver/lib/webdriver.js:735:17)
+    at async Object.runSpecs (/govuk/whitehall/node_modules/jasmine-browser-runner/index.js:116:9)
+    at async Command.runSpecs (/govuk/whitehall/node_modules/jasmine-browser-runner/lib/command.js:187:5) {
+  remoteStacktrace: '#0 0xaaaabaf6b1b0 <unknown>\n' +
+    '#1 0xaaaabada13b0 <unknown>\n' +
+    '#2 0xaaaabadc7fe4 <unknown>\n' +
+    '#3 0xaaaabadc9864 <unknown>\n' +
+    '#4 0xaaaabafa75f8 <unknown>\n' +
+    '#5 0xaaaabafa9d98 <unknown>\n' +
+    '#6 0xaaaabafa9acc <unknown>\n' +
+    '#7 0xaaaabaf987e0 <unknown>\n' +
+    '#8 0xaaaabafaa500 <unknown>\n' +
+    '#9 0xaaaabaf8e080 <unknown>\n' +
+    '#10 0xaaaabafc1790 <unknown>\n' +
+    '#11 0xaaaabafc1950 <unknown>\n' +
+    '#12 0xaaaabafdbbd4 <unknown>\n' +
+    '#13 0xffffb0f28628 <unknown>\n' +
+    '#14 0xffffb075501c <unknown>\n'
+}
+error Command failed with exit code 1.
+```
+
+To resolve it, check your project's `docker-compose.yml` file. The `*-lite` service will need a `shm_size` config to be added.
+
+For example:
+
+```yaml
+services:
+  whitehall-lite:
+    <<: *whitehall
+    shm_size: 512mb
+    depends_on:
+      - mysql-8
+      - redis
+    # ...
+```
+
+For further examples, see the PR [alphagov/govuk-docker#613](https://github.com/alphagov/govuk-docker/pull/613).
