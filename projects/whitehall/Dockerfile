@@ -22,4 +22,5 @@ ENV PATH /root/.rbenv/shims:/rbenv/bin:$PATH
 ENV BUNDLE_SILENCE_ROOT_WARNING 1
 
 # Install Whitehall specific dependencies
-RUN apt-get update -qq && apt-get install -y default-mysql-client ghostscript
+# and `less` for paginated output in 'rails console' and 'binding.pry'
+RUN apt-get update -qq && apt-get install -y default-mysql-client ghostscript less

@@ -22,5 +22,6 @@ ENV PATH /root/.rbenv/shims:/rbenv/bin:$PATH
 ENV BUNDLE_SILENCE_ROOT_WARNING 1
 
 # Install virus scanner utility
-RUN apt-get update -qq && apt-get upgrade -y && apt-get install -y clamav
+# and `less` for paginated output in 'rails console' and 'binding.pry'
+RUN apt-get update -qq && apt-get upgrade -y && apt-get install -y clamav less
 RUN ln -sf /usr/bin/clamscan /usr/bin/govuk_clamscan
