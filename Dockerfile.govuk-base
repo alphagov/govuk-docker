@@ -25,5 +25,6 @@ RUN /rbenv/plugins/ruby-build/install.sh
 ENV PATH /root/.rbenv/shims:/rbenv/bin:$PATH
 ENV BUNDLE_SILENCE_ROOT_WARNING 1
 
-# Install psql for 'rails dbconsole'
-RUN apt-get update -qq && apt-get install -y postgresql-client
+# Install `psql` for 'rails dbconsole'
+# and `less` for paginated output in 'rails console' and 'binding.pry'
+RUN apt-get update -qq && apt-get install -y postgresql-client less
