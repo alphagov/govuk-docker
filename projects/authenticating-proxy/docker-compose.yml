@@ -20,22 +20,21 @@ services:
   authenticating-proxy-lite:
     <<: *authenticating-proxy
     depends_on:
-      # In production this uses Mongo 2.6, however there is not a published Mongo 2.6 image compatible with ARM64
-      - mongo-3.6
+      - postgres-14
     environment:
       GOVUK_UPSTREAM_URI: http://government-frontend.dev.gov.uk
-      MONGODB_URI: "mongodb://mongo-3.6/authenticating-proxy"
-      TEST_MONGODB_URI: "mongodb://mongo-3.6/authenticating-proxy-test"
+      DATABASE_URL: "postgresql://postgres@postgres-14/authenticating-proxy"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-14/authenticating-proxy-test"
 
   authenticating-proxy-app: &authenticating-proxy-app
     <<: *authenticating-proxy
     depends_on:
-      - mongo-3.6
+      - postgres-14
       - nginx-proxy
       - government-frontend-app
     environment:
       GOVUK_UPSTREAM_URI: http://government-frontend.dev.gov.uk
-      MONGODB_URI: "mongodb://mongo-3.6/authenticating-proxy"
+      DATABASE_URL: "postgresql://postgres@postgres-14/authenticating-proxy"
       VIRTUAL_HOST: authenticating-proxy.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
