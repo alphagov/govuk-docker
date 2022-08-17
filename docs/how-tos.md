@@ -47,10 +47,10 @@ You will need to assume-role into AWS using the [gds-cli](https://docs.publishin
 
 ```
 # as an AWS PowerUser...
-gds aws govuk-integration-poweruser ./bin/replicate-postgresql.sh content-publisher
+gds aws govuk-integration-poweruser --assume-role-ttl 180m ./bin/replicate-postgresql.sh content-publisher
 
 # as an AWS User...
-gds aws govuk-integration-readonly ./bin/replicate-postgresql.sh content-publisher
+gds aws govuk-integration-readonly --assume-role-ttl 180m ./bin/replicate-postgresql.sh content-publisher
 ```
 
 All the scripts, other than `replicate-elasticsearch.sh`, take the name of the app to replicate data for.
