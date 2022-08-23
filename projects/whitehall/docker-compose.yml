@@ -51,3 +51,16 @@ services:
     expose:
       - "3000"
     command: bin/rails s --restart
+
+  whitehall-worker:
+    <<: *whitehall
+    depends_on:
+      - mysql-8
+      - redis
+      - nginx-proxy
+      - asset-manager-app
+      - publishing-api-app
+    environment:
+      DATABASE_URL: "mysql2://root:root@mysql-8/whitehall_development"
+      REDIS_URL: redis://redis
+    command: bundle exec sidekiq -C ./config/sidekiq.yml
