@@ -58,6 +58,7 @@ services:
       MONGODB_URI: "mongodb://mongo-3.6/licence-finder_development"
       PLEK_SERVICE_SEARCH_URI: https://www.gov.uk/api
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
+      GOVUK_PROXY_STATIC_ENABLED: "true"
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
       VIRTUAL_HOST: licence-finder.dev.gov.uk
