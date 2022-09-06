@@ -69,7 +69,7 @@ services:
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       MEMCACHE_SERVERS: memcached
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
-      PLEK_SERVICE_STATIC_URI: assets.publishing.service.gov.uk
+      PLEK_SERVICE_STATIC_URI: https://assets.publishing.service.gov.uk
       VIRTUAL_HOST: account-api.dev.gov.uk
     expose:
       - "3000"
