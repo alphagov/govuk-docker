@@ -1,0 +1,32 @@
+version: '3.7'
+
+volumes:
+  contentful-listener-api-tmp:
+
+x-contentful-listener-api: &contentful-listener-api
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: contentful-listener-api
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - root-home:/root
+    - contentful-listener-api-tmp:/govuk/contentful-listener-api/tmp
+  working_dir: /govuk/contentful-listener-api
+
+services:
+  contentful-listener-api-lite:
+    <<: *contentful-listener-api
+
+  contentful-listener-api-app:
+    <<: *contentful-listener-api
+    depends_on:
+      - publishing-api-app
+      - nginx-proxy
+    environment:
+      VIRTUAL_HOST: contentful-listener-api.dev.gov.uk
+    expose:
+      - "9292"
+    command: bundle exec puma
