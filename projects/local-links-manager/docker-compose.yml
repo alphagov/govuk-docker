@@ -24,17 +24,21 @@ services:
     shm_size: 512mb
     depends_on:
       - postgres-13
+      - redis
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-13/local-links-manager"
       TEST_DATABASE_URL: "postgresql://postgres@postgres-13/local-links-manager-test"
+      REDIS_URL: redis://redis
 
   local-links-manager-app:
     <<: *local-links-manager
     depends_on:
       - postgres-13
       - nginx-proxy
+      - redis
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-13/local-links-manager"
+      REDIS_URL: redis://redis
       VIRTUAL_HOST: local-links-manager.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
