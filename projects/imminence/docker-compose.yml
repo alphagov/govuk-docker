@@ -22,20 +22,37 @@ services:
     depends_on:
       # In production this uses Mongo 2.6, however there is not a published Mongo 2.6 image compatible with ARM64
       - mongo-3.6
+      - redis
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/imminence"
       TEST_MONGODB_URI: "mongodb://mongo-3.6/imminence-test"
+      REDIS_URL: redis://redis
 
-  imminence-app:
+  imminence-app: &imminence-app
     <<: *imminence
     depends_on:
       - mongo-3.6
       - mapit-app
       - nginx-proxy
+      - redis
+      - imminence-worker
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/imminence"
       VIRTUAL_HOST: imminence.dev.gov.uk
       BINDING: 0.0.0.0
+      REDIS_URL: redis://redis
     expose:
       - "3000"
     command: bin/rails s --restart
+
+  imminence-worker:
+    <<: *imminence
+    depends_on:
+      - mongo-3.6
+      - mapit-app
+      - nginx-proxy
+      - redis
+    environment:
+      MONGODB_URI: "mongodb://mongo-3.6/imminence"
+      REDIS_URL: redis://redis
+    command: bundle exec sidekiq -C ./config/sidekiq.yml
