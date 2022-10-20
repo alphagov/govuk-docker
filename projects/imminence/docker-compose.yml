@@ -32,7 +32,8 @@ services:
     <<: *imminence
     depends_on:
       - mongo-3.6
-      - mapit-app
+      - local-links-manager-app
+      - locations-api-app
       - nginx-proxy
       - redis
       - imminence-worker
@@ -49,7 +50,8 @@ services:
     <<: *imminence
     depends_on:
       - mongo-3.6
-      - mapit-app
+      - local-links-manager-app
+      - locations-api-app
       - nginx-proxy
       - redis
     environment:

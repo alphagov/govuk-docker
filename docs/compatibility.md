@@ -53,7 +53,6 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ local-links-manager
    - ✅ locations-api
    - ✅ manuals-publisher
-   - ✅ mapit
    - ✅ maslow
    - ✅ publisher
    - ✅ publishing-api
