@@ -42,13 +42,13 @@ services:
     <<: *frontend-app
     depends_on:
       - account-api-app-live
+      - locations-api-app
+      - local-links-manager-app
       - nginx-proxy
     environment:
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       GOVUK_PROXY_STATIC_ENABLED: "true"
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
-      PLEK_SERVICE_LOCATIONS_API_URL: https://www.gov.uk/api
-      PLEK_SERVICE_LOCAL_LINKS_MANAGER_URL: https://www.gov.uk/api
       PLEK_SERVICE_STATIC_URI: https://assets.publishing.service.gov.uk
       VIRTUAL_HOST: frontend.dev.gov.uk
       BINDING: 0.0.0.0
