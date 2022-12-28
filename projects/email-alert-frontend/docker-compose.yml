@@ -36,6 +36,7 @@ services:
       - email-alert-api-app
       - nginx-proxy
     environment:
+      GOVUK_PROXY_STATIC_ENABLED: "true"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: email-alert-frontend.dev.gov.uk
       BINDING: 0.0.0.0

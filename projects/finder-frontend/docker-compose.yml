@@ -39,6 +39,7 @@ services:
       - search-api-app
       - static-app
     environment:
+      GOVUK_PROXY_STATIC_ENABLED: "true"
       VIRTUAL_HOST: finder-frontend.dev.gov.uk
       BINDING: 0.0.0.0
       MEMCACHE_SERVERS: memcached

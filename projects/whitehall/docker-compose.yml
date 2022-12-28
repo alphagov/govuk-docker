@@ -44,6 +44,7 @@ services:
       - asset-manager-app
       - publishing-api-app
     environment:
+      GOVUK_PROXY_STATIC_ENABLED: "true"
       DATABASE_URL: "mysql2://root:root@mysql-8/whitehall_development"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: whitehall-admin.dev.gov.uk, whitehall-frontend.dev.gov.uk
