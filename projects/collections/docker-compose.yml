@@ -31,7 +31,6 @@ services:
       - static-app
       - nginx-proxy
     environment:
-      ASSET_HOST: collections.dev.gov.uk
       VIRTUAL_HOST: collections.dev.gov.uk
       BINDING: 0.0.0.0
     expose:

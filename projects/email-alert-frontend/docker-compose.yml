@@ -37,7 +37,6 @@ services:
       - nginx-proxy
     environment:
       REDIS_URL: redis://redis
-      ASSET_HOST: email-alert-frontend.dev.gov.uk
       VIRTUAL_HOST: email-alert-frontend.dev.gov.uk
       BINDING: 0.0.0.0
     expose:

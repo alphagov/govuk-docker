@@ -28,7 +28,6 @@ services:
       - static-app
       - nginx-proxy
     environment:
-      ASSET_HOST: info-frontend.dev.gov.uk
       VIRTUAL_HOST: info-frontend.dev.gov.uk
       BINDING: 0.0.0.0
     expose:

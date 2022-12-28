@@ -33,7 +33,6 @@ services:
       - support-api-app
       - support-app
     environment:
-      ASSET_HOST: feedback.dev.gov.uk
       REDIS_URL: redis://redis
       VIRTUAL_HOST: feedback.dev.gov.uk
       BINDING: 0.0.0.0
