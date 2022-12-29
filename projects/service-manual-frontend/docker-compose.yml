@@ -30,7 +30,7 @@ services:
       - static-app
       - nginx-proxy
     environment:
-      ASSET_HOST: service-manual-frontend.dev.gov.uk
+      GOVUK_PROXY_STATIC_ENABLED: "true"
       VIRTUAL_HOST: service-manual-frontend.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
