@@ -41,6 +41,7 @@ services:
       VIRTUAL_HOST: licence-finder.dev.gov.uk
       MONGODB_URI: "mongodb://mongo-3.6/licence-finder_development"
       ELASTICSEARCH_URI: http://elasticsearch-7:9200
+      GOVUK_PROXY_STATIC_ENABLED: "true"
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       BINDING: 0.0.0.0
     expose:
