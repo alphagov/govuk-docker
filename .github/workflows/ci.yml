@@ -5,10 +5,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: ruby/setup-ruby@v1
-    - uses: actions/cache@v1
       with:
-        path: vendor/bundle
-        key: bundle-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: bundle
-    - run: bundle install --jobs 4 --retry 3 --deployment
+        bundler-cache: true
     - run: GOVUK_DOCKER_DIR=. make test-ci
