@@ -20,9 +20,9 @@ RSpec.describe GovukDocker::Doctor::Checkup do
   context "when the repository is up-to-date" do
     it "should report that it is up-to-date" do
       subject = described_class.new(
-        service_name: service_name,
+        service_name:,
         checkups: %i[up_to_date],
-        messages: messages,
+        messages:,
       )
 
       ClimateControl.modify GOVUK_DOCKER_DIR: "/some/directory" do
@@ -39,9 +39,9 @@ RSpec.describe GovukDocker::Doctor::Checkup do
   context "when the repository is outdated" do
     it "should report that it is outdated" do
       subject = described_class.new(
-        service_name: service_name,
+        service_name:,
         checkups: %i[up_to_date],
-        messages: messages,
+        messages:,
       )
 
       ClimateControl.modify GOVUK_DOCKER_DIR: "/some/directory" do
@@ -58,9 +58,9 @@ RSpec.describe GovukDocker::Doctor::Checkup do
   context "when a service is installed" do
     it "should report that it is installed" do
       subject = described_class.new(
-        service_name: service_name,
+        service_name:,
         checkups: %i[installed],
-        messages: messages,
+        messages:,
       )
 
       allow(subject).to receive(:system).with("which fake_service 1>/dev/null").and_return(true)
@@ -72,9 +72,9 @@ RSpec.describe GovukDocker::Doctor::Checkup do
   context "when a service is installed to /usr/local/sbin" do
     subject do
       described_class.new(
-        service_name: service_name,
+        service_name:,
         checkups: %i[installed],
-        messages: messages,
+        messages:,
       )
     end
 
@@ -91,9 +91,9 @@ RSpec.describe GovukDocker::Doctor::Checkup do
   context "when a service is not installed" do
     it "should report that it needs to be installed" do
       subject = described_class.new(
-        service_name: service_name,
+        service_name:,
         checkups: %i[installed],
-        messages: messages,
+        messages:,
       )
 
       allow(subject).to receive(:system).with("which fake_service 1>/dev/null").and_return(false)
@@ -105,9 +105,9 @@ RSpec.describe GovukDocker::Doctor::Checkup do
   context "when a service is running" do
     it "should report that it is running" do
       subject = described_class.new(
-        service_name: service_name,
+        service_name:,
         checkups: %i[running],
-        messages: messages,
+        messages:,
       )
 
       allow(subject).to receive(:system).with("pgrep fake_service 1>/dev/null").and_return(true)
@@ -119,9 +119,9 @@ RSpec.describe GovukDocker::Doctor::Checkup do
   context "when a service is not running" do
     it "should report that it needs to be running" do
       subject = described_class.new(
-        service_name: service_name,
+        service_name:,
         checkups: %i[running],
-        messages: messages,
+        messages:,
       )
 
       allow(subject).to receive(:system).with("pgrep fake_service 1>/dev/null").and_return(false)
@@ -133,9 +133,9 @@ RSpec.describe GovukDocker::Doctor::Checkup do
   context "when a service is installed and running" do
     it "should report that it is installed and running" do
       subject = described_class.new(
-        service_name: service_name,
+        service_name:,
         checkups: %i[installed running],
-        messages: messages,
+        messages:,
       )
 
       allow(subject).to receive(:system).with("pgrep fake_service 1>/dev/null").and_return(true)
@@ -148,9 +148,9 @@ RSpec.describe GovukDocker::Doctor::Checkup do
   context "when checking the running processes user" do
     it "should report when running as a different user" do
       subject = described_class.new(
-        service_name: service_name,
+        service_name:,
         checkups: %i[running_as_different_user],
-        messages: messages,
+        messages:,
       )
 
       allow(subject).to receive(:system).with("pgrep fake_service 1>/dev/null").and_return(true)
@@ -161,9 +161,9 @@ RSpec.describe GovukDocker::Doctor::Checkup do
 
     it "should report when running as the incorrect user" do
       subject = described_class.new(
-        service_name: service_name,
+        service_name:,
         checkups: %i[running_as_different_user],
-        messages: messages,
+        messages:,
       )
 
       allow(subject).to receive(:system).with("pgrep fake_service 1>/dev/null").and_return(true)
@@ -176,9 +176,9 @@ RSpec.describe GovukDocker::Doctor::Checkup do
   context "when checking dnsmasq resolver file" do
     subject do
       described_class.new(
-        service_name: service_name,
+        service_name:,
         checkups: %i[dnsmasq_resolver],
-        messages: messages,
+        messages:,
       )
     end
 
