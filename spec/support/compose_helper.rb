@@ -25,6 +25,6 @@ module ComposeHelper
 
   def self.services(name)
     filename = File.join("projects", name, "docker-compose.yml")
-    YAML.load_file(filename)["services"]
+    YAML.load_file(filename, aliases: true)["services"]
   end
 end

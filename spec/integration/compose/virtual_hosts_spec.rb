@@ -27,7 +27,7 @@ RSpec.describe "Compose virtual hosts" do
   end
 
   def compose_nginx_domains
-    @compose_nginx_domains ||= YAML.load_file("docker-compose.yml")
+    @compose_nginx_domains ||= YAML.load_file("docker-compose.yml", aliases: true)
       .dig("services", "nginx-proxy", "networks", "default", "aliases")
   end
 end
