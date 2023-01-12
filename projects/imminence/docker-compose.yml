@@ -20,25 +20,24 @@ services:
   imminence-lite:
     <<: *imminence
     depends_on:
-      # In production this uses Mongo 2.6, however there is not a published Mongo 2.6 image compatible with ARM64
-      - mongo-3.6
+      - postgres-14-postgis
       - redis
     environment:
-      MONGODB_URI: "mongodb://mongo-3.6/imminence"
-      TEST_MONGODB_URI: "mongodb://mongo-3.6/imminence-test"
+      DATABASE_URL: "postgis://postgres@postgres-14-postgis/imminence"
+      TEST_DATABASE_URL: "postgis://postgres@postgres-14-postgis/imminence-test"
       REDIS_URL: redis://redis
 
   imminence-app: &imminence-app
     <<: *imminence
     depends_on:
-      - mongo-3.6
+      - postgres-14-postgis
       - local-links-manager-app
       - locations-api-app
       - nginx-proxy
       - redis
       - imminence-worker
     environment:
-      MONGODB_URI: "mongodb://mongo-3.6/imminence"
+      DATABASE_URL: "postgis://postgres@postgres-14-postgis/imminence"
       VIRTUAL_HOST: imminence.dev.gov.uk
       BINDING: 0.0.0.0
       REDIS_URL: redis://redis
@@ -49,12 +48,12 @@ services:
   imminence-worker:
     <<: *imminence
     depends_on:
-      - mongo-3.6
+      - postgres-14-postgis
       - local-links-manager-app
       - locations-api-app
       - nginx-proxy
       - redis
     environment:
-      MONGODB_URI: "mongodb://mongo-3.6/imminence"
+      DATABASE_URL: "postgis://postgres@postgres-14-postgis/imminence"
       REDIS_URL: redis://redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml

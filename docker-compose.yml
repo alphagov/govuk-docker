@@ -5,6 +5,7 @@ volumes:
   rabbitmq:
   postgres-12:
   postgres-13:
+  postgres-14-postgis:
   mysql-8:
   mongo-3.6:
   go:
@@ -28,6 +29,14 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
       - postgres-13:/var/lib/postgresql/data
+
+  postgres-14-postgis:
+    # Using the kartoza image because it supports ARM64 and AMD64
+    image: kartoza/postgis:14
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - postgres-14-postgis:/var/lib/postgresql/data
 
   memcached:
     image: memcached
