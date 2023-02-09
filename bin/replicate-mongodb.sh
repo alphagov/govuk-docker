@@ -16,22 +16,22 @@ bucket="govuk-integration-database-backups"
 mongo_version=3.6
 
 case "$app" in
-  "authenticating-proxy")
-    hostname=router_backend
-    database=authenticating_proxy_production
-    ;;
   "router"|"draft-router")
-    hostname=router_backend
+    hostname=mongo-router
     database="${app//-/_}"
     wait_for_rs=1
     ;;
-  "asset-manager")
-    hostname=mongo
-    database=govuk_assets_production
+  "licence-finder")
+    hostname=mongo-normal
+    database=licence_finder_production
     ;;
-  "manuals-publisher"|"publisher"|"specialist-publisher")
-    hostname=mongo
-    database=govuk_content_production
+  "licensify")
+    hostname=mongo-licensing
+    database=licensify
+    ;;
+  "content-store"|"draft-content-store")
+    hostname=mongo-api
+    database="${app//-/_}_production"
     ;;
   *)
     hostname=mongo
@@ -46,11 +46,11 @@ archive_path="${archive_dir}/${archive_file}"
 echo "Replicating mongodb for $app"
 
 if [[ -e "$archive_path" ]]; then
-  echo "Skipping download - remove ${archive_path} to force"
+  echo "Skipping download - remove ${archive_path} to force a new download on the next run"
 else
   mkdir -p "$archive_dir"
-  remote_file_name=$(aws s3 ls "s3://${bucket}/mongodb/daily/${hostname}/" | tail -n1 | sed 's/^.* .* .* //')
-  aws s3 cp "s3://${bucket}/mongodb/daily/${hostname}/${remote_file_name}" "$archive_path"
+  remote_file_name=$(aws s3 ls "s3://${bucket}/${hostname}/" | grep "\d-$database.gz" | tail -n1 | sed 's/^.* .* .* //')
+  aws s3 cp "s3://${bucket}/${hostname}/${remote_file_name}" "$archive_path"
 fi
 
 if [[ -n "${SKIP_IMPORT:-}" ]]; then
@@ -65,7 +65,7 @@ if [[ -d "$extract_path" ]]; then
 fi
 mkdir -p "$extract_path"
 
-pv "$archive_path" | gunzip | tar -zx -f - -C "$extract_path" "var/lib/mongodb/backup/mongodump/${database}"
+pv "$archive_path" | gunzip | tar -zx -f - -C "$extract_path" "${database}"
 
 echo "stopping running govuk-docker containers..."
 govuk-docker down
@@ -86,7 +86,7 @@ until docker exec "$container" mongo --eval 1 &>/dev/null; do
   sleep 1
 done
 
-docker exec "$container" mongorestore --drop --db "$app" "/replication/var/lib/mongodb/backup/mongodump/${database}/"
+docker exec "$container" mongorestore --drop --db "$app" "/replication/${database}/"
 
 case "$app" in
   "router")
