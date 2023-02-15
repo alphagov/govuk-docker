@@ -67,7 +67,7 @@ services:
       - rabbitmq:/var/lib/rabbitmq
 
   elasticsearch-6:
-    image: elasticsearch:6.7.0
+    image: elasticsearch:6.8.23
     environment:
       - http.host=0.0.0.0
       - transport.host=127.0.0.1
