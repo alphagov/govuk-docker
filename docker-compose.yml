@@ -42,6 +42,8 @@ services:
     # Using the kartoza image because it supports ARM64 and AMD64
     image: kartoza/postgis:14
     environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASS: password
       POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
       - postgres-14-postgis:/var/lib/postgresql/data
