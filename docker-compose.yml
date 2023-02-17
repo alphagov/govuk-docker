@@ -138,7 +138,6 @@ services:
           - search-admin.dev.gov.uk
           - search-api.dev.gov.uk
           - search.dev.gov.uk
-          - service-manual-frontend.dev.gov.uk
           - service-manual-publisher.dev.gov.uk
           - short-url-manager.dev.gov.uk
           - signon.dev.gov.uk
