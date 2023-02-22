@@ -23,8 +23,8 @@ services:
       - postgres-14-postgis
       - redis
     environment:
-      DATABASE_URL: "postgis://postgres@postgres-14-postgis/imminence"
-      TEST_DATABASE_URL: "postgis://postgres@postgres-14-postgis/imminence-test"
+      DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/imminence"
+      TEST_DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/imminence-test"
       REDIS_URL: redis://redis
 
   imminence-app: &imminence-app
@@ -37,7 +37,7 @@ services:
       - redis
       - imminence-worker
     environment:
-      DATABASE_URL: "postgis://postgres@postgres-14-postgis/imminence"
+      DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/imminence"
       VIRTUAL_HOST: imminence.dev.gov.uk
       BINDING: 0.0.0.0
       REDIS_URL: redis://redis
@@ -54,6 +54,6 @@ services:
       - nginx-proxy
       - redis
     environment:
-      DATABASE_URL: "postgis://postgres@postgres-14-postgis/imminence"
+      DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/imminence"
       REDIS_URL: redis://redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
