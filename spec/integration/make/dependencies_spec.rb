@@ -1,8 +1,8 @@
 require "spec_helper"
 
 RSpec.describe "Make dependencies" do
-  # Some dependencies are only needed by the dependant app for their static files.
-  let(:dependencies_that_do_not_need_to_be_running) { %w[govuk-content-schemas] }
+  # Some dependencies are only needed by the dependant app for their static files - for example, schemas in publishing api.
+  let(:dependencies_that_do_not_need_to_be_running) { %w[publishing-api] }
 
   ProjectsHelper.all_projects.each do |project_name|
     it "mirrors docker-compose.yml for #{project_name}" do
