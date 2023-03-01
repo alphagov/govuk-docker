@@ -68,8 +68,7 @@ We resolved the problem of embedded files with a [mount for the ~/govuk
 directory][govuk-mount]. This mount allows containers to access application
 code and for this code to be modified without requiring an image rebuild. Using
 this broad directory allows projects to access other projects when necessary
-which assists working with [govuk-content-schemas][] and
-[local versions of Gems][local-gems].
+which assists working with [local versions of Gems][local-gems].
 
 [docker-rails]: https://docs.docker.com/compose/rails/
 [base-dockerfile]: https://github.com/alphagov/govuk-docker/blob/b2fb90dd62a7579976cc3adaa9c783cd92cbd7e7/Dockerfile.govuk-base
@@ -77,7 +76,6 @@ which assists working with [govuk-content-schemas][] and
 [home-volume]: https://github.com/alphagov/govuk-docker/blob/b2fb90dd62a7579976cc3adaa9c783cd92cbd7e7/docker-compose.yml#L4
 [ruby-install]: https://github.com/alphagov/govuk-docker/blob/b2fb90dd62a7579976cc3adaa9c783cd92cbd7e7/Makefile#L27-L31
 [govuk-mount]: https://github.com/alphagov/govuk-docker/blob/b2fb90dd62a7579976cc3adaa9c783cd92cbd7e7/projects/publishing-api/docker-compose.yml#L11
-[govuk-content-schemas]: https://github.com/alphagov/govuk-content-schemas
 [local-gems]: https://bundler.io/man/gemfile.5.html#PATH
 
 ## Status
