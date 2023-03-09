@@ -1,0 +1,7 @@
+# Unsupported on ARM, and we don't need it anyway
+xpack.ml.enabled: false
+
+# Configuration settings from govuk-docker
+http.host: 0.0.0.0
+transport.host: 127.0.0.1
+xpack.security.enabled: false

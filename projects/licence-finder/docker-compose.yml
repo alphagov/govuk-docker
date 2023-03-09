@@ -22,25 +22,24 @@ services:
     depends_on:
       # In production this uses Mongo 2.6, however there is not a published Mongo 2.6 image compatible with ARM64
       - mongo-3.6
-      # In production this uses Elasticsearch 6, however there is not a published Elasticsearch 6 image compatible with ARM64
-      - elasticsearch-7
+      - elasticsearch-6
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/licence-finder_development"
       TEST_MONGODB_URI: "mongodb://mongo-3.6/licence-finder_test"
-      ELASTICSEARCH_URI: http://elasticsearch-7:9200
+      ELASTICSEARCH_URI: http://elasticsearch-6:9200
 
   licence-finder-app: &licence-finder-app
     <<: *licence-finder
     depends_on:
       - mongo-3.6
       - static-app
-      - elasticsearch-7
+      - elasticsearch-6
       - content-store-app
       - nginx-proxy
     environment:
       VIRTUAL_HOST: licence-finder.dev.gov.uk
       MONGODB_URI: "mongodb://mongo-3.6/licence-finder_development"
-      ELASTICSEARCH_URI: http://elasticsearch-7:9200
+      ELASTICSEARCH_URI: http://elasticsearch-6:9200
       GOVUK_PROXY_STATIC_ENABLED: "true"
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       BINDING: 0.0.0.0
@@ -51,11 +50,11 @@ services:
   licence-finder-app-live:
     <<: *licence-finder-app
     depends_on:
-      - elasticsearch-7
+      - elasticsearch-6
       - mongo-3.6
       - nginx-proxy
     environment:
-      ELASTICSEARCH_URI: http://elasticsearch-7:9200
+      ELASTICSEARCH_URI: http://elasticsearch-6:9200
       MONGODB_URI: "mongodb://mongo-3.6/licence-finder_development"
       PLEK_SERVICE_SEARCH_API_URI: https://www.gov.uk/api
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
