@@ -159,7 +159,7 @@ When building a docker image for a service, it is common to use the service dire
 
 ### docker-mount2
 
-When developing a change across multiple services, it is sometimes necessary to access the files in other service directories. Two examples of this are [govuk-content-schemas](https://github.com/alphagov/govuk_schemas/blob/master/lib/govuk_schemas.rb#L10) and developing a local change to a gem, such as [govuk_publishing_components](https://github.com/alphagov/govuk_publishing_components). When running service commands using docker/compose, the service does not have access to any files on the host unless they are mounted. In order to support access to files across different services, and using [docker-7](#docker-7), **govuk-docker mounts all service directories to `/govuk` in the container**.
+When developing a change across multiple services, it is sometimes necessary to access the files in other service directories. An example of this is developing a local change to a gem, such as [govuk_publishing_components](https://github.com/alphagov/govuk_publishing_components). When running service commands using docker/compose, the service does not have access to any files on the host unless they are mounted. In order to support access to files across different services, and using [docker-7](#docker-7), **govuk-docker mounts all service directories to `/govuk` in the container**.
 
 ### docker-bindmount
 
