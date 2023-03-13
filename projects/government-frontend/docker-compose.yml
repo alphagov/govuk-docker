@@ -46,5 +46,6 @@ services:
       GOVUK_PROXY_STATIC_ENABLED: "true"
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       PLEK_SERVICE_STATIC_URI: https://assets.publishing.service.gov.uk
+      PLEK_SERVICE_SEARCH_API_URI: https://www.gov.uk/api
       VIRTUAL_HOST: government-frontend.dev.gov.uk
       BINDING: 0.0.0.0
