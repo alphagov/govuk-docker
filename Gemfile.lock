@@ -23,7 +23,7 @@ GEM
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    rack (3.0.4.2)
+    rack (3.0.6.1)
     rainbow (3.1.1)
     regexp_parser (2.6.2)
     rexml (3.2.5)
