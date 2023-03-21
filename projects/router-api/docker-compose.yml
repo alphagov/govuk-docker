@@ -33,6 +33,7 @@ services:
       - router-app
       - nginx-proxy
     environment:
+      ROUTER_NODES: router-app
       MONGODB_URI: "mongodb://mongo-3.6/router"
       VIRTUAL_HOST: router-api.dev.gov.uk
       BINDING: 0.0.0.0
