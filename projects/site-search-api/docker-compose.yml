@@ -1,0 +1,58 @@
+x-site-search-api-prototype: &site-search-api-prototype
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: site-search-api-prototype
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - root-home:/root
+  working_dir: /govuk/site-search-api-prototype
+  environment:
+    RABBITMQ_HOSTS: rabbitmq
+    RABBITMQ_VHOST: /
+    RABBITMQ_USER: guest
+    RABBITMQ_PASSWORD: guest
+    REDIS_URL: redis://redis
+    MEILISEARCH_URL: http://meilisearch:7700
+
+services:
+  meilisearch:
+    image: getmeili/meilisearch:v1.1.0-rc.1
+    environment:
+      MEILI_MASTER_KEY: demo_master_key
+    volumes:
+      - meilisearch:/meili_data
+
+  site-search-api-prototype-lite:
+    <<: *site-search-api-prototype
+    depends_on:
+      - meilisearch
+      - redis
+      - rabbitmq
+
+  site-search-api-prototype-app:
+    <<: *site-search-api-prototype
+    depends_on:
+      - nginx-proxy
+      - meilisearch
+      - redis
+      - rabbitmq
+    expose:
+      - "3000"
+    command: bin/rails server
+    environment:
+      RABBITMQ_HOSTS: rabbitmq
+      RABBITMQ_VHOST: /
+      RABBITMQ_USER: guest
+      RABBITMQ_PASSWORD: guest
+      REDIS_URL: redis://redis
+      MEILISEARCH_URL: http://meilisearch:7700
+      MEILISEARCH_MASTER_KEY: demo_master_key
+      VIRTUAL_HOST: site-search-api-prototype.dev.gov.uk, site-search-prototype.dev.gov.uk
+      RAILS_DEVELOPMENT_HOSTS: site-search-api-prototype.dev.gov.uk, site-search-prototype.dev.gov.uk, site-search-api-prototype-app
+      BINDING: 0.0.0.0
+
+volumes:
+  meilisearch:
