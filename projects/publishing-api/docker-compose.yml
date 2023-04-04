@@ -39,6 +39,8 @@ services:
       - redis
       - nginx-proxy
     environment:
+      RABBITMQ_EXCHANGE: published_documents
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
       DATABASE_URL: "postgresql://postgres@postgres-13/publishing-api"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: publishing-api.dev.gov.uk
@@ -53,6 +55,8 @@ services:
       - postgres-13
       - redis
     environment:
+      RABBITMQ_EXCHANGE: published_documents
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
       DATABASE_URL: "postgresql://postgres@postgres-13/publishing-api"
       REDIS_URL: redis://redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
