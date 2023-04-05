@@ -36,6 +36,7 @@ services:
       VIRTUAL_HOST: content-store.dev.gov.uk
       BINDING: 0.0.0.0
       DATABASE_URL: "postgresql://postgres@postgres-13/content-store"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-13/content-store-test"
       
     expose:
       - "3000"
