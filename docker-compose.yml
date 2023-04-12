@@ -77,12 +77,11 @@ services:
       - rabbitmq:/var/lib/rabbitmq
 
   elasticsearch-6:
-    image: elasticsearch:6.7.0
+    build:
+      context: services/elasticsearch-6
+      dockerfile: Dockerfile
     environment:
-      - http.host=0.0.0.0
-      - transport.host=127.0.0.1
-      - xpack.security.enabled=false
-      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+      ES_JAVA_OPTS: -Xms1g -Xmx1g
     volumes:
       - elasticsearch-6:/usr/share/elasticsearch/data
 
