@@ -6,7 +6,7 @@ volumes:
 x-content-store-on-postgresql: &content-store-on-postgresql
   build:
     context: .
-    dockerfile: projects/content-store-on-postgresql/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: content-store-on-postgresql
   stdin_open: true
   tty: true
