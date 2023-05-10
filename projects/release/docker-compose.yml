@@ -26,6 +26,7 @@ services:
     environment:
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
       DATABASE_URL: "mysql2://root:root@mysql-8/release_development"
+      TEST_DATABASE_URL: "mysql2://root:root@mysql-8/release_test"
 
   release-app:
     <<: *release
