@@ -21,16 +21,13 @@ services:
     <<: *content-store-proxy
     depends_on:
       - nginx-proxy
-    
     environment:
       PRIMARY_UPSTREAM: http://content-store.dev.gov.uk
       SECONDARY_UPSTREAM: http://content-store-on-postgresql.dev.gov.uk
-    expose:
-      - "3000"
-    command: bundle exec rackup config.ru -p 3000 > /var/log/rackup.log
 
   content-store-proxy-app: &content-store-proxy-app
     <<: *content-store-proxy
+    command: bundle exec rackup config.ru -p 3000 -o 0.0.0.0 > /var/log/rackup.log
     depends_on:
       - content-store-app
       - content-store-on-postgresql-app
@@ -40,5 +37,7 @@ services:
       BINDING: 0.0.0.0
       PRIMARY_UPSTREAM: http://content-store.dev.gov.uk
       SECONDARY_UPSTREAM: http://content-store-on-postgresql.dev.gov.uk
+    expose:
+      - "3000"
       
     
