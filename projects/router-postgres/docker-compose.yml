@@ -1,0 +1,50 @@
+version: '3.7'
+
+x-router: &router-postgres
+  build:
+    context: .
+    dockerfile: projects/router-postgres/Dockerfile
+  image: router-postgres
+  volumes:
+    - go:/go
+    - ${GOVUK_ROOT_DIR:-~/govuk}/router-postgres:/go/src/github.com/alphagov/router-postgres:delegated
+    - root-home:/root
+  working_dir: /go/src/github.com/alphagov/router-postgres
+
+services:
+  router-postgres-lite:
+    <<: *router-postgres
+    depends_on:
+      - postgres-14
+    environment:
+      GOFLAGS: -buildvcs=false
+      BINARY: /go/src/github.com/alphagov/router-postgres/router-postgres
+      DEBUG: "true"
+      DATABASE_URL: "postgresql://postgres@postgres-14/router"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-14/router"
+
+
+  router-postgres-app: &router-postgres-app
+    <<: *router-postgres
+    depends_on:
+      - postgres-14
+      - nginx-proxy
+    expose:
+      - "8080"
+      - "3055"
+    environment:
+      VIRTUAL_HOST: router.dev.gov.uk,www.dev.gov.uk,www-origin.dev.gov.uk
+      VIRTUAL_PORT: 8080
+      DATABASE_URL: "postgresql://postgres@postgres-14/router"
+      ROUTER_APIADDR: :3055
+      ROUTER_BACKEND_HEADER_TIMEOUT: 60s
+    command: ./router-postgres
+
+  router-postgres-app-draft:
+    <<: *router-postgres-app
+    environment:
+      VIRTUAL_HOST: draft-router.dev.gov.uk,draft-origin.dev.gov.uk
+      VIRTUAL_PORT: 8080
+      DATABASE_URL: "postgresql://postgres@postgres-14/router"
+      ROUTER_APIADDR: :3055
+      ROUTER_BACKEND_HEADER_TIMEOUT: 60s

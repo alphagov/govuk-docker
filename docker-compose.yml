@@ -143,7 +143,9 @@ services:
           - publishing-api.dev.gov.uk
           - release.dev.gov.uk
           - router-api.dev.gov.uk
+          - router-api-postgres.dev.gov.uk
           - router.dev.gov.uk
+          - router-postgres.dev.gov.uk
           - search-admin.dev.gov.uk
           - search-api.dev.gov.uk
           - search-api-v2.dev.gov.uk
