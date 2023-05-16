@@ -22,7 +22,7 @@ services:
     depends_on:
       - nginx-proxy
     environment:
-      PRIMARY_UPSTREAM: http://content-store.dev.gov.uk
+      PRIMARY_UPSTREAM: http://content-store-on-mongodb.dev.gov.uk
       SECONDARY_UPSTREAM: http://content-store-on-postgresql.dev.gov.uk
 
   content-store-proxy-app: &content-store-proxy-app
@@ -33,9 +33,12 @@ services:
       - content-store-on-postgresql-app
       - nginx-proxy
     environment:
-      VIRTUAL_HOST: content-store-proxy.dev.gov.uk
+      # the proxy pretends to be the real thing, so that we don't
+      # have to make either a) global changes to plek, or b) lots
+      # of changes to lots of things
+      VIRTUAL_HOST: content-store.dev.gov.uk
       BINDING: 0.0.0.0
-      PRIMARY_UPSTREAM: http://content-store.dev.gov.uk
+      PRIMARY_UPSTREAM: http://content-store-on-mongodb.dev.gov.uk
       SECONDARY_UPSTREAM: http://content-store-on-postgresql.dev.gov.uk
     expose:
       - "3000"
