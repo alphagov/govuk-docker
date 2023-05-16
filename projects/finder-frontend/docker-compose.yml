@@ -65,6 +65,8 @@ services:
       BINDING: 0.0.0.0
       MEMCACHE_SERVERS: memcached
       PLEK_SERVICE_SEARCH_API_URI: http://site-search-api-prototype-app:3000
+      PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
+      PROTOTYPE_NAME: Meilisearch (initial proof of concept)
     expose:
       - "3000"
     command: bin/rails s --restart

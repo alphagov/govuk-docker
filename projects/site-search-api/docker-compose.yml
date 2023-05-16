@@ -19,7 +19,7 @@ x-site-search-api-prototype: &site-search-api-prototype
 
 services:
   meilisearch:
-    image: getmeili/meilisearch:v1.1.0-rc.1
+    image: getmeili/meilisearch:v1.1
     environment:
       MEILI_MASTER_KEY: demo_master_key
     volumes:
@@ -43,6 +43,7 @@ services:
       - "3000"
     command: bin/rails server
     environment:
+      API_KEY: f00b4r
       RABBITMQ_HOSTS: rabbitmq
       RABBITMQ_VHOST: /
       RABBITMQ_USER: guest

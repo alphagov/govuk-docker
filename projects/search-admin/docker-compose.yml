@@ -37,6 +37,9 @@ services:
       - publishing-api-app
       - search-api-app
     environment:
+      # This is predominantly used to display search results in an iframe
+      # Hardcode it so it doesn't point to www.dev.gov.uk which doesn't currently work locally
+      GOVUK_WEBSITE_ROOT: http://finder-frontend.dev.gov.uk
       DATABASE_URL: "mysql2://root:root@mysql-8/search_admin_development"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: search-admin.dev.gov.uk
