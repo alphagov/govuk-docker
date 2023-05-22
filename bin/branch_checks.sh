@@ -38,7 +38,7 @@ if ! git -C "${govuk_root_dir}/${app}" status -sb | grep 'origin/' -q; then
   exit 0
 fi
 
-origin_head_commit=$(git -C "${govuk_root_dir}/${app}" rev-parse "@{u}")
+origin_head_commit=$(git -C "${govuk_root_dir}/${app}" rev-parse --"@{u}")
 
 update_branch=${GOVUK_DOCKER_UPDATE_BRANCH:-ask}
 
