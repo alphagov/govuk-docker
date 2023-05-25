@@ -49,3 +49,18 @@ services:
       PLEK_SERVICE_STATIC_URI: https://assets.publishing.service.gov.uk
       VIRTUAL_HOST: frontend.dev.gov.uk
       BINDING: 0.0.0.0
+
+  frontend-app-integration:
+    <<: *frontend-app
+    depends_on:
+      - account-api-app-live
+      - nginx-proxy
+    environment:
+      GOVUK_WEBSITE_ROOT: https://www.gov.uk
+      GOVUK_PROXY_STATIC_ENABLED: "true"
+      #ASSET_MANAGER_BEARER_TOKEN: <get an asset manager token from https://signon.integration.publishing.service.gov.uk/api_users>
+      PLEK_SERVICE_ASSET_MANAGER_URI: https://assets-origin.eks.integration.govuk.digital
+      PLEK_SERVICE_CONTENT_STORE_URI: https://www.integration.publishing.service.gov.uk/api
+      PLEK_SERVICE_STATIC_URI: https://assets-origin.eks.integration.govuk.digital
+      VIRTUAL_HOST: frontend.dev.gov.uk
+      BINDING: 0.0.0.0
