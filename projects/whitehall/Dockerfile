@@ -1,5 +1,7 @@
 # Install packages for building ruby
-FROM buildpack-deps
+# TODO: Change from bullseye to stable tag once we've resolved problems with Ruby and SSL
+#       See https://github.com/alphagov/govuk-docker/pull/666 for more info.
+FROM buildpack-deps:bullseye
 
 # Install chromium browser and its webdriver
 RUN apt-get update -qq && apt-get install -y chromium chromium-driver
