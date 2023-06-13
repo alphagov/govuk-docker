@@ -1,5 +1,5 @@
 # Install packages for building ruby
-FROM buildpack-deps
+FROM buildpack-deps:bullseye
 
 # Install chromium browser and its webdriver
 RUN apt-get update -qq && apt-get install -y chromium chromium-driver
