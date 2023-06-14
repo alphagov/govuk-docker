@@ -49,7 +49,7 @@ if [[ -e "$archive_path" ]]; then
   echo "Skipping download - remove ${archive_path} to force a new download on the next run"
 else
   mkdir -p "$archive_dir"
-  remote_file_name=$(aws s3 ls "s3://${bucket}/${hostname}/" | grep "\d-$database.gz" | tail -n1 | sed 's/^.* .* .* //')
+  remote_file_name=$(aws s3 ls "s3://${bucket}/${hostname}/" | grep "[[:digit:]]-$database.gz" | tail -n1 | sed 's/^.* .* .* //')
   aws s3 cp "s3://${bucket}/${hostname}/${remote_file_name}" "$archive_path"
 fi
 
@@ -65,7 +65,7 @@ if [[ -d "$extract_path" ]]; then
 fi
 mkdir -p "$extract_path"
 
-pv "$archive_path" | gunzip | tar -zx -f - -C "$extract_path" "${database}"
+pv "$archive_path" | gunzip | tar -x -f - -C "$extract_path" "${database}"
 
 echo "stopping running govuk-docker containers..."
 govuk-docker down
