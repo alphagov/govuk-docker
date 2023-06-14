@@ -34,7 +34,7 @@ services:
       - nginx-proxy
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/content-store"
-      VIRTUAL_HOST: content-store.dev.gov.uk
+      VIRTUAL_HOST: content-store-on-mongodb.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
       - "3000"

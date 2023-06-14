@@ -117,6 +117,9 @@ services:
           - content-data-api.dev.gov.uk
           - content-data-admin.dev.gov.uk
           - content-store.dev.gov.uk
+          - content-store-on-mongodb.dev.gov.uk
+          - content-store-postgresql-branch.dev.gov.uk
+          - content-store-proxy.dev.gov.uk
           - content-tagger.dev.gov.uk
           - draft-origin.dev.gov.uk
           - draft-router.dev.gov.uk
