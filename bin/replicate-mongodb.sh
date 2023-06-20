@@ -33,6 +33,10 @@ case "$app" in
     hostname=mongo-api
     database="${app//-/_}_production"
     ;;
+  "asset-manager")
+    hostname=mongo-normal
+    database=govuk_assets_production
+    ;;
   *)
     hostname=mongo
     database="${app//-/_}_production"
