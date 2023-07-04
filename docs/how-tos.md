@@ -92,3 +92,8 @@ GOV.UK Docker should respect the following environment variables:
 - `$GOVUK_ROOT_DIR` - directory where app repositories live, defaults to `$HOME/govuk`
 - `$GOVUK_DOCKER_DIR` - directory where the govuk-docker repository lives, defaults to `$GOVUK_ROOT_DIR/govuk-docker`
 - `$GOVUK_DOCKER` - path of the govuk-docker script, defaults to `$GOVUK_DOCKER_DIR/bin/govuk-docker`
+
+
+## How to: enable production JSON logs in development
+
+- Set `GOVUK_RAILS_JSON_LOGGING` to `"true"` in `docker-compose.yml` for the application you would like to enable the logs' behaviour for.
