@@ -54,3 +54,6 @@ services:
       #CONTENT_DATA_API_BEARER_TOKEN: <get a content-data-api token from https://signon.integration.publishing.service.gov.uk/api_users>
       PLEK_SERVICE_CONTENT_DATA_API_URI: "https://content-data-api.integration.publishing.service.gov.uk"
       BINDING: 0.0.0.0
+      #SITE_IMPROVE_SITE_ID: <get a site id from SiteImprove Dashboard>
+      #SITE_IMPROVE_API_CLIENT_USERNAME: <email address of SiteImprove API Key>
+      #SITE_IMPROVE_API_CLIENT_PASSWORD: <password of SiteImprove API Key>
