@@ -198,3 +198,19 @@ services:
 ```
 
 For further examples, see the PR [alphagov/govuk-docker#613](https://github.com/alphagov/govuk-docker/pull/613).
+
+## Resolve issue with a project/app not making
+
+You may get this error when running `make <app-name>`.
+
+```
+ => ERROR [ 2/11] RUN apt-get update -qq && apt-get install -y chromium chromium-driverq
+...
+executor failed running [/bin/sh -c apt-get update -qq && apt-get install -y chromium chromium-driver]: exit code: 100
+```
+
+This may resolve by removing orphan containers which were created in a previous run of docker-compose up, but which has since been deleted from the docker-compose.yml file
+
+```
+docker-compose down -v --rmi all --remove-orphans
+```
