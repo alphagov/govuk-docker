@@ -50,6 +50,7 @@ services:
       REDIS_URL: redis://redis
       VIRTUAL_HOST: whitehall-admin.dev.gov.uk, whitehall-frontend.dev.gov.uk
       BINDING: 0.0.0.0
+      DISABLE_ASSETS_DEBUG:
     expose:
       - "3000"
     command: bin/rails s --restart
