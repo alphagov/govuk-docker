@@ -132,7 +132,6 @@ services:
           - hmrc-manuals-api.dev.gov.uk
           - imminence.dev.gov.uk
           - info-frontend.dev.gov.uk
-          - licence-finder.dev.gov.uk
           - link-checker-api.dev.gov.uk
           - local-links-manager.dev.gov.uk
           - locations-api.dev.gov.uk

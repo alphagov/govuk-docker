@@ -21,10 +21,6 @@ case "$app" in
     database="${app//-/_}"
     wait_for_rs=1
     ;;
-  "licence-finder")
-    hostname=mongo-normal
-    database=licence_finder_production
-    ;;
   "licensify")
     hostname=mongo-licensing
     database=licensify
