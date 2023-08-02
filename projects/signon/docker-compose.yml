@@ -7,7 +7,7 @@ volumes:
 x-signon: &signon
   build:
     context: .
-    dockerfile: projects/signon/Dockerfile
+    dockerfile: Dockerfile.govuk-base
   image: signon
   stdin_open: true
   tty: true
