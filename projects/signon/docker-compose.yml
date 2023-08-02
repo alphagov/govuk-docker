@@ -36,6 +36,7 @@ services:
       - mysql-8
       - nginx-proxy
       - redis
+      - signon-worker
     environment:
       DATABASE_URL: "mysql2://root:root@mysql-8/signon_development"
       VIRTUAL_HOST: signon.dev.gov.uk
@@ -44,3 +45,14 @@ services:
     expose:
       - "3000"
     command: bin/rails s --restart
+
+  signon-worker:
+    <<: *signon
+    depends_on:
+      - mysql-8
+      - redis
+      - nginx-proxy
+    environment:
+      DATABASE_URL: "mysql2://root:root@mysql-8/signon_development"
+      REDIS_URL: redis://redis
+    command: bundle exec sidekiq -C ./config/sidekiq.yml
