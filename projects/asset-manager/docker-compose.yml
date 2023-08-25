@@ -27,6 +27,7 @@ services:
       - redis
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/asset-manager"
+      FAKE_S3_HOST: "http://asset-manager.dev.gov.uk"
       TEST_MONGODB_URI: "mongodb://mongo-3.6/asset-manager-test"
       REDIS_URL: redis://redis
 
@@ -39,6 +40,7 @@ services:
       - asset-manager-worker
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/asset-manager"
+      FAKE_S3_HOST: "http://asset-manager.dev.gov.uk"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: asset-manager.dev.gov.uk
       BINDING: 0.0.0.0
@@ -55,6 +57,6 @@ services:
       MONGODB_URI: "mongodb://mongo-3.6/asset-manager"
       REDIS_URL: redis://redis
       ASSET_MANAGER_CLAMSCAN_PATH: /bin/true
-      FAKE_S3_HOST: http://127.0.0.1
+      FAKE_S3_HOST: "http://asset-manager.dev.gov.uk"
       ALLOW_FAKE_S3_IN_PRODUCTION_FOR_PUBLISHING_E2E_TESTS: "true"
     command: bundle exec sidekiq -C ./config/sidekiq.yml
