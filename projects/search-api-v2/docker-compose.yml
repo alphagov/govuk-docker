@@ -1,0 +1,31 @@
+x-search-api-v2: &search-api-v2
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: search-api-v2
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - search-api-v2-tmp:/govuk/search-api-v2/tmp
+    - root-home:/root
+  working_dir: /govuk/search-api-v2
+
+volumes:
+  search-api-v2-tmp:
+
+services:
+  search-api-v2-lite:
+    <<: *search-api-v2
+
+  search-api-v2-app:
+    <<: *search-api-v2
+    depends_on:
+      - nginx-proxy
+    environment:
+      RAILS_DEVELOPMENT_HOSTS: search-api-v2.dev.gov.uk
+      VIRTUAL_HOST: search-api-v2.dev.gov.uk
+      BINDING: 0.0.0.0
+    expose:
+      - "3000"
+    command: bin/rails server --restart
