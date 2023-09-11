@@ -37,6 +37,7 @@ services:
       - nginx-proxy
       - router-app
       - search-api-app
+      - search-api-v2-app
       - static-app
     environment:
       GOVUK_PROXY_STATIC_ENABLED: "true"
