@@ -34,8 +34,8 @@ services:
       VIRTUAL_HOST: government-frontend.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
-      - "3000"
-    command: bin/rails s --restart
+      - "3090"
+    command: ./bin/dev
 
   government-frontend-app-live:
     <<: *government-frontend-app
