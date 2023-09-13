@@ -72,7 +72,9 @@ services:
     image: redis
 
   rabbitmq:
-    image: rabbitmq
+    image: rabbitmq:management
+    ports:
+      - 15672:15672
     volumes:
       - rabbitmq:/var/lib/rabbitmq
 
