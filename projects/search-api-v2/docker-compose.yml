@@ -17,12 +17,17 @@ volumes:
 services:
   search-api-v2-lite:
     <<: *search-api-v2
+    depends_on:
+      - rabbitmq
+    environment:
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq
 
   search-api-v2-app:
     <<: *search-api-v2
     depends_on:
       - nginx-proxy
       - rabbitmq
+      - search-api-v2-worker-consume-published-documents
     environment:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
       RAILS_DEVELOPMENT_HOSTS: search-api-v2.dev.gov.uk
@@ -31,3 +36,11 @@ services:
     expose:
       - "3000"
     command: bin/rails server --restart
+
+  search-api-v2-worker-consume-published-documents:
+    <<: *search-api-v2
+    depends_on:
+      - rabbitmq
+    environment:
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq
+    command: bin/rails message_queue:consume_published_documents
