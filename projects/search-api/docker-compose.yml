@@ -12,10 +12,7 @@ x-search-api: &search-api
     - root-home:/root
   working_dir: /govuk/search-api
   environment:
-    RABBITMQ_HOSTS: rabbitmq
-    RABBITMQ_VHOST: /
-    RABBITMQ_USER: guest
-    RABBITMQ_PASSWORD: guest
+    RABBITMQ_URL: amqp://guest:guest@rabbitmq
     REDIS_URL: redis://redis
     ELASTICSEARCH_URI: http://elasticsearch-6:9200
 
@@ -38,10 +35,7 @@ services:
       - search-api-listener-insert-data
       - search-api-listener-bulk-insert-data
     environment:
-      RABBITMQ_HOSTS: rabbitmq
-      RABBITMQ_VHOST: /
-      RABBITMQ_USER: guest
-      RABBITMQ_PASSWORD: guest
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq
       REDIS_URL: redis://redis
       ELASTICSEARCH_URI: http://elasticsearch-6:9200
       VIRTUAL_HOST: search-api.dev.gov.uk, search.dev.gov.uk
