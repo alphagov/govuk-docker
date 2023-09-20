@@ -21,6 +21,7 @@ services:
       - rabbitmq
     environment:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
+      PUBLISHING_EVENT_MESSAGE_QUEUE_NAME: search_api_v2_published_documents
 
   search-api-v2-app:
     <<: *search-api-v2
@@ -30,6 +31,7 @@ services:
       - search-api-v2-worker-consume-published-documents
     environment:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
+      PUBLISHING_EVENT_MESSAGE_QUEUE_NAME: search_api_v2_published_documents
       RAILS_DEVELOPMENT_HOSTS: search-api-v2.dev.gov.uk
       VIRTUAL_HOST: search-api-v2.dev.gov.uk
       BINDING: 0.0.0.0
@@ -43,4 +45,5 @@ services:
       - rabbitmq
     environment:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
-    command: bin/rails message_queue:consume_published_documents
+      PUBLISHING_EVENT_MESSAGE_QUEUE_NAME: search_api_v2_published_documents
+    command: bin/rake publishing_event_pipeline:process_messages
