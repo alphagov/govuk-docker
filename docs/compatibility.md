@@ -87,4 +87,3 @@ These repos are used as part of running the live GOV.UK site. Since all of them 
    - ✅ plek
    - ❌ slimmer
    - ✅ smokey
-   - ❌ transition-config
