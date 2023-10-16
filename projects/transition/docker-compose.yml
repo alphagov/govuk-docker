@@ -19,6 +19,7 @@ x-transition: &transition
 services:
   transition-lite:
     <<: *transition
+    shm_size: 512mb
     depends_on:
       - postgres-13
       - redis
