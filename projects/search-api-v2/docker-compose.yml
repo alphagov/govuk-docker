@@ -21,17 +21,17 @@ services:
       - rabbitmq
     environment:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
-      PUBLISHING_EVENT_MESSAGE_QUEUE_NAME: search_api_v2_published_documents
+      PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: search_api_v2_published_documents
 
   search-api-v2-app:
     <<: *search-api-v2
     depends_on:
       - nginx-proxy
       - rabbitmq
-      - search-api-v2-worker-consume-published-documents
+      - search-api-v2-document-sync-worker
     environment:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
-      PUBLISHING_EVENT_MESSAGE_QUEUE_NAME: search_api_v2_published_documents
+      PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: search_api_v2_published_documents
       RAILS_DEVELOPMENT_HOSTS: search-api-v2.dev.gov.uk
       VIRTUAL_HOST: search-api-v2.dev.gov.uk
       BINDING: 0.0.0.0
@@ -39,11 +39,11 @@ services:
       - "3000"
     command: bin/rails server --restart
 
-  search-api-v2-worker-consume-published-documents:
+  search-api-v2-document-sync-worker:
     <<: *search-api-v2
     depends_on:
       - rabbitmq
     environment:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
-      PUBLISHING_EVENT_MESSAGE_QUEUE_NAME: search_api_v2_published_documents
-    command: bin/rake publishing_event_pipeline:process_messages
+      PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: search_api_v2_published_documents
+    command: bin/rake document_sync_worker:run
