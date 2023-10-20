@@ -12,7 +12,7 @@ RSpec.describe "Make dependencies" do
 
     it "has only valid dependencies in the #{project_name} Makefile" do
       app_dependencies = MakefileHelper.dependencies(project_name)
-        .reject { |dep| dep =~ /^(bundle|clone)/ }
+        .reject { |dep| dep =~ /^(bundle|clone|prerequisites)/ }
 
       expect((app_dependencies - ProjectsHelper.all_projects)).to eq([])
     end
