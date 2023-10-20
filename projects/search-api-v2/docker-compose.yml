@@ -9,6 +9,9 @@ x-search-api-v2: &search-api-v2
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - search-api-v2-tmp:/govuk/search-api-v2/tmp
     - root-home:/root
+    # Mount the host's gcloud config directory into the container so that the app can use
+    # Application Default Credentials (required to use Discovery Engine locally)
+    - "~/.config/gcloud:/root/.config/gcloud:delegated"
   working_dir: /govuk/search-api-v2
 
 volumes:
@@ -30,11 +33,16 @@ services:
       - rabbitmq
       - search-api-v2-document-sync-worker
     environment:
-      RABBITMQ_URL: amqp://guest:guest@rabbitmq
-      PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: search_api_v2_published_documents
-      RAILS_DEVELOPMENT_HOSTS: search-api-v2.dev.gov.uk
-      VIRTUAL_HOST: search-api-v2.dev.gov.uk
-      BINDING: 0.0.0.0
+      RABBITMQ_URL: "amqp://guest:guest@rabbitmq"
+      PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: "search_api_v2_published_documents"
+      RAILS_DEVELOPMENT_HOSTS: "search-api-v2.dev.gov.uk"
+      VIRTUAL_HOST: "search-api-v2.dev.gov.uk"
+      BINDING: "0.0.0.0"
+      # The fully qualified ID of the datastore on Discovery Engine (required to use Discovery
+      # Engine locally, can be set on `govuk-docker up` invocation or permanently in your local
+      # environment)
+      # e.g. "projects/search-api-v2-dev/locations/global/collections/default_collection/dataStores/local-my-name"
+      DISCOVERY_ENGINE_DATASTORE: "${DISCOVERY_ENGINE_DATASTORE}"
     expose:
       - "3000"
     command: bin/rails server --restart
@@ -44,6 +52,11 @@ services:
     depends_on:
       - rabbitmq
     environment:
-      RABBITMQ_URL: amqp://guest:guest@rabbitmq
-      PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: search_api_v2_published_documents
+      RABBITMQ_URL: "amqp://guest:guest@rabbitmq"
+      PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: "search_api_v2_published_documen"
+      # The fully qualified ID of the datastore on Discovery Engine (required to use Discovery
+      # Engine locally, can be set on `govuk-docker up` invocation or permanently in your local
+      # environment)
+      # e.g. "projects/search-api-v2-dev/locations/global/collections/default_collection/dataStores/local-my-name"
+      DISCOVERY_ENGINE_DATASTORE: "${DISCOVERY_ENGINE_DATASTORE}"
     command: bin/rake document_sync_worker:run
