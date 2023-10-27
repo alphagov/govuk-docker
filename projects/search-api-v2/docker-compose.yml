@@ -35,14 +35,19 @@ services:
     environment:
       RABBITMQ_URL: "amqp://guest:guest@rabbitmq"
       PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: "search_api_v2_published_documents"
-      RAILS_DEVELOPMENT_HOSTS: "search-api-v2.dev.gov.uk"
+      RAILS_DEVELOPMENT_HOSTS: "search-api-v2.dev.gov.uk,search-api-v2-app"
       VIRTUAL_HOST: "search-api-v2.dev.gov.uk"
       BINDING: "0.0.0.0"
-      # The fully qualified ID of the datastore on Discovery Engine (required to use Discovery
-      # Engine locally, can be set on `govuk-docker up` invocation or permanently in your local
-      # environment)
-      # e.g. "projects/search-api-v2-dev/locations/global/collections/default_collection/dataStores/local-my-name"
+      # The fully qualified ID of the datastore and engine on the Discovery Engine dev environment
+      # (required to use Discovery Engine locally, can be set on `govuk-docker up` invocation or
+      # permanently in your local environment).
+      #
+      # e.g. "projects/search-api-v2-dev/locations/global/collections/default_collection/dataStores/
+      #       local-my-name"
       DISCOVERY_ENGINE_DATASTORE: "${DISCOVERY_ENGINE_DATASTORE}"
+      # e.g. "projects/search-api-v2-dev/locations/global/collections/default_collection/dataStores/
+      #       local-my-name/servingConfigs/default_serving_config"
+      DISCOVERY_ENGINE_SERVING_CONFIG: "${DISCOVERY_ENGINE_SERVING_CONFIG}"
     expose:
       - "3000"
     command: bin/rails server --restart
@@ -54,9 +59,14 @@ services:
     environment:
       RABBITMQ_URL: "amqp://guest:guest@rabbitmq"
       PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: "search_api_v2_published_documents"
-      # The fully qualified ID of the datastore on Discovery Engine (required to use Discovery
-      # Engine locally, can be set on `govuk-docker up` invocation or permanently in your local
-      # environment)
-      # e.g. "projects/search-api-v2-dev/locations/global/collections/default_collection/dataStores/local-my-name"
+      # The fully qualified ID of the datastore and serving config on the Discovery Engine dev
+      # environment (required to use Discovery Engine locally, can be set on `govuk-docker up`
+      # invocation or permanently in your local environment).
+      #
+      # e.g. "projects/search-api-v2-dev/locations/global/collections/default_collection/dataStores/
+      #       local-my-name"
       DISCOVERY_ENGINE_DATASTORE: "${DISCOVERY_ENGINE_DATASTORE}"
+      # e.g. "projects/search-api-v2-dev/locations/global/collections/default_collection/dataStores/
+      #       local-my-name/servingConfigs/default_serving_config"
+      DISCOVERY_ENGINE_SERVING_CONFIG: "${DISCOVERY_ENGINE_SERVING_CONFIG}"
     command: bin/rake document_sync_worker:run
