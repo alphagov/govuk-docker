@@ -48,6 +48,15 @@ services:
       - "3000"
     command: bin/rails s --restart
 
+  finder-frontend-search-v2: &finder-frontend-search-v2
+    <<: *finder-frontend-app
+    environment:
+      PLEK_SERVICE_SEARCH_API_URI: http://search-api-v2-app:3000
+      GOVUK_PROXY_STATIC_ENABLED: "true"
+      VIRTUAL_HOST: finder-frontend.dev.gov.uk
+      BINDING: 0.0.0.0
+      MEMCACHE_SERVERS: memcached
+
   finder-frontend-app-live:
     <<: *finder-frontend-app
     depends_on:
