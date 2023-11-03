@@ -34,7 +34,7 @@ case "$app" in
     database=govuk_assets_production
     ;;
   *)
-    hostname=mongo
+    hostname=mongo-normal
     database="${app//-/_}_production"
     ;;
 esac
