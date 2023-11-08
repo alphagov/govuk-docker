@@ -25,6 +25,8 @@ services:
     environment:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
       PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: search_api_v2_published_documents
+      DISCOVERY_ENGINE_DATASTORE: none
+      DISCOVERY_ENGINE_SERVING_CONFIG: none
 
   search-api-v2-app:
     <<: *search-api-v2
