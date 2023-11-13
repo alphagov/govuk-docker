@@ -1,0 +1,42 @@
+version: '3.7'
+
+volumes:
+  content-store-on-postgresql-tmp:
+
+x-content-store-on-postgresql: &content-store-on-postgresql
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: content-store-on-postgresql
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - root-home:/root
+    - content-store-on-postgresql-tmp:/govuk/content-store-on-postgresql/tmp
+  working_dir: /govuk/content-store-on-postgresql
+
+services:
+  content-store-on-postgresql-lite:
+    <<: *content-store-on-postgresql
+    depends_on:
+      - postgres-13
+    environment:
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-13/content-store-test"
+      DATABASE_URL: "postgresql://postgres@postgres-13/content-store"
+
+  content-store-on-postgresql-app: &content-store-on-postgresql-app
+    <<: *content-store-on-postgresql
+    depends_on:
+      - router-api-app
+      - nginx-proxy
+      - postgres-13
+    environment:
+      VIRTUAL_HOST: content-store-on-postgresql.dev.gov.uk
+      BINDING: 0.0.0.0
+      DATABASE_URL: "postgresql://postgres@postgres-13/content-store"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-13/content-store-test"
+      
+    expose:
+      - "3000"
+    command: bin/rails s --restart

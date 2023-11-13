@@ -1,0 +1,46 @@
+version: '3.7'
+
+volumes:
+  content-store-proxy-tmp:
+
+x-content-store-proxy: &content-store-proxy
+  build:
+    context: .
+    dockerfile: projects/content-store-proxy/Dockerfile
+  image: content-store-proxy
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - root-home:/root
+    - content-store-proxy-tmp:/govuk/content-store-proxy/tmp
+  working_dir: /govuk/content-store-proxy
+
+services:
+  content-store-proxy-lite:
+    <<: *content-store-proxy
+    depends_on:
+      - nginx-proxy
+    environment:
+      PRIMARY_UPSTREAM: http://content-store-on-mongodb.dev.gov.uk
+      SECONDARY_UPSTREAM: http://content-store-on-postgresql.dev.gov.uk
+
+  content-store-proxy-app: &content-store-proxy-app
+    <<: *content-store-proxy
+    command: bundle exec rackup config.ru -p 3000 -o 0.0.0.0 > /var/log/rackup.log
+    depends_on:
+      - content-store-app
+      - content-store-on-postgresql-app
+      - nginx-proxy
+    environment:
+      # the proxy pretends to be the real thing, so that we don't
+      # have to make either a) global changes to plek, or b) lots
+      # of changes to lots of things
+      VIRTUAL_HOST: content-store.dev.gov.uk
+      BINDING: 0.0.0.0
+      PRIMARY_UPSTREAM: http://content-store-on-mongodb.dev.gov.uk
+      SECONDARY_UPSTREAM: http://content-store-on-postgresql.dev.gov.uk
+    expose:
+      - "3000"
+      
+    

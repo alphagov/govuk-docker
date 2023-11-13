@@ -1,0 +1,1 @@
+content-store-proxy: bundle-content-store-proxy content-store content-store-on-postgresql
