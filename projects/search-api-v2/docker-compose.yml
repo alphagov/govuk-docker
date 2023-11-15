@@ -25,7 +25,7 @@ services:
     environment:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
       PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: search_api_v2_published_documents
-      DISCOVERY_ENGINE_DATASTORE: none
+      DISCOVERY_ENGINE_DATASTORE_BRANCH: none
       DISCOVERY_ENGINE_SERVING_CONFIG: none
 
   search-api-v2-app:
@@ -40,13 +40,13 @@ services:
       RAILS_DEVELOPMENT_HOSTS: "search-api-v2.dev.gov.uk,search-api-v2-app"
       VIRTUAL_HOST: "search-api-v2.dev.gov.uk"
       BINDING: "0.0.0.0"
-      # The fully qualified ID of the datastore and engine on the Discovery Engine dev environment
-      # (required to use Discovery Engine locally, can be set on `govuk-docker up` invocation or
-      # permanently in your local environment).
+      # The fully qualified ID of the datastore branch and engine on the Discovery Engine dev
+      # environment (required to use Discovery Engine locally, can be set on `govuk-docker up`
+      # invocation or permanently in your local environment).
       #
       # e.g. "projects/search-api-v2-dev/locations/global/collections/default_collection/dataStores/
-      #       local-my-name"
-      DISCOVERY_ENGINE_DATASTORE: "${DISCOVERY_ENGINE_DATASTORE}"
+      #       local-my-name/branches/default_branch"
+      DISCOVERY_ENGINE_DATASTORE_BRANCH: "${DISCOVERY_ENGINE_DATASTORE_BRANCH}"
       # e.g. "projects/search-api-v2-dev/locations/global/collections/default_collection/dataStores/
       #       local-my-name/servingConfigs/default_serving_config"
       DISCOVERY_ENGINE_SERVING_CONFIG: "${DISCOVERY_ENGINE_SERVING_CONFIG}"
@@ -61,13 +61,13 @@ services:
     environment:
       RABBITMQ_URL: "amqp://guest:guest@rabbitmq"
       PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: "search_api_v2_published_documents"
-      # The fully qualified ID of the datastore and serving config on the Discovery Engine dev
-      # environment (required to use Discovery Engine locally, can be set on `govuk-docker up`
+      # The fully qualified ID of the datastore branch and serving config on the Discovery Engine
+      # dev environment (required to use Discovery Engine locally, can be set on `govuk-docker up`
       # invocation or permanently in your local environment).
       #
       # e.g. "projects/search-api-v2-dev/locations/global/collections/default_collection/dataStores/
-      #       local-my-name"
-      DISCOVERY_ENGINE_DATASTORE: "${DISCOVERY_ENGINE_DATASTORE}"
+      #       local-my-name/branches/default_branch"
+      DISCOVERY_ENGINE_DATASTORE_BRANCH: "${DISCOVERY_ENGINE_DATASTORE_BRANCH}"
       # e.g. "projects/search-api-v2-dev/locations/global/collections/default_collection/dataStores/
       #       local-my-name/servingConfigs/default_serving_config"
       DISCOVERY_ENGINE_SERVING_CONFIG: "${DISCOVERY_ENGINE_SERVING_CONFIG}"
