@@ -11,8 +11,8 @@ define SEARCH_API_V2_WARN_GCLOUD
 These are mounted into the container. See the README for details.\033[0m
 endef
 
-define SEARCH_API_V2_WARN_DATASTORE
-\033[1;31mWarning: DISCOVERY_ENGINE_DATASTORE environment variable is not set.\
+define SEARCH_API_V2_WARN_DATASTORE_BRANCH
+\033[1;31mWarning: DISCOVERY_ENGINE_DATASTORE_BRANCH environment variable is not set.\
 \n\033[0;31mYou need to set this environment variable locally before running govuk-docker up,\
 otherwise the app will not be able to access Discovery Engine. See the README for details.\033[0m
 endef
@@ -25,5 +25,5 @@ endef
 
 prerequisites-search-api-v2:
 	@command -v gcloud >/dev/null 2>&1 || { echo "$(SEARCH_API_V2_WARN_GCLOUD)"; }
-	@[ -n "$${DISCOVERY_ENGINE_DATASTORE}" ] || { echo "$(SEARCH_API_V2_WARN_DATASTORE)"; }
+	@[ -n "$${DISCOVERY_ENGINE_DATASTORE_BRANCH}" ] || { echo "$(SEARCH_API_V2_WARN_DATASTORE_BRANCH)"; }
 	@[ -n "$${DISCOVERY_ENGINE_SERVING_CONFIG}" ] || { echo "$(SEARCH_API_V2_WARN_SERVING_CONFIG)"; }
