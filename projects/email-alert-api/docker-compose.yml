@@ -20,25 +20,21 @@ services:
   email-alert-api-lite:
     <<: *email-alert-api
     depends_on:
-      # The version of PostgreSQL temporarily does not match
-      # production, as an upgrade in production is being worked on
-      #
-      # https://trello.com/c/ZMFOPaCl/1176-upgrade-our-app-databases
-      - postgres-13
+      - postgres-13-email-alert-api
       - redis
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-13/email-alert-api"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres-13/email-alert-api-test"
+      DATABASE_URL: "postgresql://email-alert-api@postgres-13-email-alert-api/email-alert-api"
+      TEST_DATABASE_URL: "postgresql://email-alert-api@postgres-13-email-alert-api/email-alert-api-test"
       REDIS_URL: redis://redis
 
   email-alert-api-app: &email-alert-api-app
     <<: *email-alert-api
     depends_on:
       - nginx-proxy
-      - postgres-13
+      - postgres-13-email-alert-api
       - redis
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-13/email-alert-api"
+      DATABASE_URL: "postgresql://email-alert-api@postgres-13-email-alert-api/email-alert-api"
       REDIS_URL: redis://redis
       VIRTUAL_HOST: email-alert-api.dev.gov.uk
       BINDING: 0.0.0.0
@@ -49,9 +45,9 @@ services:
   email-alert-api-worker:
     <<: *email-alert-api
     depends_on:
-      - postgres-13
+      - postgres-13-email-alert-api
       - redis
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-13/email-alert-api"
+      DATABASE_URL: "postgresql://email-alert-api@postgres-13-email-alert-api/email-alert-api"
       REDIS_URL: redis://redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml

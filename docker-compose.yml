@@ -5,6 +5,7 @@ volumes:
   rabbitmq:
   postgres-12:
   postgres-13:
+  postgres-13-email-alert-api:
   postgres-14:
   postgres-14-postgis:
   mysql-8:
@@ -30,6 +31,14 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
       - postgres-13:/var/lib/postgresql/data
+
+  postgres-13-email-alert-api:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: email-alert-api
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - postgres-13-email-alert-api:/var/lib/postgresql/data
 
   postgres-14:
     image: postgres:14
