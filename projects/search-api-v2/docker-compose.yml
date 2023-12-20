@@ -25,6 +25,8 @@ services:
     environment:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
       PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: search_api_v2_published_documents
+      DISCOVERY_ENGINE_SERVING_CONFIG: "${DISCOVERY_ENGINE_SERVING_CONFIG}"
+      DISCOVERY_ENGINE_DATASTORE_BRANCH: "${DISCOVERY_ENGINE_DATASTORE_BRANCH}"
 
   search-api-v2-app:
     <<: *search-api-v2
@@ -42,7 +44,8 @@ services:
       # Engine locally, can be set on `govuk-docker up` invocation or permanently in your local
       # environment)
       # e.g. "projects/search-api-v2-dev/locations/global/collections/default_collection/dataStores/local-my-name"
-      DISCOVERY_ENGINE_DATASTORE: "${DISCOVERY_ENGINE_DATASTORE}"
+      DISCOVERY_ENGINE_SERVING_CONFIG: "${DISCOVERY_ENGINE_SERVING_CONFIG}"
+      DISCOVERY_ENGINE_DATASTORE_BRANCH: "${DISCOVERY_ENGINE_DATASTORE_BRANCH}"
     expose:
       - "3000"
     command: bin/rails server --restart
@@ -53,7 +56,7 @@ services:
       - rabbitmq
     environment:
       RABBITMQ_URL: "amqp://guest:guest@rabbitmq"
-      PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: "search_api_v2_published_documen"
+      PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: "search_api_v2_published_documents"
       # The fully qualified ID of the datastore on Discovery Engine (required to use Discovery
       # Engine locally, can be set on `govuk-docker up` invocation or permanently in your local
       # environment)
