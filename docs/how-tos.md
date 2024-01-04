@@ -55,7 +55,7 @@ gds aws govuk-integration-readonly --assume-role-ttl 180m ./bin/replicate-postgr
 
 All the scripts, other than `replicate-elasticsearch.sh`, take the name of the app to replicate data for.
 
-Draft data can be replicated with `replicate-mongodb.sh draft-content-store` and `replicate-mongodb.sh draft-router`.
+Draft data can be replicated with `replicate-postgresql.sh draft-content-store` and `replicate-mongodb.sh draft-router`.
 
 If you want to download data without importing it, set the `SKIP_IMPORT` environment variable (to anything).
 
