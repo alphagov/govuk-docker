@@ -40,16 +40,11 @@ services:
       RAILS_DEVELOPMENT_HOSTS: "search-api-v2.dev.gov.uk,search-api-v2-app"
       VIRTUAL_HOST: "search-api-v2.dev.gov.uk"
       BINDING: "0.0.0.0"
-      # The fully qualified ID of the datastore branch and engine on the Discovery Engine dev
-      # environment (required to use Discovery Engine locally, can be set on `govuk-docker up`
-      # invocation or permanently in your local environment).
+      # The fully qualified ID of the datastore branch and engine on the Discovery Engine integration
+      # environment (required to use Discovery Engine locally).
       #
-      # e.g. "projects/search-api-v2-dev/locations/global/collections/default_collection/dataStores/
-      #       local-my-name/branches/default_branch"
-      DISCOVERY_ENGINE_DATASTORE_BRANCH: "${DISCOVERY_ENGINE_DATASTORE_BRANCH}"
-      # e.g. "projects/search-api-v2-dev/locations/global/collections/default_collection/dataStores/
-      #       local-my-name/servingConfigs/default_serving_config"
-      DISCOVERY_ENGINE_SERVING_CONFIG: "${DISCOVERY_ENGINE_SERVING_CONFIG}"
+      DISCOVERY_ENGINE_DATASTORE_BRANCH: "projects/search-api-v2-integration/locations/global/collections/default_collection/dataStores/govuk_content/branches/default_branch"
+      DISCOVERY_ENGINE_SERVING_CONFIG: "projects/search-api-v2-integration/locations/global/collections/default_collection/dataStores/govuk_content/servingConfigs/default_search"
     expose:
       - "3000"
     command: bin/rails server --restart
@@ -62,13 +57,8 @@ services:
       RABBITMQ_URL: "amqp://guest:guest@rabbitmq"
       PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: "search_api_v2_published_documents"
       # The fully qualified ID of the datastore branch and serving config on the Discovery Engine
-      # dev environment (required to use Discovery Engine locally, can be set on `govuk-docker up`
-      # invocation or permanently in your local environment).
+      # integration environment (required to use Discovery Engine locally).
       #
-      # e.g. "projects/search-api-v2-dev/locations/global/collections/default_collection/dataStores/
-      #       local-my-name/branches/default_branch"
-      DISCOVERY_ENGINE_DATASTORE_BRANCH: "${DISCOVERY_ENGINE_DATASTORE_BRANCH}"
-      # e.g. "projects/search-api-v2-dev/locations/global/collections/default_collection/dataStores/
-      #       local-my-name/servingConfigs/default_serving_config"
-      DISCOVERY_ENGINE_SERVING_CONFIG: "${DISCOVERY_ENGINE_SERVING_CONFIG}"
+      DISCOVERY_ENGINE_DATASTORE_BRANCH: "projects/search-api-v2-integration/locations/global/collections/default_collection/dataStores/govuk_content/branches/default_branch"
+      DISCOVERY_ENGINE_SERVING_CONFIG: "projects/search-api-v2-integration/locations/global/collections/default_collection/dataStores/govuk_content/servingConfigs/default_search"
     command: bin/rake document_sync_worker:run
