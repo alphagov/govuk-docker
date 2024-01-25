@@ -30,11 +30,11 @@ case "$app" in
     database="${app//-/_}_production"
     ;;
   "asset-manager")
-    hostname=mongo-normal
+    hostname=shared-documentdb
     database=govuk_assets_production
     ;;
   *)
-    hostname=mongo-normal
+    hostname=shared-documentdb
     database="${app//-/_}_production"
     ;;
 esac
@@ -49,7 +49,7 @@ if [[ -e "$archive_path" ]]; then
   echo "Skipping download - remove ${archive_path} to force a new download on the next run"
 else
   mkdir -p "$archive_dir"
-  remote_file_name=$(aws s3 ls "s3://${bucket}/${hostname}/" | grep "[[:digit:]]-$database.gz" | tail -n1 | sed 's/^.* .* .* //')
+  remote_file_name=$(aws s3 ls "s3://${bucket}/${hostname}/" | grep -e "-$database.gz\>" | tail -n1 | sed 's/^.* .* .* //')
   aws s3 cp "s3://${bucket}/${hostname}/${remote_file_name}" "$archive_path"
 fi
 
