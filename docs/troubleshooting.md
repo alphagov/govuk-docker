@@ -4,15 +4,6 @@
 
 If `bin/setup` fails on installing `dnsmasq`, make sure you're not overriding the `USER` env variable anywhere.
 
-If you are (for setting the right SSH username), you'll want to remove that and set it in `~/.config/config.yaml` instead.
-
-```yaml
-# This is for govuk-connect: https://github.com/alphagov/govuk-connect/blob/1e14c58ce8e5d831aad3e2f8353d0e5204f83388/lib/govuk_connect/cli.rb#L230
-# Can't set `export USER="yourname"` as this causes some unix things to fail (e.g. `brew install dnsmasq`)
-# See https://github.com/alphagov/govuk-connect/issues/72
-ssh_username: "yourname"
-```
-
 ## Diagnose common issues when setting up GOV.UK Docker
 
 Run the following command in `~/govuk/govuk-docker`.
