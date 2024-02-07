@@ -55,7 +55,7 @@ services:
       DISABLE_ASSETS_DEBUG:
     expose:
       - "3000"
-    command: bin/rails s --restart
+    command: bin/dev
 
   whitehall-worker:
     <<: *whitehall
