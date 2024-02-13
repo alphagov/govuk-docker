@@ -44,7 +44,7 @@ services:
       REDIS_URL: redis://redis
     expose:
       - "3000"
-    command: bin/rails s --restart
+    command: ./bin/dev
 
   signon-worker:
     <<: *signon
