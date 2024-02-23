@@ -36,7 +36,7 @@ services:
       - postgres-13
     expose:
       - "3000"
-    command: bin/rails s --restart
+    command: ./bin/dev
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-13/content-data-admin"
       VIRTUAL_HOST: content-data-admin.dev.gov.uk
