@@ -42,7 +42,6 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ govuk-developer-docs
    - ✅ hmrc-manuals-api
    - ✅ imminence
-   - ✅ info-frontend
    - ❌ licensify
       * Has a [separate](https://github.com/alphagov/licensify/blob/master/DOCKER.md) Docker project.
    - ✅ link-checker-api
