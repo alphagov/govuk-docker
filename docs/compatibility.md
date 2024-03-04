@@ -40,6 +40,7 @@ These are repos that can be started as a some kind of process, such as a web app
       * **TODO: Missing support for running the worker**
    - ✅ govuk_publishing_components
    - ✅ govuk-developer-docs
+   - ✅ govuk-chat
    - ✅ hmrc-manuals-api
    - ✅ imminence
    - ❌ licensify

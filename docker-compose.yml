@@ -138,6 +138,7 @@ services:
           - finder-frontend.dev.gov.uk
           - government-frontend.dev.gov.uk
           - govspeak-preview.dev.gov.uk
+          - govuk-chat.dev.gov.uk
           - govuk-developer-docs.dev.gov.uk
           - govuk-publishing-components.dev.gov.uk
           - hmrc-manuals-api.dev.gov.uk
