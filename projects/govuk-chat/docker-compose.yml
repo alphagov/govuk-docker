@@ -1,0 +1,41 @@
+version: '3.7'
+
+volumes:
+  govuk-chat-tmp:
+  govuk-chat-node-modules:
+
+x-govuk-chat: &govuk-chat
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: govuk-chat
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - root-home:/root
+    - govuk-chat-tmp:/govuk/govuk-chat/tmp
+    - govuk-chat-node-modules:/govuk/govuk-chat/node_modules
+  working_dir: /govuk/govuk-chat
+
+services:
+  govuk-chat-lite:
+    <<: *govuk-chat
+    depends_on:
+      - postgres-13
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres-13/govuk-chat"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-13/govuk-chat-test"
+
+  govuk-chat-app:
+    <<: *govuk-chat
+    depends_on:
+      - nginx-proxy
+      - postgres-13
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres-13/govuk-chat"
+      VIRTUAL_HOST: govuk-chat.dev.gov.uk
+      BINDING: 0.0.0.0
+    expose:
+      - "3000"
+    command: bin/dev
