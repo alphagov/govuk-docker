@@ -41,6 +41,8 @@ services:
       VIRTUAL_HOST: imminence.dev.gov.uk
       BINDING: 0.0.0.0
       REDIS_URL: redis://redis
+      PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
+      PLEK_SERVICE_SEARCH_API_URI: https://www.gov.uk/api
     expose:
       - "3000"
     command: bin/rails s --restart
