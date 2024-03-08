@@ -22,8 +22,10 @@ services:
     <<: *search-api-v2
     depends_on:
       - rabbitmq
+      - redis
     environment:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
+      REDIS_URL: redis://redis
       PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: search_api_v2_published_documents
       DISCOVERY_ENGINE_DATASTORE_BRANCH: none
       DISCOVERY_ENGINE_SERVING_CONFIG: none
@@ -33,9 +35,11 @@ services:
     depends_on:
       - nginx-proxy
       - rabbitmq
+      - redis
       - search-api-v2-document-sync-worker
     environment:
       RABBITMQ_URL: "amqp://guest:guest@rabbitmq"
+      REDIS_URL: redis://redis
       PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: "search_api_v2_published_documents"
       RAILS_DEVELOPMENT_HOSTS: "search-api-v2.dev.gov.uk,search-api-v2-app"
       VIRTUAL_HOST: "search-api-v2.dev.gov.uk"
@@ -53,8 +57,10 @@ services:
     <<: *search-api-v2
     depends_on:
       - rabbitmq
+      - redis
     environment:
       RABBITMQ_URL: "amqp://guest:guest@rabbitmq"
+      REDIS_URL: redis://redis
       PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: "search_api_v2_published_documents"
       # The fully qualified ID of the datastore branch and serving config on the Discovery Engine
       # integration environment (required to use Discovery Engine locally).
