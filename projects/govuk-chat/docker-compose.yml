@@ -30,7 +30,6 @@ services:
   govuk-chat-app:
     <<: *govuk-chat
     depends_on:
-      - govuk-chat-worker
       - nginx-proxy
       - postgres-13
     environment:
@@ -41,13 +40,3 @@ services:
     expose:
       - "3000"
     command: bin/dev
-
-  govuk-chat-worker:
-    <<: *govuk-chat
-    depends_on:
-      - redis
-      - postgres-13
-    environment:
-      REDIS_URL: redis://redis
-      DATABASE_URL: "postgresql://postgres@postgres-13/govuk-chat"
-    command: bundle exec sidekiq -C ./config/sidekiq.yml
