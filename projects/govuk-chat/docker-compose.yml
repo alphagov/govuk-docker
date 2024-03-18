@@ -33,6 +33,7 @@ services:
       - govuk-chat-worker
       - nginx-proxy
       - postgres-13
+      - redis
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-13/govuk-chat"
       REDIS_URL: redis://redis
