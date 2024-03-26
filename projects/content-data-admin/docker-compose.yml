@@ -41,3 +41,19 @@ services:
       DATABASE_URL: "postgresql://postgres@postgres-13/content-data-admin"
       VIRTUAL_HOST: content-data-admin.dev.gov.uk
       BINDING: 0.0.0.0
+
+  content-data-admin-app-integration:
+    <<: *content-data-admin-app
+    depends_on:
+      - content-data-api-app
+      - nginx-proxy
+      - postgres-13
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres-13/content-data-admin"
+      VIRTUAL_HOST: content-data-admin.dev.gov.uk
+      #CONTENT_DATA_API_BEARER_TOKEN: <get a content-data-api token from https://signon.integration.publishing.service.gov.uk/api_users>
+      PLEK_SERVICE_CONTENT_DATA_API_URI: "https://content-data-api.integration.publishing.service.gov.uk"
+      BINDING: 0.0.0.0
+      #SITEIMPROVE_SITE_ID: <get a site id from Siteimprove Dashboard>
+      #SITEIMPROVE_API_CLIENT_USERNAME: <email address of Siteimprove API Key>
+      #SITEIMPROVE_API_CLIENT_PASSWORD: <password of Siteimprove API Key>
