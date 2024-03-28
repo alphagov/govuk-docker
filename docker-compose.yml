@@ -13,6 +13,7 @@ volumes:
   go:
   elasticsearch-6:
   elasticsearch-7:
+  opensearch-2:
 
 networks:
   default:
@@ -105,6 +106,16 @@ services:
       - ES_JAVA_OPTS=-Xms1g -Xmx1g
     volumes:
       - elasticsearch-7:/usr/share/elasticsearch/data
+
+  opensearch-2:
+    image: opensearchproject/opensearch:2
+    environment:
+      - discovery.type=single-node
+      - "OPENSEARCH_JAVA_OPTS=-Xms2g -Xmx2g"
+      - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
+      - "DISABLE_SECURITY_PLUGIN=true"
+    volumes:
+      - opensearch-2:/usr/share/opensearch/data
 
   nginx-proxy:
     image: jwilder/nginx-proxy:latest
