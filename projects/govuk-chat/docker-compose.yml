@@ -22,12 +22,14 @@ services:
   govuk-chat-lite:
     <<: *govuk-chat
     depends_on:
+      - opensearch-2
       - postgres-13
       - rabbitmq
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-13/govuk-chat"
       TEST_DATABASE_URL: "postgresql://postgres@postgres-13/govuk-chat-test"
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
+      OPENSEARCH_URL: http://opensearch-2:9200
 
   govuk-chat-app:
     <<: *govuk-chat
@@ -63,7 +65,9 @@ services:
   govuk-chat-queue-consumer:
     <<: *govuk-chat
     depends_on:
+      - opensearch-2
       - rabbitmq
     environment:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
+      OPENSEARCH_URL: http://opensearch-2:9200
     command: bin/dev queue_consumer
