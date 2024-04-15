@@ -54,6 +54,7 @@ services:
     depends_on:
       - postgres-13
       - redis
+      - rabbitmq
     environment:
       RABBITMQ_EXCHANGE: published_documents
       RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
