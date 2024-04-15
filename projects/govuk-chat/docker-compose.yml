@@ -66,8 +66,10 @@ services:
     <<: *govuk-chat
     depends_on:
       - opensearch-2
+      - postgres-13
       - rabbitmq
     environment:
+      DATABASE_URL: "postgresql://postgres@postgres-13/govuk-chat"
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
       OPENSEARCH_URL: http://opensearch-2:9200
     command: bin/dev queue_consumer
