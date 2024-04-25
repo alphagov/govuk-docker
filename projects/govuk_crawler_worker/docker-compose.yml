@@ -1,5 +1,3 @@
-version: '3.7'
-
 x-govuk_crawler_worker: &govuk_crawler_worker
   build:
     context: .

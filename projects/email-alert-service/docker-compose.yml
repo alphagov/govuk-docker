@@ -1,5 +1,3 @@
-version: '3.7'
-
 x-email-alert-service: &email-alert-service
   build:
     context: .

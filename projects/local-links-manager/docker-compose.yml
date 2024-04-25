@@ -1,5 +1,3 @@
-version: '3.7'
-
 volumes:
   local-links-manager-tmp:
   local-links-manager-node-modules:

@@ -1,5 +1,3 @@
-version: '3.7'
-
 x-search-api: &search-api
   build:
     context: .

@@ -1,5 +1,3 @@
-version: '3.7'
-
 volumes:
   contacts-admin-tmp:
   contacts-admin-node-modules:

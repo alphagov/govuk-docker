@@ -1,5 +1,3 @@
-version: '3.7'
-
 volumes:
   datagovuk_find-node-modules:
   datagovuk_find-tmp:

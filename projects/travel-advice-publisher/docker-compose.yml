@@ -1,5 +1,3 @@
-version: '3.7'
-
 volumes:
   travel-advice-publisher-tmp:
   travel-advice-publisher-node-modules:

@@ -1,5 +1,3 @@
-version: '3.7'
-
 volumes:
   specialist-publisher-tmp:
   specialist-publisher-node-modules:
