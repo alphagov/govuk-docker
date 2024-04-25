@@ -1,5 +1,3 @@
-version: '3.7'
-
 x-generic-ruby-library: &generic-ruby-library
   build:
     context: .

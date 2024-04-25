@@ -1,5 +1,3 @@
-version: '3.7'
-
 volumes:
   short-url-manager-tmp:
   short-url-manager-node-modules:

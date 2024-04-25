@@ -1,5 +1,3 @@
-version: '3.7'
-
 volumes:
   govuk-chat-tmp:
   govuk-chat-node-modules:

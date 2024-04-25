@@ -1,5 +1,3 @@
-version: '3.7'
-
 volumes:
   manuals-publisher-tmp:
   manuals-publisher-node-modules:

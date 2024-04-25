@@ -1,5 +1,3 @@
-version: '3.7'
-
 volumes:
   smart-answers-tmp:
   smart-answers-node-modules:

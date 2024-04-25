@@ -1,5 +1,3 @@
-version: '3.7'
-
 volumes:
   feedback-tmp:
   feedback-node-modules:

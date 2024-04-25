@@ -1,5 +1,3 @@
-version: '3.7'
-
 x-special-route-publisher: &special-route-publisher
   build:
     context: .

@@ -1,5 +1,3 @@
-version: '3.7'
-
 x-govuk-developer-docs: &govuk-developer-docs
   build:
     context: .

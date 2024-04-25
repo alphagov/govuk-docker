@@ -1,5 +1,3 @@
-version: '3.7'
-
 volumes:
   govuk_publishing_components-tmp:
   govuk_publishing_components-node-modules:

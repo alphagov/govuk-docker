@@ -1,5 +1,3 @@
-version: '3.7'
-
 volumes:
   search-admin-tmp:
   search-admin-node-modules:

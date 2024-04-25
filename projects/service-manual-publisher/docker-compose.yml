@@ -1,5 +1,3 @@
-version: '3.7'
-
 volumes:
   service-manual-publisher-tmp:
   service-manual-publisher-node-modules:

@@ -1,5 +1,3 @@
-version: '3.7'
-
 volumes:
   email-alert-frontend-tmp:
   email-alert-frontend-node-modules:
