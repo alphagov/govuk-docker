@@ -23,10 +23,12 @@ services:
       - opensearch-2
       - postgres-13
       - rabbitmq
+      - redis
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-13/govuk-chat"
       TEST_DATABASE_URL: "postgresql://postgres@postgres-13/govuk-chat-test"
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
+      REDIS_URL: redis://redis
       OPENSEARCH_URL: http://opensearch-2:9200
 
   govuk-chat-app:
