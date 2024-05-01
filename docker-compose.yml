@@ -6,6 +6,7 @@ volumes:
   postgres-13-email-alert-api:
   postgres-14:
   postgres-14-postgis:
+  postgres-16:
   mysql-8:
   mongo-3.6:
   go:
@@ -55,6 +56,13 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
       - postgres-14-postgis:/var/lib/postgresql/data
+
+  postgres-16:
+    image: postgres:16
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - postgres-16:/var/lib/postgresql/data
 
   memcached:
     image: memcached
