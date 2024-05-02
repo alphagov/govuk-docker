@@ -1,6 +1,3 @@
-api_version: 1
-auto_merge:
-  - dependency: rubocop-govuk
-    allowed_semver_bumps:
-      - patch
-      - minor
+api_version: 2
+defaults:
+  auto_merge: true
