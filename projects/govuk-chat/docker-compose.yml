@@ -55,11 +55,13 @@ services:
   govuk-chat-worker:
     <<: *govuk-chat
     depends_on:
+      - opensearch-2
       - redis
       - postgres-16
     environment:
       REDIS_URL: redis://redis
       DATABASE_URL: "postgresql://postgres@postgres-16/govuk-chat"
+      OPENSEARCH_URL: http://opensearch-2:9200
     command: bin/dev worker
 
   govuk-chat-queue-consumer:
