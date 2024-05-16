@@ -159,12 +159,12 @@ services:
           - govuk-developer-docs.dev.gov.uk
           - govuk-publishing-components.dev.gov.uk
           - hmrc-manuals-api.dev.gov.uk
-          - imminence.dev.gov.uk
           - link-checker-api.dev.gov.uk
           - local-links-manager.dev.gov.uk
           - locations-api.dev.gov.uk
           - manuals-publisher.dev.gov.uk
           - maslow.dev.gov.uk
+          - places-manager.dev.gov.uk
           - publisher.dev.gov.uk
           - publishing-api.dev.gov.uk
           - release.dev.gov.uk

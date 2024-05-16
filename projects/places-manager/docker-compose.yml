@@ -1,50 +1,50 @@
 volumes:
-  imminence-tmp:
+  places-manager-tmp:
 
-x-imminence: &imminence
+x-places-manager: &places-manager
   build:
     context: .
     dockerfile: Dockerfile.govuk-base
-  image: imminence
+  image: places-manager
   stdin_open: true
   tty: true
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
-    - imminence-tmp:/govuk/imminence/tmp
-  working_dir: /govuk/imminence
+    - places-manager-tmp:/govuk/places-manager/tmp
+  working_dir: /govuk/places-manager
 
 services:
-  imminence-lite:
-    <<: *imminence
+  places-manager-lite:
+    <<: *places-manager
     depends_on:
       - postgres-14-postgis
       - redis
     environment:
-      DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/imminence"
-      TEST_DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/imminence-test"
+      DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/places-manager"
+      TEST_DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/places-manager-test"
       REDIS_URL: redis://redis
 
-  imminence-app: &imminence-app
-    <<: *imminence
+  places-manager-app: &places-manager-app
+    <<: *places-manager
     depends_on:
       - postgres-14-postgis
       - local-links-manager-app
       - locations-api-app
       - nginx-proxy
       - redis
-      - imminence-worker
+      - places-manager-worker
     environment:
-      DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/imminence"
-      VIRTUAL_HOST: imminence.dev.gov.uk
+      DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/places-manager"
+      VIRTUAL_HOST: places-manager.dev.gov.uk
       BINDING: 0.0.0.0
       REDIS_URL: redis://redis
     expose:
       - "3000"
     command: bin/rails s --restart
 
-  imminence-worker:
-    <<: *imminence
+  places-manager-worker:
+    <<: *places-manager
     depends_on:
       - postgres-14-postgis
       - local-links-manager-app
@@ -52,6 +52,6 @@ services:
       - nginx-proxy
       - redis
     environment:
-      DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/imminence"
+      DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/places-manager"
       REDIS_URL: redis://redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
