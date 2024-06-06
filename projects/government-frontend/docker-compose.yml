@@ -19,6 +19,7 @@ x-government-frontend: &government-frontend
 services:
   government-frontend-lite:
     <<: *government-frontend
+    shm_size: 512mb
 
   government-frontend-app: &government-frontend-app
     <<: *government-frontend
