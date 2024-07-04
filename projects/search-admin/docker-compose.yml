@@ -14,6 +14,9 @@ x-search-admin: &search-admin-base
     - root-home:/root
     - search-admin-tmp:/govuk/search-admin/tmp
     - search-admin-node-modules:/govuk/search-admin/node_modules
+    # Mount the host's gcloud config directory into the container so that the app can use
+    # Application Default Credentials (required to use Discovery Engine locally)
+    - "~/.config/gcloud:/root/.config/gcloud:delegated"
   working_dir: /govuk/search-admin
 
 services:
@@ -25,6 +28,8 @@ services:
       DATABASE_URL: "mysql2://root:root@mysql-8/search_admin_development"
       TEST_DATABASE_URL: "mysql2://root:root@mysql-8/search_admin_test"
       REDIS_URL: redis://redis
+      DISCOVERY_ENGINE_ENGINE: none
+      DISCOVERY_ENGINE_SERVING_CONFIG: none
 
   search-admin-app: &search-admin-app
     <<: *search-admin-base
@@ -39,6 +44,8 @@ services:
       VIRTUAL_HOST: search-admin.dev.gov.uk
       BINDING: 0.0.0.0
       PORT: 3000
+      DISCOVERY_ENGINE_ENGINE: projects/search-api-v2-integration/locations/global/collections/default_collection/engines/govuk
+      DISCOVERY_ENGINE_SERVING_CONFIG: projects/search-api-v2-integration/locations/global/collections/default_collection/engines/govuk/servingConfigs/default_search
     expose:
       - "3000"
     command: bin/dev
