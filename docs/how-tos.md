@@ -36,7 +36,7 @@ gem "govuk_publishing_components", path: "../govuk_publishing_components"
 
 ## How to: replicate data locally
 
-There may be times when a full database is required locally.  The following scripts in the `bin` directory allow replicating data from integration:
+There may be times when a full database is required locally.  The following scripts in the `bin` directory allow replicating data from staging:
 
 - `replicate-elasticsearch.sh`
 - `replicate-mongodb.sh APP-NAME`
@@ -46,11 +46,7 @@ There may be times when a full database is required locally.  The following scri
 You will need to assume-role into AWS using the [gds-cli](https://docs.publishing.service.gov.uk/manual/access-aws-console.html) before running the scripts. For example, to replicate data for Content Publisher, run:
 
 ```
-# as an AWS PowerUser...
-gds aws govuk-integration-poweruser --assume-role-ttl 180m ./bin/replicate-postgresql.sh content-publisher
-
-# as an AWS User...
-gds aws govuk-integration-readonly --assume-role-ttl 180m ./bin/replicate-postgresql.sh content-publisher
+gds aws govuk-staging-readonly --assume-role-ttl 180m ./bin/replicate-postgresql.sh content-publisher
 ```
 
 All the scripts, other than `replicate-elasticsearch.sh`, take the name of the app to replicate data for.

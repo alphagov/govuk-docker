@@ -33,7 +33,7 @@ case "$app" in
     ;;
 esac
 
-folder="govuk-integration-database-backups/$instance"
+folder="govuk-staging-database-backups/$instance"
 
 archive_dir="${replication_dir}/mongodb"
 archive_file="${database}.gz"
