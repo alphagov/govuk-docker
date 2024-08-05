@@ -46,7 +46,7 @@ services:
       BINDING: 0.0.0.0
     expose:
       - "3000"
-    command: bin/rails s --restart
+    command: bin/dev
 
   collections-publisher-worker:
     <<: *collections-publisher
