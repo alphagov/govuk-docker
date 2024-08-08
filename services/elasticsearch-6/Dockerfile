@@ -10,13 +10,9 @@ FROM eclipse-temurin:8-jre
 
 ARG ELASTICSEARCH_VERSION=6.7.2
 
-ARG USERNAME=elastic
-ARG USER_UID=1000
-ARG USER_GID=${USER_UID}
-
-# Set up unprivileged local user
-RUN groupadd --gid ${USER_GID} ${USERNAME} \
-    && useradd --uid ${USER_UID} --gid ${USER_GID} -m ${USERNAME}
+# As of Ubuntu 24.04, the official Docker image (which the Eclipse Temurin one is based on) ships
+# with an existing non-root user called "ubuntu"
+ARG USERNAME=ubuntu
 
 # Install required tooling
 RUN apt update && apt install -y curl
