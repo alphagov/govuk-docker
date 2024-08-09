@@ -9,6 +9,10 @@ function try_find_file {
       # Bouncer and Transition share a database with a non-standard hostname (ending with "postgresql" not "postgres")
       db_hostname="transition-postgresql"
       ;;
+    "govuk-chat")
+      # We drop the govuk- prefix from the product name on our infrastructure.
+      db_hostname="chat-postgres"
+      ;;
     "content-data-api")
       # Content Data API has a non-standard hostname (ending with "postgresql" not "postgres")
       db_hostname="content-data-api-postgresql"
