@@ -97,3 +97,7 @@ GOV.UK Docker should respect the following environment variables:
 ## How to: enable production JSON logs in development
 
 - Set `GOVUK_RAILS_JSON_LOGGING` to `"true"` in `docker-compose.yml` for the application you would like to enable the logs' behaviour for.
+
+## How to: publish a finder and specialist documents to test finders end-to-end locally
+
+See [How to Publish Content to a Finder in GOV.UK Docker](./how-tos/finder-setup.md)
