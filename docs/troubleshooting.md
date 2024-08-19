@@ -205,3 +205,19 @@ This may resolve by removing orphan containers which were created in a previous 
 ```
 docker-compose down -v --rmi all --remove-orphans
 ```
+
+
+## Rails database schema changed unexpectedly when running `rake db:migrate`
+
+It is common to find that running `rake db:migrate` results in unexpected changes to the `schema.rb` file. This is caused by slight differences between databases running in GOV.UK Docker and the production databases on AWS.
+
+Unfortunately, to resolve the issue, the only solution is to drop the database in GOV.UK docker and create a new one.
+
+Once you have taken a backup, you can remove and re-create your local database using the following commands:
+
+```bash
+rake db:drop
+rake db:create
+rake db:schema:load
+rake db:schema:migrate // optional, but if you are adding a new migration this will now update the schema without creating a horrible diff
+```
