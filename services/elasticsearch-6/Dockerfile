@@ -11,7 +11,7 @@ FROM eclipse-temurin:8-jre
 ARG ELASTICSEARCH_VERSION=6.7.2
 
 ARG USERNAME=elastic
-ARG USER_UID=1000
+ARG USER_UID=1234
 ARG USER_GID=${USER_UID}
 
 # Set up unprivileged local user
