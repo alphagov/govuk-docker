@@ -37,6 +37,7 @@ services:
       - publishing-api-app
       - link-checker-api-app
       - publisher-worker
+      - publisher-css
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/publisher"
       REDIS_URL: redis://redis
@@ -44,7 +45,11 @@ services:
       BINDING: 0.0.0.0
     expose:
       - "3000"
-    command: bin/rails s --restart
+    command: bin/dev web
+
+  publisher-css:
+    <<: *publisher
+    command: bin/dev css
 
   publisher-worker:
     <<: *publisher
@@ -56,4 +61,4 @@ services:
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/publisher"
       REDIS_URL: redis://redis
-    command: bundle exec sidekiq -C ./config/sidekiq.yml
+    command: bin/dev worker
