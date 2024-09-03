@@ -35,3 +35,23 @@ services:
     expose:
       - "3000"
     command: bin/rails s --restart
+
+  smart-answers-app-live:
+    <<: *smart-answers
+    depends_on:
+      - nginx-proxy
+      - publishing-api-app
+      - static-app
+      - content-store-app
+      - whitehall-app
+    environment:
+      GOVUK_PROXY_STATIC_ENABLED: "true"
+      VIRTUAL_HOST: smart-answers.dev.gov.uk
+      GOVUK_APP_DOMAIN: www.gov.uk
+      GOVUK_WEBSITE_ROOT: https://www.gov.uk
+      PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
+      PLEK_SERVICE_STATIC_URI: https://assets.publishing.service.gov.uk
+      BINDING: 0.0.0.0
+    expose:
+      - "3000"
+    command: bin/rails s --restart
