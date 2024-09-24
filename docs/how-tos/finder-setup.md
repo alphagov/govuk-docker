@@ -7,7 +7,7 @@ This has been tested predominantly using Specialist Publisher, but other publish
 
 1. Start your publishing app of choice, e.g. `govuk-docker up specialist-publisher-app`
 2. Start the finder-frontend app: `govuk-docker up finder-frontend-app`
-3. Create a router backend for finder frontend: 
+3. Create a router backend for finder frontend:
     ```bash
     curl http://router-api.dev.gov.uk/backends/finder-frontend -X PUT \
    -H 'Content-type: application/json' \
@@ -19,23 +19,23 @@ This has been tested predominantly using Specialist Publisher, but other publish
    -H 'Content-type: application/json' \
    -d '{"backend": {"backend_url": "http://search-api.dev.gov.uk/"}}'
     ```
-5. Create a router backend for frontend (this is needed to serve the root taxon created in step 8): 
+5. Create a router backend for frontend (this is needed to serve the root taxon created in step 8):
     ```bash
     curl http://router-api.dev.gov.uk/backends/frontend -X PUT \
       -H 'Content-type: application/json' \
       -d '{"backend": {"backend_url": "http://frontend.dev.gov.uk/"}}'
     ```
-6. Create a router backend for collections (this is needed to serve the test taxon created in step 9): 
+6. Create a router backend for collections (this is needed to serve the test taxon created in step 9):
     ```bash
     curl http://router-api.dev.gov.uk/backends/collections -X PUT \
       -H 'Content-type: application/json' \
       -d '{"backend": {"backend_url": "http://collections.dev.gov.uk/"}}'
     ```
-7. Publish special routes by running `govuk-docker run special-route-publisher-lite bundle exec rake publish_special_routes`.
+7. Publish special routes by running `govuk-docker run publishing-api-lite bundle exec rake publish_special_routes`.
 8. Publish Search API's routes by
    running `govuk-docker exec search-api-app bundle exec rake publishing_api:publish_special_routes`.
-9. Publish the root taxon for GOV.UK: `govuk-docker run special-route-publisher-lite rake publish_homepage`
-10. Publish a test taxon: 
+9. Publish the root taxon for GOV.UK: `govuk-docker run publishing-api-lite rake publish_homepage`
+10. Publish a test taxon:
     ```bash
     govuk-docker run whitehall-lite rails taxonomy:populate_end_to_end_test_data
     govuk-docker run whitehall-lite rails taxonomy:rebuild_cache
