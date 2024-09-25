@@ -23,7 +23,7 @@ work with locally. The instructions below assume that you have "made" all of the
    -H 'Content-type: application/json' \
    -d '{"backend": {"backend_url": "http://collections.dev.gov.uk/"}}'
    ```
-7. Publish the homepage and root taxon for GOV.UK: `govuk-docker run special-route-publisher-lite rake publish_homepage`
+7. Publish the homepage and root taxon for GOV.UK: `govuk-docker run publishing-api rake publish_homepage`
 8. Publish a test taxon so that we can tag Whitehall content with it:
 
    ```bash

@@ -62,7 +62,6 @@ These are repos that can be started as a some kind of process, such as a web app
    - ❌ sidekiq-monitoring
    - ✅ signon
    - ✅ smart-answers
-   - ✅ special-route-publisher
    - ✅ specialist-publisher
    - ✅ static
    - ✅ support
