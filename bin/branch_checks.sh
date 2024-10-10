@@ -7,6 +7,11 @@ if [[ "$#" == "0" ]]; then
   exit 1
 fi
 
+if [[ -n "${SKIP_BRANCH_CHECKS:-}" ]]; then
+  echo "SKIP_BRANCH_CHECKS set, skipping branch checks."
+  exit 0
+fi
+
 bold=$(tput bold)
 end_bold=$(tput sgr0)
 ul=$(tput smul)
