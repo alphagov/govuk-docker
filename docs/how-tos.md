@@ -101,3 +101,12 @@ GOV.UK Docker should respect the following environment variables:
 ## How to: publish a finder and specialist documents to test finders end-to-end locally
 
 See [How to Publish Content to a Finder in GOV.UK Docker](./how-tos/finder-setup.md)
+
+## How to: Re-run `make` without branch checks
+
+If you have already run `make` for a project recently, and just want to re-run it without it
+checking for updates to all dependent repositories (for example if you do not have a stable internet
+connection), you can set the `SKIP_BRANCH_CHECKS` environment variable:
+```bash
+SKIP_BRANCH_CHECKS=1 make my-app
+```
