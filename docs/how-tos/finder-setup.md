@@ -31,28 +31,28 @@ This has been tested predominantly using Specialist Publisher, but other publish
       -H 'Content-type: application/json' \
       -d '{"backend": {"backend_url": "http://collections.dev.gov.uk/"}}'
     ```
-7. Publish special routes by running `govuk-docker run publishing-api-lite bundle exec rake publish_special_routes`.
+7. Publish special routes by running `govuk-docker run publishing-api-lite bundle exec rake special_routes:publish`.
 8. Publish Search API's routes by
    running `govuk-docker exec search-api-app bundle exec rake publishing_api:publish_special_routes`.
-9. Publish the root taxon for GOV.UK: `govuk-docker run publishing-api-lite rake publish_homepage`
+9. Publish the root taxon for GOV.UK: `govuk-docker run publishing-api-lite rake special_routes:publish_homepage`
 10. Publish a test taxon:
     ```bash
     govuk-docker run whitehall-lite rails taxonomy:populate_end_to_end_test_data
     govuk-docker run whitehall-lite rails taxonomy:rebuild_cache
     ```
-11. Publish your specialist finder or general finder page.
-     * For a specialist
-       finder: `govuk-docker exec specialist-publisher-app bundle exec rails publishing_api:publish_finder\[finder_name\]`
-     * For a general finder, e.g. the all content
-       finder: `govuk-docker exec search-api-app env FINDER_CONFIG=all_content_finder.yml bundle exec rake publishing_api:publish_finder`
-12. Create the search
+11. Create the search
     indices: `govuk-docker exec search-api-app env SEARCH_INDEX=all bundle exec rake search:create_all_indices`
-13. Create the publishing api RabbitMQ exchange so that Search API can listen for new content to
+12. Create the publishing api RabbitMQ exchange so that Search API can listen for new content to
     index: `govuk-docker exec publishing-api-app bundle exec rake setup_exchange`
-14. Create the search API message
+13. Create the search API message
     queues: `govuk-docker exec search-api-worker bundle exec rake message_queue:create_queues`
-15. Run `govuk-docker exec search-api-worker bundle exec rake message_queue:insert_data_into_govuk` to listen for
+14. Run `govuk-docker exec search-api-worker bundle exec rake message_queue:insert_data_into_govuk` to listen for
     messages. This is a long-running process, so you may want to start it in the background.
+15. Publish your specialist finder or general finder page.
+    * For a specialist
+      finder: `govuk-docker exec specialist-publisher-app bundle exec rails publishing_api:publish_finder\[finder_name\]`
+    * For a general finder, e.g. the all content
+      finder: `govuk-docker exec search-api-app env FINDER_CONFIG=all_content_finder.yml bundle exec rake publishing_api:publish_finder`
 16. Publish a document. It should show up in the search results.
 
 
