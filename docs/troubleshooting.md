@@ -75,6 +75,10 @@ git pull
 
 ## Diagnose issues with `dev.gov.uk` domains not resolving
 
+* Check if domain runs on HTTP
+
+Chrome browser redirects the domain to HTTPS, which doesn't load the page. You can disable this setting on your browser, test the domain on a private window or use another browser.
+
 * Check if `dev.gov.uk` works end-to-end
 
 ```
