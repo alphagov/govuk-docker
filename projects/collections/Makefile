@@ -1,2 +1,2 @@
-collections: bundle-collections content-store router static
+collections: bundle-collections content-store publishing-api router static
 	$(GOVUK_DOCKER) run $@-lite yarn
