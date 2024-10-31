@@ -27,6 +27,7 @@ services:
       - nginx-proxy
     environment:
       ASSET_HOST: static.dev.gov.uk
+      EMERGENCY_BANNER_REDIS_URL: redis://redis
       REDIS_URL: redis://redis
       VIRTUAL_HOST: static.dev.gov.uk
       BINDING: 0.0.0.0
