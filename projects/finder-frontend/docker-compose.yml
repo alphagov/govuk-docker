@@ -43,6 +43,7 @@ services:
       VIRTUAL_HOST: finder-frontend.dev.gov.uk
       BINDING: 0.0.0.0
       MEMCACHE_SERVERS: memcached
+      SEARCH_AUTOCOMPLETE_API_URL: http://search-api-v2.dev.gov.uk/autocomplete.json
     expose:
       - "3000"
     command: bin/rails s --restart
@@ -59,6 +60,7 @@ services:
       GOVUK_PROXY_STATIC_ENABLED: "true"
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       PLEK_SERVICE_STATIC_URI: https://assets.publishing.service.gov.uk
+      SEARCH_AUTOCOMPLETE_API_URL: https://search.publishing.service.gov.uk/v0_1/autocomplete.json
       VIRTUAL_HOST: finder-frontend.dev.gov.uk
       BINDING: 0.0.0.0
 
@@ -74,5 +76,6 @@ services:
       GOVUK_PROXY_STATIC_ENABLED: "true"
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.integration.publishing.service.gov.uk/api
       PLEK_SERVICE_STATIC_URI: https://assets.integration.publishing.service.gov.uk
+      SEARCH_AUTOCOMPLETE_API_URL: https://search.integration.publishing.service.gov.uk/v0_1/autocomplete.json
       VIRTUAL_HOST: finder-frontend.dev.gov.uk
       BINDING: 0.0.0.0

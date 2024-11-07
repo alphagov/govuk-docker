@@ -29,6 +29,7 @@ services:
       ASSET_HOST: static.dev.gov.uk
       EMERGENCY_BANNER_REDIS_URL: redis://redis
       REDIS_URL: redis://redis
+      SEARCH_AUTOCOMPLETE_API_URL: https://search.publishing.service.gov.uk/v0_1/autocomplete.json
       VIRTUAL_HOST: static.dev.gov.uk
       BINDING: 0.0.0.0
     expose:

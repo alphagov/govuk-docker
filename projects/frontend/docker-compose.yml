@@ -27,8 +27,10 @@ services:
       - content-store-app
       - nginx-proxy
       - router-app
+      - search-api-v2-app
       - static-app
     environment:
+      SEARCH_AUTOCOMPLETE_API_URL: https://search.publishing.service.gov.uk/v0_1/autocomplete.json
       VIRTUAL_HOST: frontend.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
@@ -45,6 +47,7 @@ services:
       GOVUK_PROXY_STATIC_ENABLED: "true"
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       PLEK_SERVICE_STATIC_URI: https://assets.publishing.service.gov.uk
+      SEARCH_AUTOCOMPLETE_API_URL: https://search.publishing.service.gov.uk/v0_1/autocomplete.json
       VIRTUAL_HOST: frontend.dev.gov.uk
       BINDING: 0.0.0.0
 
@@ -60,5 +63,6 @@ services:
       PLEK_SERVICE_ASSET_MANAGER_URI: https://assets-origin.eks.integration.govuk.digital
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.integration.publishing.service.gov.uk/api
       PLEK_SERVICE_STATIC_URI: https://assets-origin.eks.integration.govuk.digital
+      SEARCH_AUTOCOMPLETE_API_URL: https://search.integration.publishing.service.gov.uk/v0_1/autocomplete.json
       VIRTUAL_HOST: frontend.dev.gov.uk
       BINDING: 0.0.0.0
