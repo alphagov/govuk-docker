@@ -22,18 +22,18 @@ services:
     shm_size: 512mb
     depends_on:
       - mysql-8
-      - redis
+      - collections-publisher-redis
     environment:
       DATABASE_URL: "mysql2://root:root@mysql-8/collections_publisher_development"
       TEST_DATABASE_URL: "mysql2://root:root@mysql-8/collections_publisher_test"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://collections-publisher-redis
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
 
   collections-publisher-app: &collections-publisher-app
     <<: *collections-publisher
     depends_on:
       - mysql-8
-      - redis
+      - collections-publisher-redis
       - content-store-app
       - link-checker-api-app
       - nginx-proxy
@@ -41,7 +41,7 @@ services:
       - collections-publisher-worker
     environment:
       DATABASE_URL: "mysql2://root:root@mysql-8/collections_publisher_development"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://collections-publisher-redis
       VIRTUAL_HOST: collections-publisher.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
@@ -51,10 +51,13 @@ services:
   collections-publisher-worker:
     <<: *collections-publisher
     depends_on:
-      - redis
+      - collections-publisher-redis
       - mysql-8
       - publishing-api-app
     environment:
       DATABASE_URL: "mysql2://root:root@mysql-8/collections_publisher_development"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://collections-publisher-redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
+
+  collections-publisher-redis:
+    image: redis

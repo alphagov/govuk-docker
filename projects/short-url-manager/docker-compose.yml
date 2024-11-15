@@ -21,25 +21,28 @@ services:
     <<: *short-url-manager
     shm_size: 512mb
     depends_on:
-      - redis
-      - mongo-3.6
+      - short-url-manager-redis
+      - mongo-3
     environment:
-      MONGODB_URI: "mongodb://mongo-3.6/short-url-manager"
-      TEST_MONGODB_URI: "mongodb://mongo-3.6/short-url-manager-test"
-      REDIS_URL: redis://redis
+      MONGODB_URI: "mongodb://mongo-3/short-url-manager"
+      TEST_MONGODB_URI: "mongodb://mongo-3/short-url-manager-test"
+      REDIS_URL: redis://short-url-manager-redis
 
   short-url-manager-app: &short-url-manager-app
     <<: *short-url-manager
     depends_on:
-      - redis
-      - mongo-3.6
+      - short-url-manager-redis
+      - mongo-3
       - nginx-proxy
       - publishing-api-app
     environment:
-      MONGODB_URI: "mongodb://mongo-3.6/short-url-manager"
-      REDIS_URL: redis://redis
+      MONGODB_URI: "mongodb://mongo-3/short-url-manager"
+      REDIS_URL: redis://short-url-manager-redis
       VIRTUAL_HOST: short-url-manager.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
       - "3000"
     command: bin/rails s --restart
+
+  short-url-manager-redis:
+    image: redis

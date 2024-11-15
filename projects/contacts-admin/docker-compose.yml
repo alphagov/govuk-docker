@@ -22,17 +22,17 @@ services:
     shm_size: 512mb
     depends_on:
       - mysql-8
-      - redis
+      - contacts-admin-redis
     environment:
       DATABASE_URL: "mysql2://root:root@mysql-8/contacts_development"
       TEST_DATABASE_URL: "mysql2://root:root@mysql-8/contacts_test"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://contacts-admin-redis
 
   contacts-admin-app: &contacts-admin-app
     <<: *contacts-admin
     depends_on:
       - mysql-8
-      - redis
+      - contacts-admin-redis
       - publishing-api-app
       - nginx-proxy
       - content-store-app
@@ -40,9 +40,12 @@ services:
     environment:
       DATABASE_URL: "mysql2://root:root@mysql-8/contacts_development"
       TEST_DATABASE_URL: "mysql2://root:root@mysql-8/contacts_test"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://contacts-admin-redis
       VIRTUAL_HOST: contacts-admin.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
       - "3000"
     command: bin/rails s --restart
+
+  contacts-admin-redis:
+    image: redis

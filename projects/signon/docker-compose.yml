@@ -22,24 +22,24 @@ services:
     shm_size: 512mb
     depends_on:
       - mysql-8
-      - redis
+      - signon-redis
     environment:
       DATABASE_URL: "mysql2://root:root@mysql-8/signon_development"
       TEST_DATABASE_URL: "mysql2://root:root@mysql-8/signon_test"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://signon-redis
 
   signon-app:
     <<: *signon
     depends_on:
       - mysql-8
       - nginx-proxy
-      - redis
+      - signon-redis
       - signon-worker
     environment:
       DATABASE_URL: "mysql2://root:root@mysql-8/signon_development"
       VIRTUAL_HOST: signon.dev.gov.uk
       BINDING: 0.0.0.0
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://signon-redis
     expose:
       - "3000"
     command: ./bin/dev
@@ -48,9 +48,12 @@ services:
     <<: *signon
     depends_on:
       - mysql-8
-      - redis
+      - signon-redis
       - nginx-proxy
     environment:
       DATABASE_URL: "mysql2://root:root@mysql-8/signon_development"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://signon-redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
+
+  signon-redis:
+    image: redis

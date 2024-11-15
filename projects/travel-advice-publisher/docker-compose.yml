@@ -22,24 +22,24 @@ services:
     shm_size: 512mb
     depends_on:
       - mongo-3.6
-      - redis
+      - travel-advice-publisher-redis
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/travel-advice-publisher"
       TEST_MONGODB_URI: "mongodb://mongo-3.6/travel-advice-publisher-test"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://travel-advice-publisher-redis
 
   travel-advice-publisher-app: &travel-advice-publisher-app
     <<: *travel-advice-publisher
     depends_on:
       - mongo-3.6
-      - redis
+      - travel-advice-publisher-redis
       - publishing-api-app
       - asset-manager-app
       - content-store-app
       - nginx-proxy
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/travel-advice-publisher"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://travel-advice-publisher-redis
       VIRTUAL_HOST: travel-advice-publisher.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
@@ -50,9 +50,12 @@ services:
     <<: *travel-advice-publisher
     depends_on:
       - mongo-3.6
-      - redis
+      - travel-advice-publisher-redis
       - publishing-api-app
       - asset-manager-app
     environment:
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://travel-advice-publisher-redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
+
+  travel-advice-publisher-redis:
+    image: redis

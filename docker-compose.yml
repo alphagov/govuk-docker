@@ -84,9 +84,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
 
-  redis:
-    image: redis
-
   rabbitmq:
     image: rabbitmq:management
     ports:

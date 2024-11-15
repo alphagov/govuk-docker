@@ -19,12 +19,12 @@ services:
     <<: *link-checker-api
     depends_on:
       - postgres-13
-      - redis
+      - link-checker-api-redis
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-13/link-checker-api"
       TEST_DATABASE_URL: "postgresql://postgres@postgres-13/link-checker-api-test"
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://link-checker-api-redis
 
   link-checker-api-app: &link-checker-api-app
     <<: *link-checker-api
@@ -32,10 +32,10 @@ services:
       - link-checker-api-worker
       - nginx-proxy
       - postgres-13
-      - redis
+      - link-checker-api-redis
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-13/link-checker-api"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://link-checker-api-redis
       VIRTUAL_HOST: link-checker-api.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
@@ -46,9 +46,12 @@ services:
     <<: *link-checker-api
     depends_on:
       - postgres-13
-      - redis
+      - link-checker-api-redis
       - nginx-proxy
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-13/link-checker-api"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://link-checker-api-redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
+
+  link-checker-api-redis:
+    image: redis
