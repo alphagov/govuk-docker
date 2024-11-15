@@ -25,7 +25,7 @@ services:
     shm_size: 512mb
     depends_on:
       - mysql-8
-      - redis
+      - whitehall-redis
     environment:
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
       GOVUK_ASSET_ROOT: "http://asset-manager.dev.gov.uk"
@@ -37,7 +37,7 @@ services:
     <<: *whitehall
     depends_on:
       - mysql-8
-      - redis
+      - whitehall-redis
       - nginx-proxy
       - asset-manager-app
       - publishing-api-app
@@ -58,7 +58,7 @@ services:
     <<: *whitehall
     depends_on:
       - mysql-8
-      - redis
+      - whitehall-redis
       - nginx-proxy
       - asset-manager-app
       - publishing-api-app

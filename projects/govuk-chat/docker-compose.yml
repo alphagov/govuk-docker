@@ -23,12 +23,12 @@ services:
       - opensearch-2
       - postgres-16
       - rabbitmq
-      - redis
+      - govuk-chat-redis
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-16/govuk-chat"
       TEST_DATABASE_URL: "postgresql://postgres@postgres-16/govuk-chat-test"
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://govuk-chat-redis
       OPENSEARCH_URL: http://opensearch-2:9200
 
   govuk-chat-app:
@@ -38,10 +38,10 @@ services:
       - govuk-chat-worker
       - nginx-proxy
       - postgres-16
-      - redis
+      - govuk-chat-redis
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-16/govuk-chat"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://govuk-chat-redis
       OPENSEARCH_URL: http://opensearch-2:9200
       VIRTUAL_HOST: govuk-chat.dev.gov.uk
       BINDING: 0.0.0.0
@@ -57,10 +57,10 @@ services:
     <<: *govuk-chat
     depends_on:
       - opensearch-2
-      - redis
+      - govuk-chat-redis
       - postgres-16
     environment:
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://govuk-chat-redis
       DATABASE_URL: "postgresql://postgres@postgres-16/govuk-chat"
       OPENSEARCH_URL: http://opensearch-2:9200
     command: bin/dev worker
@@ -76,3 +76,6 @@ services:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
       OPENSEARCH_URL: http://opensearch-2:9200
     command: bin/dev queue_consumer
+
+  govuk-chat-redis:
+    image: redis

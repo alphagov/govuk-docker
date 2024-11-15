@@ -33,12 +33,15 @@ services:
       - postgres-13
       - publishing-api-app
       - nginx-proxy
-      - redis
+      - content-tagger-redis
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-13/content-tagger"
       VIRTUAL_HOST: content-tagger.dev.gov.uk
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://content-tagger-redis
       BINDING: 0.0.0.0
     expose:
       - "3000"
     command: bin/dev
+
+  content-tagger-redis:
+    image: redis

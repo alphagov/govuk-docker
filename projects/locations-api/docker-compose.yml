@@ -19,10 +19,10 @@ services:
     <<: *locations-api
     depends_on:
       - postgres-13
-      - redis
+      - locations-api-redis
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-13/locations-api"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://locations-api-redis
       TEST_DATABASE_URL: "postgresql://postgres@postgres-13/locations-api-test"
 
   locations-api-app: &locations-api-app
@@ -30,10 +30,10 @@ services:
     depends_on:
       - nginx-proxy
       - postgres-13
-      - redis
+      - locations-api-redis
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-13/locations-api"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://locations-api-redis
       VIRTUAL_HOST: locations-api.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
@@ -44,8 +44,11 @@ services:
     <<: *locations-api
     depends_on:
       - postgres-13
-      - redis
+      - locations-api-redis
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-13/locations-api"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://locations-api-redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
+
+  locations-api-redis:
+    image: redis

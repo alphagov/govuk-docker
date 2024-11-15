@@ -20,20 +20,23 @@ services:
   support-lite:
     <<: *support
     depends_on:
-      - redis
+      - support-redis
     environment:
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://support-redis
 
   support-app: &support-app
     <<: *support
     depends_on:
-      - redis
+      - support-redis
       - nginx-proxy
       - support-api-app
     environment:
       VIRTUAL_HOST: support.dev.gov.uk
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://support-redis
       BINDING: 0.0.0.0
     expose:
       - "3000"
     command: ./bin/dev
+
+  support-redis:
+    image: redis

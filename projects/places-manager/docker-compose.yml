@@ -19,11 +19,11 @@ services:
     <<: *places-manager
     depends_on:
       - postgres-14-postgis
-      - redis
+      - places-manager-redis
     environment:
       DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/places-manager"
       TEST_DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/places-manager-test"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://places-manager-redis
 
   places-manager-app: &places-manager-app
     <<: *places-manager
@@ -32,13 +32,13 @@ services:
       - local-links-manager-app
       - locations-api-app
       - nginx-proxy
-      - redis
+      - places-manager-redis
       - places-manager-worker
     environment:
       DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/places-manager"
       VIRTUAL_HOST: places-manager.dev.gov.uk
       BINDING: 0.0.0.0
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://places-manager-redis
     expose:
       - "3000"
     command: bin/rails s --restart
@@ -50,8 +50,11 @@ services:
       - local-links-manager-app
       - locations-api-app
       - nginx-proxy
-      - redis
+      - places-manager-redis
     environment:
       DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/places-manager"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://places-manager-redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
+
+  places-manager-redis:
+    image: redis

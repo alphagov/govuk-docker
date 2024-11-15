@@ -18,7 +18,9 @@ RSpec.describe "Expected volumes" do
   end
 
   rails_projects.each do |project_name|
-    ComposeHelper.services(project_name).each_pair do |service_name, service|
+    ComposeHelper.services(project_name)
+                 .reject { |service_name| service_name.end_with? "redis" }
+                 .each_pair do |service_name, service|
       it "configures #{service_name} with a govuk delegated volume" do
         expect(service.fetch("volumes", []))
           .to include("${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated")
@@ -36,7 +38,9 @@ RSpec.describe "Expected volumes" do
   end
 
   node_projects.each do |project_name|
-    ComposeHelper.services(project_name).each_pair do |service_name, service|
+    ComposeHelper.services(project_name)
+                 .reject { |service_name| service_name.end_with? "redis" }
+                 .each_pair do |service_name, service|
       it "configures #{service_name} with a node modules volume" do
         expect(service.fetch("volumes", []))
           .to include("#{project_name}-node-modules:/govuk/#{project_name}/node_modules")
