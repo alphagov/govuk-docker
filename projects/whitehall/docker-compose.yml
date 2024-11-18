@@ -25,19 +25,19 @@ services:
     shm_size: 512mb
     depends_on:
       - mysql-8
-      - redis
+      - whitehall-redis
     environment:
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
       GOVUK_ASSET_ROOT: "http://asset-manager.dev.gov.uk"
       DATABASE_URL: "mysql2://root:root@mysql-8/whitehall_development"
       TEST_DATABASE_URL: "mysql2://root:root@mysql-8/whitehall_test"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://whitehall-redis
 
   whitehall-app: &whitehall-app
     <<: *whitehall
     depends_on:
       - mysql-8
-      - redis
+      - whitehall-redis
       - nginx-proxy
       - asset-manager-app
       - publishing-api-app
@@ -46,7 +46,7 @@ services:
       GOVUK_PROXY_STATIC_ENABLED: "true"
       GOVUK_ASSET_ROOT: "http://asset-manager.dev.gov.uk"
       DATABASE_URL: "mysql2://root:root@mysql-8/whitehall_development"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://whitehall-redis
       VIRTUAL_HOST: whitehall-admin.dev.gov.uk, whitehall-frontend.dev.gov.uk
       BINDING: 0.0.0.0
       DISABLE_ASSETS_DEBUG:
@@ -58,11 +58,14 @@ services:
     <<: *whitehall
     depends_on:
       - mysql-8
-      - redis
+      - whitehall-redis
       - nginx-proxy
       - asset-manager-app
       - publishing-api-app
     environment:
       DATABASE_URL: "mysql2://root:root@mysql-8/whitehall_development"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://whitehall-redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
+
+  whitehall-redis:
+    image: redis

@@ -21,24 +21,27 @@ services:
     <<: *release
     depends_on:
       - mysql-8
-      - redis
+      - release-redis
     environment:
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
       DATABASE_URL: "mysql2://root:root@mysql-8/release_development"
       TEST_DATABASE_URL: "mysql2://root:root@mysql-8/release_test"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://release-redi
 
   release-app:
     <<: *release
     depends_on:
       - mysql-8
       - nginx-proxy
-      - redis
+      - release-redis
     environment:
       DATABASE_URL: "mysql2://root:root@mysql-8/release_development"
       BINDING: 0.0.0.0
       VIRTUAL_HOST: release.dev.gov.uk
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://release-redi
     expose:
       - "3000"
     command: ./bin/dev
+
+  release-redis:
+    image: redis

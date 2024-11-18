@@ -102,6 +102,9 @@ services:
       ES_JAVA_OPTS: -Xms1g -Xmx1g
     volumes:
       - elasticsearch-6:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
 
   elasticsearch-7:
     image: elasticsearch:7.9.3

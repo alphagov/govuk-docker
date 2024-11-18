@@ -22,17 +22,17 @@ services:
     shm_size: 512mb
     depends_on:
       - mongo-3.6
-      - redis
+      - specialist-publisher-redis
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/specialist-publisher"
       TEST_MONGODB_URI: "mongodb://mongo-3.6/specialist-publisher-test"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://specialist-publisher-redis
 
   specialist-publisher-app: &specialist-publisher-app
     <<: *specialist-publisher
     depends_on:
       - mongo-3.6
-      - redis
+      - specialist-publisher-redis
       - nginx-proxy
       - publishing-api-app
       - asset-manager-app
@@ -40,7 +40,7 @@ services:
       - specialist-publisher-worker
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/specialist-publisher"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://specialist-publisher-redis
       VIRTUAL_HOST: specialist-publisher.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
@@ -51,10 +51,13 @@ services:
     <<: *specialist-publisher
     depends_on:
       - mongo-3.6
-      - redis
+      - specialist-publisher-redis
       - publishing-api-app
       - asset-manager-app
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/specialist-publisher"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://specialist-publisher-redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
+
+  specialist-publisher-redis:
+    image: redis

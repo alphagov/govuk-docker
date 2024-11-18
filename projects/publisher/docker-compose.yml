@@ -21,17 +21,17 @@ services:
     <<: *publisher
     shm_size: 512mb
     depends_on:
-      - redis
+      - publisher-redis
       - mongo-3.6
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/publisher"
       TEST_MONGODB_URI: "mongodb://mongo-3.6/publisher-test"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://publisher-redis
 
   publisher-app: &publisher-app
     <<: *publisher
     depends_on:
-      - redis
+      - publisher-redis
       - mongo-3.6
       - nginx-proxy
       - publishing-api-app
@@ -40,7 +40,7 @@ services:
       - publisher-css
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/publisher"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://publisher-redis
       VIRTUAL_HOST: publisher.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
@@ -54,11 +54,14 @@ services:
   publisher-worker:
     <<: *publisher
     depends_on:
-      - redis
+      - publisher-redis
       - mongo-3.6
       - nginx-proxy
       - publishing-api-app
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/publisher"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://publisher-redis
     command: bin/dev worker
+
+  publisher-redis:
+    image: redis

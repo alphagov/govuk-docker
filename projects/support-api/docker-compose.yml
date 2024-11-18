@@ -19,23 +19,26 @@ services:
     <<: *support-api
     depends_on:
       - postgres-13
-      - redis
+      - support-api-redis
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-13/support-api"
       TEST_DATABASE_URL: "postgresql://postgres@postgres-13/support-api-test"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://support-redis
 
   support-api-app: &support-api-app
     <<: *support-api
     depends_on:
       - postgres-13
-      - redis
+      - support-api-redis
       - nginx-proxy
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-13/support-api"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://support-api-redis
       VIRTUAL_HOST: support-api.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
       - "3000"
     command: bin/rails s --restart
+
+  support-api-redis:
+    image: redis

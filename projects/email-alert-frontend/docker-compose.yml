@@ -20,14 +20,14 @@ services:
   email-alert-frontend-lite:
     <<: *email-alert-frontend
     depends_on:
-      - redis
+      - email-alert-frontend-redis
     environment:
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://email-alert-frontend-redis
 
   email-alert-frontend-app: &email-alert-frontend-app
     <<: *email-alert-frontend
     depends_on:
-      - redis
+      - email-alert-frontend-redis
       - router-app
       - content-store-app
       - static-app
@@ -35,7 +35,7 @@ services:
       - nginx-proxy
     environment:
       GOVUK_PROXY_STATIC_ENABLED: "true"
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://email-alert-frontend-redis
       VIRTUAL_HOST: email-alert-frontend.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
@@ -45,14 +45,17 @@ services:
   email-alert-frontend-app-live:
     <<: *email-alert-frontend-app
     depends_on:
-      - redis
+      - email-alert-frontend-redis
       - email-alert-api-app
       - nginx-proxy
     environment:
-      REDIS_URL: redis://redis
+      REDIS_URL: redis://email-alert-frontend-redis
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       GOVUK_PROXY_STATIC_ENABLED: "true"
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       PLEK_SERVICE_STATIC_URI: https://assets.publishing.service.gov.uk
       VIRTUAL_HOST: email-alert-frontend.dev.gov.uk
       BINDING: 0.0.0.0
+
+  email-alert-frontend-redis:
+    image: redis
