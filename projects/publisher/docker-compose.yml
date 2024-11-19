@@ -27,6 +27,8 @@ services:
       MONGODB_URI: "mongodb://mongo-3.6/publisher"
       TEST_MONGODB_URI: "mongodb://mongo-3.6/publisher-test"
       REDIS_URL: redis://publisher-redis
+      SECRET_KEY_BASE: p647607dffea898a0f668fea448896db7ca3a0527f9e926db3ae629617cd64e16d2b4d357dcb312ed3f4ae5daaad98c589bb0ef1da4c251c0234b457d2e4a49f
+      LINK_CHECKER_API_SECRET_TOKEN: stk3ffv3DvpKfHmsU4pbxsxc
 
   publisher-app: &publisher-app
     <<: *publisher
@@ -43,6 +45,9 @@ services:
       REDIS_URL: redis://publisher-redis
       VIRTUAL_HOST: publisher.dev.gov.uk
       BINDING: 0.0.0.0
+      SECRET_KEY_BASE: p647607dffea898a0f668fea448896db7ca3a0527f9e926db3ae629617cd64e16d2b4d357dcb312ed3f4ae5daaad98c589bb0ef1da4c251c0234b457d2e4a49f
+      LINK_CHECKER_API_SECRET_TOKEN: stk3ffv3DvpKfHmsU4pbxsxc
+
     expose:
       - "3000"
     command: bin/dev web
