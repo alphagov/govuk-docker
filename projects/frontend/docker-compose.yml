@@ -29,6 +29,7 @@ services:
       - router-app
       - static-app
     environment:
+      ALLOW_LOCAL_CONTENT_ITEM_OVERRIDE: "true"
       VIRTUAL_HOST: frontend.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
@@ -41,6 +42,7 @@ services:
       - account-api-app-live
       - nginx-proxy
     environment:
+      ALLOW_LOCAL_CONTENT_ITEM_OVERRIDE: "true"
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       GOVUK_PROXY_STATIC_ENABLED: "true"
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
@@ -54,6 +56,7 @@ services:
       - account-api-app-live
       - nginx-proxy
     environment:
+      ALLOW_LOCAL_CONTENT_ITEM_OVERRIDE: "true"
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       GOVUK_PROXY_STATIC_ENABLED: "true"
       #ASSET_MANAGER_BEARER_TOKEN: <get an asset manager token from https://signon.integration.publishing.service.gov.uk/api_users>
