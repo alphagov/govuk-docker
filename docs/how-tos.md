@@ -1,4 +1,4 @@
-# How To's
+# How Tos
 
 👉 [Check the troubleshooting guide if you have a problem.](troubleshooting.md#installation)
 
