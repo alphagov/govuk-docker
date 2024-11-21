@@ -137,8 +137,8 @@ ActiveRecord::ConnectionNotEstablished: Plugin caching_sha2_password could not b
 
 A workaround is to get MySQL to fall back to using `mysql_native_password` as follows:
 
-- Check that you can see `govuk-docker_mysql-8_1` when running `govuk-docker ps`, if not you will need to start a service that uses mysql (for example Whitehall).
-- Bring up a mysql console inside the container: `docker exec -it govuk-docker_mysql-8_1 mysql --user=root --password=root`
+- Check that you can see `govuk-docker-mysql-8-1` when running `govuk-docker ps`, if not you will need to start a service that uses mysql (for example Whitehall).
+- Bring up a mysql console inside the container: `docker exec -it govuk-docker-mysql-8-1 mysql --user=root --password=root`
 - Alter the way the root user identifies itself. `ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'root';`
 
 ## Browser based tests fail with `NoSuchSessionError: invalid session id`

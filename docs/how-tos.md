@@ -1,4 +1,4 @@
-# How To's
+# How Tos
 
 👉 [Check the troubleshooting guide if you have a problem.](troubleshooting.md#installation)
 
@@ -47,10 +47,10 @@ You will need to assume-role into AWS using the [gds-cli](https://docs.publishin
 
 ```
 # as an AWS PowerUser...
-gds aws govuk-integration-poweruser --assume-role-ttl 180m ./bin/replicate-postgresql.sh content-publisher
+gds aws govuk-integration-poweruser --assume-role-ttl 3h ./bin/replicate-postgresql.sh content-publisher
 
 # as an AWS User...
-gds aws govuk-integration-readonly --assume-role-ttl 180m ./bin/replicate-postgresql.sh content-publisher
+gds aws govuk-integration-readonly --assume-role-ttl 3h ./bin/replicate-postgresql.sh content-publisher
 ```
 
 All the scripts, other than `replicate-elasticsearch.sh`, take the name of the app to replicate data for.
@@ -58,6 +58,15 @@ All the scripts, other than `replicate-elasticsearch.sh`, take the name of the a
 Draft data can be replicated with `replicate-postgresql.sh draft-content-store` and `replicate-mongodb.sh draft-router`.
 
 If you want to download data without importing it, set the `SKIP_IMPORT` environment variable (to anything).
+
+### Troubleshooting
+
+The replication scripts might fail for the following reasons:
+
+- `pv` not being installed. This is used to display a progress bar. On macOS, you can [install pv using Homebrew](https://formulae.brew.sh/formula/pv).
+- Running out of space in Docker. This might result in an error like `ERROR 1114 (HY000) at line 11768: The table 'govspeak_contents' is full`. If you see this, you could do either or both of the following:
+  - If you're okay with removing some or all of your Docker containers, images, and possibly volumes and other data, run [docker system prune](https://docs.docker.com/reference/cli/docker/system/prune).
+  - If you have enough spare space on your local machine, allocate more space to Docker. Using Docker Desktop, this setting is under Settings > Resources > Advanced > Resource Allocation > Virtual disk limit.
 
 ## How to: set environment variables
 
