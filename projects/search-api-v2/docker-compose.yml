@@ -27,6 +27,7 @@ services:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
       REDIS_URL: redis://search-api-v2-redis
       PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: search_api_v2_published_documents
+      GOOGLE_CLOUD_PROJECT_ID: none
       DISCOVERY_ENGINE_DATASTORE: none
       DISCOVERY_ENGINE_DATASTORE_BRANCH: none
       DISCOVERY_ENGINE_SERVING_CONFIG: none
@@ -68,6 +69,7 @@ services:
       # The fully qualified ID of the datastore, branch and serving config on the Discovery Engine
       # integration environment (required to use Discovery Engine locally).
       #
+      GOOGLE_CLOUD_PROJECT_ID: "search-api-v2-integration"
       DISCOVERY_ENGINE_DATASTORE: "projects/search-api-v2-integration/locations/global/collections/default_collection/dataStores/govuk_content"
       DISCOVERY_ENGINE_DATASTORE_BRANCH: "projects/search-api-v2-integration/locations/global/collections/default_collection/dataStores/govuk_content/branches/default_branch"
       DISCOVERY_ENGINE_SERVING_CONFIG: "projects/search-api-v2-integration/locations/global/collections/default_collection/dataStores/govuk_content/servingConfigs/default_search"
