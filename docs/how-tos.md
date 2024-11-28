@@ -2,6 +2,14 @@
 
 👉 [Check the troubleshooting guide if you have a problem.](troubleshooting.md#installation)
 
+## How to: get back to a clean slate
+
+If you encounter an issue with your Docker setup and you've already exhausted all other ideas, here's a quick one-liner that stops and removes absolutely everything. You can then follow the govuk-docker README instructions for `make`-ing your app again.
+
+```
+docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker rmi $(docker images -q) -f && docker volume prune && docker container prune && docker image prune && docker network prune && docker system prune --all --volumes
+```
+
 ## How to: reduce typing with shortcuts
 
 Typing the [full commands](../README.md#usage) is likely to get tiring. We've added a couple of lightweight helper scripts alongside govuk-docker, which figure out the application you're running based on the name of the current directory.
