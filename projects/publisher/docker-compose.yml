@@ -22,16 +22,20 @@ services:
     shm_size: 512mb
     depends_on:
       - publisher-redis
+      - postgres-16
       - mongo-3.6
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/publisher"
       TEST_MONGODB_URI: "mongodb://mongo-3.6/publisher-test"
+      DATABASE_URL: "postgresql://postgres@postgres-16/publisher"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-16/publisher_test"
       REDIS_URL: redis://publisher-redis
 
   publisher-app: &publisher-app
     <<: *publisher
     depends_on:
       - publisher-redis
+      - postgres-16
       - mongo-3.6
       - nginx-proxy
       - publishing-api-app
@@ -40,6 +44,7 @@ services:
       - publisher-css
       - signon-app
     environment:
+      DATABASE_URL: "postgresql://postgres@postgres-16/publisher"
       MONGODB_URI: "mongodb://mongo-3.6/publisher"
       REDIS_URL: redis://publisher-redis
       VIRTUAL_HOST: publisher.dev.gov.uk
@@ -57,9 +62,11 @@ services:
     depends_on:
       - publisher-redis
       - mongo-3.6
+      - postgres-16
       - nginx-proxy
       - publishing-api-app
     environment:
+      DATABASE_URL: "postgresql://postgres@postgres-16/publisher"
       MONGODB_URI: "mongodb://mongo-3.6/publisher"
       REDIS_URL: redis://publisher-redis
     command: bin/dev worker
