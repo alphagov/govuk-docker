@@ -35,3 +35,10 @@ services:
     expose:
       - "3000"
     command: bin/rails s --restart
+
+  content-store-app-draft:
+    <<: *content-store-app
+    environment:
+      VIRTUAL_HOST: draft-content-store.dev.gov.uk
+      DATABASE_URL: "postgresql://postgres@postgres-13/draft-content-store"
+      BINDING: 0.0.0.0
