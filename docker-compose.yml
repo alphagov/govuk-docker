@@ -169,6 +169,7 @@ services:
           - maslow.dev.gov.uk
           - places-manager.dev.gov.uk
           - publisher.dev.gov.uk
+          - publisher-on-postgresql.dev.gov.uk
           - publishing-api.dev.gov.uk
           - release.dev.gov.uk
           - router-api.dev.gov.uk

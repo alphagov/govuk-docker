@@ -1,0 +1,69 @@
+volumes:
+  publisher-on-postgresql-tmp:
+  publisher-on-postgresql-node-modules:
+
+x-publisher-on-postgresql: &publisher-on-postgresql
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: publisher-on-postgresql
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - root-home:/root
+    - publisher-on-postgresql-tmp:/govuk/publisher-on-postgresql/tmp
+    - publisher-on-postgresql-node-modules:/govuk/publisher-on-postgresql/node_modules
+  working_dir: /govuk/publisher-on-postgresql
+
+services:
+  publisher-on-postgresql-lite:
+    <<: *publisher-on-postgresql
+    shm_size: 512mb
+    depends_on:
+      - publisher-on-postgresql-redis
+      - postgres-13
+    environment:
+      RAILS_ENV: "test"
+      DATABASE_URL: "postgresql://postgres@postgres-13/publisher"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-13/publisher_test"
+      REDIS_URL: redis://publisher-on-postgresql-redis
+
+  publisher-on-postgresql-app: &publisher-on-postgresql-app
+    <<: *publisher-on-postgresql
+    depends_on:
+      - publisher-on-postgresql-redis
+      - postgres-13
+      - nginx-proxy
+      - publishing-api-app
+      - link-checker-api-app
+      - publisher-on-postgresql-worker
+      - publisher-on-postgresql-css
+    environment:
+      RAILS_ENV: "test"
+      DATABASE_URL: "postgresql://postgres@postgres-13/publisher-on-postgresql"
+      REDIS_URL: redis://publisher-on-postgresql-redis
+      VIRTUAL_HOST: publisher-on-postgresql.dev.gov.uk
+      BINDING: 0.0.0.0
+    expose:
+      - "3000"
+    command: bin/dev web
+
+  publisher-on-postgresql-css:
+    <<: *publisher-on-postgresql
+    command: bin/dev css
+
+  publisher-on-postgresql-worker:
+    <<: *publisher-on-postgresql
+    depends_on:
+      - publisher-on-postgresql-redis
+      - postgres-13
+      - nginx-proxy
+      - publishing-api-app
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres-13/publisher-on-postgresql"
+      REDIS_URL: redis://publisher-on-postgresql-redis
+    command: bin/dev worker
+
+  publisher-on-postgresql-redis:
+    image: redis
