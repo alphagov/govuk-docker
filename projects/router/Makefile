@@ -10,4 +10,5 @@ router: clone-router
 			} \
 		]\
 	}).ok || rs.status().ok"
-	$(GOVUK_DOCKER) run --build $@-lite make build
+	$(GOVUK_DOCKER) build $@-lite
+	$(GOVUK_DOCKER) run $@-lite make build
