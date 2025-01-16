@@ -102,6 +102,8 @@ docker attach govuk-docker_content-publisher-app_1
 CTRL-P CTRL-Q
 ```
 
+Note that many of the apps run using the Puma web server, which by default runs in cluster mode. This causes problems with using the debugger console. Puma routes the stdout from multiple processes back into the main container stdout, so the effect is often that keystrokes appear to be "lost" while output from non-paused processes is prioritised. To fix this, you can set the `WEB_CONCURRENCY` environment variable on the container to 0. That will force Puma to run in single process mode.
+
 ## How to: use a custom working directory
 
 GOV.UK Docker should respect the following environment variables:
