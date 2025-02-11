@@ -38,6 +38,7 @@ services:
       - link-checker-api-app
       - publisher-worker
       - publisher-css
+      - signon-app
     environment:
       MONGODB_URI: "mongodb://mongo-3.6/publisher"
       REDIS_URL: redis://publisher-redis
