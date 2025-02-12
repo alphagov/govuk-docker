@@ -24,11 +24,12 @@ services:
     <<: *search-admin-base
     depends_on:
       - mysql-8
+      - search-admin-redis
     environment:
       DATABASE_URL: "mysql2://root:root@mysql-8/search_admin_development"
       TEST_DATABASE_URL: "mysql2://root:root@mysql-8/search_admin_test"
       REDIS_URL: redis://search-admin-redis
-      DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: none
+      DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: "projects/780375417592/locations/global/collections/default_collection"
 
   search-admin-app: &search-admin-app
     <<: *search-admin-base
@@ -36,6 +37,7 @@ services:
       - mysql-8
       - nginx-proxy
       - publishing-api-app
+      - search-admin-redis
     environment:
       DATABASE_URL: "mysql2://root:root@mysql-8/search_admin_development"
       TEST_DATABASE_URL: "mysql2://root:root@mysql-8/search_admin_test"
