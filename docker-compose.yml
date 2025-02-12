@@ -176,7 +176,6 @@ services:
           - search-admin.dev.gov.uk
           - search-api.dev.gov.uk
           - search-api-v2.dev.gov.uk
-          - search-v2-evaluator.dev.gov.uk
           - search.dev.gov.uk
           - service-manual-publisher.dev.gov.uk
           - short-url-manager.dev.gov.uk
