@@ -27,7 +27,7 @@ work with locally. The instructions below assume that you have "made" all of the
 8. Publish a test taxon so that we can tag Whitehall content with it:
 
    ```bash
-   govuk-docker run whitehall-app-lite rails taxonomy:populate_end_to_end_test_data
+   govuk-docker run whitehall-lite rails taxonomy:populate_end_to_end_test_data
    govuk-docker run whitehall-lite rails taxonomy:rebuild_cache
    ```
 9. Publish a document. You should be able to access it at `http://government-frontend.dev.gov.uk/{{your_base_path_here}}`
