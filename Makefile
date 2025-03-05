@@ -3,6 +3,12 @@ GOVUK_DOCKER_DIR ?= $(GOVUK_ROOT_DIR)/govuk-docker
 GOVUK_DOCKER     ?= $(GOVUK_DOCKER_DIR)/exe/govuk-docker
 SHELLCHECK       ?= shellcheck
 
+ifeq ($(GOVUK_HTTPS_CHECKOUT), 1)
+	GOVUK_GITHUB_BASE="https://github.com/"
+else
+	GOVUK_GITHUB_BASE="git@github.com:"
+endif
+
 # Best practice to ensure these targets always execute, even if a
 # file like 'test' exists in the current directory.
 .PHONY: lint test
@@ -37,7 +43,7 @@ bundle-%: clone-% branch-checks-%
 
 clone-%:
 	@if [ ! -d "${GOVUK_ROOT_DIR}/$*/.git" ]; then \
-		echo "$*" && git clone "git@github.com:alphagov/$*.git" "${GOVUK_ROOT_DIR}/$*"; \
+		echo "$*" && git clone "${GOVUK_GITHUB_BASE}alphagov/$*.git" "${GOVUK_ROOT_DIR}/$*"; \
 	fi
 
 branch-checks-%:
