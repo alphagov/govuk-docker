@@ -129,3 +129,21 @@ connection), you can set the `SKIP_BRANCH_CHECKS` environment variable:
 ```bash
 SKIP_BRANCH_CHECKS=1 make my-app
 ```
+
+## How to: Use Podman instead of Docker
+
+If you prefer to use [Podman](https://podman.io/) instead of Docker to run and orchestrate your
+containers, you can set `GOVUK_DOCKER_CONTAINER_RUNTIME=podman` in your environment (for example, in
+your `.bashrc`).
+
+Note that Podman needs an external "compose provider" installed as a backing tool for `podman
+compose` (which itself is just a wrapper), and the ideal option is Docker's v2 Compose CLI plugin.
+You do not need Docker itself installed, and `podman compose` will pick up on the plugin
+automatically if installed, for example through:
+- Podman Desktop on macOS or Windows
+- your Linux distribution's package manager or Homebrew on macOS (check to make sure it's >= 2.x)
+- manually installing a release from [its repository](https://github.com/docker/compose)
+
+GOV.UK Docker works by running an Nginx container on port 80, which requires root privileges to bind
+to. You will need to run `govuk-docker` as root on Linux, or if you are using Podman Machine, have
+it configured appropriately (this is taken care of for you when using Podman Desktop).
