@@ -17,6 +17,7 @@ services:
     <<: *govuk-developer-docs
     environment:
       LANG: "C.UTF-8"
+      NO_CONTRACTS: true
 
   govuk-developer-docs-app:
     <<: *govuk-developer-docs
