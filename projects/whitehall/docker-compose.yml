@@ -40,6 +40,7 @@ services:
       - whitehall-redis
       - nginx-proxy
       - asset-manager-app
+      - link-checker-api-app
       - publishing-api-app
       - whitehall-worker
       - signon-app
@@ -62,6 +63,7 @@ services:
       - whitehall-redis
       - nginx-proxy
       - asset-manager-app
+      - link-checker-api-app
       - publishing-api-app
     environment:
       DATABASE_URL: "mysql2://root:root@mysql-8/whitehall_development"
