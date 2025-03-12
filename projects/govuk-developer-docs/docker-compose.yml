@@ -1,3 +1,6 @@
+volumes:
+  govuk-developer-docs-node-modules:
+
 x-govuk-developer-docs: &govuk-developer-docs
   build:
     context: .
@@ -6,6 +9,7 @@ x-govuk-developer-docs: &govuk-developer-docs
   volumes:
     - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
     - root-home:/root
+    - govuk-developer-docs-node-modules:/govuk/govuk-developer-docs/node_modules
   working_dir: /govuk/govuk-developer-docs
 
 services:
@@ -22,4 +26,4 @@ services:
       VIRTUAL_HOST: govuk-developer-docs.dev.gov.uk
     expose:
       - "4567"
-    command: bundle exec middleman server --bind-address 0.0.0.0
+    command: bash -c "yarn && bundle exec middleman server --bind-address 0.0.0.0"
