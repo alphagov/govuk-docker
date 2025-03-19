@@ -129,3 +129,35 @@ connection), you can set the `SKIP_BRANCH_CHECKS` environment variable:
 ```bash
 SKIP_BRANCH_CHECKS=1 make my-app
 ```
+
+## How to: Use Podman instead of Docker
+
+> [!WARNING]
+> GOV.UK Docker was built for Docker (if the name didn't make that obvious!), so when leaving the
+> "golden path" you may experience unexpected issues that your peers can't help you with.
+>
+> For now, we recommend you only use another Linux container runtime if you are comfortable with
+> Linux and container technologies, and able/willing to resolve issues yourself.
+
+If you prefer to use [Podman](https://podman.io/) instead of Docker to run and orchestrate your
+containers, you can set `GOVUK_DOCKER_CONTAINER_RUNTIME=podman` in your environment (for example, in
+your `.bashrc`).
+
+Podman needs an external "compose provider" installed as a backing tool for `podman compose` (which
+itself is just a wrapper), and the ideal option is Docker's v2 Compose CLI plugin rather than the
+legacy `podman-compose` tool. You do not need Docker itself installed, and `podman compose` will
+pick up on the Docker Compose plugin automatically if installed, for example through:
+- Podman Desktop on macOS or Windows
+- your Linux distribution's package manager or Homebrew on macOS (check to make sure it's >= 2.x)
+- manually installing a release from [its repository](https://github.com/docker/compose)
+
+There are two major gotchas relating to the Nginx proxy:
+- it needs to run on port 80, which under most circumstances requires root privileges to bind to on
+  Linux, and
+- it requires a Docker-compatible socket to be mounted into the container, so is not compatible with
+  daemonless approaches (like Podman's out-of-the-box architecture)
+
+The easiest way to work around this is (more advanced approaches are available but left as an
+exercise for the reader):
+- on Linux, by setting up a Podman socket as root, and running GOV.UK Docker as root
+- on Mac, by using Podman Desktop and enabling all Docker Compatibility features
