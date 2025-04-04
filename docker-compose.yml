@@ -133,6 +133,8 @@ services:
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock
       - ./nginx-proxy.conf:/etc/nginx/proxy.conf
+    security_opt:
+      - 'label=type:docker_t'
     networks:
       default:
         aliases:
