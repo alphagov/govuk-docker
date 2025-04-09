@@ -12,6 +12,7 @@
 
 COMPOSE_FLAGS=("-f" "$(dirname "$0")/../docker-compose.yml")
 COMPOSE_FILES="$(dirname "$0")/../projects/*/docker-compose.yml"
+GOVUK_DOCKER_CONTAINER_RUNTIME="${GOVUK_DOCKER_CONTAINER_RUNTIME:-docker}"
 
 for file in $COMPOSE_FILES; do
   COMPOSE_FLAGS+=("-f" "$file")
@@ -21,5 +22,5 @@ if ! "$(dirname "$0")"/govuk-docker-version >/dev/null; then
   read -rp "Press enter to continue..."
 fi
 
->&2 echo "docker compose -f [...] $*"
-docker compose "${COMPOSE_FLAGS[@]}" "$@"
+>&2 echo "${GOVUK_DOCKER_CONTAINER_RUNTIME} compose -f [...] $*"
+${GOVUK_DOCKER_CONTAINER_RUNTIME} compose "${COMPOSE_FLAGS[@]}" "$@"
