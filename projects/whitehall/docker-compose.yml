@@ -26,6 +26,7 @@ services:
     depends_on:
       - mysql-8
       - whitehall-redis
+      - publishing-api-app
     environment:
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
       GOVUK_ASSET_ROOT: "http://asset-manager.dev.gov.uk"
