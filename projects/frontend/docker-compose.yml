@@ -26,6 +26,7 @@ services:
       - account-api-app
       - content-store-app
       - nginx-proxy
+      - publishing-api-app
       - router-app
       - search-api-app
       - static-app
