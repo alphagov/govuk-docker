@@ -14,7 +14,7 @@ RSpec.describe "Make dependencies" do
       app_dependencies = MakefileHelper.dependencies(project_name)
         .reject { |dep| dep =~ /^(bundle|clone|prerequisites)/ }
 
-      expect((app_dependencies - ProjectsHelper.all_projects)).to eq([])
+      expect(app_dependencies - ProjectsHelper.all_projects).to eq([])
     end
   end
 
