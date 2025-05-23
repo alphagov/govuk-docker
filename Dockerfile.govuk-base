@@ -3,12 +3,18 @@
 # project and make any changes to it there.
 
 # Install packages for building ruby
-# TODO: Change from bullseye to stable tag once we've resolved problems with Ruby and SSL
-#       See https://github.com/alphagov/govuk-docker/pull/666 for more info.
-FROM buildpack-deps:bullseye
+FROM buildpack-deps:bookworm
 
 # Install chromium browser and its webdriver
-RUN apt-get update -qq && apt-get install -y chromium chromium-driver
+RUN apt-get update -qq && \
+  apt-get install -y --no-install-recommends \
+  build-essential \
+  autoconf bison \
+  libssl-dev  \
+  libreadline-dev \
+  zlib1g-dev \
+  chromium chromium-driver && \
+  rm -rf /var/lib/apt/lists/*
 
 # Enable no-sandbox for chrome so that it can run as a root user
 ENV GOVUK_TEST_CHROME_NO_SANDBOX 1
