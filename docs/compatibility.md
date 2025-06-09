@@ -18,7 +18,6 @@ These are repos that can be started as a some kind of process, such as a web app
       * Has a [separate](https://github.com/alphagov/docker-ckan) Docker project.
    - ✅  collections
    - ✅ collections-publisher
-   - ✅ contacts-admin
    - ✅ content-data-admin
    - ✅ content-data-api
    - ✅ content-publisher
