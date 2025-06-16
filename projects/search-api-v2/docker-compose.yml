@@ -29,6 +29,7 @@ services:
       PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: search_api_v2_published_documents
       GOOGLE_CLOUD_PROJECT_ID: none
       DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: none
+      DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: none
 
   search-api-v2-app:
     <<: *search-api-v2
@@ -46,6 +47,7 @@ services:
       BINDING: "0.0.0.0"
       GOOGLE_CLOUD_PROJECT_ID: "780375417592"
       DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: "projects/780375417592/locations/global/collections/default_collection"
+      DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: "projects/780375417592/locations/global"
     expose:
       - "3000"
     command: bin/rails server --restart
@@ -61,6 +63,7 @@ services:
       PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: "search_api_v2_published_documents"
       GOOGLE_CLOUD_PROJECT_ID: "780375417592"
       DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: "projects/780375417592/locations/global/collections/default_collection"
+      DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: "projects/780375417592/locations/global"
     command: bin/rake document_sync_worker:run
 
   search-api-v2-redis:
