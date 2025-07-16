@@ -1,5 +1,5 @@
 search-api-v2: prerequisites-search-api-v2 bundle-search-api-v2
-	$(GOVUK_DOCKER) run $@-lite bundle exec rake document_sync_worker:create_queue
+	$(GOVUK_DOCKER) run --rm $@-lite bundle exec rake document_sync_worker:create_queue
 
 BOLD_RED=\033[1;31m
 REG_RED=\033[0;31m

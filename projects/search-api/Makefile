@@ -11,6 +11,6 @@ search-api: bundle-search-api wait-for-elasticsearch
       echo "Indices found, skipping index creation."; \
     else \
       echo "No indices found, creating all indices..."; \
-      $(GOVUK_DOCKER) run $@-lite env SEARCH_INDEX=all bundle exec rake search:create_all_indices; \
+      $(GOVUK_DOCKER) run --rm $@-lite env SEARCH_INDEX=all bundle exec rake search:create_all_indices; \
     fi
-	$(GOVUK_DOCKER) run $@-lite bundle exec rake message_queue:create_queues
+	$(GOVUK_DOCKER) run --rm $@-lite bundle exec rake message_queue:create_queues
