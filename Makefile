@@ -14,8 +14,8 @@ default:
 	@echo "    make content-publisher"
 
 test-local: test-scripts
-	$(GOVUK_DOCKER) run govuk-docker-lite bundle exec rubocop
-	$(GOVUK_DOCKER) run govuk-docker-lite bundle exec rspec
+	$(GOVUK_DOCKER) run --rm govuk-docker-lite bundle exec rubocop
+	$(GOVUK_DOCKER) run --rm govuk-docker-lite bundle exec rspec
 
 test-ci: test-scripts
 	bundle exec rubocop
@@ -31,9 +31,9 @@ test-scripts:
 
 bundle-%: clone-% branch-checks-%
 	$(GOVUK_DOCKER) build $*-lite
-	$(GOVUK_DOCKER) run $*-lite rbenv install -s || ($(GOVUK_DOCKER) build --no-cache $*-lite; $(GOVUK_DOCKER) run $*-lite rbenv install -s)
-	if [ -f "${GOVUK_ROOT_DIR}/$*/Gemfile.lock" ]; then $(GOVUK_DOCKER) run $*-lite sh -c 'gem install --conservative --no-document bundler -v $$(grep -A1 "BUNDLED WITH" Gemfile.lock | tail -1)'; fi
-	$(GOVUK_DOCKER) run $*-lite bundle
+	$(GOVUK_DOCKER) run --rm $*-lite rbenv install -s || ($(GOVUK_DOCKER) build --no-cache $*-lite; $(GOVUK_DOCKER) run --rm $*-lite rbenv install -s)
+	if [ -f "${GOVUK_ROOT_DIR}/$*/Gemfile.lock" ]; then $(GOVUK_DOCKER) run --rm $*-lite sh -c 'gem install --conservative --no-document bundler -v $$(grep -A1 "BUNDLED WITH" Gemfile.lock | tail -1)'; fi
+	$(GOVUK_DOCKER) run --rm $*-lite bundle
 
 clone-%:
 	@if [ ! -d "${GOVUK_ROOT_DIR}/$*/.git" ]; then \
