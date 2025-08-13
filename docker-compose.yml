@@ -168,7 +168,6 @@ services:
           - local-links-manager.dev.gov.uk
           - locations-api.dev.gov.uk
           - manuals-publisher.dev.gov.uk
-          - maslow.dev.gov.uk
           - places-manager.dev.gov.uk
           - publisher.dev.gov.uk
           - publishing-api.dev.gov.uk
