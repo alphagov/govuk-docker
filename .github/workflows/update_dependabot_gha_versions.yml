@@ -1,0 +1,38 @@
+name: "On dependabot PR: update GitHub Actions versions to pinned hashes"
+on: pull_request
+
+permissions:
+  contents: write
+
+jobs:
+  update_dependabot_pr:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'alphagov/govuk-docker'
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Fetch Dependabot metadata
+        id: dependabot-metadata
+        uses: dependabot/fetch-metadata@08eff52bf64351f401fb50d4972fa95b9f2c2d1b # v2.4.0
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Update pinned Actions hashes
+        if: steps.dependabot-metadata.outputs.package-ecosystem == 'github-actions'
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        run: |
+          
+          echo "Installing pinact"
+          wget -q -O "pinact.tar.gz" "https://github.com/suzuki-shunsuke/pinact/releases/download/v3.4.2/pinact_linux_amd64.tar.gz"
+          tar xzf pinact.tar.gz
+          chmod +x ./pinact
+          
+          ./pinact run
+          
+          git config --global user.name "GOV.UK Platform Engineering [bot]"
+          git config --global user.email "govuk-platform-engineering@digital.cabinet-office.gov.uk"
+          
+          git add .github/
+          git commit -m "Convert pinned tags to pinned commit hashes"
+          git push
