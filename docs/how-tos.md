@@ -7,7 +7,7 @@
 If you encounter an issue with your Docker setup and you've already exhausted all other ideas, here's a quick one-liner that stops and removes absolutely everything. You can then follow the govuk-docker README instructions for `make`-ing your app again.
 
 ```
-docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker rmi $(docker images -q) -f && docker volume prune && docker container prune && docker image prune && docker network prune && docker build prune -f && docker system prune --all --volumes
+docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker rmi $(docker images -q) -f && docker volume prune && docker container prune && docker image prune && docker network prune && docker builder prune -f && docker system prune --all --volumes
 ```
 
 ## How to: reduce typing with shortcuts
