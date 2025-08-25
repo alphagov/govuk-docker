@@ -101,7 +101,7 @@ services:
     environment:
       ES_JAVA_OPTS: -Xms1g -Xmx1g
     volumes:
-      - elasticsearch-6:/usr/share/elasticsearch/data
+      - elasticsearch-6:/usr/elasticsearch/data
     ports:
       - "9200:9200"
       - "9300:9300"
