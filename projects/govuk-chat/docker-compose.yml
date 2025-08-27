@@ -35,7 +35,8 @@ services:
     <<: *govuk-chat
     depends_on:
       - govuk-chat-css
-      - govuk-chat-worker
+      - govuk-chat-answer-worker
+      - govuk-chat-default-worker
       - nginx-proxy
       - postgres-16
       - govuk-chat-redis
@@ -53,7 +54,7 @@ services:
     <<: *govuk-chat
     command: bin/dev css
 
-  govuk-chat-worker:
+  govuk-chat-answer-worker:
     <<: *govuk-chat
     depends_on:
       - opensearch-2
@@ -63,7 +64,19 @@ services:
       REDIS_URL: redis://govuk-chat-redis
       DATABASE_URL: "postgresql://postgres@postgres-16/govuk-chat"
       OPENSEARCH_URL: http://opensearch-2:9200
-    command: bin/dev worker
+    command: bin/dev answer-worker
+
+  govuk-chat-default-worker:
+    <<: *govuk-chat
+    depends_on:
+      - opensearch-2
+      - govuk-chat-redis
+      - postgres-16
+    environment:
+      REDIS_URL: redis://govuk-chat-redis
+      DATABASE_URL: "postgresql://postgres@postgres-16/govuk-chat"
+      OPENSEARCH_URL: http://opensearch-2:9200
+    command: bin/dev default-worker
 
   govuk-chat-queue-consumer:
     <<: *govuk-chat
