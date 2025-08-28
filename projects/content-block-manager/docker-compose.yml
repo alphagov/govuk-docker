@@ -1,0 +1,68 @@
+volumes:
+  content-block-manager-tmp:
+  content-block-manager-node-modules:
+
+x-content-block-manager: &content-block-manager
+  build:
+    context: .
+    dockerfile: projects/content-block-manager/Dockerfile
+  image: content-block-manager
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - root-home:/root
+    - content-block-manager-tmp:/govuk/content-block-manager/tmp
+    - content-block-manager-node-modules:/govuk/content-block-manager/node_modules
+  working_dir: /govuk/content-block-manager
+  # Mount /tmp as a tmpfs volume. This is a workaround until docker/for-linux#1015 is resolved.
+  # See alphagov/govuk-docker#537 for more info.
+  tmpfs: /tmp:exec
+
+services:
+  content-block-manager-lite:
+    <<: *content-block-manager
+    shm_size: 512mb
+    depends_on:
+      - postgres-16
+      - content-block-manager-redis
+      - publishing-api-app
+    environment:
+      DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
+      DATABASE_URL: "postgresql://postgres@postgres-16/content-block-manager_development"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-16/content-block-manager_test"
+      REDIS_URL: redis://content-block-manager-redis
+
+  content-block-manager-app: &content-block-manager-app
+    <<: *content-block-manager
+    depends_on:
+      - postgres-16
+      - content-block-manager-redis
+      - nginx-proxy
+      - publishing-api-app
+      - content-block-manager-worker
+      - signon-app
+    environment:
+      GOVUK_PROXY_STATIC_ENABLED: "true"
+      DATABASE_URL: "postgresql://postgres@postgres-16/content-block-manager_development"
+      REDIS_URL: redis://content-block-manager-redis
+      VIRTUAL_HOST: content-block-manager.dev.gov.uk
+      BINDING: 0.0.0.0
+    expose:
+      - "3000"
+    command: bin/dev
+
+  content-block-manager-worker:
+    <<: *content-block-manager
+    depends_on:
+      - postgres-16
+      - content-block-manager-redis
+      - nginx-proxy
+      - publishing-api-app
+    environment:
+      DATABASE_URL: "postgresql://root:root@postgres-16/content-block-manager_development"
+      REDIS_URL: redis://content-block-manager-redis
+    command: bundle exec sidekiq -C ./config/sidekiq.yml
+
+  content-block-manager-redis:
+    image: redis
