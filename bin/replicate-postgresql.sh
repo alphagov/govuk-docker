@@ -85,4 +85,40 @@ database="$(govuk-docker config | ruby -ryaml -e "puts YAML::load(STDIN.read).di
 
 govuk-docker run --rm -T "$postgres_container" /usr/bin/psql -h "$postgres_container" -U postgres -c "DROP DATABASE IF EXISTS \"${database}\""
 govuk-docker run --rm -T "$postgres_container" /usr/bin/createdb -h "$postgres_container" -U postgres "$database"
-pv "$archive_path" | govuk-docker run --rm -T "$postgres_container" /usr/bin/pg_restore -h "$postgres_container" -U postgres -d "$database" --no-owner --no-privileges
+# hexdump -C -n 16 "$archive_path"
+# docker run --rm -v "$archive_path":/dump:ro postgres:16 \
+#   pg_restore -l /dump | head
+
+docker pull postgres:17
+docker run --rm -v "$archive_path":/dump:ro postgres:17 pg_restore -l /dump | head
+
+docker run --rm \
+  --network govuk-docker_default \
+  -e PGPASSWORD=postgres \
+  -v "$archive_path":/dump:ro \
+  postgres:17 \
+  pg_restore -v -h "$postgres_container" -U postgres -d "$database" \
+    --no-owner --no-privileges /dump
+
+# dump="$archive_path"      # e.g. .../content_publisher_production.dump.gz (misnamed; not gzipped)
+# net="govuk-docker_default"
+# host="$postgres_container"
+# db="$database"
+
+# echo "== pg_restore (client) version =="
+# docker run --rm postgres:16 /usr/lib/postgresql/16/bin/pg_restore --version
+
+# echo "== dump header =="
+# docker run --rm -v "$dump":/dump:ro alpine:3 sh -lc 'file -b /dump || true'
+
+# echo "== TOC listing test (should succeed) =="
+# docker run --rm -v "$dump":/dump:ro postgres:16 \
+#   /usr/lib/postgresql/16/bin/pg_restore -l /dump | head -n 20
+
+# echo "== restoring =="
+# docker run --rm \
+#   --network "$net" \
+#   -e PGPASSWORD=postgres \
+#   -v "$dump":/dump:ro \
+#   postgres:16 \
+#   bash -lc '/usr/lib/postgresql/16/bin/pg_restore -v -h '"$host"' -U postgres -d '"$db"' --no-owner --no-privileges /dump'
