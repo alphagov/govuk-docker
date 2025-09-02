@@ -66,5 +66,13 @@ services:
       DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: "projects/780375417592/locations/global"
     command: bin/rake document_sync_worker:run
 
+  search-api-v2-task-runner:
+    <<: *search-api-v2
+    environment:
+      REDIS_URL: none
+      GOOGLE_CLOUD_PROJECT_ID: "780375417592"
+      DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: "projects/780375417592/locations/global/collections/default_collection"
+      DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: "projects/780375417592/locations/global"
+
   search-api-v2-redis:
     image: redis
