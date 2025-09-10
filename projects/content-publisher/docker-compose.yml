@@ -24,17 +24,17 @@ services:
     <<: *content-publisher
     shm_size: 512mb
     depends_on:
-      - postgres-13
+      - postgres-16
       - content-publisher-redis
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-13/content-publisher"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres-13/content-publisher-test"
+      DATABASE_URL: "postgresql://postgres@postgres-16/content-publisher"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-16/content-publisher-test"
       REDIS_URL: redis://content-publisher-redis
 
   content-publisher-app: &content-publisher-app
     <<: *content-publisher
     depends_on:
-      - postgres-13
+      - postgres-16
       - content-publisher-redis
       - content-publisher-worker
       - publishing-api-app
@@ -42,7 +42,7 @@ services:
       - nginx-proxy
       - content-store-app
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-13/content-publisher"
+      DATABASE_URL: "postgresql://postgres@postgres-16/content-publisher"
       REDIS_URL: redis://content-publisher-redis
       VIRTUAL_HOST: content-publisher.dev.gov.uk
       BINDING: 0.0.0.0
@@ -53,12 +53,12 @@ services:
   content-publisher-worker:
     <<: *content-publisher
     depends_on:
-      - postgres-13
+      - postgres-16
       - content-publisher-redis
       - publishing-api-app
       - asset-manager-app
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-13/content-publisher"
+      DATABASE_URL: "postgresql://postgres@postgres-16/content-publisher"
       REDIS_URL: redis://content-publisher-redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
 
