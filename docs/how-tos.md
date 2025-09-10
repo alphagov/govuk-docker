@@ -54,12 +54,10 @@ There may be times when a full database is required locally.  The following scri
 You will need to assume-role into AWS using the [gds-cli](https://docs.publishing.service.gov.uk/manual/access-aws-console.html) before running the scripts. For example, to replicate data for Content Publisher, run:
 
 ```
-# as an AWS PowerUser...
-gds aws govuk-integration-poweruser --assume-role-ttl 3h ./bin/replicate-postgresql.sh content-publisher
-
-# as an AWS User...
-gds aws govuk-integration-readonly --assume-role-ttl 3h ./bin/replicate-postgresql.sh content-publisher
+gds aws govuk-integration-developer --assume-role-ttl 3h ./bin/replicate-postgresql.sh content-publisher
 ```
+
+> The `readonly` role does not provide access to S3, so cannot be used to replicate data locally.
 
 All the scripts, other than `replicate-elasticsearch.sh`, take the name of the app to replicate data for.
 
