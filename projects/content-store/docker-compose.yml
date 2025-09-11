@@ -18,18 +18,18 @@ services:
   content-store-lite:
     <<: *content-store
     depends_on:
-      - postgres-13
+      - postgres-17
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-13/content-store"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres-13/content-store-test"
+      DATABASE_URL: "postgresql://postgres@postgres-17/content-store"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-17/content-store-test"
   content-store-app: &content-store-app
     <<: *content-store
     depends_on:
-      - postgres-13
+      - postgres-17
       - router-api-app
       - nginx-proxy
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-13/content-store"
+      DATABASE_URL: "postgresql://postgres@postgres-17/content-store"
       VIRTUAL_HOST: content-store.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
@@ -40,5 +40,5 @@ services:
     <<: *content-store-app
     environment:
       VIRTUAL_HOST: draft-content-store.dev.gov.uk
-      DATABASE_URL: "postgresql://postgres@postgres-13/draft-content-store"
+      DATABASE_URL: "postgresql://postgres@postgres-17/draft-content-store"
       BINDING: 0.0.0.0

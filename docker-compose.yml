@@ -7,6 +7,7 @@ volumes:
   postgres-14:
   postgres-14-postgis:
   postgres-16:
+  postgres-17:
   mysql-8:
   mongo-3.6:
   go:
@@ -63,6 +64,13 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
       - postgres-16:/var/lib/postgresql/data
+
+  postgres-17:
+    image: postgres:17
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - postgres-17:/var/lib/postgresql/data
 
   memcached:
     image: memcached
