@@ -55,6 +55,7 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ router-api
    - ✅ search-admin
    - ✅ search-api
+   - ✅ search-evaluation-service
    - ✅ service-manual-publisher
    - ✅ short-url-manager
    - ❌ sidekiq-monitoring
