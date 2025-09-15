@@ -25,7 +25,7 @@ services:
       DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: none
       DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: none
 
-  search-evaluation-service-app:
+  search-evaluation-service-task-runner:
     <<: *search-evaluation-service
     environment:
       GOOGLE_CLOUD_PROJECT_ID: "780375417592"
