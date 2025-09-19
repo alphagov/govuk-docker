@@ -19,6 +19,7 @@ x-release: &release
 services:
   release-lite:
     <<: *release
+    shm_size: 512mb
     depends_on:
       - mysql-8
       - release-redis
