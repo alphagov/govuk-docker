@@ -4,7 +4,7 @@ This guide explains how to use GOV.UK Docker to develop features for government 
 work with locally. The instructions below assume that you have "made" all of the relevant projects before starting.
 
 1. Start the Whitehall app: `govuk-docker up whitehall-app`
-2. Start the government-frontend app: `govuk-docker up government-frontend-app`
+2. Start the government-frontend app: `govuk-docker up government-frontend-app`. Alternatively, start the frontend app `govuk-docker up frontend-app` if that's the rendering app for the documents you are working with.
 3. Create a router backend for government frontend:
    ```bash
    curl http://router-api.dev.gov.uk/backends/government-frontend -X PUT \
@@ -23,7 +23,7 @@ work with locally. The instructions below assume that you have "made" all of the
    -H 'Content-type: application/json' \
    -d '{"backend": {"backend_url": "http://collections.dev.gov.uk/"}}'
    ```
-7. Publish the homepage and root taxon for GOV.UK: `govuk-docker run publishing-api rake publish_homepage`
+7. Publish the homepage and root taxon for GOV.UK: `govuk-docker run publishing-api-lite rake special_routes:publish_homepage`
 8. Publish a test taxon so that we can tag Whitehall content with it:
 
    ```bash
