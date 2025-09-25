@@ -28,6 +28,7 @@ services:
       REDIS_URL: redis://search-api-v2-redis
       PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: search_api_v2_published_documents
       GOOGLE_CLOUD_PROJECT_ID: none
+      GOOGLE_CLOUD_PROJECT_ID_NUMBER: none
       DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: none
       DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: none
 
@@ -46,6 +47,7 @@ services:
       VIRTUAL_HOST: "search-api-v2.dev.gov.uk"
       BINDING: "0.0.0.0"
       GOOGLE_CLOUD_PROJECT_ID: "780375417592"
+      GOOGLE_CLOUD_PROJECT_ID_NUMBER: "780375417592"
       DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: "projects/780375417592/locations/global/collections/default_collection"
       DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: "projects/780375417592/locations/global"
     expose:
@@ -62,6 +64,7 @@ services:
       REDIS_URL: redis://search-api-v2-redis
       PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: "search_api_v2_published_documents"
       GOOGLE_CLOUD_PROJECT_ID: "780375417592"
+      GOOGLE_CLOUD_PROJECT_ID_NUMBER: "780375417592"
       DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: "projects/780375417592/locations/global/collections/default_collection"
       DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: "projects/780375417592/locations/global"
     command: bin/rake document_sync_worker:run
@@ -71,6 +74,7 @@ services:
     environment:
       REDIS_URL: none
       GOOGLE_CLOUD_PROJECT_ID: "780375417592"
+      GOOGLE_CLOUD_PROJECT_ID_NUMBER: "780375417592"
       DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: "projects/780375417592/locations/global/collections/default_collection"
       DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: "projects/780375417592/locations/global"
 
