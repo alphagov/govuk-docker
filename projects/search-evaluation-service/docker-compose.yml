@@ -1,0 +1,33 @@
+x-search-evaluation-service: &search-evaluation-service
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: search-evaluation-service
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - search-evaluation-service-tmp:/govuk/search-evaluation-service/tmp
+    - root-home:/root
+    # Mount the host's gcloud config directory into the container so that the app can use
+    # Application Default Credentials (required to use Discovery Engine locally)
+    - "~/.config/gcloud:/root/.config/gcloud:delegated"
+  working_dir: /govuk/search-evaluation-service
+
+volumes:
+  search-evaluation-service-tmp:
+
+services:
+  search-evaluation-service-lite:
+    <<: *search-evaluation-service
+    environment:
+      GOOGLE_CLOUD_PROJECT_ID: none
+      DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: none
+      DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: none
+
+  search-evaluation-service-task-runner:
+    <<: *search-evaluation-service
+    environment:
+      GOOGLE_CLOUD_PROJECT_ID: "780375417592"
+      DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: "projects/780375417592/locations/global/collections/default_collection"
+      DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: "projects/780375417592/locations/global"
