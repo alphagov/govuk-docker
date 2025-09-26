@@ -1,0 +1,39 @@
+version: '3.7'
+
+volumes:
+  router-api-postgres-tmp:
+
+x-router-api-postgres: &router-api-postgres
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: router-api-postgres
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - root-home:/root
+    - router-api-postgres-tmp:/govuk/router-api-postgres/tmp
+  working_dir: /govuk/router-api-postgres
+
+services:
+  router-api-postgres-lite: &router-api-postgres-lite
+    <<: *router-api-postgres
+    depends_on:
+      - postgres-14
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres-14/router"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-14/router"
+
+  router-api-postgres-app: &router-api-postgres-app
+    <<: *router-api-postgres
+    depends_on:
+      - nginx-proxy
+      - postgres-14
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres-14/router"
+      VIRTUAL_HOST: router-api-postgres.dev.gov.uk
+      BINDING: 0.0.0.0
+    expose:
+      - "3000"
+    command: bin/rails s --restart
