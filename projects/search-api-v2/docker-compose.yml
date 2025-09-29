@@ -46,10 +46,10 @@ services:
       RAILS_DEVELOPMENT_HOSTS: "search-api-v2.dev.gov.uk,search-api-v2-app"
       VIRTUAL_HOST: "search-api-v2.dev.gov.uk"
       BINDING: "0.0.0.0"
-      GOOGLE_CLOUD_PROJECT_ID: "780375417592"
+      GOOGLE_CLOUD_PROJECT_ID: "search-api-v2-integration"
       GOOGLE_CLOUD_PROJECT_ID_NUMBER: "780375417592"
-      DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: "projects/780375417592/locations/global/collections/default_collection"
-      DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: "projects/780375417592/locations/global"
+      DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: "projects/search-api-v2-integration/locations/global/collections/default_collection"
+      DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: "projects/search-api-v2-integration/locations/global"
     expose:
       - "3000"
     command: bin/rails server --restart
@@ -63,20 +63,20 @@ services:
       RABBITMQ_URL: "amqp://guest:guest@rabbitmq"
       REDIS_URL: redis://search-api-v2-redis
       PUBLISHED_DOCUMENTS_MESSAGE_QUEUE_NAME: "search_api_v2_published_documents"
-      GOOGLE_CLOUD_PROJECT_ID: "780375417592"
+      GOOGLE_CLOUD_PROJECT_ID: "search-api-v2-integration"
       GOOGLE_CLOUD_PROJECT_ID_NUMBER: "780375417592"
-      DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: "projects/780375417592/locations/global/collections/default_collection"
-      DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: "projects/780375417592/locations/global"
+      DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: "projects/search-api-v2-integration/locations/global/collections/default_collection"
+      DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: "projects/search-api-v2-integration/locations/global"
     command: bin/rake document_sync_worker:run
 
   search-api-v2-task-runner:
     <<: *search-api-v2
     environment:
       REDIS_URL: none
-      GOOGLE_CLOUD_PROJECT_ID: "780375417592"
+      GOOGLE_CLOUD_PROJECT_ID: "search-api-v2-integration"
       GOOGLE_CLOUD_PROJECT_ID_NUMBER: "780375417592"
-      DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: "projects/780375417592/locations/global/collections/default_collection"
-      DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: "projects/780375417592/locations/global"
+      DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: "projects/search-api-v2-integration/locations/global/collections/default_collection"
+      DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: "projects/search-api-v2-integration/locations/global"
 
   search-api-v2-redis:
     image: redis
