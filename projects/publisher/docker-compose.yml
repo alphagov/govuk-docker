@@ -23,10 +23,7 @@ services:
     depends_on:
       - publisher-redis
       - postgres-17
-      - mongo-3.6
     environment:
-      MONGODB_URI: "mongodb://mongo-3.6/publisher"
-      TEST_MONGODB_URI: "mongodb://mongo-3.6/publisher-test"
       DATABASE_URL: "postgresql://postgres@postgres-17/publisher"
       TEST_DATABASE_URL: "postgresql://postgres@postgres-17/publisher_test"
       REDIS_URL: redis://publisher-redis
@@ -36,7 +33,6 @@ services:
     depends_on:
       - publisher-redis
       - postgres-17
-      - mongo-3.6
       - nginx-proxy
       - publishing-api-app
       - link-checker-api-app
@@ -45,7 +41,6 @@ services:
       - signon-app
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-17/publisher"
-      MONGODB_URI: "mongodb://mongo-3.6/publisher"
       REDIS_URL: redis://publisher-redis
       VIRTUAL_HOST: publisher.dev.gov.uk
       BINDING: 0.0.0.0
@@ -61,13 +56,11 @@ services:
     <<: *publisher
     depends_on:
       - publisher-redis
-      - mongo-3.6
       - postgres-17
       - nginx-proxy
       - publishing-api-app
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-17/publisher"
-      MONGODB_URI: "mongodb://mongo-3.6/publisher"
       REDIS_URL: redis://publisher-redis
     command: bin/dev worker
 
