@@ -30,11 +30,13 @@ services:
       - nginx-proxy
     environment:
       GOVUK_PROXY_STATIC_ENABLED: "true"
+      PLEK_SERVICE_STATIC_URI: http://static.dev.gov.uk
+      PLEK_SERVICE_CONTENT_STORE_URI: http://content-store.dev.gov.uk
       VIRTUAL_HOST: government-frontend.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
-      - "3000"
-    command: bin/rails s --restart
+      - "3090"
+    command: bin/dev
 
   government-frontend-app-live:
     <<: *government-frontend-app
