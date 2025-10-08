@@ -1,0 +1,35 @@
+x-search-api-v2-beta-features: &search-api-v2-beta-features
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: search-api-v2-beta-features
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - search-api-v2-beta-features-tmp:/govuk/search-api-v2-beta-features/tmp
+    - root-home:/root
+    # Mount the host's gcloud config directory into the container so that the app can use
+    # Application Default Credentials (required to use Discovery Engine locally)
+    - "~/.config/gcloud:/root/.config/gcloud:delegated"
+  working_dir: /govuk/search-api-v2-beta-features
+
+volumes:
+  search-api-v2-beta-features-tmp:
+
+services:
+  search-api-v2-beta-features-lite:
+    <<: *search-api-v2-beta-features
+    environment:
+      GOOGLE_CLOUD_PROJECT_ID: none
+      GOOGLE_CLOUD_PROJECT_ID_NUMBER: none
+      DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: none
+      DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: none
+
+  search-api-v2-beta-features-task-runner:
+    <<: *search-api-v2-beta-features
+    environment:
+      GOOGLE_CLOUD_PROJECT_ID: "search-api-v2-integration"
+      GOOGLE_CLOUD_PROJECT_ID_NUMBER: "780375417592"
+      DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: "projects/780375417592/locations/global/collections/default_collection"
+      DISCOVERY_ENGINE_DEFAULT_LOCATION_NAME: "projects/780375417592/locations/global"
