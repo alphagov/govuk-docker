@@ -1,4 +1,5 @@
 volumes:
+  carrierwave-tmp:
   whitehall-tmp:
   whitehall-node-modules:
 
@@ -14,6 +15,7 @@ x-whitehall: &whitehall
     - root-home:/root
     - whitehall-tmp:/govuk/whitehall/tmp
     - whitehall-node-modules:/govuk/whitehall/node_modules
+    - carrierwave-tmp:/govuk/whitehall/carrierwave-tmp
   working_dir: /govuk/whitehall
   # Mount /tmp as a tmpfs volume. This is a workaround until docker/for-linux#1015 is resolved.
   # See alphagov/govuk-docker#537 for more info.
