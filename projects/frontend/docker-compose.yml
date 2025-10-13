@@ -32,11 +32,15 @@ services:
       - static-app
     environment:
       ALLOW_LOCAL_CONTENT_ITEM_OVERRIDE: "true"
+      GOVUK_WEBSITE_ROOT: https://www.gov.uk
+      GOVUK_PROXY_STATIC_ENABLED: "true"
+      PLEK_SERVICE_STATIC_URI: http://static.dev.gov.uk
+      PLEK_SERVICE_CONTENT_STORE_URI: http://content-store.dev.gov.uk
       VIRTUAL_HOST: frontend.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
-      - "3000"
-    command: bin/rails s --restart
+      - "3005"
+    command: bin/dev
 
   frontend-app-live:
     <<: *frontend-app
