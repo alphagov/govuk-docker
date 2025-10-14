@@ -52,6 +52,21 @@ services:
       - "3000"
     command: bin/dev
 
+  # Run the app with Whitehall, Mainstream and both frontend apps running
+  content-block-manager-full:
+    <<: *content-block-manager-app
+    depends_on:
+      - postgres-16
+      - content-block-manager-redis
+      - nginx-proxy
+      - publishing-api-app
+      - content-block-manager-worker
+      - signon-app
+      - whitehall-app
+      - publisher-app
+      - frontend-app
+      - government-frontend-app
+
   content-block-manager-worker:
     <<: *content-block-manager
     depends_on:
