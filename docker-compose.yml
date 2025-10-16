@@ -102,6 +102,13 @@ services:
     volumes:
       - rabbitmq:/var/lib/rabbitmq
 
+  elasticsearch-6-init:
+    image: eclipse-temurin:8-jre
+    user: root
+    volumes:
+      - elasticsearch-6:/usr/share/elasticsearch/data
+    command: chown -R ubuntu:ubuntu /usr/share/elasticsearch/data
+
   elasticsearch-6:
     build:
       context: services/elasticsearch-6
@@ -113,6 +120,8 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
+    depends_on:
+      - elasticsearch-6-init
 
   elasticsearch-7:
     image: elasticsearch:7.9.3
