@@ -28,6 +28,7 @@ echo "
   cluster.name: 'docker-cluster'
   network.host: 0.0.0.0
   discovery.zen.minimum_master_nodes: 1
+  xpack.ml.enabled: false
   path.repo: ['/replication']
 " > "$cfg_path"
 
