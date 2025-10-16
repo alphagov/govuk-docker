@@ -46,7 +46,10 @@ until curl 127.0.0.1:9200 &>/dev/null; do
   sleep 1
 done
 
+echo "removing indices..."
 curl -XDELETE "http://127.0.0.1:9200/_all"
+
+echo "registering snapshot..."
 curl "http://127.0.0.1:9200/_snapshot/snapshots" -X PUT -H 'Content-Type: application/json' -d '{
   "type": "fs",
   "settings": {
@@ -59,5 +62,27 @@ curl "http://127.0.0.1:9200/_snapshot/snapshots" -X PUT -H 'Content-Type: applic
 # wait for elasticsearch to digest the snapshot metadata
 sleep 5
 
-snapshot_name=$(curl "http://127.0.0.1:9200/_snapshot/snapshots/_all" | ruby -e 'require "json"; STDOUT << (JSON.parse(STDIN.read)["snapshots"].map { |a| a["snapshot"] }.sort.last)')
-curl -XPOST "http://127.0.0.1:9200/_snapshot/snapshots/${snapshot_name}/_restore?wait_for_completion=true"
+snapshot_name=$(curl "http://127.0.0.1:9200/_snapshot/snapshots/_all" | jq -r ".snapshots | map(.snapshot) | sort | last")
+
+indices=$(curl "http://127.0.0.1:9200/_snapshot/snapshots/_all" | jq -r '
+.snapshots[].indices
+| [
+    (map(select(startswith("detailed-"))) | sort | last),
+    (map(select(startswith("page-traffic-"))) | sort | last),
+    (map(select(startswith("metasearch-"))) | sort | last),
+    (map(select(startswith("govuk-"))) | sort | last),
+    (map(select(startswith("government-"))) | sort | last),
+    ".kibana_1",
+    ".tasks",
+    "licence-finder"
+  ] | join(",")
+')
+
+echo "restoring indices..."
+curl -XPOST "http://127.0.0.1:9200/_snapshot/snapshots/${snapshot_name}/_restore?wait_for_completion=true" \
+-H "Content-Type: application/json" \
+-d @- <<EOF
+{
+ "indices": "${indices}"
+}
+EOF
