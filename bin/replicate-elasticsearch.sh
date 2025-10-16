@@ -30,6 +30,7 @@ echo "
   discovery.zen.minimum_master_nodes: 1
   xpack.ml.enabled: false
   path.repo: ['/replication']
+  path.data: /usr/share/elasticsearch/data
 " > "$cfg_path"
 
 echo "stopping running govuk-docker containers..."
