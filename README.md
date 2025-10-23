@@ -66,7 +66,26 @@ make [app-name]
 make collections-publisher
 ```
 
+You'll also need to set up the database and seed data:
+
+```
+# enter the app directory, e.g. ~/govuk/whitehall
+cd ~/govuk/app-name
+
+# create development database (used locally when running `govuk-docker-up`)
+govuk-docker-run rails db:create
+
+# create test database (used locally when running tests)
+govuk-docker-run rails db:create RAILS_ENV=test
+
+# Seed the database(s)
+govuk-docker-run rails db:seed
+govuk-docker-run rails db:seed RAILS_ENV=test
+```
+
 👉 [Check the troubleshooting guide if you have a problem.](docs/troubleshooting.md)
+
+## Stacks
 
 Each project provides a number of 'stacks' for different use cases. You can see the stacks for a project in its [config file](projects/content-publisher/docker-compose.yml). To provide consistency, all projects should follow these conventions for stacks:
 
