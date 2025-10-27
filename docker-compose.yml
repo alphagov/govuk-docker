@@ -163,7 +163,6 @@ services:
           - collections-publisher.dev.gov.uk
           - collections.dev.gov.uk
           - content-block-manager.dev.gov.uk
-          - content-publisher.dev.gov.uk
           - content-data-api.dev.gov.uk
           - content-data-admin.dev.gov.uk
           - content-store.dev.gov.uk

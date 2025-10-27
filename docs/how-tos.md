@@ -16,11 +16,11 @@ Typing the [full commands](../README.md#usage) is likely to get tiring. We've ad
 
 ```
 # full commands
-govuk-docker run content-publisher-lite bundle exec rake
-govuk-docker up content-publisher-app
+govuk-docker run collections-publisher-lite bundle exec rake
+govuk-docker up collections-publisher-app
 
 # shortcuts
-# assuming you're in the content-publisher directory
+# assuming you're in the collections-publisher directory
 govuk-docker-run bundle exec rake
 govuk-docker-up
 ```
@@ -51,10 +51,10 @@ There may be times when a full database is required locally.  The following scri
 - `replicate-mysql.sh APP-NAME`
 - `replicate-postgresql.sh APP-NAME`
 
-You will need to assume-role into AWS using the [gds-cli](https://docs.publishing.service.gov.uk/manual/access-aws-console.html) before running the scripts. For example, to replicate data for Content Publisher, run:
+You will need to assume-role into AWS using the [gds-cli](https://docs.publishing.service.gov.uk/manual/access-aws-console.html) before running the scripts. For example, to replicate data for Collections Publisher, run:
 
 ```
-gds aws govuk-integration-developer --assume-role-ttl 3h ./bin/replicate-postgresql.sh content-publisher
+gds aws govuk-integration-developer --assume-role-ttl 3h ./bin/replicate-postgresql.sh collections-publisher
 ```
 
 > The `readonly` role does not provide access to S3, so cannot be used to replicate data locally.
@@ -79,7 +79,7 @@ The replication scripts might fail for the following reasons:
 While most environment variables should be set in the config for a project, sometimes it's necessary to set assign one or more variables at the point of running a command, such as a Rake task. This can be done using `env` e.g.
 
 ```
-govuk-docker run content-publisher-lite env MY_VAR=my_val bundle exec rake my_task
+govuk-docker run collections-publisher-lite env MY_VAR=my_val bundle exec rake my_task
 ```
 
 ## How to: debug a running Rails app
@@ -91,7 +91,7 @@ Normally it's enough to run a Rails app using `govuk-docker up`. To get a `debug
 govuk-docker ps
 
 # attach to the container
-docker attach govuk-docker_content-publisher-app_1
+docker attach govuk-docker_collections-publisher-app_1
 
 # awesome debugging stuff
 ...

@@ -68,7 +68,7 @@ make collections-publisher
 
 👉 [Check the troubleshooting guide if you have a problem.](docs/troubleshooting.md)
 
-Each project provides a number of 'stacks' for different use cases. You can see the stacks for a project in its [config file](projects/content-publisher/docker-compose.yml). To provide consistency, all projects should follow these conventions for stacks:
+Each project provides a number of 'stacks' for different use cases. You can see the stacks for a project in its [config file](projects/collections-publisher/docker-compose.yml). To provide consistency, all projects should follow these conventions for stacks:
 
 ### The `lite` stack
 
@@ -103,7 +103,7 @@ Variations on the `app` stack are allowed where necessary such as:
   - **app-draft**: used for testing the [authenticating-proxy](https://github.com/alphagov/govuk-docker/tree/master/projects/authenticating-proxy) against a draft version of the [router](https://github.com/alphagov/govuk-docker/tree/master/projects/router) app.
   - **app-live**: used to test a read-only frontend app against live GOV.UK APIs (avoids having to replicate data locally).
 
-Some `app` stacks also depend on a `worker` stack, to run asynchronous tasks [[example](https://github.com/alphagov/govuk-docker/blob/d286748e0300df8f0d1ed618086d4f8f951e752a/projects/content-publisher/docker-compose.yml#L46)].
+Some `app` stacks also depend on a `worker` stack, to run asynchronous tasks [[example](https://github.com/alphagov/govuk-docker/blob/5c1d2e399a5f707229421ede44100e7820192dde/projects/collections-publisher/docker-compose.yml)].
 
 ## Resources
 
