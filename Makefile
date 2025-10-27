@@ -11,7 +11,7 @@ default:
 	@echo "Run 'make APP-NAME' to set up an app and its dependencies."
 	@echo
 	@echo "For example:"
-	@echo "    make content-publisher"
+	@echo "    make collections-publisher"
 
 test-local: test-scripts
 	$(GOVUK_DOCKER) run govuk-docker-lite bundle exec rubocop
