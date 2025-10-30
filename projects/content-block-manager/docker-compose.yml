@@ -24,19 +24,19 @@ services:
     <<: *content-block-manager
     shm_size: 512mb
     depends_on:
-      - postgres-16
+      - postgres-17
       - content-block-manager-redis
       - publishing-api-app
     environment:
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
-      DATABASE_URL: "postgresql://postgres@postgres-16/content-block-manager_development"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres-16/content-block-manager_test"
+      DATABASE_URL: "postgresql://postgres@postgres-17/content-block-manager_development"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-17/content-block-manager_test"
       REDIS_URL: redis://content-block-manager-redis
 
   content-block-manager-app: &content-block-manager-app
     <<: *content-block-manager
     depends_on:
-      - postgres-16
+      - postgres-17
       - content-block-manager-redis
       - nginx-proxy
       - publishing-api-app
@@ -44,7 +44,7 @@ services:
       - signon-app
     environment:
       GOVUK_PROXY_STATIC_ENABLED: "true"
-      DATABASE_URL: "postgresql://postgres@postgres-16/content-block-manager_development"
+      DATABASE_URL: "postgresql://postgres@postgres-17/content-block-manager_development"
       REDIS_URL: redis://content-block-manager-redis
       VIRTUAL_HOST: content-block-manager.dev.gov.uk
       BINDING: 0.0.0.0
@@ -56,7 +56,7 @@ services:
   content-block-manager-full:
     <<: *content-block-manager-app
     depends_on:
-      - postgres-16
+      - postgres-17
       - content-block-manager-redis
       - nginx-proxy
       - publishing-api-app
@@ -70,12 +70,12 @@ services:
   content-block-manager-worker:
     <<: *content-block-manager
     depends_on:
-      - postgres-16
+      - postgres-17
       - content-block-manager-redis
       - nginx-proxy
       - publishing-api-app
     environment:
-      DATABASE_URL: "postgresql://root:root@postgres-16/content-block-manager_development"
+      DATABASE_URL: "postgresql://root:root@postgres-17/content-block-manager_development"
       REDIS_URL: redis://content-block-manager-redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
 
