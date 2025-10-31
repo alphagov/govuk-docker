@@ -12,10 +12,15 @@ echo -e "✅ Starting Docker...\n"
 echo "✅ Configuring dnsmasq [/etc/resolver/dev/gov.uk]"
 echo -e "You may need to enter your root password...\n"
 sudo mkdir -p /etc/resolver
-echo -e "nameserver 127.0.0.1\nport 53" | sudo tee /etc/resolver/dev.gov.uk >/dev/null
+echo -e "nameserver 127.0.0.1\nport 533" | sudo tee /etc/resolver/dev.gov.uk >/dev/null
 
 echo -e "✅ Configuring dnsmasq [$brew_root/etc/dnsmasq.conf]\n"
-echo "conf-dir=$brew_root/etc/dnsmasq.d,*.conf" >> $brew_root/etc/dnsmasq.conf
+echo """
+conf-dir=$brew_root/etc/dnsmasq.d,*.conf
+port=533
+domain-needed
+bogus-priv
+""" >> $brew_root/etc/dnsmasq.conf
 
 echo -e "✅ Configuring dnsmasq [$brew_root/etc/dnsmasq.d/development.conf]\n"
 mkdir -p $brew_root/etc/dnsmasq.d

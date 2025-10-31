@@ -183,7 +183,7 @@ RSpec.describe GovukDocker::Doctor::Checkup do
     end
 
     it "should report success if dnsmasq conf matches the one in govuk-docker" do
-      dns_config = "nameserver 127.0.0.1\nport 53"
+      dns_config = "nameserver 127.0.0.1\nport 533"
       allow(File).to receive(:read).and_call_original
       allow(File).to receive(:read).with("/etc/resolver/dev.gov.uk").and_return(dns_config)
 

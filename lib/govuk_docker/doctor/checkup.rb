@@ -103,7 +103,7 @@ module GovukDocker::Doctor
     end
 
     def dnsmasq_resolver?
-      File.read("/etc/resolver/dev.gov.uk").strip == "nameserver 127.0.0.1\nport 53"
+      File.read("/etc/resolver/dev.gov.uk").strip == "nameserver 127.0.0.1\nport 533"
     end
 
     def dnsmasq_resolver_message
@@ -115,7 +115,7 @@ module GovukDocker::Doctor
     end
 
     def dnsmasq_resolving?
-      `dig +short +time=1 +tries=1 app.dev.gov.uk @127.0.0.1`.strip == "127.0.0.1"
+      `dig -p 533 +short +time=1 +tries=1 app.dev.gov.uk @127.0.0.1`.strip == "127.0.0.1"
     end
 
     def dnsmasq_resolving_message
