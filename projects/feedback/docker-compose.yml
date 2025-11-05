@@ -26,12 +26,11 @@ services:
     depends_on:
       - feedback-redis
       - router-app
-      - static-app
       - nginx-proxy
       - support-api-app
       - support-app
     environment:
-      GOVUK_PROXY_STATIC_ENABLED: "true"
+      GOVUK_PROXY_STATIC_ENABLED: "false"
       REDIS_URL: redis://feedback-redis
       VIRTUAL_HOST: feedback.dev.gov.uk
       BINDING: 0.0.0.0
@@ -46,9 +45,8 @@ services:
       - nginx-proxy
     environment:
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
-      GOVUK_PROXY_STATIC_ENABLED: "true"
+      GOVUK_PROXY_STATIC_ENABLED: "false"
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
-      PLEK_SERVICE_STATIC_URI: https://assets.publishing.service.gov.uk
       VIRTUAL_HOST: feedback.dev.gov.uk
       BINDING: 0.0.0.0
       REDIS_URL: redis://feedback-redis
