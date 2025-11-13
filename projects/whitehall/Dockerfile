@@ -10,9 +10,9 @@ ENV GOVUK_TEST_CHROME_NO_SANDBOX 1
 # Install node / yarn
 RUN curl -sL https://deb.nodesource.com/setup_22.x | bash -
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN apt-get update -qq && apt-get install -y yarn nodejs
-RUN yarn config set cache-folder /root/.yarn/
+RUN apt-get update -qq && apt-get install -y nodejs
+RUN corepack enable && yarn set version 4.x
+RUN yarn config set cacheFolder "/root/.yarn/"
 
 # Install rbenv to manage ruby versions
 RUN git clone https://github.com/rbenv/rbenv.git /rbenv
