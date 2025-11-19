@@ -11,4 +11,4 @@
 # **************************************************************
 
 STACK=${1:-app}
-"$(dirname "$0")"/govuk-docker up "$(basename "$(pwd)")-$STACK"
+"$(dirname "$0")"/govuk-docker up "$(basename "$(pwd)")-$STACK" "${@:2}"
