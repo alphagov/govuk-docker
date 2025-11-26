@@ -64,7 +64,7 @@ sleep 5
 
 snapshot_name=$(curl "http://127.0.0.1:9200/_snapshot/snapshots/_all" | jq -r ".snapshots | map(.snapshot) | sort | last")
 
-indices=$(curl "http://127.0.0.1:9200/_snapshot/snapshots/_all" | jq -r '
+indices=$(curl "http://127.0.0.1:9200/_snapshot/snapshots/$snapshot_name" | jq -r '
 .snapshots[].indices
 | [
     (map(select(startswith("detailed-"))) | sort | last),
