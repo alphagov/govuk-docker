@@ -1,0 +1,48 @@
+volumes:
+  fact-check-manager-tmp:
+  fact-check-manager-node-modules:
+
+x-fact-check-manager: &fact-check-manager
+  build:
+    context: .
+    dockerfile: Dockerfile.govuk-base
+  image: fact-check-manager
+  stdin_open: true
+  tty: true
+  volumes:
+    - ${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated
+    - root-home:/root
+    - fact-check-manager-tmp:/govuk/fact-check-manager/tmp
+    - fact-check-manager-node-modules:/govuk/fact-check-manager/node_modules
+  working_dir: /govuk/fact-check-manager
+
+services:
+  fact-check-manager-lite:
+    <<: *fact-check-manager
+    shm_size: 512mb
+    depends_on:
+      - postgres-17
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres-17/fact-check-manager"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-17/fact-check-manager_test"
+
+  fact-check-manager-app: &fact-check-manager-app
+    <<: *fact-check-manager
+    depends_on:
+      - postgres-17
+      - nginx-proxy
+      - publishing-api-app
+      - signon-app
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres-17/fact-check-manager"
+      VIRTUAL_HOST: fact-check-manager.dev.gov.uk
+      BINDING: 0.0.0.0
+    expose:
+      - "3000"
+    command: bin/dev web
+
+  fact-check-manager-css:
+    <<: *fact-check-manager
+    command: bin/dev css
+
+

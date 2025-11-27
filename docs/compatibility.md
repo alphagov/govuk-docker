@@ -30,6 +30,8 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ email-alert-api
    - ✅ email-alert-frontend
    - ✅ email-alert-service
+   - ⚠ fact-check-manager
+     * Currently a work in progress
    - ✅ feedback
    - ✅ finder-frontend
    - ✅ frontend
