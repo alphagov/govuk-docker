@@ -78,3 +78,19 @@ services:
       PLEK_SERVICE_STATIC_URI: https://assets.integration.publishing.service.gov.uk
       VIRTUAL_HOST: finder-frontend.dev.gov.uk
       BINDING: 0.0.0.0
+
+  finder-frontend-app-live-local-search:
+    <<: *finder-frontend-app
+    depends_on:
+      - account-api-app-live
+      - nginx-proxy
+      - search-api-app
+    environment:
+      PLEK_SERVICE_SEARCH_API_V2_URI: https://search.publishing.service.gov.uk/v0_1
+      PLEK_SERVICE_WHITEHALL_FRONTEND_URI: https://www.gov.uk
+      GOVUK_WEBSITE_ROOT: https://www.gov.uk
+      GOVUK_PROXY_STATIC_ENABLED: "true"
+      PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
+      PLEK_SERVICE_STATIC_URI: https://assets.publishing.service.gov.uk
+      VIRTUAL_HOST: finder-frontend.dev.gov.uk
+      BINDING: 0.0.0.0
