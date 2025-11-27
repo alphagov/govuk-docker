@@ -172,6 +172,7 @@ services:
           - draft-router.dev.gov.uk
           - email-alert-api.dev.gov.uk
           - email-alert-frontend.dev.gov.uk
+          - fact-check-manager.dev.gov.uk
           - feedback.dev.gov.uk
           - frontend.dev.gov.uk
           - finder-frontend.dev.gov.uk
