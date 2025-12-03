@@ -29,6 +29,7 @@ services:
   fact-check-manager-app: &fact-check-manager-app
     <<: *fact-check-manager
     depends_on:
+      - fact-check-manager-worker
       - postgres-17
       - nginx-proxy
       - publishing-api-app
@@ -41,8 +42,23 @@ services:
       - "3000"
     command: bin/dev web
 
+  fact-check-manager-worker:
+    <<: *fact-check-manager
+    depends_on:
+      - fact-check-manager-redis
+      - postgres-17
+      - nginx-proxy
+      - publishing-api-app
+    environment:
+      DATABASE_URL: "postgresql://postgres@postgres-17/fact-check-manager"
+      REDIS_URL: redis://fact-check-manager-redis
+    command: bin/dev worker
+
   fact-check-manager-css:
     <<: *fact-check-manager
     command: bin/dev css
+
+  fact-check-manager-redis:
+    image: redis
 
 
