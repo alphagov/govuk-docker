@@ -85,8 +85,8 @@ services:
       - account-api-app-live
       - nginx-proxy
       - search-api-app
+      - search-api-v2-app
     environment:
-      PLEK_SERVICE_SEARCH_API_V2_URI: https://search.publishing.service.gov.uk/v0_1
       PLEK_SERVICE_WHITEHALL_FRONTEND_URI: https://www.gov.uk
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       GOVUK_PROXY_STATIC_ENABLED: "true"
