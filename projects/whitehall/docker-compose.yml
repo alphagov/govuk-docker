@@ -48,7 +48,6 @@ services:
       - whitehall-worker
       - signon-app
     environment:
-      GOVUK_PROXY_STATIC_ENABLED: "true"
       GOVUK_ASSET_ROOT: "http://asset-manager.dev.gov.uk"
       DATABASE_URL: "mysql2://root:root@mysql-8/whitehall_development"
       REDIS_URL: redis://whitehall-redis
