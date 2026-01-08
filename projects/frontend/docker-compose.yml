@@ -32,7 +32,6 @@ services:
     environment:
       ALLOW_LOCAL_CONTENT_ITEM_OVERRIDE: "true"
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
-      GOVUK_PROXY_STATIC_ENABLED: "false"
       PLEK_SERVICE_CONTENT_STORE_URI: http://content-store.dev.gov.uk
       VIRTUAL_HOST: frontend.dev.gov.uk
       BINDING: 0.0.0.0
@@ -48,7 +47,6 @@ services:
     environment:
       ALLOW_LOCAL_CONTENT_ITEM_OVERRIDE: "true"
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
-      GOVUK_PROXY_STATIC_ENABLED: "false"
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       PLEK_SERVICE_SEARCH_API_URI: https://www.gov.uk/api
       VIRTUAL_HOST: frontend.dev.gov.uk
@@ -62,7 +60,6 @@ services:
     environment:
       ALLOW_LOCAL_CONTENT_ITEM_OVERRIDE: "true"
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
-      GOVUK_PROXY_STATIC_ENABLED: "false"
       #ASSET_MANAGER_BEARER_TOKEN: <get an asset manager token from https://signon.integration.publishing.service.gov.uk/api_users>
       PLEK_SERVICE_ASSET_MANAGER_URI: https://assets-origin.eks.integration.govuk.digital
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.integration.publishing.service.gov.uk/api

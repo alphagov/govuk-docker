@@ -43,7 +43,6 @@ services:
       - content-block-manager-worker
       - signon-app
     environment:
-      GOVUK_PROXY_STATIC_ENABLED: "true"
       DATABASE_URL: "postgresql://postgres@postgres-17/content-block-manager_development"
       REDIS_URL: redis://content-block-manager-redis
       VIRTUAL_HOST: content-block-manager.dev.gov.uk

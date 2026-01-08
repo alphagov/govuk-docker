@@ -27,7 +27,6 @@ services:
       - publishing-api-app
       - content-store-app
     environment:
-      GOVUK_PROXY_STATIC_ENABLED: "false"
       VIRTUAL_HOST: smart-answers.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
@@ -41,7 +40,6 @@ services:
       - publishing-api-app
       - content-store-app
     environment:
-      GOVUK_PROXY_STATIC_ENABLED: "false"
       VIRTUAL_HOST: smart-answers.dev.gov.uk
       GOVUK_APP_DOMAIN: www.gov.uk
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
