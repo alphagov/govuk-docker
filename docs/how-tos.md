@@ -54,7 +54,7 @@ There may be times when a full database is required locally.  The following scri
 You will need to assume-role into AWS using the [gds-cli](https://docs.publishing.service.gov.uk/manual/access-aws-console.html) before running the scripts. For example, to replicate data for Collections Publisher, run:
 
 ```
-gds aws govuk-integration-developer --assume-role-ttl 3h ./bin/replicate-postgresql.sh collections-publisher
+gds aws govuk-integration-developer --assume-role-ttl 3h ./bin/replicate-mysql.sh collections-publisher
 ```
 
 > The `readonly` role does not provide access to S3, so cannot be used to replicate data locally.
