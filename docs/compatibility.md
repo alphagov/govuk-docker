@@ -84,5 +84,4 @@ These repos are used as part of running the live GOV.UK site. Since all of them 
    - ❌ govuk_sidekiq
    - ❌ govuk_taxonomy_helpers
    - ✅ plek
-   - ❌ slimmer
    - ✅ smokey
