@@ -20,7 +20,7 @@ conf-dir=$brew_root/etc/dnsmasq.d,*.conf
 port=533
 domain-needed
 bogus-priv
-""" >> $brew_root/etc/dnsmasq.conf
+""" > $brew_root/etc/dnsmasq.conf
 
 echo -e "✅ Configuring dnsmasq [$brew_root/etc/dnsmasq.d/development.conf]\n"
 mkdir -p $brew_root/etc/dnsmasq.d
