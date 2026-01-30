@@ -21,19 +21,19 @@ RSpec.describe "Expected volumes" do
     ComposeHelper.services(project_name)
                  .reject { |service_name| service_name.end_with? "redis" }
                  .each_pair do |service_name, service|
-      it "configures #{service_name} with a govuk delegated volume" do
-        expect(service.fetch("volumes", []))
-          .to include("${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated")
-      end
+                   it "configures #{service_name} with a govuk delegated volume" do
+                     expect(service.fetch("volumes", []))
+                       .to include("${GOVUK_ROOT_DIR:-~/govuk}:/govuk:delegated")
+                   end
 
-      it "configures #{service_name} with a root-home volume" do
-        expect(service.fetch("volumes", [])).to include("root-home:/root")
-      end
+                   it "configures #{service_name} with a root-home volume" do
+                     expect(service.fetch("volumes", [])).to include("root-home:/root")
+                   end
 
-      it "configures #{service_name} with a tmp volume" do
-        expect(service.fetch("volumes", []))
-          .to include("#{project_name}-tmp:/govuk/#{project_name}/tmp")
-      end
+                   it "configures #{service_name} with a tmp volume" do
+                     expect(service.fetch("volumes", []))
+                       .to include("#{project_name}-tmp:/govuk/#{project_name}/tmp")
+                   end
     end
   end
 
@@ -41,10 +41,10 @@ RSpec.describe "Expected volumes" do
     ComposeHelper.services(project_name)
                  .reject { |service_name| service_name.end_with? "redis" }
                  .each_pair do |service_name, service|
-      it "configures #{service_name} with a node modules volume" do
-        expect(service.fetch("volumes", []))
-          .to include("#{project_name}-node-modules:/govuk/#{project_name}/node_modules")
-      end
+                   it "configures #{service_name} with a node modules volume" do
+                     expect(service.fetch("volumes", []))
+                       .to include("#{project_name}-node-modules:/govuk/#{project_name}/node_modules")
+                   end
     end
   end
 end
