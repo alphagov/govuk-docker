@@ -34,6 +34,7 @@ services:
       - nginx-proxy
       - publishing-api-app
       - signon-app
+      - fact-check-manager-css
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-17/fact-check-manager"
       VIRTUAL_HOST: fact-check-manager.dev.gov.uk
