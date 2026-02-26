@@ -34,10 +34,14 @@ services:
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       PLEK_SERVICE_CONTENT_STORE_URI: http://content-store.dev.gov.uk
       VIRTUAL_HOST: frontend.dev.gov.uk
+      VIRTUAL_PORT: 3005
       BINDING: 0.0.0.0
+      WEB_CONCURRENCY: 0
     expose:
       - "3005"
     command: bin/dev
+    ports:
+      - "12345:12345"
 
   frontend-app-live:
     <<: *frontend-app
@@ -50,7 +54,9 @@ services:
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       PLEK_SERVICE_SEARCH_API_URI: https://www.gov.uk/api
       VIRTUAL_HOST: frontend.dev.gov.uk
+      VIRTUAL_PORT: 3005
       BINDING: 0.0.0.0
+      WEB_CONCURRENCY: 0
 
   frontend-app-integration:
     <<: *frontend-app
@@ -65,4 +71,6 @@ services:
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.integration.publishing.service.gov.uk/api
       PLEK_SERVICE_SEARCH_API_URI: https://www.integration.publishing.service.gov.uk/api
       VIRTUAL_HOST: frontend.dev.gov.uk
+      VIRTUAL_PORT: 3005
       BINDING: 0.0.0.0
+      WEB_CONCURRENCY: 0
