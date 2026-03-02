@@ -27,6 +27,7 @@ services:
       - feedback-redis
       - router-app
       - nginx-proxy
+      - publishing-api-app
       - support-api-app
       - support-app
     environment:
