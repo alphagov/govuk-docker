@@ -67,7 +67,6 @@ snapshot_name=$(curl "http://127.0.0.1:9200/_snapshot/snapshots/_all" | jq -r ".
 indices=$(curl "http://127.0.0.1:9200/_snapshot/snapshots/$snapshot_name" | jq -r '
 .snapshots[].indices
 | [
-    (map(select(startswith("detailed-"))) | sort | last),
     (map(select(startswith("page-traffic-"))) | sort | last),
     (map(select(startswith("metasearch-"))) | sort | last),
     (map(select(startswith("govuk-"))) | sort | last),
