@@ -74,6 +74,26 @@ The replication scripts might fail for the following reasons:
   - If you're okay with removing some or all of your Docker containers, images, and possibly volumes and other data, run [docker system prune](https://docs.docker.com/reference/cli/docker/system/prune).
   - If you have enough spare space on your local machine, allocate more space to Docker. Using Docker Desktop, this setting is under Settings > Resources > Advanced > Resource Allocation > Virtual disk limit.
 
+## How to: run frontend application against the APIs in the integration environment
+
+Some frontend apps, like `feedback`, have a dedicated `*-app-integration` stack. This stack allows your app to connect to the integration versions of the GOV.UK backend services, including Publishing API and Content Store.
+
+For testing with integration instances, we need to override local Docker services endpoints.
+
+1. Enable connection to Content Store in integration
+
+The Content Store in integration requires connecting to VPN/Zscaler or HTTP Basic Authentication. 
+To include basic authentication credentials update the environment variable in the `docker-compose.yml` for the relevant app:
+`PLEK_SERVICE_CONTENT_STORE_URI: https://USERNAME:PASSWORD@www.integration.publishing.service.gov.uk/api`
+Replace USERNAME and PASSWORD with the standard integration credentials widely known to GOV.UK developers.
+
+1. Enable connection to Publishing API in integration
+
+The Publishing API needs to be accessed it via Kubernetes port forwarding. To make the service available on your local machine run the following command in a separate terminal (see [Kubernetes prerequisites](https://docs.publishing.service.gov.uk/kubernetes/cheatsheet.html#prerequisites) for more details):
+```
+kubectl port-forward -n apps deploy/publishing-api 8080:8080
+```
+
 ## How to: set environment variables
 
 While most environment variables should be set in the config for a project, sometimes it's necessary to set assign one or more variables at the point of running a command, such as a Rake task. This can be done using `env` e.g.
