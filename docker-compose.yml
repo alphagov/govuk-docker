@@ -176,7 +176,6 @@ services:
           - feedback.dev.gov.uk
           - frontend.dev.gov.uk
           - finder-frontend.dev.gov.uk
-          - government-frontend.dev.gov.uk
           - govspeak-preview.dev.gov.uk
           - govuk-chat.dev.gov.uk
           - govuk-developer-docs.dev.gov.uk
