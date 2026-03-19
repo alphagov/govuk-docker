@@ -24,6 +24,7 @@ services:
   feedback-app: &feedback-app
     <<: *feedback
     depends_on:
+      - content-store-app
       - feedback-redis
       - router-app
       - nginx-proxy
