@@ -20,7 +20,7 @@ services:
     depends_on:
       - postgres-14
     environment:
-      GOVUK_UPSTREAM_URI: http://government-frontend.dev.gov.uk
+      GOVUK_UPSTREAM_URI: http://frontend.dev.gov.uk
       DATABASE_URL: "postgresql://postgres@postgres-14/authenticating-proxy"
       TEST_DATABASE_URL: "postgresql://postgres@postgres-14/authenticating-proxy-test"
 
@@ -29,9 +29,9 @@ services:
     depends_on:
       - postgres-14
       - nginx-proxy
-      - government-frontend-app
+      - frontend-app
     environment:
-      GOVUK_UPSTREAM_URI: http://government-frontend.dev.gov.uk
+      GOVUK_UPSTREAM_URI: http://frontend.dev.gov.uk
       DATABASE_URL: "postgresql://postgres@postgres-14/authenticating-proxy"
       VIRTUAL_HOST: authenticating-proxy.dev.gov.uk
       BINDING: 0.0.0.0
