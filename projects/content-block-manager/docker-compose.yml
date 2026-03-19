@@ -64,7 +64,6 @@ services:
       - whitehall-app
       - publisher-app
       - frontend-app
-      - government-frontend-app
 
   content-block-manager-worker:
     <<: *content-block-manager
