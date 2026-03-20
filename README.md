@@ -92,7 +92,7 @@ Do this to start a GOV.UK web app:
 govuk-docker up [app-name]-app
 ```
 
-👉 [Replicate data locally](docs/how-tos.md#how-to-replicate-data-locally) (or use the [`app-live` stack](#the-app--stacks)).
+👉 [Replicate data locally](docs/how-tos.md#how-to-replicate-data-locally) (or use the [`app-live` stack](#the-app--stacks) or [`app-integration` stack]((docs/how-tos.md#how-to-run-frontend-application-against-the-apis-in-the-integration-environment))).
 
 👉 [Check the troubleshooting guide if you have a problem.](docs/troubleshooting.md)
 
@@ -102,6 +102,7 @@ Variations on the `app` stack are allowed where necessary such as:
 
   - **app-draft**: used for testing the [authenticating-proxy](https://github.com/alphagov/govuk-docker/tree/master/projects/authenticating-proxy) against a draft version of the [router](https://github.com/alphagov/govuk-docker/tree/master/projects/router) app.
   - **app-live**: used to test a read-only frontend app against live GOV.UK APIs (avoids having to replicate data locally).
+  - **app-integration**: used to test a read-only frontend app against integration GOV.UK APIs (avoids having to replicate data locally, without risking degradation in the live production service). [See the how to guide](docs/how-tos.md#how-to-run-frontend-application-against-the-apis-in-the-integration-environment)
 
 Some `app` stacks also depend on a `worker` stack, to run asynchronous tasks [[example](https://github.com/alphagov/govuk-docker/blob/5c1d2e399a5f707229421ede44100e7820192dde/projects/collections-publisher/docker-compose.yml)].
 
