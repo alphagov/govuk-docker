@@ -1,10 +1,16 @@
+---
 version: 2
 updates:
 - package-ecosystem: bundler
-  directory: "/"
+  directory: /
   schedule:
     interval: daily
-- package-ecosystem: "github-actions"
-  directory: "/"
+  cooldown:
+    default-days: 10
+- package-ecosystem: github-actions
+  directory: /
   schedule:
     interval: daily
+  cooldown:
+    default-days: 10
+...
