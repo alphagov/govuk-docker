@@ -12,7 +12,7 @@ x-search-api: &search-api
   environment:
     RABBITMQ_URL: amqp://guest:guest@rabbitmq
     REDIS_URL: redis://search-api-redis
-    ELASTICSEARCH_URI: http://elasticsearch-6:9200
+    ELASTICSEARCH_URI: http://elasticsearch-7.10:9200
 
 services:
   search-api-lite:
@@ -20,14 +20,14 @@ services:
     depends_on:
       - search-api-redis
       - rabbitmq
-      - elasticsearch-6
+      - elasticsearch-7.10
 
   search-api-app: &search-api-app
     <<: *search-api
     depends_on:
       - nginx-proxy
       - search-api-redis
-      - elasticsearch-6
+      - elasticsearch-7.10
       - search-api-worker
       - search-api-listener-publishing-queue
       - search-api-listener-insert-data
@@ -35,7 +35,7 @@ services:
     environment:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
       REDIS_URL: redis://search-api-redis
-      ELASTICSEARCH_URI: http://elasticsearch-6:9200
+      ELASTICSEARCH_URI: http://elasticsearch-7.10:9200
       VIRTUAL_HOST: search-api.dev.gov.uk, search.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
@@ -47,7 +47,7 @@ services:
     depends_on:
       - search-api-redis
       - rabbitmq
-      - elasticsearch-6
+      - elasticsearch-7.10
     command: bundle exec sidekiq -C ./config/sidekiq.yml
 
   search-api-listener-publishing-queue:
@@ -70,3 +70,5 @@ services:
 
   search-api-redis:
     image: redis
+    ports:
+      - "6379:6379"
