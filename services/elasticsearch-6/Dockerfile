@@ -8,7 +8,7 @@
 
 FROM eclipse-temurin:8-jre
 
-ARG ELASTICSEARCH_VERSION=6.7.2
+ARG ELASTICSEARCH_VERSION=6.8.23
 
 # As of Ubuntu 24.04, the official Docker image (which the Eclipse Temurin one is based on) ships
 # with an existing non-root user called "ubuntu"
