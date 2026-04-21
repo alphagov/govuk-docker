@@ -29,7 +29,6 @@ services:
       - search-api-redis
       - elasticsearch-6
       - search-api-worker
-      - search-api-listener-publishing-queue
       - search-api-listener-insert-data
       - search-api-listener-bulk-insert-data
     environment:
@@ -49,12 +48,6 @@ services:
       - rabbitmq
       - elasticsearch-6
     command: bundle exec sidekiq -C ./config/sidekiq.yml
-
-  search-api-listener-publishing-queue:
-    <<: *search-api
-    depends_on:
-      - rabbitmq
-    command: bundle exec rake message_queue:listen_to_publishing_queue
 
   search-api-listener-insert-data:
     <<: *search-api
