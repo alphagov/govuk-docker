@@ -26,7 +26,6 @@ services:
     <<: *content-store
     depends_on:
       - postgres-17
-      - router-api-app
       - nginx-proxy
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-17/content-store"
