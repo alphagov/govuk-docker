@@ -40,8 +40,6 @@ services:
     expose:
       - "3005"
     command: bin/dev
-    ports:
-      - "12345:12345"
 
   frontend-app-live:
     <<: *frontend-app
@@ -57,6 +55,8 @@ services:
       VIRTUAL_PORT: 3005
       BINDING: 0.0.0.0
       WEB_CONCURRENCY: 0
+    ports:
+      - "12345:12345"
 
   frontend-app-integration:
     <<: *frontend-app
@@ -75,3 +75,23 @@ services:
       VIRTUAL_PORT: 3005
       BINDING: 0.0.0.0
       WEB_CONCURRENCY: 0
+    ports:
+      - "12345:12345"
+  frontend-app-draft:
+    <<: *frontend-app
+    depends_on:
+      - account-api-app-live
+      - nginx-proxy
+    environment:
+      GOVUK_RAILS_JSON_LOGGING: "false"
+      ALLOW_LOCAL_CONTENT_ITEM_OVERRIDE: "true"
+      GOVUK_WEBSITE_ROOT: https://www.gov.uk
+      PLEK_SERVICE_CONTENT_STORE_URI: http://draft-content-store.dev.gov.uk
+      VIRTUAL_HOST: draft-frontend.dev.gov.uk
+      VIRTUAL_PORT: 3005
+      BINDING: 0.0.0.0
+      WEB_CONCURRENCY: 0
+      PIDFILE: ./tmp/pids/server-draft.pid
+      RAILS_DEVELOPMENT_HOSTS: draft-frontend.dev.gov.uk
+    ports:
+      - "12346:12345"
