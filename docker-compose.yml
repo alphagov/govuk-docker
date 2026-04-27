@@ -170,7 +170,6 @@ services:
           - draft-content-store.dev.gov.uk
           - draft-origin.dev.gov.uk
           - draft-router.dev.gov.uk
-          - draft-frontend.dev.gov.uk
           - email-alert-api.dev.gov.uk
           - email-alert-frontend.dev.gov.uk
           - fact-check-manager.dev.gov.uk
