@@ -6,13 +6,6 @@ x-frontend: &frontend
   build:
     context: .
     dockerfile: Dockerfile.govuk-base
-  depends_on:
-    - account-api-app
-    - content-store-app
-    - nginx-proxy
-    - publishing-api-app
-    - router-app
-    - search-api-app
   image: frontend
   stdin_open: true
   tty: true
@@ -29,6 +22,13 @@ services:
 
   frontend-app: &frontend-app
     <<: *frontend
+    depends_on:
+      - account-api-app
+      - content-store-app
+      - nginx-proxy
+      - publishing-api-app
+      - router-app
+      - search-api-app
     environment:
       ALLOW_LOCAL_CONTENT_ITEM_OVERRIDE: "true"
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
@@ -37,14 +37,12 @@ services:
       VIRTUAL_PORT: 3005
       BINDING: 0.0.0.0
       WEB_CONCURRENCY: 0
-    ports:
-      - "12345:12345"
     expose:
       - "3005"
     command: bin/dev
 
   frontend-app-live:
-    <<: *frontend
+    <<: *frontend-app
     depends_on:
       - account-api-app-live
       - nginx-proxy
@@ -57,12 +55,11 @@ services:
       VIRTUAL_PORT: 3005
       BINDING: 0.0.0.0
       WEB_CONCURRENCY: 0
-    expose:
-      - "3005"
-    command: bin/dev
+    ports:
+      - "12345:12345"
 
   frontend-app-integration:
-    <<: *frontend
+    <<: *frontend-app
     depends_on:
       - account-api-app-live
       - nginx-proxy
@@ -78,19 +75,13 @@ services:
       VIRTUAL_PORT: 3005
       BINDING: 0.0.0.0
       WEB_CONCURRENCY: 0
-    expose:
-      - "3005"
-    command: bin/dev
-
+    ports:
+      - "12345:12345"
   frontend-app-draft:
-    <<: *frontend
+    <<: *frontend-app
     depends_on:
-      - account-api-app
-      - content-store-app-draft
+      - account-api-app-live
       - nginx-proxy
-      - publishing-api-app
-      - router-app
-      - search-api-app
     environment:
       GOVUK_RAILS_JSON_LOGGING: "false"
       ALLOW_LOCAL_CONTENT_ITEM_OVERRIDE: "true"
@@ -102,6 +93,5 @@ services:
       WEB_CONCURRENCY: 0
       PIDFILE: ./tmp/pids/server-draft.pid
       RAILS_DEVELOPMENT_HOSTS: draft-frontend.dev.gov.uk
-    expose:
-      - "3005"
-    command: bin/dev
+    ports:
+      - "12346:12345"
