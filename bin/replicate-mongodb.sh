@@ -14,11 +14,6 @@ replication_dir="${GOVUK_DOCKER_REPLICATION_DIR:-${GOVUK_DOCKER_DIR:-${GOVUK_ROO
 mongo_version=3.6
 
 case "$app" in
-  "router"|"draft-router")
-    instance=router-mongo
-    database="${app//-/_}"
-    wait_for_rs=1
-    ;;
   "asset-manager")
     instance=shared-documentdb
     database=govuk_assets_production
@@ -87,17 +82,3 @@ until docker exec "$container" mongo --eval 1 &>/dev/null; do
 done
 
 docker exec "$container" mongorestore --drop --nsFrom="${database}".* --nsTo="${app}".* --archive="/replication/${extract_file}"
-
-case "$app" in
-  "router")
-    echo "Munging router backend hostnames"
-    docker exec "$container" \
-      mongo --quiet --eval 'db = db.getSiblingDB("router"); db.backends.find().forEach( function(b) { b.backend_url = b.backend_url.replace(".integration.govuk-internal.digital", ".dev.gov.uk").replace("https","http"); db.backends.save(b); } );'
-    ;;
-  "draft-router")
-    echo "Munging draft-router backend hostnames"
-    docker exec "$container" \
-      mongo --quiet --eval 'db = db.getSiblingDB("draft-router"); db.backends.find().forEach( function(b) { b.backend_url = b.backend_url.replace(".integration.govuk-internal.digital", ".dev.gov.uk").replace("https","http"); db.backends.save(b); } );'
-    ;;
-esac
-

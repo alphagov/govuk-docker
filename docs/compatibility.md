@@ -53,7 +53,6 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ publishing-api
    - ✅ release
    - ✅ router
-   - ✅ router-api
    - ✅ search-admin
    - ✅ search-api
    - ✅ search-api-v2
