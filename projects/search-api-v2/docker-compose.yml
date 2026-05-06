@@ -46,6 +46,7 @@ services:
       RAILS_DEVELOPMENT_HOSTS: "search-api-v2.dev.gov.uk,search-api-v2-app"
       VIRTUAL_HOST: "search-api-v2.dev.gov.uk"
       BINDING: "0.0.0.0"
+      GOOGLE_SDK_RUBY_LOGGING_GEMS: "all"
       GOOGLE_CLOUD_PROJECT_ID: "search-api-v2-integration"
       GOOGLE_CLOUD_PROJECT_ID_NUMBER: "780375417592"
       DISCOVERY_ENGINE_DEFAULT_COLLECTION_NAME: "projects/search-api-v2-integration/locations/global/collections/default_collection"
