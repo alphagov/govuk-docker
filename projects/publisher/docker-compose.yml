@@ -42,6 +42,7 @@ services:
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-17/publisher"
       REDIS_URL: redis://publisher-redis
+      GOVUK_WEBSITE_ROOT: https://www.gov.uk
       VIRTUAL_HOST: publisher.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
@@ -62,6 +63,7 @@ services:
     environment:
       DATABASE_URL: "postgresql://postgres@postgres-17/publisher"
       REDIS_URL: redis://publisher-redis
+      GOVUK_WEBSITE_ROOT: https://www.gov.uk
     command: bin/dev worker
 
   publisher-redis:
