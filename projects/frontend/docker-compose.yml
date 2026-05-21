@@ -41,6 +41,35 @@ services:
       - "3005"
     command: bin/dev
 
+  frontend-app-ports:
+    <<: *frontend-app
+    depends_on:
+      - nginx-proxy
+    environment:
+      ALLOW_LOCAL_CONTENT_ITEM_OVERRIDE: "true"
+      BINDING: 0.0.0.0
+      GOVUK_WEBSITE_ROOT: https://www.gov.uk
+      PLEK_SERVICE_CONTENT_STORE_URI: http://content-store:8080
+      PLEK_SERVICE_LICENSIFY_URI: http://licensify:8081
+      PLEK_SERVICE_LOCAL_LINKS_MANAGER_URI: http://local-links-manager:8082
+      PLEK_SERVICE_LOCATIONS_API_URI: http://locations-api:8083
+      PLEK_SERVICE_PLACES_MANAGER_URI: http://places-manager:8084
+      PLEK_SERVICE_PUBLISHING_API_URI: http://publishing-api:8085
+      PLEK_SERVICE_SEARCH_API_URI: http://search-api:8086
+      VIRTUAL_HOST: frontend.dev.gov.uk
+      VIRTUAL_PORT: 3005
+      WEB_CONCURRENCY: 0
+    ports:
+      - "12345:12345"
+    extra_hosts:
+      "content-store": host-gateway
+      "licensify": host-gateway
+      "local-links-manager": host-gateway
+      "locations-api": host-gateway
+      "places-manager": host-gateway
+      "publishing-api": host-gateway
+      "search-api": host-gateway
+
   frontend-app-live:
     <<: *frontend-app
     depends_on:
@@ -77,6 +106,7 @@ services:
       WEB_CONCURRENCY: 0
     ports:
       - "12345:12345"
+
   frontend-app-draft:
     <<: *frontend-app
     depends_on:
