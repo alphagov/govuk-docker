@@ -70,7 +70,6 @@ indices=$(curl "http://127.0.0.1:9200/_snapshot/snapshots/$snapshot_name" | jq -
     (map(select(startswith("page-traffic-"))) | sort | last),
     (map(select(startswith("metasearch-"))) | sort | last),
     (map(select(startswith("govuk-"))) | sort | last),
-    (map(select(startswith("government-"))) | sort | last),
     ".kibana_1",
     ".tasks",
     "licence-finder"
