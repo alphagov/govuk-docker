@@ -7,7 +7,7 @@ wait-for-elasticsearch:
 	@echo "Elasticsearch is up!"
 
 search-api: bundle-search-api wait-for-elasticsearch
-	@if curl -s "http://localhost:9200/_cat/indices" | grep -q "government-"; then \
+	@if curl -s "http://localhost:9200/_cat/indices" | grep -q "govuk-"; then \
       echo "Indices found, skipping index creation."; \
     else \
       echo "No indices found, creating all indices..."; \
