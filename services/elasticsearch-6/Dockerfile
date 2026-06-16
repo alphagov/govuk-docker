@@ -19,7 +19,7 @@ RUN apt update && apt install -y curl
 
 # Get Elasticsearch
 WORKDIR /usr
-RUN curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELASTICSEARCH_VERSION}.tar.gz
+RUN curl -L -O --insecure https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELASTICSEARCH_VERSION}.tar.gz
 RUN tar -xvf elasticsearch-${ELASTICSEARCH_VERSION}.tar.gz
 RUN mv elasticsearch-${ELASTICSEARCH_VERSION} elasticsearch
 
