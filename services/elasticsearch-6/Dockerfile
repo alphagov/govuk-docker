@@ -17,6 +17,11 @@ ARG USERNAME=ubuntu
 # Install required tooling
 RUN apt update && apt install -y curl
 
+# Install ZScaler Root CA cert
+ADD https://raw.githubusercontent.com/alphagov/govuk-infrastructure/refs/heads/main/cacerts/zscaler-root-ca.pem /usr/local/share/ca-certificates/zscaler.pem
+ENV SSL_CERT_FILE="/usr/local/share/ca-certificates/zscaler.pem"
+ENV REQUESTS_CA_BUNDLE="/usr/local/share/ca-certificates/zscaler.pem"
+
 # Get Elasticsearch
 WORKDIR /usr
 RUN curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELASTICSEARCH_VERSION}.tar.gz
