@@ -11,7 +11,7 @@ volumes:
   mysql-8:
   mongo-3.6:
   go:
-  elasticsearch-6:
+  elasticsearch-7.10:
   elasticsearch-7:
   opensearch-2:
 
@@ -102,26 +102,26 @@ services:
     volumes:
       - rabbitmq:/var/lib/rabbitmq
 
-  elasticsearch-6-init:
-    image: eclipse-temurin:8-jre
-    user: root
+  elasticsearch-7.10-init:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
     volumes:
-      - elasticsearch-6:/usr/share/elasticsearch/data
+      - elasticsearch-7.10:/usr/share/elasticsearch/data
     command: chown -R ubuntu:ubuntu /usr/share/elasticsearch/data
 
-  elasticsearch-6:
-    build:
-      context: services/elasticsearch-6
-      dockerfile: Dockerfile
+  elasticsearch-7.10:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
     environment:
-      ES_JAVA_OPTS: -Xms1g -Xmx1g
+      - http.host=0.0.0.0
+      - transport.host=127.0.0.1
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
     volumes:
-      - elasticsearch-6:/usr/share/elasticsearch/data
+      - elasticsearch-7.10:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
       - "9300:9300"
     depends_on:
-      - elasticsearch-6-init
+      - elasticsearch-7.10-init
 
   elasticsearch-7:
     image: elasticsearch:7.9.3
