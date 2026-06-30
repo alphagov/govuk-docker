@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -eu
+
+# **************************************************************
+# DO NOT ADD NEW STUFF IN HERE
+#
+# This is meant to be a simple wrapper script to reduce typing
+# for day-to-day commands. Its behaviour should not depend on
+# its arguments. We do not want our own bespoke CLI, as this can
+# only lead to complexity, performance and maintenance overheads
+# on top of docker and docker-compose.
+# **************************************************************
+
+appname="$(basename $(pwd))"
+script_dir="$(dirname "$(readlink -f "$0")")"
+source "${script_dir}/../projects/${appname}/port-forward.sh"
