@@ -23,7 +23,7 @@ fi
 
 # temporary config file because ES needs to be configured in advance
 # for filesystem-based snapshots
-cfg_path=$(mktemp '/tmp/govuk-docker-data-sync.XXXXX')
+cfg_path=$(mktemp -d -t govuk-docker-data-sync)
 echo "
   cluster.name: 'docker-cluster'
   network.host: 0.0.0.0
