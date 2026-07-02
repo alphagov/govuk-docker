@@ -47,6 +47,7 @@ services:
       REDIS_URL: redis://content-block-manager-redis
       VIRTUAL_HOST: content-block-manager.dev.gov.uk
       BINDING: 0.0.0.0
+      JWT_AUTH_SECRET: secret
     expose:
       - "3000"
     command: bin/dev
