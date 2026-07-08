@@ -34,10 +34,14 @@ services:
     environment:
       REDIS_URL: redis://feedback-redis
       VIRTUAL_HOST: feedback.dev.gov.uk
+      VIRTUAL_PORT: 3000
       BINDING: 0.0.0.0
+      WEB_CONCURRENCY: 0
     expose:
       - "3000"
     command: bin/rails s --restart
+    ports:
+      - "12348:12345"
 
   feedback-app-live:
     <<: *feedback-app
@@ -48,9 +52,11 @@ services:
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       VIRTUAL_HOST: feedback.dev.gov.uk
+      VIRTUAL_PORT: 3000
       BINDING: 0.0.0.0
       REDIS_URL: redis://feedback-redis
-
+      WEB_CONCURRENCY: 0
+      
   feedback-app-integration:
     <<: *feedback-app
     depends_on:
@@ -61,8 +67,10 @@ services:
       PLEK_SERVICE_CONTENT_STORE_URI: https://USERNAME:PASSWORD@www.integration.publishing.service.gov.uk/api # Update the credentials
       PLEK_SERVICE_PUBLISHING_API_URI: http://host.docker.internal:8080 # Requires `kubectl port-forward -n apps deploy/publishing-api 8080:8080`
       VIRTUAL_HOST: feedback.dev.gov.uk
+      VIRTUAL_PORT: 3000
       BINDING: 0.0.0.0
       REDIS_URL: redis://feedback-redis
+      WEB_CONCURRENCY: 0
 
   feedback-redis:
     image: redis
