@@ -39,11 +39,15 @@ services:
       - search-api-v2-app
     environment:
       VIRTUAL_HOST: finder-frontend.dev.gov.uk
+      VIRTUAL_PORT: 3000
       BINDING: 0.0.0.0
       MEMCACHE_SERVERS: memcached
+      WEB_CONCURRENCY: 0
     expose:
       - "3000"
     command: bin/rails s --restart
+    ports:
+      - "12347:12345"
 
   finder-frontend-app-live:
     <<: *finder-frontend-app
@@ -57,6 +61,7 @@ services:
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       VIRTUAL_HOST: finder-frontend.dev.gov.uk
+      VIRTUAL_PORT: 3000
       BINDING: 0.0.0.0
 
   finder-frontend-app-integration:
@@ -71,7 +76,9 @@ services:
       GOVUK_WEBSITE_ROOT: https://www.integration.publishing.service.gov.uk
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.integration.publishing.service.gov.uk/api
       VIRTUAL_HOST: finder-frontend.dev.gov.uk
+      VIRTUAL_PORT: 3000
       BINDING: 0.0.0.0
+      WEB_CONCURRENCY: 0
 
   finder-frontend-app-live-local-search:
     <<: *finder-frontend-app
@@ -85,4 +92,6 @@ services:
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       PLEK_SERVICE_CONTENT_STORE_URI: https://www.gov.uk/api
       VIRTUAL_HOST: finder-frontend.dev.gov.uk
+      VIRTUAL_PORT: 3000
       BINDING: 0.0.0.0
+      WEB_CONCURRENCY: 0
