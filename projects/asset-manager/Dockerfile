@@ -1,6 +1,11 @@
 # Install packages for building ruby
 FROM buildpack-deps:trixie
 
+# Trust the ZScaler root CA so HTTPS URLs work behing the corporate proxy
+RUN curl -fsSL -o /usr/local/share/ca-certificates/zscaler-root-ca.crt \
+  https://raw.githubusercontent.com/alphagov/govuk-infrastructure/refs/heads/main/cacerts/zscaler-root-ca.pem \
+  && update-ca-certificates
+
 # Install chromium browser and its webdriver
 RUN apt-get update -qq && apt-get install -y chromium chromium-driver
 
