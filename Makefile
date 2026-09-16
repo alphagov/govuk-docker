@@ -1,6 +1,9 @@
 GOVUK_ROOT_DIR   ?= $(HOME)/govuk
 GOVUK_DOCKER_DIR ?= $(GOVUK_ROOT_DIR)/govuk-docker
 GOVUK_DOCKER     ?= $(GOVUK_DOCKER_DIR)/exe/govuk-docker
+# One-off setup/test commands (db:prepare, bundle, yarn, etc.) should always
+# be run with --rm, otherwise the stopped containers are never cleaned up.
+GOVUK_DOCKER_RUN ?= $(GOVUK_DOCKER) run --rm
 SHELLCHECK       ?= shellcheck
 
 # Best practice to ensure these targets always execute, even if a
@@ -14,8 +17,8 @@ default:
 	@echo "    make collections-publisher"
 
 test-local: test-scripts
-	$(GOVUK_DOCKER) run govuk-docker-lite bundle exec rubocop
-	$(GOVUK_DOCKER) run govuk-docker-lite bundle exec rspec
+	$(GOVUK_DOCKER_RUN) govuk-docker-lite bundle exec rubocop
+	$(GOVUK_DOCKER_RUN) govuk-docker-lite bundle exec rspec
 
 test-ci: test-scripts
 	bundle exec rubocop
@@ -31,9 +34,9 @@ test-scripts:
 
 bundle-%: clone-% branch-checks-%
 	$(GOVUK_DOCKER) build $*-lite
-	$(GOVUK_DOCKER) run $*-lite rbenv install -s || ($(GOVUK_DOCKER) build --no-cache $*-lite; $(GOVUK_DOCKER) run $*-lite rbenv install -s)
-	if [ -f "${GOVUK_ROOT_DIR}/$*/Gemfile.lock" ]; then $(GOVUK_DOCKER) run $*-lite sh -c 'gem install --conservative --no-document bundler -v $$(grep -A1 "BUNDLED WITH" Gemfile.lock | tail -1)'; fi
-	$(GOVUK_DOCKER) run $*-lite bundle
+	$(GOVUK_DOCKER_RUN) $*-lite rbenv install -s || ($(GOVUK_DOCKER) build --no-cache $*-lite; $(GOVUK_DOCKER_RUN) $*-lite rbenv install -s)
+	if [ -f "${GOVUK_ROOT_DIR}/$*/Gemfile.lock" ]; then $(GOVUK_DOCKER_RUN) $*-lite sh -c 'gem install --conservative --no-document bundler -v $$(grep -A1 "BUNDLED WITH" Gemfile.lock | tail -1)'; fi
+	$(GOVUK_DOCKER_RUN) $*-lite bundle
 
 clone-%:
 	@if [ ! -d "${GOVUK_ROOT_DIR}/$*/.git" ]; then \

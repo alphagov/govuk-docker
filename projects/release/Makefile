@@ -1,4 +1,4 @@
 release: bundle-release
-	$(GOVUK_DOCKER) run $@-lite bin/rake db:prepare
-	$(GOVUK_DOCKER) run $@-lite env RAILS_ENV=test bin/rake db:prepare
-	$(GOVUK_DOCKER) run $@-lite yarn
+	$(GOVUK_DOCKER_RUN) $@-lite bin/rake db:prepare
+	$(GOVUK_DOCKER_RUN) $@-lite env RAILS_ENV=test bin/rake db:prepare
+	$(GOVUK_DOCKER_RUN) $@-lite yarn
