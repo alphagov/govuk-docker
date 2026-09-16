@@ -46,7 +46,7 @@ gem "govuk_publishing_components", path: "../govuk_publishing_components"
 
 There may be times when a full database is required locally.  The following scripts in the `bin` directory allow replicating data from integration:
 
-- `replicate-elasticsearch.sh`
+- `replicate-opensearch.sh`
 - `replicate-mongodb.sh APP-NAME`
 - `replicate-mysql.sh APP-NAME`
 - `replicate-postgresql.sh APP-NAME`
@@ -59,7 +59,7 @@ gds aws govuk-integration-developer --assume-role-ttl 3h ./bin/replicate-mysql.s
 
 > The `readonly` role does not provide access to S3, so cannot be used to replicate data locally.
 
-All the scripts, other than `replicate-elasticsearch.sh`, take the name of the app to replicate data for.
+All the scripts, other than `replicate-opensearch.sh`, take the name of the app to replicate data for.
 
 Draft data can be replicated with `replicate-postgresql.sh draft-content-store` and `replicate-mongodb.sh draft-router`.
 
