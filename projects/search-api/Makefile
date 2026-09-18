@@ -1,12 +1,12 @@
-wait-for-elasticsearch:
-	@echo "Waiting for Elasticsearch to be ready..."
+wait-for-opensearch:
+	@echo "Waiting for OpenSearch to be ready..."
 	@until curl -s http://127.0.0.1:9200/_cluster/health > /dev/null 2>&1; do \
-		echo "Elasticsearch not available yet..."; \
+		echo "OpenSearch not available yet..."; \
 		sleep 2; \
 	done
-	@echo "Elasticsearch is up!"
+	@echo "OpenSearch is up!"
 
-search-api: bundle-search-api wait-for-elasticsearch
+search-api: bundle-search-api wait-for-opensearch
 	@if curl -s "http://localhost:9200/_cat/indices" | grep -q "govuk-"; then \
       echo "Indices found, skipping index creation."; \
     else \
