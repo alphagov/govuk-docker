@@ -30,6 +30,7 @@ services:
     <<: *content-data-admin
     depends_on:
       - content-data-api-app
+      - email-alert-api-app
       - nginx-proxy
       - postgres-13
     expose:
