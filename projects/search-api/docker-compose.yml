@@ -12,7 +12,7 @@ x-search-api: &search-api
   environment:
     RABBITMQ_URL: amqp://guest:guest@rabbitmq
     REDIS_URL: redis://search-api-redis
-    ELASTICSEARCH_URI: http://opensearch-3:9200
+    OPENSEARCH_URI: http://opensearch-3:9200
 
 services:
   search-api-lite:
@@ -34,7 +34,7 @@ services:
     environment:
       RABBITMQ_URL: amqp://guest:guest@rabbitmq
       REDIS_URL: redis://search-api-redis
-      ELASTICSEARCH_URI: http://opensearch-3:9200
+      OPENSEARCH_URI: http://opensearch-3:9200
       VIRTUAL_HOST: search-api.dev.gov.uk, search.dev.gov.uk
       BINDING: 0.0.0.0
     expose:
