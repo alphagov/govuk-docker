@@ -5,10 +5,10 @@ volumes:
   postgres-13:
   postgres-13-email-alert-api:
   postgres-14:
-  postgres-14-postgis:
   postgres-16:
   postgres-17:
   postgres-18:
+  postgres-18-postgis:
   mysql-8:
   mongo-3.6:
   go:
@@ -49,16 +49,6 @@ services:
     volumes:
       - postgres-14:/var/lib/postgresql/data
 
-  postgres-14-postgis:
-    # Using the kartoza image because it supports ARM64 and AMD64
-    image: kartoza/postgis:14
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASS: password
-      POSTGRES_HOST_AUTH_METHOD: trust
-    volumes:
-      - postgres-14-postgis:/var/lib/postgresql/data
-
   postgres-16:
     image: postgres:16
     environment:
@@ -80,6 +70,15 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - postgres-18:/var/lib/postgresql
+
+  postgres-18-postgis:
+    # Using the kartoza image because it supports ARM64 and AMD64
+    image: kartoza/postgis:18-3.6
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASS: password
+    volumes:
+      - postgres-18-postgis:/var/lib/postgresql/data
 
   memcached:
     image: memcached
