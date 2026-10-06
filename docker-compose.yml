@@ -1,7 +1,6 @@
 volumes:
   root-home:
   rabbitmq:
-  postgres-12:
   postgres-13:
   postgres-13-email-alert-api:
   postgres-14:
@@ -19,13 +18,6 @@ networks:
   default:
 
 services:
-  postgres-12:
-    image: postgres:12
-    environment:
-      POSTGRES_HOST_AUTH_METHOD: trust
-    volumes:
-      - postgres-12:/var/lib/postgresql/data
-
   postgres-13:
     image: postgres:13
     environment:
