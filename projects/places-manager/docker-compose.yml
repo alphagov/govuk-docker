@@ -18,24 +18,24 @@ services:
   places-manager-lite:
     <<: *places-manager
     depends_on:
-      - postgres-14-postgis
+      - postgres-18-postgis
       - places-manager-redis
     environment:
-      DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/places-manager"
-      TEST_DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/places-manager-test"
+      DATABASE_URL: "postgis://postgres:password@postgres-18-postgis/places-manager"
+      TEST_DATABASE_URL: "postgis://postgres:password@postgres-18-postgis/places-manager-test"
       REDIS_URL: redis://places-manager-redis
 
   places-manager-app: &places-manager-app
     <<: *places-manager
     depends_on:
-      - postgres-14-postgis
+      - postgres-18-postgis
       - local-links-manager-app
       - locations-api-app
       - nginx-proxy
       - places-manager-redis
       - places-manager-worker
     environment:
-      DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/places-manager"
+      DATABASE_URL: "postgis://postgres:password@postgres-18-postgis/places-manager"
       VIRTUAL_HOST: places-manager.dev.gov.uk
       VIRTUAL_PORT: 3000
       BINDING: 0.0.0.0
@@ -50,12 +50,12 @@ services:
   places-manager-app-ports: &places-manager-app
     <<: *places-manager
     depends_on:
-      - postgres-14-postgis
+      - postgres-18-postgis
       - nginx-proxy
       - places-manager-redis
       - places-manager-worker-ports
     environment:
-      DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/places-manager"
+      DATABASE_URL: "postgis://postgres:password@postgres-18-postgis/places-manager"
       PLEK_SERVICE_CONTENT_STORE_URI: http://content-store:8080
       PLEK_SERVICE_LOCATIONS_API_URI: http://locations-api:8081
       PLEK_SERVICE_SEARCH_API_URI: http://search-api:8082
@@ -77,11 +77,11 @@ services:
   places-manager-worker-ports:
     <<: *places-manager
     depends_on:
-      - postgres-14-postgis
+      - postgres-18-postgis
       - nginx-proxy
       - places-manager-redis
     environment:
-      DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/places-manager"
+      DATABASE_URL: "postgis://postgres:password@postgres-18-postgis/places-manager"
       PLEK_SERVICE_CONTENT_STORE_URI: http://content-store:8080
       PLEK_SERVICE_LOCATIONS_API_URI: http://locations-api:8081
       PLEK_SERVICE_SEARCH_API_URI: http://search-api:8082
@@ -95,13 +95,13 @@ services:
   places-manager-worker:
     <<: *places-manager
     depends_on:
-      - postgres-14-postgis
+      - postgres-18-postgis
       - local-links-manager-app
       - locations-api-app
       - nginx-proxy
       - places-manager-redis
     environment:
-      DATABASE_URL: "postgis://postgres:password@postgres-14-postgis/places-manager"
+      DATABASE_URL: "postgis://postgres:password@postgres-18-postgis/places-manager"
       REDIS_URL: redis://places-manager-redis
     command: bundle exec sidekiq -C ./config/sidekiq.yml
 
