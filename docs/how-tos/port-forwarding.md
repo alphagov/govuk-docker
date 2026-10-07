@@ -28,3 +28,17 @@ You should now be able to locally view things such as postcode and licence pages
 When you're finished, stop the port-forwarding with:
 
 ```pkill -f "kubectl port-forward"```
+
+## Mixing locally-running apps with port-forwarded apps
+
+Note that you can use this (and other options like app-live and app-integration for apps that have them) in concert
+with individual overrides. For instance, if you wanted to run frontend locally pointing to an experimental branch
+of local-links-manager, but backed by content-store, locations-api, and places manager from the production cluster,
+you could add
+
+```PLEK_SERVICE_LOCAL_LINKS_MANAGER_URI=http://local-links-manager.dev.gov.uk```
+
+...to your `.env` file in Frontend, then run Frontend with port-forwarding as above, and in a separate console run
+local-links-manager. The value in `.env` will override `PLEK_SERVICE_LOCAL_LINKS_MANAGER_URI` from the docker
+container, and you'll be able to test the integration between the two apps in question without running up an
+entire cluster of all the apps.
