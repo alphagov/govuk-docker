@@ -19,16 +19,12 @@ services:
     <<: *account-api
     depends_on:
       - memcached
-      # The version of PostgreSQL temporarily does not match
-      # production, as an upgrade in production is being worked on
-      #
-      # https://trello.com/c/ZMFOPaCl/1176-upgrade-our-app-databases
-      - postgres-13
+      - postgres-18
       - account-api-redis
     environment:
       MEMCACHE_SERVERS: memcached
-      DATABASE_URL: "postgresql://postgres@postgres-13/account-api"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres-13/account-api-test"
+      DATABASE_URL: "postgresql://postgres:password@postgres-18/account-api"
+      TEST_DATABASE_URL: "postgresql://postgres:password@postgres-18/account-api-test"
       REDIS_URL: redis://account-api-redis
 
   account-api-app:
@@ -37,11 +33,11 @@ services:
       - content-store-app
       - memcached
       - nginx-proxy
-      - postgres-13
+      - postgres-18
       - account-api-redis
     environment:
       MEMCACHE_SERVERS: memcached
-      DATABASE_URL: "postgresql://postgres@postgres-13/account-api"
+      DATABASE_URL: "postgresql://postgres:password@postgres-18/account-api"
       VIRTUAL_HOST: account-api.dev.gov.uk
       BINDING: 0.0.0.0
       GOVUK_ACCOUNT_OAUTH_CLIENT_ID: client-id
@@ -56,11 +52,11 @@ services:
     depends_on:
       - memcached
       - nginx-proxy
-      - postgres-13
+      - postgres-18
       - account-api-redis
     environment:
       BINDING: 0.0.0.0
-      DATABASE_URL: "postgresql://postgres@postgres-13/account-api"
+      DATABASE_URL: "postgresql://postgres:password@postgres-18/account-api"
       REDIS_URL: redis://account-api-redis
       GOVUK_ACCOUNT_OAUTH_CLIENT_ID: client-id
       GOVUK_ACCOUNT_OAUTH_CLIENT_SECRET: client-secret
