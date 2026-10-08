@@ -225,3 +225,19 @@ rake db:create
 rake db:schema:load
 rake db:schema:migrate // optional, but if you are adding a new migration this will now update the schema without creating a horrible diff
 ```
+
+## Resolve 'A server is already running' error
+
+Sometimes an application will fail to start with `govuk-docker-up` and give an error similar to the following:
+
+```bash
+A server is already running (pid: n, file: /govuk/app-name/tmp/pids/server.pid)
+```
+
+This is normally caused by the application failing to exit correctly.
+
+It can typically be resolved by stopping the running container, then deleting the pid file:
+
+```bash
+govuk-docker-run rm /govuk/app-name/tmp/pids/server.pid
+```
