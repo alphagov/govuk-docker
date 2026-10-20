@@ -180,6 +180,7 @@ services:
           - locations-api.dev.gov.uk
           - manuals-publisher.dev.gov.uk
           - places-manager.dev.gov.uk
+          - public-asset-checker.dev.gov.uk
           - publisher.dev.gov.uk
           - publishing-api.dev.gov.uk
           - release.dev.gov.uk

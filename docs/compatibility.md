@@ -47,6 +47,7 @@ These are repos that can be started as a some kind of process, such as a web app
    - ✅ locations-api
    - ✅ manuals-publisher
    - ✅ places-manager
+   - ✅ public-asset-checker
    - ✅ publisher
    - ✅ publishing-api
    - ✅ release
