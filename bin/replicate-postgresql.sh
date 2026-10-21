@@ -68,17 +68,24 @@ echo "stopping running govuk-docker containers..."
 govuk-docker down
 
 postgres_container="$(govuk-docker config | ruby -ryaml -e "puts YAML::load(STDIN.read).dig('services', '${app}-lite', 'depends_on').keys.select { |k| k.start_with? 'postgres-' }")"
+postgres_major_version="$(sed -E 's/^postgres-([0-9]*)/\1/' <<<"$postgres_container")"
 govuk-docker up -d "$postgres_container"
 trap 'govuk-docker down' EXIT
 
+PGPASSWORD=
+
+if [ "$postgres_major_version" -ge "18" ]; then
+  PGPASSWORD="password"
+fi
+
 echo "waiting for postgres..."
-until govuk-docker run --rm -T "$postgres_container" /usr/bin/psql -h "$postgres_container" -U postgres -c 'SELECT 1' &>/dev/null; do
+until govuk-docker run -e "PGPASSWORD=$PGPASSWORD" --rm -T "$postgres_container" /usr/bin/psql -h "$postgres_container" -U postgres -c 'SELECT 1' &>/dev/null; do
   sleep 1
 done
 
 # Extract the local database name from the app's DATABASE_URL environment variable
 database="$(govuk-docker config | ruby -ryaml -e "puts YAML::load(STDIN.read).dig('services', '${app}-app', 'environment', 'DATABASE_URL').split('/').last")"
 
-govuk-docker run --rm -T "$postgres_container" /usr/bin/psql -h "$postgres_container" -U postgres -c "DROP DATABASE IF EXISTS \"${database}\""
-govuk-docker run --rm -T "$postgres_container" /usr/bin/createdb -h "$postgres_container" -U postgres "$database"
-pv "$archive_path" | govuk-docker run --rm -T "$postgres_container" /usr/bin/pg_restore -h "$postgres_container" -U postgres -d "$database" --no-owner --no-privileges
+govuk-docker run -e "PGPASSWORD=$PGPASSWORD" --rm -T "$postgres_container" /usr/bin/psql -h "$postgres_container" -U postgres -c "DROP DATABASE IF EXISTS \"${database}\""
+govuk-docker run -e "PGPASSWORD=$PGPASSWORD" --rm -T "$postgres_container" /usr/bin/createdb -h "$postgres_container" -U postgres "$database"
+pv "$archive_path" | govuk-docker run -e "PGPASSWORD=$PGPASSWORD" --rm -T "$postgres_container" /usr/bin/pg_restore -h "$postgres_container" -U postgres -d "$database" --no-owner --no-privileges
