@@ -18,10 +18,10 @@ services:
   content-data-api-lite: &content-data-api-lite
     <<: *content-data-api
     depends_on:
-      - postgres-13
+      - postgres-18
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-13/content-data-api"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres-13/content-data-api-test"
+      DATABASE_URL: "postgresql://postgres@postgres-18/content-data-api"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-18/content-data-api-test"
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
 
   content-data-api-app: &content-data-api-app
@@ -30,9 +30,9 @@ services:
       - "3000"
     depends_on:
       - nginx-proxy
-      - postgres-13
+      - postgres-18
     command: bin/rails s --restart
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-13/content-data-api"
+      DATABASE_URL: "postgresql://postgres@postgres-18/content-data-api"
       VIRTUAL_HOST: content-data-api.dev.gov.uk
       BINDING: 0.0.0.0
