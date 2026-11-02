@@ -64,13 +64,13 @@ services:
       - postgres-18:/var/lib/postgresql
 
   postgres-18-postgis:
-    # Using the kartoza image because it supports ARM64 and AMD64
-    image: kartoza/postgis:18-3.6
+    # Using the imresamu image because it supports ARM64 and AMD64 and uses standard env vars
+    image: imresamu/postgis:18-3.6
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASS: password
+      POSTGRES_PASSWORD: password
     volumes:
-      - postgres-18-postgis:/var/lib/postgresql/data
+      - postgres-18-postgis:/var/lib/postgresql
 
   memcached:
     image: memcached
