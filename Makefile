@@ -36,7 +36,7 @@ bundle-%: clone-% branch-checks-%
 	$(GOVUK_DOCKER) build $*-lite
 	$(GOVUK_DOCKER_RUN) $*-lite rbenv install -s || ($(GOVUK_DOCKER) build --no-cache $*-lite; $(GOVUK_DOCKER_RUN) $*-lite rbenv install -s)
 	if [ -f "${GOVUK_ROOT_DIR}/$*/Gemfile.lock" ]; then $(GOVUK_DOCKER_RUN) $*-lite sh -c 'gem install --conservative --no-document bundler -v $$(grep -A1 "BUNDLED WITH" Gemfile.lock | tail -1)'; fi
-	$(GOVUK_DOCKER_RUN) $*-lite bundle
+	$(GOVUK_DOCKER_RUN) $*-lite bundle install
 
 clone-%:
 	@if [ ! -d "${GOVUK_ROOT_DIR}/$*/.git" ]; then \
