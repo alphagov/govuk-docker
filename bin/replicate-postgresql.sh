@@ -68,7 +68,7 @@ echo "stopping running govuk-docker containers..."
 govuk-docker down
 
 postgres_container="$(govuk-docker config | ruby -ryaml -e "puts YAML::load(STDIN.read).dig('services', '${app}-lite', 'depends_on').keys.select { |k| k.start_with? 'postgres-' }")"
-postgres_major_version="$(sed -E 's/^postgres-([0-9]*)/\1/' <<<"$postgres_container")"
+postgres_major_version="$(sed -E 's/^postgres-([0-9]*)(-postgis)?/\1/' <<<"$postgres_container")"
 govuk-docker up -d "$postgres_container"
 trap 'govuk-docker down' EXIT
 
