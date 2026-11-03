@@ -7,9 +7,10 @@ See this [PR for Frontend](https://github.com/alphagov/govuk-docker/pull/994) an
 
 From the app directory (e.g. ~/govuk/frontend):
 
-1) Log in to the appropriate AWS environment (we'll use integration as an example)
+1) Log in to the appropriate AWS environment (we'll use integration as an example). You'll need admin privileges, so fulladmin on integration or tempadmin
+on other environments.
 
-```eval $(gds aws govuk-$1-developer -e --art 8h)```
+```eval $(gds aws govuk-integration-fulladmin -e --art 8h)```
 
 1) Use the appropriate context
 
