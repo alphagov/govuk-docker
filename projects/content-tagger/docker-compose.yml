@@ -21,21 +21,21 @@ services:
     <<: *content-tagger
     shm_size: 512mb
     depends_on:
-      - postgres-13
+      - postgres-18
     environment:
       DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: "true"
-      DATABASE_URL: "postgresql://postgres@postgres-13/content-tagger"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres-13/content-tagger-test"
+      DATABASE_URL: "postgresql://postgres:password@postgres-18/content-tagger"
+      TEST_DATABASE_URL: "postgresql://postgres:password@postgres-18/content-tagger-test"
 
-  content-tagger-app: &content-tagger-app
+  content-tagger-app:
     <<: *content-tagger
     depends_on:
-      - postgres-13
+      - postgres-18
       - publishing-api-app
       - nginx-proxy
       - content-tagger-redis
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-13/content-tagger"
+      DATABASE_URL: "postgresql://postgres:password@postgres-18/content-tagger"
       VIRTUAL_HOST: content-tagger.dev.gov.uk
       REDIS_URL: redis://content-tagger-redis
       BINDING: 0.0.0.0
