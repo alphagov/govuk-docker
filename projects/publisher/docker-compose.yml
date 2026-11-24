@@ -24,8 +24,8 @@ services:
       - publisher-redis
       - postgres-18
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-18/publisher"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres-18/publisher_test"
+      DATABASE_URL: "postgresql://postgres:password@postgres-18/publisher"
+      TEST_DATABASE_URL: "postgresql://postgres:password@postgres-18/publisher_test"
       REDIS_URL: redis://publisher-redis
 
   publisher-app: &publisher-app
@@ -40,7 +40,7 @@ services:
       - publisher-css
       - signon-app
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-18/publisher"
+      DATABASE_URL: "postgresql://postgres:password@postgres-18/publisher"
       REDIS_URL: redis://publisher-redis
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       VIRTUAL_HOST: publisher.dev.gov.uk
@@ -61,7 +61,7 @@ services:
       - nginx-proxy
       - publishing-api-app
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-18/publisher"
+      DATABASE_URL: "postgresql://postgres:password@postgres-18/publisher"
       REDIS_URL: redis://publisher-redis
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
     command: bin/dev worker
