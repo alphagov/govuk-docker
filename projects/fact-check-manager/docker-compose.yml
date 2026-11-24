@@ -21,22 +21,22 @@ services:
     <<: *fact-check-manager
     shm_size: 512mb
     depends_on:
-      - postgres-17
+      - postgres-18
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-17/fact-check-manager"
-      TEST_DATABASE_URL: "postgresql://postgres@postgres-17/fact-check-manager_test"
+      DATABASE_URL: "postgresql://postgres@postgres-18/fact-check-manager"
+      TEST_DATABASE_URL: "postgresql://postgres@postgres-18/fact-check-manager_test"
 
   fact-check-manager-app: &fact-check-manager-app
     <<: *fact-check-manager
     depends_on:
       - fact-check-manager-worker
-      - postgres-17
+      - postgres-18
       - nginx-proxy
       - publishing-api-app
       - signon-app
       - fact-check-manager-css
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-17/fact-check-manager"
+      DATABASE_URL: "postgresql://postgres@postgres-18/fact-check-manager"
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
       VIRTUAL_HOST: fact-check-manager.dev.gov.uk
       BINDING: 0.0.0.0
@@ -48,11 +48,11 @@ services:
     <<: *fact-check-manager
     depends_on:
       - fact-check-manager-redis
-      - postgres-17
+      - postgres-18
       - nginx-proxy
       - publishing-api-app
     environment:
-      DATABASE_URL: "postgresql://postgres@postgres-17/fact-check-manager"
+      DATABASE_URL: "postgresql://postgres@postgres-18/fact-check-manager"
       REDIS_URL: redis://fact-check-manager-redis
       GOVUK_WEBSITE_ROOT: https://www.gov.uk
     command: bin/dev worker
